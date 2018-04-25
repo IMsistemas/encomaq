@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+declare var jquery: any;
+declare var $: any;
 @Component({
   selector: 'app-nom-identifytype',
   templateUrl: './nom-identifytype.component.html',
@@ -10,6 +11,7 @@ export class NomIdentifytypeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    $('.dropdown-toggle').dropdown();
   }
 
 }
