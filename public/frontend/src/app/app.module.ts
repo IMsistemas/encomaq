@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { NomIdentifytypeComponent } from './nomenclature/nom-identifytype/nom-identifytype.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NomIdentifytypeComponent
   ],
   imports: [
     BrowserModule
