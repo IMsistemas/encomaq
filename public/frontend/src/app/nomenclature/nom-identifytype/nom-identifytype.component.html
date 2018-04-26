@@ -21,10 +21,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>test </td>
-          <td>test </td>
+        <tr *ngFor="let ident of list_identifytype | async;  let i = index ">
+          <td>{{i+1}}</td>
+          <td>{{ident.identifytypename}}</td>
+          <td>{{ ((ident.state === 1)? 'Activo':'Anulado') }}</td>
           <td>
             <div class="dropdown">
               <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
@@ -32,12 +32,15 @@
                 <i class="fas fa-cogs"></i>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#"><i class="fas fa-edit"></i> Editar</a>
-                <a class="dropdown-item" href="#"><i class="fas fa-trash-alt"></i> Eliminar</a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-edit"></i> Editar</a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-trash-alt"></i> Eliminar</a>
               </div>
             </div>
           </td>
         </tr>
+
       </tbody>
     </table>
   </div>
