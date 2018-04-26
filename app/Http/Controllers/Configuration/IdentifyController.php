@@ -37,7 +37,15 @@ class IdentifyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $data = $request->all();
+         $ident = new IndetifyType();
+         $ident->identifytypename = $data["identifytypename"];
+         $ident->state = 1;
+         if($ident->save()){
+            return response()->json(['success' => $ident ]);
+        }else{
+            return response()->json(['error' => $ident ]);
+        }
     }
 
     /**

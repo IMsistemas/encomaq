@@ -10,9 +10,7 @@ class IndetifyType extends Model
 
     protected $primaryKey = "ididentifytype";
 
-    public $incrementing = true;
-
-    public $timestamps = false;
+   
 
     public function biz_client()
     {

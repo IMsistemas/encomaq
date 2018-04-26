@@ -19,4 +19,12 @@ export class NomIdentifytypeComponent implements OnInit {
   get_list_identifytype() {
     this.list_identifytype = this.identify.get_identifytype();
   }
+  new_identifytype() {
+    $('#mdl_new_identifytype').modal('show');
+  }
+  update_list(evento) {
+    if (evento === true) {
+      this.get_list_identifytype();
+    }
+  }
 }
