@@ -1,0 +1,31 @@
+<div class="container" *ngIf="tem_edit_identify">
+  <div class="row">
+    <div class="col-sm-12">
+      <form novalidate (ngSubmit)="edit_identifytype(tem_edit_identify); frm_edit.reset();" #frm_edit="ngForm">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Tipo Identificacion</label>
+              <input type="email" class="form-control" maxlength="100" id="identifytypename" name="identifytypename"  [(ngModel)]="tem_edit_identify.identifytypename" #identifytypename="ngModel"
+                required>
+            </div>
+
+            <div *ngIf="identifytypename.errors?.required && identifytypename.touched" class="alert alert-danger">
+              El tipo es obligatorio
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col m12 s12">
+            <button type="submit" class="btn btn-success" [disabled]="frm_edit.invalid">
+              Guardar
+              <i class="fas fa-save"></i>
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

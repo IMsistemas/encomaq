@@ -10,6 +10,9 @@ declare var $: any;
 })
 export class NomIdentifytypeComponent implements OnInit {
   list_identifytype: Observable<any>;
+  info_identifytype_select: any;
+  msm_cancel_activate: any;
+  tem_cancel_activate: any;
   constructor(private identify: NomidentifytyService) { }
 
   ngOnInit() {
@@ -26,5 +29,33 @@ export class NomIdentifytypeComponent implements OnInit {
     if (evento === true) {
       this.get_list_identifytype();
     }
+  }
+  init_edit_identifytype(data: any) {
+    this.info_identifytype_select = data;
+    $('#mdl_edit_identifytype').modal('show');
+  }
+  cancel_activate_identifytype(data: any) {
+    this.tem_cancel_activate = data;
+    if ( data.state === 1) {
+      this.msm_cancel_activate = 'Esta seguro de anular el tipo' + data.identifytypename + '?';
+    } else {
+      this.msm_cancel_activate = 'Esta seguro de activar el tipo' + data.identifytypename + '?';
+    }
+    $('#mdl_cancel_identifytype').modal('show');
+  }
+  ok_cancel_identifytype() {
+    this.identify.delete_identifytype(this.tem_cancel_activate.ididentifytype).subscribe(
+      (response) => {
+        if (response.success !== undefined) {
+          $('#mdl_cancel_identifytype').modal('hide');
+          this.get_list_identifytype();
+        } else if (response.error !== undefined) {
+          $('#mdl_cancel_identifytype').modal('hide');
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+        $('#mdl_cancel_identifytype').modal('hide');
+      });
   }
 }

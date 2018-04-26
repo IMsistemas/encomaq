@@ -32,10 +32,10 @@
                 <i class="fas fa-cogs"></i>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="#" (click)="init_edit_identifytype(ident)" >
                   <i class="fas fa-edit"></i> Editar</a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-trash-alt"></i> Eliminar</a>
+                <a class="dropdown-item" href="#" (click)="cancel_activate_identifytype(ident)">
+                  <i class="fas fa-trash-alt"></i> Activar/Anular</a>
               </div>
             </div>
           </td>
@@ -57,6 +57,46 @@
       </div>
       <div class="modal-body">
          <app-new-identifytype (update_component_father)="update_list($event)" ></app-new-identifytype>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="mdl_edit_identifytype" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title">Edita Tipo De Identificacion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-edit-identifytypeclear [tem_edit_identify]="info_identifytype_select" (update_component_father)="update_list($event)" ></app-edit-identifytypeclear>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="mdl_cancel_identifytype" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title">Activar/Anular Tipo De Identificacion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <strong>{{msm_cancel_activate}}</strong>
+          </div>
+
+          <div class="col-sm-12 text-right">
+            <button type="button" class="btn btn-primary" (click)="ok_cancel_identifytype()" >Aceptar <i class="fas fa-check-circle"></i> </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

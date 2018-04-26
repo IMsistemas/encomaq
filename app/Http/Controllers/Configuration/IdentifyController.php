@@ -15,7 +15,7 @@ class IdentifyController extends Controller
      */
     public function index()
     {
-        $data = IndetifyType::all();
+        $data = IndetifyType::whereRaw("state=1")->get();
         return  Response::json($data,200);
     }
 
@@ -79,7 +79,14 @@ class IdentifyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $ident= IndetifyType::find($id);
+        $ident->identifytypename = $data["identifytypename"];
+        if($ident->save()){
+            return response()->json(['success' => $ident ]);
+        }else{
+            return response()->json(['error' => $ident ]);
+        }
     }
 
     /**
@@ -90,6 +97,16 @@ class IdentifyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ident = IndetifyType::find($id);
+        if ($ident->state == 1) {
+            $ident->state = 0;
+        } else {
+            $ident->state = 1;
+        }
+        if($ident->save()){
+            return response()->json(['success' => $ident ]);
+        }else{
+            return response()->json(['error' => $ident ]);
+        }
     }
 }
