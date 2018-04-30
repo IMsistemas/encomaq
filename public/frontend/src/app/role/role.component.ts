@@ -13,6 +13,8 @@ declare var $: any;
 export class RoleComponent implements OnInit {
   listRole: Observable<any>;
   role_selected: any;
+  message_success: any;
+  message_error: any;
   constructor(private role: RoleService) { }
 
   ngOnInit() {
@@ -37,10 +39,28 @@ export class RoleComponent implements OnInit {
     this.role.delete(this.role_selected.idrole).subscribe(
       (response) => {
         if (response.success === true) {
+
           $('#mdlConfirmDelete').modal('hide');
+          this.message_success = 'Se ha eliminado satisfactoriamente el Rol seleccionado';
+          $('#mdlMessageSuccess').modal('show');
           this.getListRole();
+
         } else if (response.success === false) {
+
           $('#mdlConfirmDelete').modal('hide');
+
+          if (response.dependence !== undefined) {
+
+            this.message_error = 'No se puede eliminar el Rol seleccionado, ya que existen Usuarios asignados';
+            $('#mdlMessageSuccess').modal('show');
+
+          } else {
+
+            this.message_error = 'Ha ocurrido un error al intentar eliminar el Rol seleccionado';
+            $('#mdlMessageSuccess').modal('show');
+
+          }
+
         }
       },
       (error) => {
