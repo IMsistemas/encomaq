@@ -37,7 +37,7 @@ import { UpdateComponent } from './role/update/update.component';
     FormsModule,
     RouterModule.forRoot(RouterConfig),
   ],
-  providers: [NomidentifytyService, RoleService, ItemcategoryService],
+  providers: [NomidentifytyService, RoleService, ItemcategoryService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

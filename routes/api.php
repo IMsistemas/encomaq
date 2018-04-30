@@ -23,3 +23,6 @@ Route::group(['middleware' => 'cors'], function(){
 
 Route::get('role/getListRole', 'System\Role\RoleController@getListRole');
 Route::resource('role', 'System\Role\RoleController');
+
+Route::get('login/getSessionExist', 'System\Login\LoginController@getSessionExist');
+Route::resource('login', 'System\Login\LoginController');
