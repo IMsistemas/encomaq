@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\System\Login;
 
+use App\Models\System\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
@@ -49,7 +51,38 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::where( 'email', $request->input('email' ) )->where('state', 1)->get();
+
+        if ( count( $user ) > 0 ) {
+
+            if( Hash::check( $request->input('password'), $user[0]->password  ) ) {
+
+                Session::put('users', $user[0]);
+
+                return response()->json(['success' => true]);
+
+            } else {
+
+                return response()->json(['success' => false]);
+
+            }
+
+        } else {
+
+            $user = new User();
+
+            $user->idrole = 1;
+            $user->personname = 'Administrador';
+            $user->lastnameperson = 'General';
+            $user->email = $request->input('email' );
+            $user->state = 1;
+            $user->password = Hash::make($request->input('password'));
+
+            $user->save();
+
+            return response()->json(['success' => false]);
+
+        }
     }
 
     /**
