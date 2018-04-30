@@ -7,6 +7,7 @@ import { NomIdentifytypeComponent } from './nomenclature/nom-identifytype/nom-id
 import { NomidentifytyService } from './service/identifytype/nomidentifyty.service';
 import { NewIdentifytypeComponent } from './nomenclature/nom-identifytype/new-identifytype/new-identifytype.component';
 import { EditIdentifytypeclearComponent } from './nomenclature/nom-identifytype/edit-identifytypeclear/edit-identifytypeclear.component';
+import { RoleComponent } from './role/role.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { EditIdentifytypeclearComponent } from './nomenclature/nom-identifytype/
     NomIdentifytypeComponent,
     NewIdentifytypeComponent,
     EditIdentifytypeclearComponent,
+    RoleComponent,
   ],
   imports: [
     BrowserModule,
