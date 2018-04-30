@@ -52,12 +52,12 @@ export class RoleComponent implements OnInit {
           if (response.dependence !== undefined) {
 
             this.message_error = 'No se puede eliminar el Rol seleccionado, ya que existen Usuarios asignados';
-            $('#mdlMessageSuccess').modal('show');
+            $('#mdlMessageError').modal('show');
 
           } else {
 
             this.message_error = 'Ha ocurrido un error al intentar eliminar el Rol seleccionado';
-            $('#mdlMessageSuccess').modal('show');
+            $('#mdlMessageError').modal('show');
 
           }
 
@@ -68,10 +68,39 @@ export class RoleComponent implements OnInit {
         $('#mdlConfirmDelete').modal('hide');
       });
   }
-  updateListRole(event) {
+  updateListRole(event, type) {
     if (event === true) {
+
+      if (type === 'create') {
+
+        this.message_success = 'Se ha creado satisfactoriamente el Rol';
+
+      } else {
+
+        this.message_success = 'Se ha editado satisfactoriamente el Rol seleccionado';
+
+      }
+
+      $('#mdlMessageSuccess').modal('show');
+
       this.getListRole();
+
+    } else {
+
+      if (type === 'create') {
+
+        this.message_error = 'Ha ocurrido un error al intentar agregar un Rol...';
+
+      } else {
+
+        this.message_error = 'Ha ocurrido un error al intentar editar el Rol seleccionado';
+
+      }
+
+      $('#mdlMessageError').modal('show');
+
     }
+
   }
 
 }

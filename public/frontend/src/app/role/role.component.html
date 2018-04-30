@@ -71,7 +71,7 @@
           </button>
         </div>
         <div class="modal-body">
-           <app-create (update_component_father)="updateListRole($event)" ></app-create>
+           <app-create (update_component_father)="updateListRole($event, 'create')" ></app-create>
         </div>
       </div>
     </div>
@@ -87,7 +87,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <app-update [tem_edit_role]="role_selected" (update_component_father)="updateListRole($event)" ></app-update>
+          <app-update [tem_edit_role]="role_selected" (update_component_father)="updateListRole($event, 'edit')" ></app-update>
         </div>
       </div>
     </div>
