@@ -8,6 +8,11 @@ import { NomidentifytyService } from './service/identifytype/nomidentifyty.servi
 import { NewIdentifytypeComponent } from './nomenclature/nom-identifytype/new-identifytype/new-identifytype.component';
 import { EditIdentifytypeclearComponent } from './nomenclature/nom-identifytype/edit-identifytypeclear/edit-identifytypeclear.component';
 import { RoleComponent } from './role/role.component';
+import { RoleService } from './service/role/role.service';
+import { MenuComponent } from './menu/menu.component';
+import { RouterModule } from '@angular/router';
+import { RouterConfig } from './roter.config';
+
 
 
 @NgModule({
@@ -17,13 +22,15 @@ import { RoleComponent } from './role/role.component';
     NewIdentifytypeComponent,
     EditIdentifytypeclearComponent,
     RoleComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(RouterConfig),
   ],
-  providers: [NomidentifytyService],
+  providers: [NomidentifytyService, RoleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
