@@ -1,6 +1,19 @@
 <!---->
-<app-menu></app-menu>
 
-<div class="container">
-    <router-outlet></router-outlet>
+<div *ngIf="sessionExist == true">
+
+    <app-menu></app-menu>
+
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+
 </div>
+
+<div *ngIf="sessionExist != true">
+
+    <app-login></app-login>    
+
+</div>
+
+

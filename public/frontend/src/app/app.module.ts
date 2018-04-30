@@ -16,7 +16,8 @@ import { CategoryitemComponent } from './nomenclature/categoryitem/categoryitem.
 import { ItemcategoryService } from './service/ncategoryitem/itemcategory.service';
 import { CreateComponent } from './role/create/create.component';
 import { UpdateComponent } from './role/update/update.component';
-
+import { LoginService } from './service/login/login.service';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { UpdateComponent } from './role/update/update.component';
     CategoryitemComponent,
     CreateComponent,
     UpdateComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
