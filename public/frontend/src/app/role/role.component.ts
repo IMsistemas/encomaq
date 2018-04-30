@@ -21,5 +21,13 @@ export class RoleComponent implements OnInit {
   getListRole() {
     this.listRole = this.role.getListRole();
   }
+  create() {
+    $('#mdlCreate').modal('show');
+  }
+  updateListRole(event) {
+    if (event === true) {
+      this.getListRole();
+    }
+  }
 
 }

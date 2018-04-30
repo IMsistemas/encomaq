@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { RouterConfig } from './roter.config';
 import { CategoryitemComponent } from './nomenclature/categoryitem/categoryitem.component';
 import { ItemcategoryService } from './service/ncategoryitem/itemcategory.service';
+import { CreateComponent } from './role/create/create.component';
 
 
 
@@ -26,6 +27,7 @@ import { ItemcategoryService } from './service/ncategoryitem/itemcategory.servic
     RoleComponent,
     MenuComponent,
     CategoryitemComponent,
+    CreateComponent,
   ],
   imports: [
     BrowserModule,

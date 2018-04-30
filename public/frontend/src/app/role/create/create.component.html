@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-sm-12">
+    <form novalidate  (ngSubmit)="create(frm_create.value); frm_create.reset();" #frm_create="ngForm">
+      <div class="row">
+        <div class="col-sm-12">
+
+          <div class="form-group">
+            <label for="rolename">Rol</label>
+            <input type="text" class="form-control" maxlength="100" id="rolename" name="rolename" ngModel #rolename="ngModel"
+              required>
+          </div>
+
+          <div *ngIf="rolename.errors?.required && rolename.touched" class="alert alert-danger">
+            El Nombre del Rol es requerido
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col m12 s12">
+          <button type="submit" class="btn btn-success" [disabled]="frm_create.invalid">
+            Guardar
+            <i class="fas fa-save"></i>
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -41,7 +41,19 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $role = new Role();
+
+        $role->rolename = $request->input('rolename');
+
+        if ($role->save()) {
+
+            return response()->json(['success' => true ]);
+
+        } else {
+
+            return response()->json(['success' => false ]);
+
+        }
     }
 
     /**
