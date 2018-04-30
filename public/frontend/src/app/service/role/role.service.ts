@@ -15,4 +15,7 @@ export class RoleService {
   create(data: any): Observable<any> {
     return this.http.post(this.url_api.get_url_api() + 'api/role', data);
   }
+  update(id: any, data: any): Observable<any> {
+    return this.http.put(this.url_api.get_url_api() + 'api/role/' + id, data);
+  }
 }

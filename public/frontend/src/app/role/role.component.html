@@ -46,7 +46,9 @@
                           <i class="fas fa-cogs"></i>
                       </button>
                       <div class="dropdown-menu">
-                          <a class="dropdown-item" ng-click="edit(item)"><i class="fas fa-edit"></i> Editar</a>
+                          <a class="dropdown-item" (click)="updateSelectedRole(item)">
+                            <i class="fas fa-edit"></i> Editar
+                          </a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" ng-click="confirmValidate(item)"><i class="fas fa-ban"></i> Anular</a>
                           <a class="dropdown-item" ng-click="confirmDelete(item)"><i class="fas fa-trash-alt"></i> Eliminar</a>
@@ -76,6 +78,20 @@
     </div>
   </div>
 
-
+  <div class="modal" id="mdlUpdate" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h5 class="modal-title">Editar Rol</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <app-update [tem_edit_role]="role_selected" (update_component_father)="updateListRole($event)" ></app-update>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>

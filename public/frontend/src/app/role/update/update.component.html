@@ -1,0 +1,29 @@
+ <div class="row" *ngIf="tem_edit_role">
+    <div class="col-sm-12">
+      <form novalidate (ngSubmit)="update(tem_edit_role); frm_edit.reset();" #frm_edit="ngForm">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Rol</label>
+              <input type="text" class="form-control" maxlength="100" id="rolename" name="rolename"  [(ngModel)]="tem_edit_role.rolename" #rolename="ngModel"
+                required>
+            </div>
+
+            <div *ngIf="rolename.errors?.required && rolename.touched" class="alert alert-danger">
+              El Nombre del Rol es requerido
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col m12 s12">
+            <button type="submit" class="btn btn-success" [disabled]="frm_edit.invalid">
+              Guardar
+              <i class="fas fa-save"></i>
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>

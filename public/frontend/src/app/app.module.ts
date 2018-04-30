@@ -15,6 +15,7 @@ import { RouterConfig } from './roter.config';
 import { CategoryitemComponent } from './nomenclature/categoryitem/categoryitem.component';
 import { ItemcategoryService } from './service/ncategoryitem/itemcategory.service';
 import { CreateComponent } from './role/create/create.component';
+import { UpdateComponent } from './role/update/update.component';
 
 
 
@@ -28,6 +29,7 @@ import { CreateComponent } from './role/create/create.component';
     MenuComponent,
     CategoryitemComponent,
     CreateComponent,
+    UpdateComponent,
   ],
   imports: [
     BrowserModule,

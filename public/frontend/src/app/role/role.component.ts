@@ -12,6 +12,7 @@ declare var $: any;
 })
 export class RoleComponent implements OnInit {
   listRole: Observable<any>;
+  role_selected: any;
   constructor(private role: RoleService) { }
 
   ngOnInit() {
@@ -23,6 +24,10 @@ export class RoleComponent implements OnInit {
   }
   create() {
     $('#mdlCreate').modal('show');
+  }
+  updateSelectedRole(item: any) {
+    this.role_selected = item;
+    $('#mdlUpdate').modal('show');
   }
   updateListRole(event) {
     if (event === true) {
