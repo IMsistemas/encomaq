@@ -12,6 +12,8 @@ import { RoleService } from './service/role/role.service';
 import { MenuComponent } from './menu/menu.component';
 import { RouterModule } from '@angular/router';
 import { RouterConfig } from './roter.config';
+import { CategoryitemComponent } from './nomenclature/categoryitem/categoryitem.component';
+import { ItemcategoryService } from './service/ncategoryitem/itemcategory.service';
 
 
 
@@ -23,6 +25,7 @@ import { RouterConfig } from './roter.config';
     EditIdentifytypeclearComponent,
     RoleComponent,
     MenuComponent,
+    CategoryitemComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,7 @@ import { RouterConfig } from './roter.config';
     FormsModule,
     RouterModule.forRoot(RouterConfig),
   ],
-  providers: [NomidentifytyService, RoleService],
+  providers: [NomidentifytyService, RoleService, ItemcategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
