@@ -16,6 +16,7 @@ export class RoleComponent implements OnInit {
 
   ngOnInit() {
     $('.dropdown-toggle').dropdown();
+    this.getListRole();
   }
   getListRole() {
     this.listRole = this.role.getListRole();

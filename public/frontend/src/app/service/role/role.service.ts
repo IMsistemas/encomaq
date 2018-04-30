@@ -10,7 +10,7 @@ export class RoleService {
   url_api = new UrlApi();
   constructor(private http: HttpClient) { }
   getListRole(): Observable<any> {
-    return this.http.get(this.url_api.get_url_api() + 'api/getListRole');
+    return this.http.get(this.url_api.get_url_api() + 'api/role/getListRole');
   }
 
 }

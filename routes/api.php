@@ -20,3 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'cors'], function(){
     Route::resource('Identifytype', 'Configuration\IdentifyController');
 });
+
+
+
+
+Route::get('role/getListRole', 'System\Role\RoleController@getListRole');
+Route::resource('role', 'System\Role\RoleController');
