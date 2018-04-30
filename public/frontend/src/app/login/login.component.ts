@@ -5,6 +5,9 @@ import { catchError, retry } from 'rxjs/operators';
 import { NgForm } from '@angular/forms';
 import { LoginService } from './../service/login/login.service';
 
+declare var jquery: any;
+declare var $: any;
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +20,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   verify(data) {
-    this.login.verify(data).subscribe(
+    console.log('aaaa');
+    this.login.verifyLogin(data).subscribe(
       (response) => {
         if (response.success === true) {
           

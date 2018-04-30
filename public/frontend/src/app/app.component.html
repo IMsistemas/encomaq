@@ -1,6 +1,6 @@
 <!---->
 
-<div *ngIf="sessionExist == true">
+<div *ngIf="sessionExist != true">
 
     <app-menu></app-menu>
 
@@ -10,7 +10,7 @@
 
 </div>
 
-<div *ngIf="sessionExist != true">
+<div *ngIf="sessionExist == true">
 
     <app-login></app-login>    
 

@@ -14,7 +14,7 @@ export class LoginService {
     return this.http.get(this.url_api.get_url_api() + 'api/login/getSessionExist');
   }
 
-  verify(data: any): Observable<any> {
+  verifyLogin(data: any): Observable<any> {    
     return this.http.post(this.url_api.get_url_api() + 'api/login', data);
   }
 

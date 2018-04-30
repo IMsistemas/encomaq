@@ -1,29 +1,47 @@
- <div class="row" *ngIf="tem_edit_role">
-    <div class="col-sm-12">
-      <form novalidate (ngSubmit)="update(tem_edit_role); frm_edit.reset();" #frm_edit="ngForm">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="form-group">
-              <label for="exampleFormControlInput1">Rol</label>
-              <input type="text" class="form-control" maxlength="100" id="rolename" name="rolename"  [(ngModel)]="tem_edit_role.rolename" #rolename="ngModel"
-                required>
-            </div>
+ 
+ 
+ <form novalidate (ngSubmit)="update(tem_edit_role); frm_edit.reset();" #frm_edit="ngForm">
 
-            <div *ngIf="rolename.errors?.required && rolename.touched" class="alert alert-danger">
-              El Nombre del Rol es requerido
+  <div class="modal-header bg-primary">
+    <h5 class="modal-title">Editar Rol</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="row" *ngIf="tem_edit_role">
+      <div class="col-sm-12">
+        
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Rol</label>
+                <input type="text" class="form-control" maxlength="100" id="rolename" name="rolename"  [(ngModel)]="tem_edit_role.rolename" #rolename="ngModel"
+                  required>
+              </div>
+
+              <span *ngIf="rolename.errors?.required && rolename.touched">                  
+                  <small id="emailHelp" class="form-text text-danger text-right">El Nombre del Rol es requerido</small>
+              </span>
             </div>
           </div>
-        </div>
-
-        <div class="row">
-          <div class="col m12 s12">
-            <button type="submit" class="btn btn-success" [disabled]="frm_edit.invalid">
-              Guardar
-              <i class="fas fa-save"></i>
-            </button>
-          </div>
-        </div>
-
-      </form>
+        
+      </div>
     </div>
   </div>
+  
+  <div class="modal-footer">
+
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Cancelar <i class="fas fa-ban"></i>
+      </button>
+
+      <button type="submit" class="btn btn-success" [disabled]="frm_edit.invalid">
+        Guardar
+        <i class="fas fa-save"></i>
+      </button>
+
+  </div>
+ 
+</form>
