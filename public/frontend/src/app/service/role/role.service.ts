@@ -18,4 +18,7 @@ export class RoleService {
   update(id: any, data: any): Observable<any> {
     return this.http.put(this.url_api.get_url_api() + 'api/role/' + id, data);
   }
+  delete(id: any): Observable<any> {
+    return this.http.delete(this.url_api.get_url_api() + 'api/role/' + id);
+  }
 }

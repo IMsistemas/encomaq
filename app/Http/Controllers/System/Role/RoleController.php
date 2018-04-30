@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\System\Role;
 
 use App\Models\System\Role;
+use App\Models\System\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -110,6 +111,26 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $count_user = User::where('idrole', $id)->count();
+
+        if ($count_user == 0) {
+
+            $role = Role::find($id);
+
+            if ($role->delete()) {
+
+                return response()->json(['success' => true ]);
+
+            } else {
+
+                return response()->json(['success' => false ]);
+
+            }
+
+        } else {
+
+            return response()->json(['success' => false, 'dependence' => true ]);
+
+        }
     }
 }

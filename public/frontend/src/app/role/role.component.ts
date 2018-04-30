@@ -29,6 +29,25 @@ export class RoleComponent implements OnInit {
     this.role_selected = item;
     $('#mdlUpdate').modal('show');
   }
+  confirmDelete(item: any) {
+    this.role_selected = item;
+    $('#mdlConfirmDelete').modal('show');
+  }
+  delete() {
+    this.role.delete(this.role_selected.idrole).subscribe(
+      (response) => {
+        if (response.success === true) {
+          $('#mdlConfirmDelete').modal('hide');
+          this.getListRole();
+        } else if (response.success === false) {
+          $('#mdlConfirmDelete').modal('hide');
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+        $('#mdlConfirmDelete').modal('hide');
+      });
+  }
   updateListRole(event) {
     if (event === true) {
       this.getListRole();
