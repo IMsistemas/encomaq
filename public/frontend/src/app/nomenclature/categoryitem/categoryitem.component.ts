@@ -53,9 +53,9 @@ export class CategoryitemComponent implements OnInit {
   cancel_activate(data: any) {
     this.tem_cancel_activate = data;
     if (data.state === 1) {
-      this.msm_cancel_activate = 'Esta seguro de anular la categoria' + data.categoryitemname + '?';
+      this.msm_cancel_activate = 'Esta seguro de anular la categoria ' + data.categoryitemname + '?';
     } else {
-      this.msm_cancel_activate = 'Esta seguro de activar la categoria' + data.categoryitemname + '?';
+      this.msm_cancel_activate = 'Esta seguro de activar la categoria ' + data.categoryitemname + '?';
     }
     $('#mdl_cancelactivate').modal('show');
   }

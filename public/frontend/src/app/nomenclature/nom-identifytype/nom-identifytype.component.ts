@@ -53,9 +53,9 @@ export class NomIdentifytypeComponent implements OnInit {
   cancel_activate_identifytype(data: any) {
     this.tem_cancel_activate = data;
     if ( data.state === 1) {
-      this.msm_cancel_activate = 'Esta seguro de anular el tipo' + data.identifytypename + '?';
+      this.msm_cancel_activate = 'Esta seguro de anular el tipo ' + data.identifytypename + '?';
     } else {
-      this.msm_cancel_activate = 'Esta seguro de activar el tipo' + data.identifytypename + '?';
+      this.msm_cancel_activate = 'Esta seguro de activar el tipo ' + data.identifytypename + '?';
     }
     $('#mdl_cancel_identifytype').modal('show');
   }
