@@ -2,7 +2,7 @@
   <form novalidate (ngSubmit)="edit_transferreason(tem_edit); frm_edittransfer.reset();" #frm_edittransfer="ngForm">
 
     <div class="modal-header bg-primary">
-      <h5 class="modal-title">Editar Transferencia</h5>
+      <h5 class="modal-title">Editar Motivo Traslado</h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -12,13 +12,13 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="form-group">
-            <label for="exampleFormControlInput1">Transferencia</label>
+            <label for="exampleFormControlInput1">Motivo Traslado</label>
             <input type="email" class="form-control" maxlength="100" id="transferreasonname" name="transferreasonname" [(ngModel)]="tem_edit.transferreasonname"
               #transferreasonname="ngModel" required>
           </div>
 
           <div *ngIf="transferreasonname.errors?.required && transferreasonname.touched" class="alert alert-danger">
-            La transferencia es obligatorio
+            El Motivo Traslado es obligatorio
           </div>
         </div>
       </div>

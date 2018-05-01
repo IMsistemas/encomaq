@@ -3,7 +3,7 @@
       <form novalidate (ngSubmit)="edit_identifytype(tem_edit_identify); frm_edit.reset();" #frm_edit="ngForm">
 
         <div class="modal-header bg-primary">
-          <h5 class="modal-title">Edita Tipo De Identificacion</h5>
+          <h5 class="modal-title">Editar Tipo de Identificación</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-sm-12">
             <div class="form-group">
-              <label for="exampleFormControlInput1">Tipo Identificacion</label>
+              <label for="exampleFormControlInput1">Tipo Identificación</label>
               <input type="email" class="form-control" maxlength="100" id="identifytypename" name="identifytypename" [(ngModel)]="tem_edit_identify.identifytypename"
                 #identifytypename="ngModel" required>
             </div>
