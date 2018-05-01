@@ -18,6 +18,10 @@ import { CreateComponent } from './role/create/create.component';
 import { UpdateComponent } from './role/update/update.component';
 import { LoginService } from './service/login/login.service';
 import { LoginComponent } from './login/login.component';
+import { TransferreasonComponent } from './nomenclature/transferreason/transferreason.component';
+import { AddtransferreasonComponent } from './nomenclature/transferreason/addtransferreason/addtransferreason.component';
+import { EdittransferreasonComponent } from './nomenclature/transferreason/edittransferreason/edittransferreason.component';
+import { ReasontransferService } from './service/ntranseferreason/reasontransfer.service';
 
 
 @NgModule({
@@ -32,6 +36,9 @@ import { LoginComponent } from './login/login.component';
     CreateComponent,
     UpdateComponent,
     LoginComponent,
+    TransferreasonComponent,
+    AddtransferreasonComponent,
+    EdittransferreasonComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +46,7 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     RouterModule.forRoot(RouterConfig),
   ],
-  providers: [NomidentifytyService, RoleService, ItemcategoryService, LoginService],
+  providers: [NomidentifytyService, RoleService, ItemcategoryService, LoginService, ReasontransferService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

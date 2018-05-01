@@ -26,3 +26,6 @@ Route::get('role/getListRole', 'System\Role\RoleController@getListRole');
 Route::resource('role', 'System\Role\RoleController');
 
 Route::resource('login', 'System\Login\LoginController');
+Route::group(['middleware' => 'cors'], function(){
+    Route::resource('Transferreason', 'Configuration\TransferReasonController');
+});
