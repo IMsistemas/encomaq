@@ -9,20 +9,20 @@ import { LoginService } from './service/login/login.service';
 })
 export class AppComponent implements OnInit {
   sessionExist: any;
-  result: any;
+  result: Observable<any>;
   constructor(private login: LoginService) { }
 
   ngOnInit() {
     this.getSessionExist();
   }
 
-  getSessionExist(){   
-    
-    console.log(this.login.getSessionExist());
-    
-    this.sessionExist = this.login.getSessionExist();
+  getSessionExist() {       
+        
+    //this.sessionExist = this.login.getSessionExist();
 
-    //this.result = this.login.getSessionExist(); 
-    //this.sessionExist = result.response.success;
+    this.result = this.login.getSessionExist(); 
+
+    console.log(this.result);
+
   }
 }

@@ -24,7 +24,7 @@ class LoginController extends Controller
     {
         if (Session::has('users') == false) {
 
-            return response()->json(['success' => false ]);
+            return response()->json(['success' => true ]);
 
         } else {
 
@@ -68,17 +68,6 @@ class LoginController extends Controller
             }
 
         } else {
-
-            $user = new User();
-
-            $user->idrole = 1;
-            $user->personname = 'Administrador';
-            $user->lastnameperson = 'General';
-            $user->email = $request->input('email' );
-            $user->state = 1;
-            $user->password = Hash::make($request->input('password'));
-
-            $user->save();
 
             return response()->json(['success' => false]);
 

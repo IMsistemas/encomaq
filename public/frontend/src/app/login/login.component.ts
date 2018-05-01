@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   verify(data) {
-    console.log('aaaa');
+    
     this.login.verifyLogin(data).subscribe(
       (response) => {
         if (response.success === true) {
@@ -34,5 +34,6 @@ export class LoginComponent implements OnInit {
         console.log('POST call in error", respons', error);
         
       });
+      
   }
 }

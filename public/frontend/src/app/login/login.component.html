@@ -5,12 +5,14 @@
             <div class="col-12 col-sm-4">
 
                 <div class="card text-center" style="margin-top: 15%;">
-                    <div class="card-header">
-                        ENTRAR
-                    </div>
-                    <div class="card-body">
+                    
+                    <form novalidate (ngSubmit)="verify(frm_login.value); frm_login.reset();" #frm_login="ngForm">
 
-                        <form novalidate (ngSubmit)="verify(frm_login.value); frm_login.reset();" #frm_login="ngForm">
+                        <div class="card-header">
+                            ENTRAR
+                        </div>
+
+                        <div class="card-body">                        
 
                             <div class="col-12" style="margin-top: 5px;">
                                 <div class="input-group">
@@ -18,7 +20,7 @@
                                         <span class="input-group-text" id="basic-user"><i class="fas fa-envelope fa-lg"></i></span>
                                     </div>
                                     <input type="text" class="form-control" id="email" name="email" ngModel #email="ngModel"
-                                           aria-describedby="basic-user" placeholder="Email" required />
+                                            aria-describedby="basic-user" placeholder="Email" required />
                                 </div>
                                 <span *ngIf="email.errors?.required && email.touched">
                                     <small id="emailHelp" class="form-text text-danger text-right">El Email es requerido</small>
@@ -31,10 +33,10 @@
                                         <span class="input-group-text" id="basic-pass"><i class="fas fa-key fa-lg"></i></span>
                                     </div>
                                     <input type="password" class="form-control" id="password" name="password" ngModel #password="ngModel"
-                                           aria-describedby="basic-pass" placeholder="Password" required />
+                                            aria-describedby="basic-pass" placeholder="Password" required />
                                 </div>
                                 <span *ngIf="password.errors?.required && password.touched" class="">
-                                  <small id="emailHelp" class="form-text text-danger text-right">El Password es requerido</small>
+                                    <small id="emailHelp" class="form-text text-danger text-right">El Password es requerido</small>
                                 </span>
                                 
                             </div>
@@ -45,16 +47,18 @@
 
                             <div class="col-12" style="margin-top: 5px; display: none;" id="view-failed-login">
                                 <div class="alert alert-danger" style="font-size: 11px;" role="alert">{{text_failed}}</div>
-                            </div>
+                            </div>                        
 
-                        </form>
+                        </div>
 
-                    </div>
-                    <div class="card-footer text-muted">
-                        <button type="submit" class="btn btn-primary" [disabled]="frm_login.invalid">
-                            Aceptar <i class="fas fa-sign-in-alt fa-lg"></i>
-                        </button>
-                    </div>
+                        <div class="card-footer text-muted">
+                            <button type="submit" class="btn btn-primary" [disabled]="frm_login.invalid">
+                                Aceptar <i class="fas fa-sign-in-alt fa-lg"></i>
+                            </button>
+                        </div>
+
+                    </form>
+
                 </div>
 
             </div>

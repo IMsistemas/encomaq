@@ -9,8 +9,8 @@ import { UrlApi } from '../url-api';
 export class LoginService {
   url_api = new UrlApi();
   constructor(private http: HttpClient) { }
-
   getSessionExist(): Observable<any> {
+    console.log('aaaa');
     return this.http.get(this.url_api.get_url_api() + 'api/login/getSessionExist');
   }
 
