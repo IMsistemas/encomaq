@@ -53,9 +53,9 @@ export class TransferreasonComponent implements OnInit {
   cancel_activate(data: any) {
     this.tem_cancel_activate = data;
     if (data.state === 1) {
-      this.msm_cancel_activate = 'Esta seguro de anular la categoria' + data.transferreasonname + '?';
+      this.msm_cancel_activate = 'Esta seguro de anular la transferencia ' + data.transferreasonname + '?';
     } else {
-      this.msm_cancel_activate = 'Esta seguro de activar la categoria' + data.transferreasonname + '?';
+      this.msm_cancel_activate = 'Esta seguro de activar la transferencia ' + data.transferreasonname + '?';
     }
     $('#mdl_cancelactivate').modal('show');
   }

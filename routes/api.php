@@ -34,3 +34,7 @@ Route::group(['middleware' => 'cors'], function(){
 Route::group(['middleware' => 'cors'], function(){
     Route::resource('Transferreason', 'Configuration\TransferReasonController');
 });
+
+Route::group(['middleware' => 'cors'], function(){
+    Route::resource('UnitType', 'Configuration\UnitTypeController');
+});
