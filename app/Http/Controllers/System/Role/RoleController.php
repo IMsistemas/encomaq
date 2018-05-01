@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\System\Role;
 
+use App\Models\System\Permission;
 use App\Models\System\Role;
+use App\Models\System\RolePermission;
 use App\Models\System\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,6 +24,14 @@ class RoleController extends Controller
     public function getListRole()
     {
         return Role::orderBy('rolename', 'asc')->get();
+    }
+
+    public function getPermission($id)
+    {
+        $permission = Permission::orderBy('permissionname', 'asc')->get();
+        $permissionrole = RolePermission::where('idrole', $id)->get();
+
+        return [$permission, $permissionrole];
     }
 
     /**
