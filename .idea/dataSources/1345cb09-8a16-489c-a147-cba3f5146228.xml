@@ -1871,74 +1871,80 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="403" parent="243" name="created_at">
+    <column id="403" parent="243" name="node">
       <Position>3</Position>
-      <DataType>datetime|0s</DataType>
+      <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="404" parent="243" name="updated_at">
+    <column id="404" parent="243" name="created_at">
       <Position>4</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="405" parent="243" name="PRIMARY">
+    <column id="405" parent="243" name="updated_at">
+      <Position>5</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="406" parent="243" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>idpermission</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="406" parent="244" name="idrole">
+    <column id="407" parent="244" name="idrole">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="407" parent="244" name="rolename">
+    <column id="408" parent="244" name="rolename">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="408" parent="244" name="created_at">
+    <column id="409" parent="244" name="created_at">
       <Position>3</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="409" parent="244" name="updated_at">
+    <column id="410" parent="244" name="updated_at">
       <Position>4</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="410" parent="244" name="PRIMARY">
+    <key id="411" parent="244" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>idrole</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="411" parent="245" name="idrole">
+    <column id="412" parent="245" name="idrole">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="412" parent="245" name="idpermission">
+    <column id="413" parent="245" name="idpermission">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="413" parent="245" name="sys_role_permission_sys_role_idrole_fk">
+    <index id="414" parent="245" name="sys_role_permission_sys_role_idrole_fk">
       <ColNames>idrole</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="414" parent="245" name="sys_role_permission_sys_permission_idpermission_fk">
+    <index id="415" parent="245" name="sys_role_permission_sys_permission_idpermission_fk">
       <ColNames>idpermission</ColNames>
       <Type>btree</Type>
     </index>
-    <foreign-key id="415" parent="245" name="sys_role_permission_sys_role_idrole_fk">
+    <foreign-key id="416" parent="245" name="sys_role_permission_sys_role_idrole_fk">
       <ColNames>idrole</ColNames>
       <RefSchemaName>db_encomaq</RefSchemaName>
       <RefTableName>sys_role</RefTableName>
@@ -1946,77 +1952,77 @@
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="416" parent="245" name="sys_role_permission_sys_permission_idpermission_fk">
+    <foreign-key id="417" parent="245" name="sys_role_permission_sys_permission_idpermission_fk">
       <ColNames>idpermission</ColNames>
       <RefSchemaName>db_encomaq</RefSchemaName>
       <RefTableName>sys_permission</RefTableName>
       <RefColNames>idpermission</RefColNames>
     </foreign-key>
-    <column id="417" parent="246" name="iduser">
+    <column id="418" parent="246" name="iduser">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="418" parent="246" name="idrole">
+    <column id="419" parent="246" name="idrole">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="419" parent="246" name="personname">
+    <column id="420" parent="246" name="personname">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="420" parent="246" name="lastnameperson">
+    <column id="421" parent="246" name="lastnameperson">
       <Position>4</Position>
       <DataType>varchar(150)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="421" parent="246" name="email">
+    <column id="422" parent="246" name="email">
       <Position>5</Position>
       <DataType>varchar(150)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="422" parent="246" name="password">
+    <column id="423" parent="246" name="password">
       <Position>6</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="423" parent="246" name="state">
+    <column id="424" parent="246" name="state">
       <Position>7</Position>
       <DataType>tinyint(1)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="424" parent="246" name="created_at">
+    <column id="425" parent="246" name="created_at">
       <Position>8</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="425" parent="246" name="updated_at">
+    <column id="426" parent="246" name="updated_at">
       <Position>9</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="426" parent="246" name="user_role_idrole_fk">
+    <index id="427" parent="246" name="user_role_idrole_fk">
       <ColNames>idrole</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="427" parent="246" name="PRIMARY">
+    <key id="428" parent="246" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>iduser</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="428" parent="246" name="user_role_idrole_fk">
+    <foreign-key id="429" parent="246" name="user_role_idrole_fk">
       <ColNames>idrole</ColNames>
       <RefSchemaName>db_encomaq</RefSchemaName>
       <RefTableName>sys_role</RefTableName>
