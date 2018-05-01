@@ -17,12 +17,18 @@ export class AppComponent implements OnInit {
   }
 
   getSessionExist() {       
+       
+    this.login.getSessionExist().subscribe(
+      (response) => {
         
-    //this.sessionExist = this.login.getSessionExist();
+        this.sessionExist = response.success;
+        
+      },
+      (error) => {
 
-    this.result = this.login.getSessionExist(); 
-
-    console.log(this.result);
+        console.log('POST call in error", respons', error);
+        
+      });
 
   }
 }

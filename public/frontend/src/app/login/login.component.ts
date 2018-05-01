@@ -25,6 +25,8 @@ export class LoginComponent implements OnInit {
       (response) => {
         if (response.success === true) {
           
+          //location.reload();
+
         } else  {
           
         }

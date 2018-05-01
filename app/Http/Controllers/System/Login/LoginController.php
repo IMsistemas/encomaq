@@ -20,11 +20,18 @@ class LoginController extends Controller
         //
     }
 
+    public function logout()
+    {
+        Session::flush();
+
+        return response()->json(['success' => true]);
+    }
+
     public function getSessionExist()
     {
         if (Session::has('users') == false) {
 
-            return response()->json(['success' => true ]);
+            return response()->json(['success' => false ]);
 
         } else {
 

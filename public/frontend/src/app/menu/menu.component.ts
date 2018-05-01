@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, OnInit, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { LoginService } from './../service/login/login.service';
+
+declare var jquery: any;
+declare var $: any;
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +12,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private login: LoginService) { }
 
   ngOnInit() {
+  }
+
+  confirmLogout() {
+    $('#mdlConfirmLogout').modal('show');
+  }
+
+  logout() {
+    this.login.logout().subscribe(
+      (response) => {
+        
+        location.reload();
+        
+      },
+      (error) => {
+
+        console.log('POST call in error", respons', error);
+        
+      });
   }
 
 }
