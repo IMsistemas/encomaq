@@ -22,10 +22,10 @@ export class CreateComponent implements OnInit {
   create(data) {
     this.role.create(data).subscribe(
       (response) => {
-        if (response.success !== undefined) {
+        if (response.success === true) {
           $('#mdlCreate').modal('hide');
           this.update_component_father.emit(true);
-        } else if (response.error !== undefined) {
+        } else {
           $('#mdlCreate').modal('hide');
           this.update_component_father.emit(false);
         }

@@ -44,6 +44,19 @@ class RoleController extends Controller
         //
     }
 
+    private function searchExistRol($rolename, $id)
+    {
+        $count = Role::where('rolename', $rolename);
+
+        if ($id != null) {
+            $count = $count->where('idrole', '!=' , $id);
+        }
+
+        $count = $count->count();
+
+        return ($count == 0) ? false : true;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -52,19 +65,29 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $role = new Role();
 
-        $role->rolename = $request->input('rolename');
+        if ($this->searchExistRol($request->input('rolename'), null) == false) {
 
-        if ($role->save()) {
+            $role = new Role();
 
-            return response()->json(['success' => true ]);
+            $role->rolename = $request->input('rolename');
+
+            if ($role->save()) {
+
+                return response()->json(['success' => true ]);
+
+            } else {
+
+                return response()->json(['success' => false ]);
+
+            }
 
         } else {
 
-            return response()->json(['success' => false ]);
+            return response()->json(['success' => false, 'exist' => true]);
 
         }
+
     }
 
     /**
@@ -98,19 +121,29 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $role = Role::find($id);
 
-        $role->rolename = $request->input('rolename');
+        if ($this->searchExistRol($request->input('rolename'), $id) == false) {
 
-        if ($role->save()) {
+            $role = Role::find($id);
 
-            return response()->json(['success' => true ]);
+            $role->rolename = $request->input('rolename');
+
+            if ($role->save()) {
+
+                return response()->json(['success' => true ]);
+
+            } else {
+
+                return response()->json(['success' => false ]);
+
+            }
 
         } else {
 
-            return response()->json(['success' => false ]);
+            return response()->json(['success' => false, 'exist' => true]);
 
         }
+
     }
 
     /**

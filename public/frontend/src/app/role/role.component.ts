@@ -15,6 +15,7 @@ export class RoleComponent implements OnInit {
   listRole: Observable<any>;
   listPermission: any;
   role_selected: any;
+  rolename_selected: any;
   message_success: any;
   message_error: any;
   constructor(private role: RoleService) { }
@@ -39,6 +40,7 @@ export class RoleComponent implements OnInit {
 
   confirmDelete(item: any) {
     this.role_selected = item;
+    this.rolename_selected = item.rolename;
     $('#mdlConfirmDelete').modal('show');
   }
 
@@ -74,7 +76,7 @@ export class RoleComponent implements OnInit {
         if (response.success === true) {
 
           $('#mdlConfirmDelete').modal('hide');
-          this.message_success = 'Se ha eliminado satisfactoriamente el Rol seleccionado';
+          this.message_success = 'Se ha eliminado satisfactoriamente el Rol: ' + this.rolename_selected;
           $('#mdlMessageSuccess').modal('show');
           this.getListRole();
 
@@ -116,24 +118,25 @@ export class RoleComponent implements OnInit {
       }
 
       $('#mdlMessageSuccess').modal('show');
-
-      this.getListRole();
+      
 
     } else {
 
       if (type === 'create') {
 
-        this.message_error = 'Ha ocurrido un error al intentar agregar un Rol...';
+        this.message_error = 'Ha ocurrido un error al intentar agregar un Rol o el mismo ya existe en el sistema...';
 
       } else {
 
-        this.message_error = 'Ha ocurrido un error al intentar editar el Rol seleccionado';
+        this.message_error = 'Ha ocurrido un error al intentar editar el Rol seleccionado o el mismo nombre ya existe en el sistema';
 
       }
 
       $('#mdlMessageError').modal('show');
 
     }
+
+    this.getListRole();
 
   }
 

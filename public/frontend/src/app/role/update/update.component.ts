@@ -17,10 +17,10 @@ export class UpdateComponent implements OnInit {
   update(data: any) {
     this.role.update(data.idrole, data).subscribe(
       (response) => {
-        if (response.success !== undefined) {
+        if (response.success === true) {
           $('#mdlUpdate').modal('hide');
           this.update_component_father.emit(true);
-        } else if (response.error !== undefined) {
+        } else {
           $('#mdlUpdate').modal('hide');
           this.update_component_father.emit(false);
         }
