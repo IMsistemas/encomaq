@@ -22,17 +22,11 @@ export class MenuComponent implements OnInit {
   }
 
   logout() {
-    this.login.logout().subscribe(
-      (response) => {
-        
-        location.reload();
-        
-      },
-      (error) => {
+    
+    localStorage.removeItem('user');
 
-        console.log('POST call in error", respons', error);
-        
-      });
+    location.reload();
+
   }
 
 }

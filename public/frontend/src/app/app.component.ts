@@ -18,17 +18,15 @@ export class AppComponent implements OnInit {
 
   getSessionExist() {       
        
-    this.login.getSessionExist().subscribe(
-      (response) => {
-        
-        this.sessionExist = response.success;
-        
-      },
-      (error) => {
+    if (localStorage.getItem('user') === null){
 
-        console.log('POST call in error", respons', error);
-        
-      });
+      this.sessionExist = false;
+ 
+    } else {
+
+      this.sessionExist = true;
+
+    }    
 
   }
 }
