@@ -13,6 +13,7 @@ export class NomIdentifytypeComponent implements OnInit {
   info_identifytype_select: any;
   msm_cancel_activate: any;
   tem_cancel_activate: any;
+  message_info: any;
   constructor(private identify: NomidentifytyService) { }
 
   ngOnInit() {
@@ -25,9 +26,24 @@ export class NomIdentifytypeComponent implements OnInit {
   new_identifytype() {
     $('#mdl_new_identifytype').modal('show');
   }
-  update_list(evento) {
+  update_list(evento, type) {
     if (evento === true) {
+      if (type === 'create') {
+        this.message_info = 'Sea guardado correctamente los datos..!!';
+        $('#mdlMessageSuccess').modal('show');
+      } else if (type === 'edit') {
+        this.message_info = 'Sea editado correctamente los datos..!!';
+        $('#mdlMessageSuccess').modal('show');
+      }
       this.get_list_identifytype();
+    } else {
+      if (type === 'create') {
+        this.message_info = 'Error al guardar los datos..!!';
+        $('#mdlMessageError').modal('show');
+      } else if (type === 'edit') {
+        this.message_info = 'Error al editar los datos..!!';
+        $('#mdlMessageError').modal('show');
+      }
     }
   }
   init_edit_identifytype(data: any) {

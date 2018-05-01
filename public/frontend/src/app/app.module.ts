@@ -22,6 +22,10 @@ import { TransferreasonComponent } from './nomenclature/transferreason/transferr
 import { AddtransferreasonComponent } from './nomenclature/transferreason/addtransferreason/addtransferreason.component';
 import { EdittransferreasonComponent } from './nomenclature/transferreason/edittransferreason/edittransferreason.component';
 import { ReasontransferService } from './service/ntranseferreason/reasontransfer.service';
+import { UnittypeComponent } from './nomenclature/unittype/unittype.component';
+import { AddunittypeComponent } from './nomenclature/unittype/addunittype/addunittype.component';
+import { EditunittypeComponent } from './nomenclature/unittype/editunittype/editunittype.component';
+import { UnittypeService } from './service/nunittype/unittype.service';
 
 
 @NgModule({
@@ -38,7 +42,10 @@ import { ReasontransferService } from './service/ntranseferreason/reasontransfer
     LoginComponent,
     TransferreasonComponent,
     AddtransferreasonComponent,
-    EdittransferreasonComponent
+    EdittransferreasonComponent,
+    UnittypeComponent,
+    AddunittypeComponent,
+    EditunittypeComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +53,7 @@ import { ReasontransferService } from './service/ntranseferreason/reasontransfer
     FormsModule,
     RouterModule.forRoot(RouterConfig),
   ],
-  providers: [NomidentifytyService, RoleService, ItemcategoryService, LoginService, ReasontransferService],
+  providers: [NomidentifytyService, RoleService, ItemcategoryService, LoginService, ReasontransferService, UnittypeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

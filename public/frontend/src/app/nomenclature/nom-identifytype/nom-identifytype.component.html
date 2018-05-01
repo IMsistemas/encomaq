@@ -32,9 +32,9 @@
                 <i class="fas fa-cogs"></i>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#" (click)="init_edit_identifytype(ident)" >
+                <a class="dropdown-item"  (click)="init_edit_identifytype(ident)" >
                   <i class="fas fa-edit"></i> Editar</a>
-                <a class="dropdown-item" href="#" (click)="cancel_activate_identifytype(ident)">
+                <a class="dropdown-item"  (click)="cancel_activate_identifytype(ident)">
                   <i class="fas fa-trash-alt"></i> Activar/Anular</a>
               </div>
             </div>
@@ -49,15 +49,10 @@
 <div class="modal" id="mdl_new_identifytype" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header bg-primary">
-        <h5 class="modal-title">Nuevo Tipo De Identificacion</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-         <app-new-identifytype (update_component_father)="update_list($event)" ></app-new-identifytype>
-      </div>
+
+      <app-new-identifytype (update_component_father)="update_list($event, 'create')"></app-new-identifytype>
+
+      
     </div>
   </div>
 </div>
@@ -65,15 +60,10 @@
 <div class="modal" id="mdl_edit_identifytype" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header bg-primary">
-        <h5 class="modal-title">Edita Tipo De Identificacion</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <app-edit-identifytypeclear [tem_edit_identify]="info_identifytype_select" (update_component_father)="update_list($event)" ></app-edit-identifytypeclear>
-      </div>
+
+      <app-edit-identifytypeclear [tem_edit_identify]="info_identifytype_select" (update_component_father)="update_list($event, 'edit')"></app-edit-identifytypeclear>
+
+      
     </div>
   </div>
 </div>
@@ -97,6 +87,50 @@
             <button type="button" class="btn btn-primary" (click)="ok_cancel_identifytype()" >Aceptar <i class="fas fa-check-circle"></i> </button>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="mdlMessageError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title">Información</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{message_info}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Cerrar
+          <i class="fa fa-ban" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="mdlMessageSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-success">
+        <h5 class="modal-title">Información</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{message_info}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Cerrar
+          <i class="fa fa-ban" aria-hidden="true"></i>
+        </button>
       </div>
     </div>
   </div>

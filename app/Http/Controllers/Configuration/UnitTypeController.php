@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Configuration;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
-use App\Models\Nomenclature\CategoryItem;
+use App\Models\Nomenclature\UnitType;
 
-
-class CategoryController extends Controller
+class UnitTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data = CategoryItem::whereRaw("state=1")->get();
+        $data = UnitType::whereRaw("state=1")->get();
         return  Response::json($data,200);
     }
 
@@ -40,8 +39,8 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $aux = new CategoryItem();
-        $aux->categoryitemname = $data["categoryitemname"];
+        $aux = new UnitType();
+        $aux->unittypename = $data["unittypename"];
         $aux->state = 1;
         if($aux->save()){
             return response()->json(['success' => $aux ]);
@@ -82,8 +81,8 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $aux= CategoryItem::find($id);
-        $aux->categoryitemname = $data["categoryitemname"];
+        $aux= UnitType::find($id);
+        $aux->unittypename = $data["unittypename"];
         if($aux->save()){
             return response()->json(['success' => $aux ]);
         }else{
@@ -99,7 +98,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $aux = CategoryItem::find($id);
+        $aux = UnitType::find($id);
         if ($aux->state == 1) {
             $aux->state = 0;
         } else {
