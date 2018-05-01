@@ -6,7 +6,6 @@ use App\Models\System\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -20,25 +19,7 @@ class LoginController extends Controller
         //
     }
 
-    public function logout()
-    {
-        Session::flush();
 
-        return response()->json(['success' => true]);
-    }
-
-    public function getSessionExist()
-    {
-        if (Session::has('users') == false) {
-
-            return response()->json(['success' => false ]);
-
-        } else {
-
-            return response()->json(['success' => true ]);
-
-        }
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -64,9 +45,7 @@ class LoginController extends Controller
 
             if( Hash::check( $request->input('password'), $user[0]->password  ) ) {
 
-                Session::put('users', $user[0]);
-
-                return response()->json(['success' => true]);
+                return response()->json(['success' => true, 'user' => $user[0]]);
 
             } else {
 
