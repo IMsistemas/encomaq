@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { Component, OnChanges, SimpleChanges, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { RoleService } from './../service/role/role.service';
@@ -12,6 +13,7 @@ declare var $: any;
 })
 export class RoleComponent implements OnInit {
   listRole: Observable<any>;
+  listPermission: any;
   role_selected: any;
   message_success: any;
   message_error: any;
@@ -21,20 +23,51 @@ export class RoleComponent implements OnInit {
     $('.dropdown-toggle').dropdown();
     this.getListRole();
   }
+
   getListRole() {
     this.listRole = this.role.getListRole();
   }
+
   create() {
     $('#mdlCreate').modal('show');
   }
+
   updateSelectedRole(item: any) {
     this.role_selected = item;
     $('#mdlUpdate').modal('show');
   }
+
   confirmDelete(item: any) {
     this.role_selected = item;
     $('#mdlConfirmDelete').modal('show');
   }
+
+  getPermission(item: any) {
+    this.role.getPermission(item.idrole).subscribe(
+      (response) => {
+
+        this.listPermission = [];
+
+        for (let element of response[0]) {
+
+          let obj: Object = {
+            permissionname: element.permissionname,
+            idpermission: element.idpermission,
+            idrole: item.idrole,
+            state: 0
+          };
+
+          this.listPermission.push(obj);
+        }
+
+        $('#mdlPermission').modal('show');
+
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+  }
+
   delete() {
     this.role.delete(this.role_selected.idrole).subscribe(
       (response) => {
@@ -68,6 +101,7 @@ export class RoleComponent implements OnInit {
         $('#mdlConfirmDelete').modal('hide');
       });
   }
+
   updateListRole(event, type) {
     if (event === true) {
 
