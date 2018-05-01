@@ -14,7 +14,7 @@ declare var $: any;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  login_failed: any;
   constructor(private login: LoginService) { }
 
   ngOnInit() {
@@ -31,6 +31,9 @@ export class LoginComponent implements OnInit {
 
         } else  {
           
+          this.login_failed = 'Email y/o Password incorrecto...';
+          $('#view-failed-login').show();  
+
         }
       },
       (error) => {
