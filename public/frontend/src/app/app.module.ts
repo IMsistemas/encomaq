@@ -26,6 +26,8 @@ import { UnittypeComponent } from './nomenclature/unittype/unittype.component';
 import { AddunittypeComponent } from './nomenclature/unittype/addunittype/addunittype.component';
 import { EditunittypeComponent } from './nomenclature/unittype/editunittype/editunittype.component';
 import { UnittypeService } from './service/nunittype/unittype.service';
+import { AddcategoryitemComponent } from './nomenclature/categoryitem/addcategoryitem/addcategoryitem.component';
+import { EditcategoryitemComponent } from './nomenclature/categoryitem/editcategoryitem/editcategoryitem.component';
 
 
 @NgModule({
@@ -45,7 +47,9 @@ import { UnittypeService } from './service/nunittype/unittype.service';
     EdittransferreasonComponent,
     UnittypeComponent,
     AddunittypeComponent,
-    EditunittypeComponent
+    EditunittypeComponent,
+    AddcategoryitemComponent,
+    EditcategoryitemComponent
   ],
   imports: [
     BrowserModule,
