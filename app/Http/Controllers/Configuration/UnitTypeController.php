@@ -16,7 +16,8 @@ class UnitTypeController extends Controller
      */
     public function index()
     {
-        $data = UnitType::whereRaw("state=1")->get();
+        //$data = UnitType::whereRaw("state=1")->get();
+        $data = UnitType::all();
         return  Response::json($data,200);
     }
 
@@ -39,13 +40,17 @@ class UnitTypeController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $aux = new UnitType();
-        $aux->unittypename = $data["unittypename"];
-        $aux->state = 1;
-        if($aux->save()){
-            return response()->json(['success' => $aux ]);
-        }else{
-            return response()->json(['error' => $aux ]);
+        if ($this->existunit($data["unittypename"], null) == false ) {
+            $aux = new UnitType();
+            $aux->unittypename = $data["unittypename"];
+            $aux->state = 1;
+            if($aux->save()){
+                return response()->json(['success' => $aux ]);
+            }else{
+                return response()->json(['error' => $aux ]);
+            }
+        } else {
+            return response()->json(['error' => 'exist']);
         }
     }
 
@@ -81,12 +86,16 @@ class UnitTypeController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $aux= UnitType::find($id);
-        $aux->unittypename = $data["unittypename"];
-        if($aux->save()){
-            return response()->json(['success' => $aux ]);
-        }else{
-            return response()->json(['error' => $aux ]);
+        if ($this->existunit($data["unittypename"], $id) == false ) {
+            $aux= UnitType::find($id);
+            $aux->unittypename = $data["unittypename"];
+            if($aux->save()){
+                return response()->json(['success' => $aux ]);
+            }else{
+                return response()->json(['error' => $aux ]);
+            }
+        } else {
+            return response()->json(['error' => 'exist' ]);
         }
     }
 
@@ -109,5 +118,15 @@ class UnitTypeController extends Controller
         }else{
             return response()->json(['error' => $aux ]);
         }
+    }
+
+    private function existunit($aux, $id)
+    {
+        $count = UnitType::where('unittypename', $aux);
+        if ($id != null) {
+            $count = $count->where('idunittype', '!=' , $id);
+        }
+        $count = $count->count();
+        return ($count == 0) ? false : true;
     }
 }

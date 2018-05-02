@@ -35,16 +35,16 @@ export class NomIdentifytypeComponent implements OnInit {
         this.message_info = 'Sea editado correctamente los datos..!!';
         $('#mdlMessageSuccess').modal('show');
       }
-      this.get_list_identifytype();
     } else {
       if (type === 'create') {
-        this.message_info = 'Error al guardar los datos..!!';
+        this.message_info = 'Ha ocurrido un error al intentar agregar el tipo de identificación o la misma ya existe en el sistema..!!';
         $('#mdlMessageError').modal('show');
       } else if (type === 'edit') {
-        this.message_info = 'Error al editar los datos..!!';
+        this.message_info = 'Ha ocurrido un error al intentar editar el tipo de identificación o la misma ya existe en el sistema..!!';
         $('#mdlMessageError').modal('show');
       }
     }
+    this.get_list_identifytype();
   }
   init_edit_identifytype(data: any) {
     this.info_identifytype_select = data;

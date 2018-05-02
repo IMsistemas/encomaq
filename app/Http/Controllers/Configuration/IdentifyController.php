@@ -15,7 +15,8 @@ class IdentifyController extends Controller
      */
     public function index()
     {
-        $data = IndetifyType::whereRaw("state=1")->get();
+        //$data = IndetifyType::whereRaw("state=1")->get();
+        $data = IndetifyType::all();
         return  Response::json($data,200);
     }
 
@@ -38,13 +39,17 @@ class IdentifyController extends Controller
     public function store(Request $request)
     {
          $data = $request->all();
-         $ident = new IndetifyType();
-         $ident->identifytypename = $data["identifytypename"];
-         $ident->state = 1;
-         if($ident->save()){
-            return response()->json(['success' => $ident ]);
-        }else{
-            return response()->json(['error' => $ident ]);
+        if ($this->existtypeidentify($data["identifytypename"], null) == false) {
+            $ident = new IndetifyType();
+            $ident->identifytypename = $data["identifytypename"];
+            $ident->state = 1;
+            if($ident->save()){
+                return response()->json(['success' => $ident ]);
+            }else{
+                return response()->json(['error' => $ident ]);
+            }
+        } else {
+            return response()->json(['error' => 'exist' ]);
         }
     }
 
@@ -80,12 +85,16 @@ class IdentifyController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $ident= IndetifyType::find($id);
-        $ident->identifytypename = $data["identifytypename"];
-        if($ident->save()){
-            return response()->json(['success' => $ident ]);
-        }else{
-            return response()->json(['error' => $ident ]);
+        if ($this->existtypeidentify($data["identifytypename"], $id) == false) {
+            $ident= IndetifyType::find($id);
+            $ident->identifytypename = $data["identifytypename"];
+            if($ident->save()){
+                return response()->json(['success' => $ident ]);
+            }else{
+                return response()->json(['error' => $ident ]);
+            }
+        }else {
+            return response()->json(['error' => 'exist' ]);
         }
     }
 
@@ -108,5 +117,14 @@ class IdentifyController extends Controller
         }else{
             return response()->json(['error' => $ident ]);
         }
+    }
+    private function existtypeidentify($aux, $id)
+    {
+        $count = IndetifyType::where('identifytypename', $aux);
+        if ($id != null) {
+            $count = $count->where('ididentifytype', '!=' , $id);
+        }
+        $count = $count->count();
+        return ($count == 0) ? false : true;
     }
 }

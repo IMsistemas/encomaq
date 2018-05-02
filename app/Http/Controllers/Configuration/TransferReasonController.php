@@ -16,7 +16,8 @@ class TransferReasonController extends Controller
      */
     public function index()
     {
-        $data = TransferReason::whereRaw("state=1")->get();
+        //$data = TransferReason::whereRaw("state=1")->get();
+        $data = TransferReason::all();
         return  Response::json($data,200);
     }
 
@@ -39,13 +40,17 @@ class TransferReasonController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $transfer = new TransferReason();
-        $transfer->transferreasonname = $data["transferreasonname"];
-        $transfer->state = 1;
-        if($transfer->save()){
-            return response()->json(['success' => $transfer ]);
-        }else{
-            return response()->json(['error' => $transfer ]);
+        if ($this->existtransfer($data["transferreasonname"], null) ==  false ) {
+            $transfer = new TransferReason();
+            $transfer->transferreasonname = $data["transferreasonname"];
+            $transfer->state = 1;
+            if($transfer->save()){
+                return response()->json(['success' => $transfer ]);
+            }else{
+                return response()->json(['error' => $transfer ]);
+            }
+        } else {
+            return response()->json(['error' => 'exist' ]);
         }
     }
 
@@ -81,12 +86,16 @@ class TransferReasonController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $transfer= TransferReason::find($id);
-        $transfer->transferreasonname = $data["transferreasonname"];
-        if($transfer->save()){
-            return response()->json(['success' => $transfer ]);
-        }else{
-            return response()->json(['error' => $transfer ]);
+        if ($this->existtransfer($data["transferreasonname"], $id) ==  false ) {
+            $transfer= TransferReason::find($id);
+            $transfer->transferreasonname = $data["transferreasonname"];
+            if($transfer->save()){
+                return response()->json(['success' => $transfer ]);
+            }else{
+                return response()->json(['error' => $transfer ]);
+            }
+        } else {
+            return response()->json(['error' => 'exist' ]);
         }
     }
 
@@ -109,5 +118,15 @@ class TransferReasonController extends Controller
         }else{
             return response()->json(['error' => $transfer ]);
         }
+    }
+
+    private function existtransfer($aux, $id)
+    {
+        $count = TransferReason::where('transferreasonname', $aux);
+        if ($id != null) {
+            $count = $count->where('idtransferreason', '!=' , $id);
+        }
+        $count = $count->count();
+        return ($count == 0) ? false : true;
     }
 }

@@ -35,16 +35,16 @@ export class CategoryitemComponent implements OnInit {
         this.message_info = 'Sea editado correctamente los datos..!!';
         $('#mdlMessageSuccess').modal('show');
       }
-      this.get_list_categoryitem();
     } else {
       if (type === 'create') {
-        this.message_info = 'Error al guardar los datos..!!';
+        this.message_info = 'Ha ocurrido un error al itentar agregar una categoria o la misma ya existe en el sistema..!!';
         $('#mdlMessageError').modal('show');
       } else if (type === 'edit') {
-        this.message_info = 'Error al editar los datos..!!';
+        this.message_info = 'Ha ocurrido un error al itentar editar una categoria o la misma ya existe en el sistema..!!';
         $('#mdlMessageError').modal('show');
       }
     }
+    this.get_list_categoryitem();
   }
   edit_categoryitem(data: any) {
     this.info_tem_edit = data;

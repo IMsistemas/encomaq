@@ -17,7 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data = CategoryItem::whereRaw("state=1")->get();
+        //$data = CategoryItem::whereRaw("state=1")->get();
+        $data = CategoryItem::all();
         return  Response::json($data,200);
     }
 
@@ -40,13 +41,17 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $aux = new CategoryItem();
-        $aux->categoryitemname = $data["categoryitemname"];
-        $aux->state = 1;
-        if($aux->save()){
-            return response()->json(['success' => $aux ]);
-        }else{
-            return response()->json(['error' => $aux ]);
+        if ($this->existcategory($data["categoryitemname"], null) == false) {
+            $aux = new CategoryItem();
+            $aux->categoryitemname = $data["categoryitemname"];
+            $aux->state = 1;
+            if($aux->save()){
+                return response()->json(['success' => $aux ]);
+            }else{
+                return response()->json(['error' => $aux ]);
+            }
+        } else {
+            return response()->json(['error' => 'exist']);
         }
     }
 
@@ -82,12 +87,16 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $aux= CategoryItem::find($id);
-        $aux->categoryitemname = $data["categoryitemname"];
-        if($aux->save()){
-            return response()->json(['success' => $aux ]);
-        }else{
-            return response()->json(['error' => $aux ]);
+        if ($this->existcategory($data["categoryitemname"], $id) == false) {
+            $aux= CategoryItem::find($id);
+            $aux->categoryitemname = $data["categoryitemname"];
+            if($aux->save()){
+                return response()->json(['success' => $aux ]);
+            }else{
+                return response()->json(['error' => $aux ]);
+            }
+        } else {
+            return response()->json(['error' => 'exist']);
         }
     }
 
@@ -110,5 +119,15 @@ class CategoryController extends Controller
         }else{
             return response()->json(['error' => $aux ]);
         }
+    }
+
+    private function existcategory($category, $id)
+    {
+        $count = CategoryItem::where('categoryitemname', $category);
+        if ($id != null) {
+            $count = $count->where('idcategoryitem', '!=' , $id);
+        }
+        $count = $count->count();
+        return ($count == 0) ? false : true;
     }
 }
