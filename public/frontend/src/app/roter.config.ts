@@ -5,6 +5,7 @@ import { RoleComponent } from './role/role.component';
 import { CategoryitemComponent } from './nomenclature/categoryitem/categoryitem.component';
 import { TransferreasonComponent } from './nomenclature/transferreason/transferreason.component';
 import { UnittypeComponent } from './nomenclature/unittype/unittype.component';
+import { AppComponent } from './app.component';
 export const RouterConfig: Route[] = [
     { path: 'identiytype', component: NomIdentifytypeComponent},
     { path: 'role', component: RoleComponent },
@@ -12,6 +13,6 @@ export const RouterConfig: Route[] = [
     { path: 'transferreason', component: TransferreasonComponent },
     { path: 'unittype', component: UnittypeComponent },
 
-    { path: '', redirectTo: 'role', pathMatch: 'full' },
-    { path: '**', component: RoleComponent }
+    { path: '', component: AppComponent, pathMatch: 'full' },
+    { path: '**', component: AppComponent }
 ];
