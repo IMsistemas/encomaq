@@ -13,6 +13,4 @@ export const RouterConfig: Route[] = [
     { path: 'transferreason', component: TransferreasonComponent },
     { path: 'unittype', component: UnittypeComponent },
 
-    { path: '', component: AppComponent, pathMatch: 'full' },
-    { path: '**', component: AppComponent }
 ];
