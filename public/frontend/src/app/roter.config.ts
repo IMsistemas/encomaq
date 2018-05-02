@@ -11,4 +11,7 @@ export const RouterConfig: Route[] = [
     { path: 'categoryitem', component: CategoryitemComponent },
     { path: 'transferreason', component: TransferreasonComponent },
     { path: 'unittype', component: UnittypeComponent },
+
+    { path: '', redirectTo: 'role', pathMatch: 'full' },
+    { path: '**', component: RoleComponent }
 ];
