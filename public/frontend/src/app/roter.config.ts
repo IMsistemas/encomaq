@@ -8,7 +8,7 @@ import { UnittypeComponent } from './nomenclature/unittype/unittype.component';
 import { AppComponent } from './app.component';
 export const RouterConfig: Route[] = [
     { path: 'identiytype', component: NomIdentifytypeComponent},
-    { path: 'role', component: RoleComponent },
+    { path: '/role', component: RoleComponent },
     { path: 'categoryitem', component: CategoryitemComponent },
     { path: 'transferreason', component: TransferreasonComponent },
     { path: 'unittype', component: UnittypeComponent },
