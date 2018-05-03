@@ -7,15 +7,15 @@ import { NomIdentifytypeComponent } from './nomenclature/nom-identifytype/nom-id
 import { NomidentifytyService } from './service/identifytype/nomidentifyty.service';
 import { NewIdentifytypeComponent } from './nomenclature/nom-identifytype/new-identifytype/new-identifytype.component';
 import { EditIdentifytypeclearComponent } from './nomenclature/nom-identifytype/edit-identifytypeclear/edit-identifytypeclear.component';
-import { RoleComponent } from './role/role.component';
+import { RoleComponent } from './system/role/role.component';
 import { RoleService } from './service/role/role.service';
 import { MenuComponent } from './menu/menu.component';
 import { RouterModule } from '@angular/router';
 import { RouterConfig } from './roter.config';
 import { CategoryitemComponent } from './nomenclature/categoryitem/categoryitem.component';
 import { ItemcategoryService } from './service/ncategoryitem/itemcategory.service';
-import { CreateComponent } from './role/create/create.component';
-import { UpdateComponent } from './role/update/update.component';
+import { CreateComponent } from './system/role/create/create.component';
+import { UpdateComponent } from './system/role/update/update.component';
 import { LoginService } from './service/login/login.service';
 import { LoginComponent } from './login/login.component';
 import { TransferreasonComponent } from './nomenclature/transferreason/transferreason.component';
@@ -28,6 +28,7 @@ import { EditunittypeComponent } from './nomenclature/unittype/editunittype/edit
 import { UnittypeService } from './service/nunittype/unittype.service';
 import { AddcategoryitemComponent } from './nomenclature/categoryitem/addcategoryitem/addcategoryitem.component';
 import { EditcategoryitemComponent } from './nomenclature/categoryitem/editcategoryitem/editcategoryitem.component';
+import { UserComponent } from './system/user/user.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { EditcategoryitemComponent } from './nomenclature/categoryitem/editcateg
     AddunittypeComponent,
     EditunittypeComponent,
     AddcategoryitemComponent,
-    EditcategoryitemComponent
+    EditcategoryitemComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

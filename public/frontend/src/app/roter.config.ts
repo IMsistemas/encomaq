@@ -1,11 +1,10 @@
 // tslint:disable-next-line:eofline
 import { RouterModule, Route } from '@angular/router';
 import { NomIdentifytypeComponent } from './nomenclature/nom-identifytype/nom-identifytype.component';
-import { RoleComponent } from './role/role.component';
+import { RoleComponent } from './system/role/role.component';
 import { CategoryitemComponent } from './nomenclature/categoryitem/categoryitem.component';
 import { TransferreasonComponent } from './nomenclature/transferreason/transferreason.component';
 import { UnittypeComponent } from './nomenclature/unittype/unittype.component';
-
 export const RouterConfig: Route[] = [
     { path: 'identiytype', component: NomIdentifytypeComponent},
     { path: 'role', component: RoleComponent },

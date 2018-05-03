@@ -1,7 +1,7 @@
 import { element } from 'protractor';
 import { Component, OnChanges, SimpleChanges, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { RoleService } from './../service/role/role.service';
+import { RoleService } from './../../service/role/role.service';
 
 declare var jquery: any;
 declare var $: any;
@@ -118,7 +118,7 @@ export class RoleComponent implements OnInit {
       }
 
       $('#mdlMessageSuccess').modal('show');
-      
+
 
     } else {
 

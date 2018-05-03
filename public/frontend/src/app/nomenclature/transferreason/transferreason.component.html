@@ -27,7 +27,7 @@
 
 
   <div class="col-12 table-responsive">
-  
+
     <table class="table table-striped table-hover table-bordered">
       <thead class="thead-dark">
         <tr>
@@ -41,7 +41,7 @@
         <tr *ngFor="let ident of list_transferreason | async;  let i = index ">
           <td>{{i+1}}</td>
           <td>{{ident.transferreasonname}}</td>
-          <td>{{ ((ident.state === 1)? 'ACTIVO':'ANULADO') }}</td>
+          <td>{{ ((ident.state == 1)? 'ACTIVO':'ANULADO') }}</td>
           <td>
             <div class="dropdown">
               <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
@@ -60,7 +60,7 @@
 
       </tbody>
     </table>
-  
+
   </div>
 
 

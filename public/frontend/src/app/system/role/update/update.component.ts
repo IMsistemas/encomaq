@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { RoleService } from './../../service/role/role.service';
+import { RoleService } from './../../../service/role/role.service';
 declare var jquery: any;
 declare var $: any;
 @Component({
