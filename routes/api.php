@@ -38,3 +38,8 @@ Route::group(['middleware' => 'cors'], function(){
 Route::group(['middleware' => 'cors'], function(){
     Route::resource('UnitType', 'Configuration\UnitTypeController');
 });
+
+Route::group(['middleware' => 'cors'], function(){
+    Route::get('user/getListUser', 'System\User\UserController@getListUser');
+    Route::resource('user', 'System\User\UserController');
+});
