@@ -29,7 +29,7 @@ import { UnittypeService } from './service/nunittype/unittype.service';
 import { AddcategoryitemComponent } from './nomenclature/categoryitem/addcategoryitem/addcategoryitem.component';
 import { EditcategoryitemComponent } from './nomenclature/categoryitem/editcategoryitem/editcategoryitem.component';
 import { UserComponent } from './system/user/user.component';
-
+import { UserService } from './service/user/user.service';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,9 @@ import { UserComponent } from './system/user/user.component';
     FormsModule,
     RouterModule.forRoot(RouterConfig),
   ],
-  providers: [NomidentifytyService, RoleService, ItemcategoryService, LoginService, ReasontransferService, UnittypeService],
+  providers: [NomidentifytyService, RoleService, ItemcategoryService, LoginService, 
+              ReasontransferService, UnittypeService, UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
