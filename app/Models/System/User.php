@@ -11,4 +11,9 @@ class User extends Model
 
     protected $primaryKey = 'iduser';
 
+    public function role()
+    {
+        return $this->belongsTo('App\Models\System\Role', 'idrole');
+    }
+
 }

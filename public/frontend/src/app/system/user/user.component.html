@@ -35,14 +35,14 @@
                   <th>NOMBRE</th>
                   <th>APELLIDOS</th>
                   <th>EMAIL</th>
-                  <th>ESTADO</th>
+                  <th style="width: 8%;">ESTADO</th>
                   <th style="width: 5%;"></th>
               </tr>
           </thead>
           <tbody>
           <tr *ngFor="let item of listUser | async;  let i = index " >
               <td>{{i + 1}}</td>
-              <td class="text-left">{{item.user.rolename}}</td>
+              <td class="text-left">{{item.role.rolename}}</td>
               <td class="text-left">{{item.personname}}</td>
               <td class="text-left">{{item.lastnameperson}}</td>
               <td class="text-left">{{item.email}}</td>

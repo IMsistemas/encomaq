@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\System\User;
 
+use App\Models\System\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,6 +16,11 @@ class UserController extends Controller
     public function index()
     {
         //
+    }
+
+    public function getListUser()
+    {
+        return User::with('role')->orderBy('personname', 'asc')->get();
     }
 
     /**

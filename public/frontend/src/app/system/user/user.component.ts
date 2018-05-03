@@ -20,6 +20,12 @@ export class UserComponent implements OnInit {
   constructor(private user: UserService) { }
 
   ngOnInit() {
+    $('.dropdown-toggle').dropdown();
+    this.getListUser();
+  }
+
+  getListUser() {
+    this.listUser = this.user.getListUser();
   }
 
 }
