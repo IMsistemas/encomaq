@@ -114,7 +114,36 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if ($this->searchExistUser($request->input('email'), $id) == false) {
+
+            $user = User::find($id);
+
+            $user->idrole = $request->input('idrole');
+            $user->personname = $request->input('personname');
+            $user->lastnameperson = $request->input('lastnameperson');
+            $user->email = $request->input('email');
+
+            if ($request->input('password') != '') {
+
+                $user->password = Hash::make($request->input('password'));
+
+            }
+
+            if ($user->save()) {
+
+                return response()->json(['success' => true ]);
+
+            } else {
+
+                return response()->json(['success' => false ]);
+
+            }
+
+        } else {
+
+            return response()->json(['success' => false, 'exist' => true]);
+
+        }
     }
 
     /**

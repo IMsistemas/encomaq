@@ -32,6 +32,10 @@ export class UserComponent implements OnInit {
     $('#mdlCreate').modal('show');
   }
 
+  updateSelectedUser(item: any) {
+    this.user_selected = item;
+    $('#mdlUpdate').modal('show');
+  }
 
   updateListUser(event, type) {
     if (event === true) {

@@ -1,3 +1,111 @@
-<p>
-  updateuser works!
-</p>
+ 
+ 
+ <form novalidate (ngSubmit)="update(tem_edit_user); frm_edit.reset();" #frm_edit="ngForm">
+
+  <div class="modal-header bg-primary">
+    <h5 class="modal-title">Editar Usuario</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+      <div class="row" *ngIf="tem_edit_user">
+        <div class="col-sm-12">
+          
+            <div class="row">
+              <div class="col-12 col-sm-6">
+
+                <div class="form-group">
+                  <label for="personname">Nombre</label>
+                  <input type="text" class="form-control" maxlength="100" id="personname" name="personname" [(ngModel)]="tem_edit_user.personname" #personname="ngModel"
+                    required>
+                </div>
+
+                <span *ngIf="personname.errors?.required && personname.touched">                  
+                  <small id="emailHelp" class="form-text text-danger text-right">El Nombre es requerido</small>
+                </span>
+
+              </div>
+
+              <div class="col-12 col-sm-6">
+
+                <div class="form-group">
+                  <label for="lastnameperson">Apellidos</label>
+                  <input type="text" class="form-control" maxlength="100" id="lastnameperson" name="lastnameperson" [(ngModel)]="tem_edit_user.lastnameperson" #lastnameperson="ngModel"
+                    required>
+                </div>
+
+                <span *ngIf="lastnameperson.errors?.required && lastnameperson.touched">                  
+                  <small id="emailHelp" class="form-text text-danger text-right">Los Apellidos son requeridos</small>
+                </span>
+
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+
+                <div class="form-group">
+                  <label for="idrole">Rol</label>
+                  <select class="form-control" id="idrole" name="idrole" [(ngModel)]="tem_edit_user.idrole" #idrole="ngModel" required>
+                      <option [value]="">-- Seleccione --</option>
+                      <option *ngFor="let role of listRole | async" [ngValue]="role.idrole" [selected]="">
+                          {{role.rolename}}
+                      </option>
+                  </select>
+                </div>
+
+                <span *ngIf="idrole.errors?.required && idrole.touched">                  
+                  <small id="emailHelp" class="form-text text-danger text-right">El Rol es requerido</small>
+                </span>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" maxlength="100" id="email" name="email" [(ngModel)]="tem_edit_user.email" #email="ngModel"
+                    required>
+                </div>
+
+                <span *ngIf="email.errors?.required && email.touched">                  
+                  <small id="emailHelp" class="form-text text-danger text-right">El Email es requerido</small>
+                </span>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" id="password" name="password" [(ngModel)]="tem_edit_user.password" #password="ngModel">
+                </div>
+
+              </div>
+            </div>
+          
+        </div>
+      </div>
+  </div>
+  
+  <div class="modal-footer">
+
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Cancelar <i class="fas fa-ban"></i>
+      </button>
+
+      <button type="submit" class="btn btn-success" [disabled]="frm_edit.invalid">
+        Guardar
+        <i class="fas fa-save"></i>
+      </button>
+
+  </div>
+ 
+</form>
