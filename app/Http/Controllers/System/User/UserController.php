@@ -5,6 +5,7 @@ namespace App\Http\Controllers\System\User;
 use App\Models\System\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -33,6 +34,19 @@ class UserController extends Controller
         //
     }
 
+    private function searchExistUser($email, $id)
+    {
+        $count = User::where('email', $email);
+
+        if ($id != null) {
+            $count = $count->where('iduser', '!=' , $id);
+        }
+
+        $count = $count->count();
+
+        return ($count == 0) ? false : true;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -41,7 +55,32 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($this->searchExistUser($request->input('email'), null) == false) {
+
+            $user = new User();
+
+            $user->idrole = $request->input('idrole');
+            $user->personname = $request->input('personname');
+            $user->lastnameperson = $request->input('lastnameperson');
+            $user->email = $request->input('email');
+            $user->password = Hash::make($request->input('password'));
+            $user->state = 1;
+
+            if ($user->save()) {
+
+                return response()->json(['success' => true ]);
+
+            } else {
+
+                return response()->json(['success' => false ]);
+
+            }
+
+        } else {
+
+            return response()->json(['success' => false, 'exist' => true]);
+
+        }
     }
 
     /**

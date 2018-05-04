@@ -26,6 +26,11 @@ class RoleController extends Controller
         return Role::orderBy('rolename', 'asc')->get();
     }
 
+    public function getActiveRole()
+    {
+        return Role::orderBy('rolename', 'asc')->get();
+    }
+
     public function getPermission($id)
     {
         $permission = Permission::orderBy('permissionname', 'asc')->get();

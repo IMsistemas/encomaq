@@ -19,6 +19,10 @@ export class RoleService {
     return this.http.get(this.url_api.get_url_api() + 'api/role/getPermission/' + id);
   }
 
+  getActiveRole(): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/role/getActiveRole');
+  }
+
   create(data: any): Observable<any> {
     return this.http.post(this.url_api.get_url_api() + 'api/role', data);
   }

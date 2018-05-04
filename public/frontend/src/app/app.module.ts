@@ -30,6 +30,8 @@ import { AddcategoryitemComponent } from './nomenclature/categoryitem/addcategor
 import { EditcategoryitemComponent } from './nomenclature/categoryitem/editcategoryitem/editcategoryitem.component';
 import { UserComponent } from './system/user/user.component';
 import { UserService } from './service/user/user.service';
+import { CreateuserComponent } from './system/user/createuser/createuser.component';
+import { UpdateuserComponent } from './system/user/updateuser/updateuser.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { UserService } from './service/user/user.service';
     EditunittypeComponent,
     AddcategoryitemComponent,
     EditcategoryitemComponent,
-    UserComponent
+    UserComponent,
+    CreateuserComponent,
+    UpdateuserComponent
   ],
   imports: [
     BrowserModule,

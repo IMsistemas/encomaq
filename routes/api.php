@@ -22,6 +22,7 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::get('role/getPermission/{id}', 'System\Role\RoleController@getPermission');
+Route::get('role/getActiveRole', 'System\Role\RoleController@getActiveRole');
 Route::get('role/getListRole', 'System\Role\RoleController@getListRole');
 Route::resource('role', 'System\Role\RoleController');
 

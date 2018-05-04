@@ -28,4 +28,45 @@ export class UserComponent implements OnInit {
     this.listUser = this.user.getListUser();
   }
 
+  create() {
+    $('#mdlCreate').modal('show');
+  }
+
+
+  updateListUser(event, type) {
+    if (event === true) {
+
+      if (type === 'create') {
+
+        this.message_success = 'Se ha creado satisfactoriamente el Usuario';
+
+      } else {
+
+        this.message_success = 'Se ha editado satisfactoriamente el Usuario seleccionado';
+
+      }
+
+      $('#mdlMessageSuccess').modal('show');
+
+
+    } else {
+
+      if (type === 'create') {
+
+        this.message_error = 'Ha ocurrido un error al intentar agregar un Usuario o el mismo ya existe en el sistema...';
+
+      } else {
+
+        this.message_error = 'Ha ocurrido un error al intentar editar el Usuario seleccionado o el mismo nombre ya existe en el sistema';
+
+      }
+
+      $('#mdlMessageError').modal('show');
+
+    }
+
+    this.getListUser();
+
+  }
+
 }

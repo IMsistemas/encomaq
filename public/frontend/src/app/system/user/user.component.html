@@ -59,13 +59,13 @@
                             <i class="fas fa-edit"></i> Editar
                           </a>
 
-                          <div *ngIf="item.idrole != 1" class="dropdown-divider"></div>
+                          <div *ngIf="item.iduser != 1" class="dropdown-divider"></div>
 
-                          <a *ngIf="item.idrole != 1" class="dropdown-item" (click)="setState(item)">
-                            <i class="fas fa-list-ul"></i> Cambiar Estado
+                          <a *ngIf="item.iduser != 1" class="dropdown-item" (click)="setState(item)">
+                            <i class="fas fa-ban"></i> Cambiar Estado
                           </a>
 
-                          <a *ngIf="item.idrole != 1" class="dropdown-item" (click)="confirmDelete(item)">
+                          <a *ngIf="item.iduser != 1" class="dropdown-item" (click)="confirmDelete(item)">
                             <i class="fas fa-trash-alt"></i> Eliminar
                           </a>
 
@@ -83,7 +83,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
-        <app-create (update_component_father)="updateListRole($event, 'create')" ></app-create>
+        <app-createuser (update_component_father)="updateListUser($event, 'create')" ></app-createuser>
 
       </div>
     </div>
