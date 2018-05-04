@@ -86,23 +86,22 @@ export class UserComponent implements OnInit {
   }
 
   setState() {
-    this.user.update(this.user_selected.iduser, this.user_selected).subscribe(
+    this.user.updateState(this.user_selected.iduser, this.user_selected).subscribe(
       (response) => {
         if (response.success === true) {
-          $('#mdlUpdate').modal('hide');
-          this.update_component_father.emit(true);
+          $('#mdlConfirmSetState').modal('hide');
+          this.getListUser();
         } else {
-          $('#mdlUpdate').modal('hide');
-          this.update_component_father.emit(false);
+          $('#mdlConfirmSetState').modal('hide');
+          this.getListUser();
         }
       },
       (error) => {
         console.log('POST call in error", respons', error);
         $('#mdlUpdate').modal('hide');
-        this.update_component_father.emit(false);
+        this.getListUser();
       });
   }
-
 
   updateListUser(event, type) {
     if (event === true) {

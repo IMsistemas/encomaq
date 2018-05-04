@@ -156,7 +156,7 @@ class UserController extends Controller
 
         } else {
 
-            $user->state = 0;
+            $user->state = 1;
 
         }
 

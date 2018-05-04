@@ -46,7 +46,7 @@
               <td class="text-left">{{item.personname}}</td>
               <td class="text-left">{{item.lastnameperson}}</td>
               <td class="text-left">{{item.email}}</td>
-              <td class="text-left">{{item.state}}</td>
+              <td class="text-left">{{ ((item.state == 1) ? 'ACTIVO' : 'INACTIVO' ) }}</td>
               <td class="text-center">
 
                   <div class="btn-group">
