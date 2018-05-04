@@ -1,5 +1,5 @@
 import { element } from 'protractor';
-import { Component, OnChanges, SimpleChanges, OnInit, ViewChild } from '@angular/core';
+import { Component, OnChanges, Output, EventEmitter, SimpleChanges, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { UserService } from './../../service/user/user.service';
 
@@ -12,6 +12,7 @@ declare var $: any;
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+  @Output() update_component_father = new EventEmitter<boolean>();
   listUser: Observable<any>;
   user_selected: any;
   username_selected: any;
