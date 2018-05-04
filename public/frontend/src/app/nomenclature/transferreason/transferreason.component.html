@@ -38,10 +38,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let ident of list_transferreason | async;  let i = index ">
+        <tr *ngFor="let ident of list_transferreason | async;  let i = index " [ngClass]= "{'text-danger':ident.state == 0 } ">
           <td>{{i+1}}</td>
           <td>{{ident.transferreasonname}}</td>
-          <td>{{ ((ident.state == 1)? 'ACTIVO':'ANULADO') }}</td>
+          <td>{{ ((ident.state == 1)? 'ACTIVO':'INACTIVO') }}</td>
           <td>
             <div class="dropdown">
               <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
@@ -52,7 +52,7 @@
                 <a class="dropdown-item" (click)="edit_transferreason(ident)">
                   <i class="fas fa-edit"></i> Editar</a>
                 <a class="dropdown-item" (click)="cancel_activate(ident)">
-                  <i class="fas fa-trash-alt"></i> Activar/Anular</a>
+                  <i class="fas fa-ban"></i> Cambiar estado</a>
                 <a class="dropdown-item" (click)="delete(ident)">
                     <i class="fas fa-trash-alt"></i> Eliminar</a>
               </div>
@@ -130,71 +130,75 @@
     </div>
   </div>
 
-  <div class="modal" id="mdl_cancelactivate" tabindex="-1" role="dialog">
+  
+
+
+<div class="modal fade" id="mdl_cancelactivate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-warning">
+        <h5 class="modal-title">Confirmación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            ¿Está seguro que desea cambiar el estado al motivo de traslado ?
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Cancelar
+          <i class="fas fa-ban"></i>
+        </button>
+
+        <button type="button" class="btn btn-warning" (click)="ok_cancelactivate();">
+          Aceptar
+          <i class="fas fa-retweet"></i>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="modal fade" id="mdl_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header bg-danger">
-          <h5 class="modal-title">Activar/Anular </h5>
+          <h5 class="modal-title">Confirmación</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <div class="row">
-            <div class="col-sm-12">
-              <strong>{{msm_cancel_activate}}</strong>
+            <div class="col-12">
+              ¿Está seguro que desea eliminar el motivo de traslado ?
             </div>
-
-
           </div>
         </div>
         <div class="modal-footer">
+  
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
             Cancelar
             <i class="fas fa-ban"></i>
           </button>
-          <button type="button" class="btn btn-primary" (click)="ok_cancelactivate()">Aceptar
-            <i class="fas fa-check-circle"></i>
+  
+          <button type="button" class="btn btn-danger" (click)="ok_delete();">
+            Aceptar
+            <i class="fas fa-trash-alt"></i>
           </button>
+  
         </div>
       </div>
     </div>
   </div>
-
-
-
-
-  <div class="modal" id="mdl_delete" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header bg-danger">
-          <h5 class="modal-title">Eliminar </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-sm-12">
-              <strong>Esta seguro de eliminar el motivo de traslado?</strong>
-            </div>
   
-  
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Cancelar
-            <i class="fas fa-ban"></i>
-          </button>
-          <button type="button" class="btn btn-primary" (click)="ok_delete()">Aceptar
-            <i class="fas fa-check-circle"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </div>
 
 
