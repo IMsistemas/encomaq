@@ -31,22 +31,22 @@
           <thead class="thead-dark">
               <tr>
                   <th style="width: 8%;">NO</th>
-                  <th>ROL</th>
                   <th>NOMBRE</th>
                   <th>APELLIDOS</th>
                   <th>EMAIL</th>
                   <th style="width: 8%;">ESTADO</th>
+                  <th>ROL</th>
                   <th style="width: 5%;"></th>
               </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of listUser | async;  let i = index " >
+          <tr *ngFor="let item of listUser | async;  let i = index " [ngClass]= "{'text-danger':item.state == 0}" >
               <td>{{i + 1}}</td>
-              <td class="text-left">{{item.role.rolename}}</td>
               <td class="text-left">{{item.personname}}</td>
               <td class="text-left">{{item.lastnameperson}}</td>
               <td class="text-left">{{item.email}}</td>
               <td class="text-left">{{ ((item.state == 1) ? 'ACTIVO' : 'INACTIVO' ) }}</td>
+              <td class="text-left">{{item.role.rolename}}</td>
               <td class="text-center">
 
                   <div class="btn-group">
@@ -98,7 +98,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="modal fade" id="mdlConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
