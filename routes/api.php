@@ -42,5 +42,6 @@ Route::group(['middleware' => 'cors'], function(){
 
 Route::group(['middleware' => 'cors'], function(){
     Route::get('user/getListUser', 'System\User\UserController@getListUser');
+    Route::put('user/updateState/{id}', 'System\User\UserController@updateState');
     Route::resource('user', 'System\User\UserController');
 });

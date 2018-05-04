@@ -37,6 +37,72 @@ export class UserComponent implements OnInit {
     $('#mdlUpdate').modal('show');
   }
 
+  confirmDelete(item: any) {
+    this.user_selected = item;
+    this.username_selected = item.personname + ' ' + item.lastnameperson;
+    $('#mdlConfirmDelete').modal('show');
+  }
+
+  delete() {
+    this.user.delete(this.user_selected.iduser).subscribe(
+      (response) => {
+        if (response.success === true) {
+
+          $('#mdlConfirmDelete').modal('hide');
+          this.message_success = 'Se ha eliminado satisfactoriamente el Usuario: ' + this.username_selected;
+          $('#mdlMessageSuccess').modal('show');
+          this.getListUser();
+
+        } else if (response.success === false) {
+
+          $('#mdlConfirmDelete').modal('hide');
+
+          if (response.dependence !== undefined) {
+
+            this.message_error = 'No se puede eliminar el Usuario seleccionado, ya que existen Usuarios asignados';
+            $('#mdlMessageError').modal('show');
+
+          } else {
+
+            this.message_error = 'Ha ocurrido un error al intentar eliminar el Usuario seleccionado';
+            $('#mdlMessageError').modal('show');
+
+          }
+
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+        $('#mdlConfirmDelete').modal('hide');
+      });
+  }
+
+
+  confirmSetState(item: any) {
+    this.user_selected = item;
+    this.username_selected = item.personname + ' ' + item.lastnameperson;
+    $('#mdlConfirmSetState').modal('show');
+  }
+
+  setState() {
+    this.user.update(this.user_selected.iduser, this.user_selected).subscribe(
+      (response) => {
+        if (response.success === true) {
+          $('#mdlUpdate').modal('hide');
+          this.update_component_father.emit(true);
+        } else {
+          $('#mdlUpdate').modal('hide');
+          this.update_component_father.emit(false);
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+        $('#mdlUpdate').modal('hide');
+        this.update_component_father.emit(false);
+      });
+  }
+
+
   updateListUser(event, type) {
     if (event === true) {
 

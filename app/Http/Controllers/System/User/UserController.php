@@ -146,6 +146,31 @@ class UserController extends Controller
         }
     }
 
+    public function updateState(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if($request->input('state') == 1){
+
+            $user->state = 0;
+
+        } else {
+
+            $user->state = 0;
+
+        }
+
+        if ($user->save()) {
+
+            return response()->json(['success' => true ]);
+
+        } else {
+
+            return response()->json(['success' => false ]);
+
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -154,6 +179,16 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+
+        if ($user->delete()) {
+
+            return response()->json(['success' => true ]);
+
+        } else {
+
+            return response()->json(['success' => false ]);
+
+        }
     }
 }

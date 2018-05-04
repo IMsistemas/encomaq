@@ -27,4 +27,8 @@ export class UserService {
     return this.http.delete(this.url_api.get_url_api() + 'api/user/' + id);
   }
 
+  updateState(id: any, data: any): Observable<any> {
+    return this.http.put(this.url_api.get_url_api() + 'api/user/updateState/' + id, data);
+  }
+
 }
