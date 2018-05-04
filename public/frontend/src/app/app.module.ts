@@ -36,8 +36,8 @@ import { WarehouseComponent } from './Biz/warehouse/warehouse.component';
 import { AddwarehouseComponent } from './Biz/warehouse/addwarehouse/addwarehouse.component';
 import { EditwarehouseComponent } from './Biz/warehouse/editwarehouse/editwarehouse.component';
 import { WarehouseService } from './service/bwarehouse/warehouse.service';
-import { BizcompanyComponent } from './bizcompany/bizcompany.component';
 import { CompanyComponent } from './Biz/company/company.component';
+import { BcompanyService } from './service/bcompany/bcompany.service';
 
 @NgModule({
   declarations: [
@@ -65,7 +65,6 @@ import { CompanyComponent } from './Biz/company/company.component';
     WarehouseComponent,
     AddwarehouseComponent,
     EditwarehouseComponent,
-    BizcompanyComponent,
     CompanyComponent,
   ],
   imports: [
@@ -75,7 +74,8 @@ import { CompanyComponent } from './Biz/company/company.component';
     RouterModule.forRoot(RouterConfig),
   ],
   providers: [NomidentifytyService, RoleService, ItemcategoryService, LoginService,
-              ReasontransferService, UnittypeService, UserService, WarehouseService
+              ReasontransferService, UnittypeService, UserService, WarehouseService,
+              BcompanyService
   ],
   bootstrap: [AppComponent]
 })

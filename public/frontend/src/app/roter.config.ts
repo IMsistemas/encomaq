@@ -6,6 +6,7 @@ import { CategoryitemComponent } from './nomenclature/categoryitem/categoryitem.
 import { TransferreasonComponent } from './nomenclature/transferreason/transferreason.component';
 import { UnittypeComponent } from './nomenclature/unittype/unittype.component';
 import { UserComponent } from './system/user/user.component';
+import { CompanyComponent } from './Biz/company/company.component';
 export const RouterConfig: Route[] = [
     { path: 'identiytype', component: NomIdentifytypeComponent},
     { path: 'role', component: RoleComponent },
@@ -13,6 +14,7 @@ export const RouterConfig: Route[] = [
     { path: 'transferreason', component: TransferreasonComponent },
     { path: 'unittype', component: UnittypeComponent },
     { path: 'user', component: UserComponent },
+    { path: 'company', component: CompanyComponent },
 ];
 
 
