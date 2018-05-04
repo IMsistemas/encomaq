@@ -16,17 +16,17 @@ export class AppComponent implements OnInit {
     this.getSessionExist();
   }
 
-  getSessionExist() {       
-       
-    if (localStorage.getItem('user') === null){
+  getSessionExist() {
+
+    if (sessionStorage.getItem('user') === null) {
 
       this.sessionExist = false;
- 
+
     } else {
 
       this.sessionExist = true;
 
-    }    
+    }
 
   }
 }

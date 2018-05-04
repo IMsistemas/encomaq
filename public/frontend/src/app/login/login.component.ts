@@ -20,27 +20,27 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   verify(data) {
-    
+
     this.login.verifyLogin(data).subscribe(
       (response) => {
         if (response.success === true) {
-          
-          localStorage.setItem('user', JSON.stringify(response.user));
+
+          sessionStorage.setItem('user', JSON.stringify(response.user));
 
           location.reload();
 
         } else  {
-          
+
           this.login_failed = 'Email y/o Password incorrecto...';
-          $('#view-failed-login').show();  
+          $('#view-failed-login').show();
 
         }
       },
       (error) => {
 
         console.log('POST call in error", respons', error);
-        
+
       });
-      
+
   }
 }

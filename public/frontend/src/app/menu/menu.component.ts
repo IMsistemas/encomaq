@@ -22,8 +22,8 @@ export class MenuComponent implements OnInit {
   }
 
   logout() {
-    
-    localStorage.removeItem('user');
+
+    sessionStorage.removeItem('user');
 
     location.reload();
 
