@@ -23,7 +23,7 @@ export class MenuComponent implements OnInit {
 
   logout() {
 
-    sessionStorage.removeItem('user');
+    localStorage.removeItem('user');
 
     location.reload();
 

@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
 
   getSessionExist() {
 
-    if (sessionStorage.getItem('user') === null) {
+    if (localStorage.getItem('user') === null) {
 
       this.sessionExist = false;
 

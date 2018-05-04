@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       (response) => {
         if (response.success === true) {
 
-          sessionStorage.setItem('user', JSON.stringify(response.user));
+          localStorage.setItem('user', JSON.stringify(response.user));
 
           location.reload();
 
