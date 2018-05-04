@@ -16,7 +16,7 @@ declare var $: any;
 })
 export class CreateuserComponent implements OnInit {
   @Output() update_component_father = new EventEmitter<boolean>();
-  listRole: Observable<any>;
+  listRole = [];
   constructor(private user: UserService, private role: RoleService) { }
 
   ngOnInit() {
@@ -24,7 +24,26 @@ export class CreateuserComponent implements OnInit {
   }
 
   getListRole() {
-    this.listRole = this.role.getActiveRole();
+
+    this.listRole.push({idrole: '', rolename: '-- Seleccione --'});
+    this.role.getActiveRole().subscribe(
+      (response) => {
+
+        for (let role of response) {
+          let obj: Object = {
+            idrole: role.idrole,
+            rolename: role.rolename
+          };
+          this.listRole.push(obj);
+        }
+
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+        $('#mdlCreate').modal('hide');
+        this.update_component_father.emit(false);
+      });
+
   }
 
   create(data) {
