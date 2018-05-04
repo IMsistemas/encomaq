@@ -32,6 +32,10 @@ import { UserComponent } from './system/user/user.component';
 import { UserService } from './service/user/user.service';
 import { CreateuserComponent } from './system/user/createuser/createuser.component';
 import { UpdateuserComponent } from './system/user/updateuser/updateuser.component';
+import { WarehouseComponent } from './Biz/warehouse/warehouse.component';
+import { AddwarehouseComponent } from './Biz/warehouse/addwarehouse/addwarehouse.component';
+import { EditwarehouseComponent } from './Biz/warehouse/editwarehouse/editwarehouse.component';
+import { WarehouseService } from './service/bwarehouse/warehouse.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,10 @@ import { UpdateuserComponent } from './system/user/updateuser/updateuser.compone
     EditcategoryitemComponent,
     UserComponent,
     CreateuserComponent,
-    UpdateuserComponent
+    UpdateuserComponent,
+    WarehouseComponent,
+    AddwarehouseComponent,
+    EditwarehouseComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,8 +70,8 @@ import { UpdateuserComponent } from './system/user/updateuser/updateuser.compone
     FormsModule,
     RouterModule.forRoot(RouterConfig),
   ],
-  providers: [NomidentifytyService, RoleService, ItemcategoryService, LoginService, 
-              ReasontransferService, UnittypeService, UserService
+  providers: [NomidentifytyService, RoleService, ItemcategoryService, LoginService,
+              ReasontransferService, UnittypeService, UserService, WarehouseService
   ],
   bootstrap: [AppComponent]
 })
