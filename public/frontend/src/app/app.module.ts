@@ -36,6 +36,8 @@ import { WarehouseComponent } from './Biz/warehouse/warehouse.component';
 import { AddwarehouseComponent } from './Biz/warehouse/addwarehouse/addwarehouse.component';
 import { EditwarehouseComponent } from './Biz/warehouse/editwarehouse/editwarehouse.component';
 import { WarehouseService } from './service/bwarehouse/warehouse.service';
+import { BizcompanyComponent } from './bizcompany/bizcompany.component';
+import { CompanyComponent } from './Biz/company/company.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,8 @@ import { WarehouseService } from './service/bwarehouse/warehouse.service';
     WarehouseComponent,
     AddwarehouseComponent,
     EditwarehouseComponent,
+    BizcompanyComponent,
+    CompanyComponent,
   ],
   imports: [
     BrowserModule,
