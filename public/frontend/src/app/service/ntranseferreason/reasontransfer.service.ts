@@ -22,4 +22,7 @@ export class ReasontransferService {
   delete_transferreason(id: any): Observable<any> {
     return this.http.delete(this.url_api.get_url_api() + 'api/Transferreason/' + id);
   }
+  delete_oktransferreason(id: any): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/Transferreason/delete/' + id);
+  }
 }

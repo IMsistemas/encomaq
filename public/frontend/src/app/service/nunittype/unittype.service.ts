@@ -21,5 +21,8 @@ export class UnittypeService {
   delete_unittype(id: any): Observable<any> {
     return this.http.delete(this.url_api.get_url_api() + 'api/UnitType/' + id);
   }
+  delete_okunittype(id: any): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/UnitType/delete/' + id);
+  }
 
 }

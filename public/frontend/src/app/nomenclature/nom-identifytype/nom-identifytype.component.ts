@@ -74,4 +74,29 @@ export class NomIdentifytypeComponent implements OnInit {
         $('#mdl_cancel_identifytype').modal('hide');
       });
   }
+  delete(data: any) {
+    this.tem_cancel_activate = data;
+    $('#mdl_delete').modal('show');
+  }
+  ok_delete() {
+    this.identify.delete_okidentifytype(this.tem_cancel_activate.ididentifytype).subscribe(
+      (response) => {
+        if (response.success !== undefined) {
+          $('#mdl_delete').modal('hide');
+          this.get_list_identifytype();
+          this.message_info = 'Sea elimino correctamente los datos..!!';
+          $('#mdlMessageSuccess').modal('show');
+        } else if (response.error !== undefined) {
+          $('#mdl_delete').modal('hide');
+          this.message_info = 'Error al eliminar los datos..!!';
+          $('#mdlMessageError').modal('show');
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+        $('#mdl_delete').modal('hide');
+        this.message_info = 'Error al eliminar los datos..!!';
+        $('#mdlMessageError').modal('show');
+      });
+  }
 }

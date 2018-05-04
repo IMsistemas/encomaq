@@ -21,4 +21,7 @@ export class NomidentifytyService {
   delete_identifytype(id: any): Observable<any> {
     return this.http.delete(this.url_api.get_url_api() + 'api/Identifytype/' + id);
   }
+  delete_okidentifytype(id: any): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/Identifytype/delete/' + id);
+  }
 }

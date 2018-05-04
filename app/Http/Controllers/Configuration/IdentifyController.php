@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Models\Nomenclature\IndetifyType;
+use App\Models\Biz\Carrier;
+use App\Models\Biz\Client;
 class IdentifyController extends Controller
 {
     /**
@@ -127,4 +129,24 @@ class IdentifyController extends Controller
         $count = $count->count();
         return ($count == 0) ? false : true;
     }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteidentify($id){
+        $aux1 = Carrier::whereRaw("ididentifytype=".$id."")->get();
+        $aux2 = Client::whereRaw("ididentifytype=".$id."")->get();
+        if (count($aux1) == 0  &&  count($aux2) == 0 ) {
+            $aux = IndetifyType::find($id); 
+            if ($aux->delete()) {
+                return response()->json(['success' => true ]);
+            } else {
+                return response()->json(['error' => 'error' ]);
+            }
+        }else {
+            return response()->json(['error' => 'used' ]);
+        }
+    }    
 }

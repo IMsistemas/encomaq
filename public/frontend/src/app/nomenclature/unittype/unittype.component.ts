@@ -80,4 +80,29 @@ export class UnittypeComponent implements OnInit {
         $('#mdl_cancelactivate').modal('hide');
       });
   }
+  delete(data: any) {
+    this.tem_cancel_activate = data;
+    $('#mdl_delete').modal('show');
+  }
+  ok_delete() {
+    this.unit.delete_okunittype(this.tem_cancel_activate.idunittype).subscribe(
+      (response) => {
+        if (response.success !== undefined) {
+          $('#mdl_delete').modal('hide');
+          this.message_info = 'Sea eliminado correctamente los datos..!!';
+          $('#mdlMessageSuccess').modal('show');
+          this.get_list_unittype();
+        } else if (response.error !== undefined) {
+          $('#mdl_delete').modal('hide');
+          this.message_info = 'Error al eliminar los datos..!!';
+          $('#mdlMessageError').modal('show');
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+        this.message_info = 'Error al eliminar los datos..!!';
+        $('#mdlMessageError').modal('show');
+        $('#mdl_delete').modal('hide');
+      });
+  }
 }

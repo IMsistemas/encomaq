@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Models\Nomenclature\CategoryItem;
-
+use App\Models\Biz\Item;
 
 class CategoryController extends Controller
 {
@@ -130,4 +130,24 @@ class CategoryController extends Controller
         $count = $count->count();
         return ($count == 0) ? false : true;
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deletecategory($id){
+        $aux1 = Item::whereRaw("idcategoryitem=".$id."")->get();
+        if (count($aux1) == 0) {
+            $aux = CategoryItem::find($id); 
+            if ($aux->delete()) {
+                return response()->json(['success' => true ]);
+            } else {
+                return response()->json(['error' => 'error' ]);
+            }
+        }else {
+            return response()->json(['error' => 'used' ]);
+        }
+    }    
 }

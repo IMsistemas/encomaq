@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Models\Nomenclature\UnitType;
+use App\Models\Biz\Item;
 
 class UnitTypeController extends Controller
 {
@@ -128,5 +129,25 @@ class UnitTypeController extends Controller
         }
         $count = $count->count();
         return ($count == 0) ? false : true;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteunit($id){
+        $aux1 = Item::whereRaw("idunittype=".$id."")->get();
+        if (count($aux1) == 0) {
+            $aux = UnitType::find($id); 
+            if ($aux->delete()) {
+                return response()->json(['success' => true ]);
+            } else {
+                return response()->json(['error' => 'error' ]);
+            }
+        }else {
+            return response()->json(['error' => 'used' ]);
+        }
     }
 }

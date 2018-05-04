@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('Identifytype/delete/{id}', 'Configuration\IdentifyController@deleteidentify');
     Route::resource('Identifytype', 'Configuration\IdentifyController');
 });
 
@@ -29,14 +30,17 @@ Route::resource('role', 'System\Role\RoleController');
 Route::resource('login', 'System\Login\LoginController');
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('CategoryItem/delete/{id}', 'Configuration\CategoryController@deletecategory');
     Route::resource('CategoryItem', 'Configuration\CategoryController');
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('Transferreason/delete/{id}', 'Configuration\TransferReasonController@deletetransseferreason');
     Route::resource('Transferreason', 'Configuration\TransferReasonController');
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('UnitType/delete/{id}', 'Configuration\UnitTypeController@deleteunit');
     Route::resource('UnitType', 'Configuration\UnitTypeController');
 });
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Models\Nomenclature\TransferReason;
+use App\Models\Biz\Referralguide;
 
 class TransferReasonController extends Controller
 {
@@ -128,5 +129,25 @@ class TransferReasonController extends Controller
         }
         $count = $count->count();
         return ($count == 0) ? false : true;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deletetransseferreason($id){
+        $aux1 = Referralguide::whereRaw("idtransferreason=".$id."")->get();
+        if (count($aux1) == 0) {
+            $aux = TransferReason::find($id); 
+            if ($aux->delete()) {
+                return response()->json(['success' => true ]);
+            } else {
+                return response()->json(['error' => 'error' ]);
+            }
+        }else {
+            return response()->json(['error' => 'used' ]);
+        }
     }
 }
