@@ -8,6 +8,7 @@ import { UnittypeComponent } from './nomenclature/unittype/unittype.component';
 import { UserComponent } from './system/user/user.component';
 import { CompanyComponent } from './Biz/company/company.component';
 import { WarehouseComponent } from './Biz/warehouse/warehouse.component';
+import { ItemComponent } from './Biz/item/item.component';
 export const RouterConfig: Route[] = [
     { path: 'identiytype', component: NomIdentifytypeComponent},
     { path: 'role', component: RoleComponent },
@@ -17,6 +18,7 @@ export const RouterConfig: Route[] = [
     { path: 'user', component: UserComponent },
     { path: 'company', component: CompanyComponent },
     { path: 'warehouse', component: WarehouseComponent },
+    { path: 'item', component: ItemComponent },
 ];
 
 

@@ -38,6 +38,10 @@ import { EditwarehouseComponent } from './Biz/warehouse/editwarehouse/editwareho
 import { WarehouseService } from './service/bwarehouse/warehouse.service';
 import { CompanyComponent } from './Biz/company/company.component';
 import { BcompanyService } from './service/bcompany/bcompany.service';
+import { ItemComponent } from './Biz/item/item.component';
+import { AdditemComponent } from './Biz/item/additem/additem.component';
+import { EdititemComponent } from './Biz/item/edititem/edititem.component';
+import { ItemService } from './service/bitem/item.service';
 
 @NgModule({
   declarations: [
@@ -66,6 +70,9 @@ import { BcompanyService } from './service/bcompany/bcompany.service';
     AddwarehouseComponent,
     EditwarehouseComponent,
     CompanyComponent,
+    ItemComponent,
+    AdditemComponent,
+    EdititemComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +82,7 @@ import { BcompanyService } from './service/bcompany/bcompany.service';
   ],
   providers: [NomidentifytyService, RoleService, ItemcategoryService, LoginService,
               ReasontransferService, UnittypeService, UserService, WarehouseService,
-              BcompanyService
+              BcompanyService, ItemService
   ],
   bootstrap: [AppComponent]
 })
