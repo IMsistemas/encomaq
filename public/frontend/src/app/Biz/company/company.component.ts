@@ -10,6 +10,8 @@ declare var $: any;
 })
 export class CompanyComponent implements OnInit {
   @Input() tem_edit_role: any;
+  message_success: any;
+  message_error: any;
   constructor(private company: BcompanyService) { }
 
   ngOnInit() {
@@ -51,8 +53,16 @@ export class CompanyComponent implements OnInit {
       (response) => {
         if (response.success === true) {
           
+          this.message_success = 'Se ha editado satisfactoriamente la Información de la Empresa';
+          $('#mdlMessageSuccess').modal('show');
+
+          this.ngOnInit();
+
         } else {
           
+          this.message_error = 'Ha ocurrido un error al intentar guardar la Información de la Empresa';
+          $('#mdlMessageError').modal('show');
+
         }
       },
       (error) => {
