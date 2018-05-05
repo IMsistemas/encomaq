@@ -42,6 +42,7 @@ import { ItemComponent } from './Biz/item/item.component';
 import { AdditemComponent } from './Biz/item/additem/additem.component';
 import { EdititemComponent } from './Biz/item/edititem/edititem.component';
 import { ItemService } from './service/bitem/item.service';
+import { ProfileComponent } from './system/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { ItemService } from './service/bitem/item.service';
     ItemComponent,
     AdditemComponent,
     EdititemComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
