@@ -39,7 +39,8 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::where( 'email', $request->input('email' ) )->where('state', 1)->get();
+        $user = User::with('role')->where( 'email', $request->input('email' ) )
+                        ->where('state', 1)->get();
 
         if ( count( $user ) > 0 ) {
 

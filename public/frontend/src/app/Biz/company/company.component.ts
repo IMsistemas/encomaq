@@ -26,11 +26,11 @@ export class CompanyComponent implements OnInit {
     this.company.get().subscribe(
       (response) => {
 
-        if (response.length != 0) {
+        if (response.length !== 0) {
 
           this.tem_edit_role = response[0];
 
-          if (response[0].image != null && response[0].image != '') {
+          if (response[0].image !== null && response[0].image !== '') {
 
               this.urlimage = this.url_api.get_url_api() + response[0].image;
 
@@ -40,7 +40,7 @@ export class CompanyComponent implements OnInit {
 
           this.tem_edit_role = {
 
-            idcompany: 0,  
+            idcompany: 0,
             businessname: '',
             tradename: '',
             identify: '',
@@ -64,14 +64,14 @@ export class CompanyComponent implements OnInit {
     this.company.update(data.idcompany, data).subscribe(
       (response) => {
         if (response.success === true) {
-          
+
           this.message_success = 'Se ha editado satisfactoriamente la Información de la Empresa';
           $('#mdlMessageSuccess').modal('show');
 
           this.ngOnInit();
 
         } else {
-          
+
           this.message_error = 'Ha ocurrido un error al intentar guardar la Información de la Empresa';
           $('#mdlMessageError').modal('show');
 
@@ -92,14 +92,14 @@ export class CompanyComponent implements OnInit {
     this.company.upload(this.fileToUpload).subscribe(
       (response) => {
         if (response.success === true) {
-          
+
           this.message_success = 'Se ha agregado la imagen satisfactoriamente';
           $('#mdlMessageSuccess').modal('show');
 
           this.ngOnInit();
 
         } else {
-          
+
           this.message_error = 'Ha ocurrido un error al intentar agregar la imagen o no está creada la Información de la Empresa';
           $('#mdlMessageError').modal('show');
 

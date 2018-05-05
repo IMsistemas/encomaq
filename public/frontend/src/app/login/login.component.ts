@@ -25,6 +25,8 @@ export class LoginComponent implements OnInit {
       (response) => {
         if (response.success === true) {
 
+          response.user.password = '';
+
           localStorage.setItem('user', JSON.stringify(response.user));
 
           location.reload();

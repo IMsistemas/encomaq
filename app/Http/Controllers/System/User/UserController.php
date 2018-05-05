@@ -131,7 +131,12 @@ class UserController extends Controller
 
             if ($user->save()) {
 
-                return response()->json(['success' => true ]);
+
+                $userProfile = User::with('role')->where( 'email', $request->input('email' ) )
+                                        ->where('state', 1)->get();
+
+
+                return response()->json(['success' => true, 'user' => $userProfile[0]]);
 
             } else {
 
