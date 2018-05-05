@@ -1,3 +1,156 @@
-<p>
-  company works!
-</p>
+<div class="container">
+
+  <div class="col-12" style="margin-top: 15px;">
+
+    <div class="row">
+
+        <div class="col-12">
+
+            <h4>Información de la Empresa</h4>
+
+        </div>
+
+    </div>
+
+  </div>
+
+  <hr>
+
+  <form novalidate (ngSubmit)="update(tem_edit_role); frm_edit.reset();" #frm_edit="ngForm">
+
+    <div class="row" style="margin-top: 5px;">
+
+      <div class="col-12 col-sm-6">
+
+        <div class="row">
+
+          <div class="col-12">
+
+            <div class="form-group">
+              <label for="businessname">Razón Social <span class="required">(*)</span> </label>
+              <input type="text" class="form-control" maxlength="100" id="businessname" name="businessname"  [(ngModel)]="tem_edit_role.businessname" #businessname="ngModel"
+                required>
+            </div>
+
+            <span *ngIf="businessname.errors?.required && businessname.touched">
+                <small id="emailHelp" class="form-text text-danger text-right">La Razón Social es requerida</small>
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-12">
+
+            <div class="form-group">
+              <label for="tradename">Nombre Comercial <span class="required">(*)</span> </label>
+              <input type="text" class="form-control" maxlength="100" id="tradename" name="tradename"  [(ngModel)]="tem_edit_role.tradename" #tradename="ngModel"
+                required>
+            </div>
+
+            <span *ngIf="tradename.errors?.required && tradename.touched">
+                <small id="emailHelp" class="form-text text-danger text-right">El Nombre Comercial es requerido</small>
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-12 col-sm-6">
+
+            <div class="form-group">
+              <label for="identify">RUC <span class="required">(*)</span> </label>
+              <input type="text" class="form-control" maxlength="100" id="identify" name="identify"  [(ngModel)]="tem_edit_role.identify" #identify="ngModel"
+                required>
+            </div>
+
+            <span *ngIf="identify.errors?.required && identify.touched">
+                <small id="emailHelp" class="form-text text-danger text-right">El RUC es requerido</small>
+            </span>
+
+          </div>
+
+          <div class="col-12 col-sm-6">
+
+            <div class="form-group">
+              <label for="phone">Teléfono</label>
+              <input type="text" class="form-control" maxlength="100" id="phone" name="phone"  [(ngModel)]="tem_edit_role.phone" #phone="ngModel">
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+      <div class="col-12 col-sm-6"></div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-12">
+
+        <div class="form-group">
+          <label for="address">Dirección</label>
+          <input type="text" class="form-control" maxlength="100" id="address" name="address"  [(ngModel)]="tem_edit_role.address" #address="ngModel">
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-12 col-sm-6">
+
+        <div class="form-group">
+          <label for="email">Email <span class="required">(*)</span> </label>
+          <input type="text" class="form-control" maxlength="100" id="email" name="email"  [(ngModel)]="tem_edit_role.email" #email="ngModel"
+            required>
+        </div>
+
+        <span *ngIf="email.errors?.required && email.touched">
+            <small id="emailHelp" class="form-text text-danger text-right">El Email es requerido</small>
+        </span>
+
+      </div>
+
+      <div class="col-12 col-sm-6">
+
+        <div class="form-group">
+          <label for="urlweb">URL Sitio Web</label>
+          <input type="text" class="form-control" maxlength="100" id="urlweb" name="urlweb"  [(ngModel)]="tem_edit_role.urlweb" #urlweb="ngModel">
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="row" style="margin-top: 5px;">
+
+      <div class="col-12 text-center">
+
+        <button type="button" class="btn btn-secondary">
+          Cancelar <i class="fas fa-ban"></i>
+        </button>
+
+        <button type="submit" class="btn btn-success" [disabled]="frm_edit.invalid">
+          Guardar <i class="fas fa-save"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+  </form>
+
+
+
+</div>

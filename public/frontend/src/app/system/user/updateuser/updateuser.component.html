@@ -17,7 +17,7 @@
               <div class="col-12 col-sm-6">
 
                 <div class="form-group">
-                  <label for="personname">Nombre</label>
+                  <label for="personname">Nombre <span class="required">(*)</span> </label>
                   <input type="text" class="form-control" maxlength="100" id="personname" name="personname" [(ngModel)]="tem_edit_user.personname" #personname="ngModel"
                     required>
                 </div>
@@ -31,7 +31,7 @@
               <div class="col-12 col-sm-6">
 
                 <div class="form-group">
-                  <label for="lastnameperson">Apellidos</label>
+                  <label for="lastnameperson">Apellidos <span class="required">(*)</span> </label>
                   <input type="text" class="form-control" maxlength="100" id="lastnameperson" name="lastnameperson" [(ngModel)]="tem_edit_user.lastnameperson" #lastnameperson="ngModel"
                     required>
                 </div>
@@ -48,7 +48,7 @@
               <div class="col-12">
 
                 <div class="form-group">
-                  <label for="idrole">Rol</label>
+                  <label for="idrole">Rol <span class="required">(*)</span> </label>
                   <select class="form-control" id="idrole" name="idrole" [(ngModel)]="tem_edit_user.idrole" #idrole="ngModel" required>
                       <option [value]="">-- Seleccione --</option>
                       <option *ngFor="let role of listRole | async" [ngValue]="role.idrole" [selected]="">
@@ -68,7 +68,7 @@
               <div class="col-12">
 
                 <div class="form-group">
-                  <label for="email">Email</label>
+                  <label for="email">Email <span class="required">(*)</span> </label>
                   <input type="email" class="form-control" maxlength="100" id="email" name="email" [(ngModel)]="tem_edit_user.email" #email="ngModel"
                     required>
                 </div>
