@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Biz;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
+use App\Models\Biz\Item;
 
 class ItemController extends Controller
 {
@@ -35,7 +37,22 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        if ($this->existitem($data["itemname"], null) == false ) {
+            $aux = new Item();
+            $aux->idcategoryitem = $data["idcategoryitem"];
+            $aux->idunittype = $data["idunittype"];
+            $aux->itemname = $data["itemname"];
+            $aux->description = $data["description"];
+            $aux->state = 1;
+            if($aux->save()){
+                return response()->json(['success' => $aux ]);
+            }else{
+                return response()->json(['error' => $aux ]);
+            }
+        } else {
+            return response()->json(['error' => 'exist']);
+        }
     }
 
     /**
@@ -69,7 +86,22 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        if ($this->existitem($data["itemname"], $id) == false ) {
+            $aux = Item::find($id);
+            $aux->idcategoryitem = $data["idcategoryitem"];
+            $aux->idunittype = $data["idunittype"];
+            $aux->itemname = $data["itemname"];
+            $aux->description = $data["description"];
+            $aux->state = 1;
+            if($aux->save()){
+                return response()->json(['success' => $aux ]);
+            }else{
+                return response()->json(['error' => $aux ]);
+            }
+        } else {
+            return response()->json(['error' => 'exist']);
+        }
     }
 
     /**
@@ -81,5 +113,23 @@ class ItemController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function itemfiltro($parametro) 
+    {
+        $filtro = json_decode($parametro);
+        $data = Item::with("nom_category","nom_unit")
+                        ->whereRaw("(itemname  LIKE '%".$filtro->Buscar."%' OR description  LIKE '%".$filtro->Buscar."%')")
+                        ->get();
+        return  Response::json($data,200);
+    }
+    private function existitem($aux, $id)
+    {
+        $count = Item::where('itemname', $aux);
+        if ($id != null) {
+            $count = $count->where('iditem', '!=' , $id);
+        }
+        $count = $count->count();
+        return ($count == 0) ? false : true;
     }
 }

@@ -16,4 +16,12 @@ class Item extends Model
     {
         return $this->hasMany('App\Models\Biz\Referralguideitem',"iditem");
     }
+    public function nom_category()
+    {
+        return $this->belongsTo('App\Models\Nomenclature\CategoryItem',"idcategoryitem");
+    }
+    public function nom_unit()
+    {
+        return $this->belongsTo('App\Models\Nomenclature\UnitType',"idunittype");
+    }
 }
