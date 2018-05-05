@@ -21,6 +21,8 @@ export class CompanyComponent implements OnInit {
 
   ngOnInit() {
 
+    $('#btn_upload').prop('disabled', true);
+
     this.company.get().subscribe(
       (response) => {
 
@@ -82,6 +84,7 @@ export class CompanyComponent implements OnInit {
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
+    $('#btn_upload').prop('disabled', false);
   }
 
   upload() {
