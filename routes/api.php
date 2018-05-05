@@ -59,3 +59,9 @@ Route::group(['middleware' => 'cors'], function(){
     Route::get('WareHouse/state/{id}', 'Biz\WareHouseController@statewarehouse');
     Route::resource('WareHouse', 'Biz\WareHouseController');
 });
+
+Route::group(['middleware' => 'cors'], function(){
+    Route::get('Item/filtro/{text}', 'Biz\ItemController@itemfiltro');
+    Route::get('Item/state/{id}', 'Biz\ItemController@statewarehouse');
+    Route::resource('Item', 'Biz\ItemController');
+});
