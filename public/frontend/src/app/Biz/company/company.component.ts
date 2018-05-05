@@ -12,6 +12,8 @@ export class CompanyComponent implements OnInit {
   @Input() tem_edit_role: any;
   message_success: any;
   message_error: any;
+  fileToUpload: File = null;
+  urlimage = './assets/image/no_image_available.jpg';
   constructor(private company: BcompanyService) { }
 
   ngOnInit() {
@@ -47,7 +49,6 @@ export class CompanyComponent implements OnInit {
   }
 
 
-
   update(data: any) {
     this.company.update(data.idcompany, data).subscribe(
       (response) => {
@@ -68,6 +69,34 @@ export class CompanyComponent implements OnInit {
       (error) => {
         console.log('POST call in error", respons', error);
       });
+  }
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+  }
+
+  upload() {
+
+    this.company.upload(this.fileToUpload).subscribe(
+      (response) => {
+        if (response === true) {
+          
+          this.message_success = 'Se ha editado satisfactoriamente la Información de la Empresa';
+          $('#mdlMessageSuccess').modal('show');
+
+          this.ngOnInit();
+
+        } else {
+          
+          this.message_error = 'Ha ocurrido un error al intentar guardar la Información de la Empresa';
+          $('#mdlMessageError').modal('show');
+
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+
   }
 
 }

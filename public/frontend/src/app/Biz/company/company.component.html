@@ -34,9 +34,9 @@
                 required>
             </div>
 
-            <span *ngIf="businessname.errors?.required && businessname.touched">
+            <div *ngIf="businessname.errors?.required && businessname.touched">
                 <small id="emailHelp" class="form-text text-danger text-right">La Razón Social es requerida</small>
-            </span>
+            </div>
 
           </div>
 
@@ -88,10 +88,30 @@
         </div>
 
 
-
       </div>
 
-      <div class="col-12 col-sm-6"></div>
+      <div class="col-12 col-sm-6">
+      
+        <div class="row">
+
+          <div class="col-12 text-center">
+          
+              <img src="{{urlimage}}" class="img-fluid" alt="Responsive image" style="width: 55%;">
+          
+          </div>
+        
+          <div class="col-12" style="margin-top: 5px;">
+          
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="file" lang="es" (change)="handleFileInput($event.target.files)">
+                <label class="custom-file-label" for="file">Seleccionar Imagen</label>
+            </div>
+          
+          </div>
+
+        </div>
+
+      </div>
 
     </div>
 

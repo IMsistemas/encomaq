@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
@@ -17,6 +17,13 @@ export class BcompanyService {
 
   update(id: any, data: any): Observable<any> {
     return this.http.put(this.url_api.get_url_api() + 'api/company/' + id, data);
+  }
+
+  upload(file: File): Observable<Object> {
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+
+    return this.http.post(this.url_api.get_url_api() + 'api/company/upload', formData);
   }
 
 }
