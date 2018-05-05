@@ -19,11 +19,11 @@ export class BcompanyService {
     return this.http.put(this.url_api.get_url_api() + 'api/company/' + id, data);
   }
 
-  upload(file: File): Observable<Object> {
+  upload(file: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('file', file, file.name);
 
-    return this.http.post(this.url_api.get_url_api() + 'api/company/upload', formData);
+    return this.http.post(this.url_api.get_url_api() + 'api/company', formData);
   }
 
 }

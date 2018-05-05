@@ -41,7 +41,45 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->hasFile('file')) {
+
+            $dirupload = 'uploads/image';
+
+            $file = $request->file('file');
+            $destinationPath = public_path() . $dirupload;
+            $name = rand(0, 9999) . '_' . $file->getClientOriginalName();
+
+            $company = Company::all();
+
+            if (count($company) > 0) {
+
+                if($file->move($destinationPath, $name)) {
+
+                    $url_file = $dirupload . '/' . $name;
+
+                    $company = Company::find($company[0]->idcompany);
+
+                    $company->image = $url_file;
+
+                    if ($company->save())  {
+
+                        return response()->json(['success' => true]);
+
+                    }
+
+                } else {
+
+                    return response()->json(['success' => false]);
+
+                }
+
+            } else {
+
+                return response()->json(['success' => false]);
+
+            }
+
+        }
     }
 
     /**

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BcompanyService } from './../../service/bcompany/bcompany.service';
+import { UrlApi } from './../../service/url-api';
+
 declare var jquery: any;
 declare var $: any;
 
@@ -10,6 +12,7 @@ declare var $: any;
 })
 export class CompanyComponent implements OnInit {
   @Input() tem_edit_role: any;
+  url_api = new UrlApi();
   message_success: any;
   message_error: any;
   fileToUpload: File = null;
@@ -24,6 +27,12 @@ export class CompanyComponent implements OnInit {
         if (response.length != 0) {
 
           this.tem_edit_role = response[0];
+
+          if (response[0].image != null && response[0].image != '') {
+
+              this.urlimage = this.url_api.get_url_api() + response[0].image;
+
+          }
 
         } else {
 
@@ -79,7 +88,7 @@ export class CompanyComponent implements OnInit {
 
     this.company.upload(this.fileToUpload).subscribe(
       (response) => {
-        if (response === true) {
+        if (response.success === true) {
           
           this.message_success = 'Se ha editado satisfactoriamente la Información de la Empresa';
           $('#mdlMessageSuccess').modal('show');
