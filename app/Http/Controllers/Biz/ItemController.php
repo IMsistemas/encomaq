@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Models\Biz\Item;
+use App\Models\Biz\Referralguide;
 
 class ItemController extends Controller
 {
@@ -112,7 +113,17 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $aux1 = Referralguide::whereRaw("iditem=".$id."")->get();
+        if (count($aux1) == 0) {
+            $aux = Item::find($id); 
+            if ($aux->delete()) {
+                return response()->json(['success' => true ]);
+            } else {
+                return response()->json(['error' => 'error' ]);
+            }
+        }else {
+            return response()->json(['error' => 'used' ]);
+        }
     }
 
     public function itemfiltro($parametro) 
@@ -131,5 +142,25 @@ class ItemController extends Controller
         }
         $count = $count->count();
         return ($count == 0) ? false : true;
+    }
+        /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function stateitem($id)
+    {
+        $aux = Item::find($id);
+        if ($aux->state == 1) {
+            $aux->state = 0;
+        } else {
+            $aux->state = 1;
+        }
+        if($aux->save()){
+            return response()->json(['success' => $aux ]);
+        }else{
+            return response()->json(['error' => $aux ]);
+        }
     }
 }
