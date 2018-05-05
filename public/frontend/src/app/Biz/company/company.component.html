@@ -16,11 +16,13 @@
 
   <hr>
 
-  <form novalidate (ngSubmit)="update(tem_edit_role); frm_edit.reset();" #frm_edit="ngForm">
+  <form novalidate (ngSubmit)="update(tem_edit_role);" #frm_edit="ngForm">
 
     <div class="row" style="margin-top: 5px;">
 
       <div class="col-12 col-sm-6">
+
+        <input type="hidden" id="idcompany" name="idcompany"  [(ngModel)]="tem_edit_role.idcompany" #idcompany="ngModel">
 
         <div class="row">
 

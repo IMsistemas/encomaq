@@ -14,36 +14,50 @@ export class CompanyComponent implements OnInit {
 
   ngOnInit() {
 
-    this.tem_edit_role = {
-
-      businessname: '',
-      tradename: '',
-      identify: '',
-      phone: '',
-      address: '',
-      email: '',
-      urlweb: ''
-
-    };
-
-  }
-
-  update(data: any) {
-    /*this.role.update(data.idrole, data).subscribe(
+    this.company.get().subscribe(
       (response) => {
-        if (response.success === true) {
-          $('#mdlUpdate').modal('hide');
-          this.update_component_father.emit(true);
+
+        if (response.length != 0) {
+
+          this.tem_edit_role = response[0];
+
         } else {
-          $('#mdlUpdate').modal('hide');
-          this.update_component_father.emit(false);
+
+          this.tem_edit_role = {
+
+            idcompany: 0,  
+            businessname: '',
+            tradename: '',
+            identify: '',
+            phone: '',
+            address: '',
+            email: '',
+            urlweb: ''
+
+          };
+
         }
       },
       (error) => {
         console.log('POST call in error", respons', error);
-        $('#mdlUpdate').modal('hide');
-        this.update_component_father.emit(false);
-      });*/
+      });
+
+  }
+
+
+
+  update(data: any) {
+    this.company.update(data.idcompany, data).subscribe(
+      (response) => {
+        if (response.success === true) {
+          
+        } else {
+          
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
   }
 
 }

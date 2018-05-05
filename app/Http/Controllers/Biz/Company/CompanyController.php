@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Biz\Company;
 
+use App\Models\Biz\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,6 +16,11 @@ class CompanyController extends Controller
     public function index()
     {
         //
+    }
+
+    public function get()
+    {
+        return Company::all();
     }
 
     /**
@@ -69,7 +75,34 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if ($id == 0) {
+
+            $company = new Company();
+
+        } else {
+
+            $company = Company::find($id);
+
+        }
+
+        $company->businessname = $request->input('businessname');
+        $company->tradename = $request->input('tradename');
+        $company->identify = $request->input('identify');
+        $company->phone = $request->input('phone');
+        $company->address = $request->input('address');
+        $company->email = $request->input('email');
+        $company->urlweb = $request->input('urlweb');
+
+        if ($company->save()) {
+
+            return response()->json(['success' => true ]);
+
+        } else {
+
+            return response()->json(['success' => false ]);
+
+        }
+
     }
 
     /**

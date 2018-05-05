@@ -49,3 +49,8 @@ Route::group(['middleware' => 'cors'], function(){
     Route::put('user/updateState/{id}', 'System\User\UserController@updateState');
     Route::resource('user', 'System\User\UserController');
 });
+
+Route::group(['middleware' => 'cors'], function(){
+    Route::get('company/get', 'Biz\Company\CompanyController@get');
+    Route::resource('company', 'Biz\Company\CompanyController');
+});
