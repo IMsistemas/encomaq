@@ -1,3 +1,81 @@
-<p>
-  editwarehouse works!
-</p>
+<div *ngIf="tem_edit">
+  <form novalidate (ngSubmit)="edit_warehouse(tem_edit); frm_editwarehouse.reset();" #frm_editwarehouse="ngForm">
+
+    <div class="modal-header bg-primary">
+      <h5 class="modal-title">Editar Bodega</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Bodega
+              <span class="required">(*)</span>
+            </label>
+            <input type="text" class="form-control" maxlength="100" id="warehousename" name="warehousename" [(ngModel)]="tem_edit.warehousename"
+              #warehousename="ngModel" required>
+          </div>
+
+          <div *ngIf="warehousename.errors?.required && warehousename.touched" >
+            <small id="" class="form-text text-danger text-right">La bodega es requerida</small>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Dirección
+              <span class="required">(*)</span>
+            </label>
+            <input type="text" class="form-control"  id="address" name="address" [(ngModel)]="tem_edit.address"
+              #address="ngModel" required>
+          </div>
+      
+          <div *ngIf="address.errors?.required && address.touched">
+            <small id="" class="form-text text-danger text-right">La dirección es requerida</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Teléfono
+              <span class="required">(*)</span>
+            </label>
+            <input type="text" class="form-control" pattern="^[0-9]*" id="phone" name="phone" [(ngModel)]="tem_edit.phone" #phone="ngModel" required>
+          </div>
+      
+          <div *ngIf="phone.errors?.required && phone.touched">
+            <small id="" class="form-text text-danger text-right">La teléfono es requerido</small>
+          </div>
+          <div *ngIf="phone.errors?.pattern">
+            <small id="" class="form-text text-danger text-right">El teléfono es invalido</small>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        Cancelar
+        <i class="fas fa-ban"></i>
+      </button>
+      <button type="submit" class="btn btn-success" [disabled]="frm_editwarehouse.invalid">
+        Guardar
+        <i class="fas fa-save"></i>
+      </button>
+    </div>
+
+
+
+  </form>
+</div>

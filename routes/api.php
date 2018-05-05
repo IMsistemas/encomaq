@@ -54,3 +54,8 @@ Route::group(['middleware' => 'cors'], function(){
     Route::get('company/get', 'Biz\Company\CompanyController@get');
     Route::resource('company', 'Biz\Company\CompanyController');
 });
+
+Route::group(['middleware' => 'cors'], function(){
+    Route::get('WareHouse/state/{id}', 'Biz\WareHouseController@statewarehouse');
+    Route::resource('WareHouse', 'Biz\WareHouseController');
+});
