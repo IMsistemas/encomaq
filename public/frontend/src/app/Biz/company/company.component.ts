@@ -93,14 +93,14 @@ export class CompanyComponent implements OnInit {
       (response) => {
         if (response.success === true) {
           
-          this.message_success = 'Se ha editado satisfactoriamente la Información de la Empresa';
+          this.message_success = 'Se ha agregado la imagen satisfactoriamente';
           $('#mdlMessageSuccess').modal('show');
 
           this.ngOnInit();
 
         } else {
           
-          this.message_error = 'Ha ocurrido un error al intentar guardar la Información de la Empresa';
+          this.message_error = 'Ha ocurrido un error al intentar agregar la imagen o no está creada la Información de la Empresa';
           $('#mdlMessageError').modal('show');
 
         }
