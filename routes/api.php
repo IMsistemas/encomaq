@@ -52,6 +52,5 @@ Route::group(['middleware' => 'cors'], function(){
 
 Route::group(['middleware' => 'cors'], function(){
     Route::get('company/get', 'Biz\Company\CompanyController@get');
-    Route::post('company/upload', 'Biz\Company\CompanyController@upload');
     Route::resource('company', 'Biz\Company\CompanyController');
 });

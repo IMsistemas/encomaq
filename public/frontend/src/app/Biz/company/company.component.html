@@ -100,13 +100,21 @@
           
           </div>
         
-          <div class="col-12" style="margin-top: 5px;">
+          <div class="col-12 col-sm-9" style="margin-top: 5px;">
           
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="file" lang="es" (change)="handleFileInput($event.target.files)">
                 <label class="custom-file-label" for="file">Seleccionar Imagen</label>
             </div>
           
+          </div>
+
+          <div class="col-12 col-sm-3" style="margin-top: 5px;">
+          
+            <button type="button" class="btn btn-secondary" (click)="upload();" >
+              Subir <i class="fas fa-ban"></i>
+            </button>
+
           </div>
 
         </div>
