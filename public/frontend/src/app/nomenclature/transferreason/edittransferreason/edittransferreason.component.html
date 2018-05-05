@@ -12,13 +12,13 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="form-group">
-            <label for="exampleFormControlInput1">Motivo Traslado</label>
+            <label for="exampleFormControlInput1">Motivo Traslado <span class="required">(*)</span></label>
             <input type="email" class="form-control" maxlength="100" id="transferreasonname" name="transferreasonname" [(ngModel)]="tem_edit.transferreasonname"
               #transferreasonname="ngModel" required>
           </div>
 
-          <div *ngIf="transferreasonname.errors?.required && transferreasonname.touched" class="alert alert-danger">
-            El Motivo Traslado es obligatorio
+          <div *ngIf="transferreasonname.errors?.required && transferreasonname.touched" >
+            <small id="" class="form-text text-danger text-right">El Motivo Traslado es obligatorio</small>
           </div>
         </div>
       </div>
