@@ -1,3 +1,169 @@
-<p>
-  configemail works!
-</p>
+<div class="container">
+
+    <div class="col-12" style="margin-top: 15px;">  
+      <div class="row">
+        <div class="col-6">
+    
+          <h4>Configuración Email Sistema</h4>
+    
+        </div>
+      </div>
+    </div>
+    <hr>
+
+    
+    <form novalidate (ngSubmit)="save_configemail(dataemail);" #frm_email="ngForm">
+
+    
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Driver 
+            <span class="required">(*)</span>
+          </label>
+          <input type="text" class="form-control" maxlength="10" id="driver" name="driver" [(ngModel)]="dataemail.driver" #driver="ngModel"
+          required>
+        </div>
+    
+        <div *ngIf="driver.errors?.required && driver.touched">
+          <small id="" class="form-text text-danger text-right">El driver es requerido</small>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Servidor
+            <span class="required">(*)</span>
+          </label>
+          <input type="text" class="form-control" maxlength="200" id="server" name="server" [(ngModel)]="dataemail.server" #server="ngModel" required>
+        </div>
+      
+        <div *ngIf="server.errors?.required && server.touched">
+          <small id="" class="form-text text-danger text-right">El servidor es requerido</small>
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Puerto
+            <span class="required">(*)</span>
+          </label>
+          <input type="text" class="form-control" maxlength="11" pattern="^[0-9]*" id="port" name="port" [(ngModel)]="dataemail.port" #port="ngModel" required>
+        </div>
+    
+        <div *ngIf="port.errors?.required && port.touched">
+          <small id="" class="form-text text-danger text-right">El puerto es requerido</small>
+        </div>
+        <div *ngIf="port.errors?.pattern">
+          <small id="" class="form-text text-danger text-right">El puerto es invalido</small>
+        </div>
+      </div>
+    
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Encriptación
+            <span class="required">(*)</span>
+          </label>
+          <input type="email" class="form-control" maxlength="10" id="encryptation" name="encryptation" [(ngModel)]="dataemail.encryptation" #encryptation="ngModel" required>
+        </div>
+    
+        <div *ngIf="encryptation.errors?.required && encryptation.touched">
+          <small id="" class="form-text text-danger text-right">La encriptación es requerida</small>
+        </div>
+      </div>
+    
+    
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Usuario
+            <span class="required">(*)</span>
+          </label>
+          <input type="text" class="form-control" maxlength="100" id="useremail" name="useremail" [(ngModel)]="dataemail.useremail" #useremail="ngModel" required >
+        </div>
+    
+        <div *ngIf="useremail.errors?.required && useremail.touched">
+          <small id="" class="form-text text-danger text-right">El usuario es requerido</small>
+        </div>
+      </div>
+    
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Password
+            <span class="required">(*)</span>
+          </label>
+          <input type="password" class="form-control"  id="passwordemail" name="passwordemail" [(ngModel)]="dataemail.passwordemail" #passwordemail="ngModel" required>
+        </div>
+    
+        <div *ngIf="passwordemail.errors?.required && passwordemail.touched">
+          <small id="" class="form-text text-danger text-right">El password es requerido</small>
+        </div>
+      </div>
+    
+    
+    </div>
+
+    <div class="row ">
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-success" [disabled]="frm_email.invalid">
+          Guardar
+          <i class="fas fa-save"></i>
+        </button>
+      </div>
+    </div>
+
+    </form>
+
+
+  <div class="modal fade" id="mdlMessageError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-danger">
+          <h5 class="modal-title">Información</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{message_info}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cerrar
+            <i class="fa fa-ban" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="mdlMessageSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-success">
+          <h5 class="modal-title">Información</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{message_info}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cerrar
+            <i class="fa fa-ban" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\System\ConfigEmail;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
+use App\Models\System\ConfigEmail;
 
 class ConfigEmailController extends Controller
 {
@@ -14,7 +16,8 @@ class ConfigEmailController extends Controller
      */
     public function index()
     {
-        //
+        $data = ConfigEmail::all();
+        return  Response::json($data,200);
     }
 
     /**
@@ -35,7 +38,19 @@ class ConfigEmailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $email = new ConfigEmail();
+        $email->driver = $data["driver"];
+        $email->server = $data["server"];
+        $email->port = $data["port"];
+        $email->encryptation = $data["encryptation"];
+        $email->useremail = $data["useremail"];
+        $email->passwordemail = $data["passwordemail"];
+        if($email->save()){
+            return response()->json(['success' => $email ]);
+        }else{
+            return response()->json(['error' => $email ]);
+        }
     }
 
     /**
@@ -69,7 +84,19 @@ class ConfigEmailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $email = ConfigEmail::find($id);
+        $email->driver = $data["driver"];
+        $email->server = $data["server"];
+        $email->port = $data["port"];
+        $email->encryptation = $data["encryptation"];
+        $email->useremail = $data["useremail"];
+        $email->passwordemail = $data["passwordemail"];
+        if($email->save()){
+            return response()->json(['success' => $email ]);
+        }else{
+            return response()->json(['error' => $email ]);
+        }
     }
 
     /**
