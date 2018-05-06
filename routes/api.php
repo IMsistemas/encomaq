@@ -65,3 +65,7 @@ Route::group(['middleware' => 'cors'], function(){
     Route::get('Item/state/{id}', 'Biz\ItemController@stateitem');
     Route::resource('Item', 'Biz\ItemController');
 });
+
+Route::group(['middleware' => 'cors'], function(){
+    Route::resource('ConfigEmail', 'System\ConfigEmail\ConfigEmailController');
+});

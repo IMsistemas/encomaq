@@ -43,6 +43,8 @@ import { AdditemComponent } from './Biz/item/additem/additem.component';
 import { EdititemComponent } from './Biz/item/edititem/edititem.component';
 import { ItemService } from './service/bitem/item.service';
 import { ProfileComponent } from './system/profile/profile.component';
+import { ConfigemailComponent } from './system/configemail/configemail.component';
+import { ConfigemailService } from './service/sconfigemail/configemail.service';
 
 @NgModule({
   declarations: [
@@ -75,6 +77,7 @@ import { ProfileComponent } from './system/profile/profile.component';
     AdditemComponent,
     EdititemComponent,
     ProfileComponent,
+    ConfigemailComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,7 +87,7 @@ import { ProfileComponent } from './system/profile/profile.component';
   ],
   providers: [NomidentifytyService, RoleService, ItemcategoryService, LoginService,
               ReasontransferService, UnittypeService, UserService, WarehouseService,
-              BcompanyService, ItemService
+              BcompanyService, ItemService, ConfigemailService
   ],
   bootstrap: [AppComponent]
 })
