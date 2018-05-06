@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Models\Biz\Item;
-use App\Models\Biz\Referralguide;
+use App\Models\Biz\Referralguideitem;
 
 class ItemController extends Controller
 {
@@ -113,7 +113,7 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        $aux1 = Referralguide::whereRaw("iditem=".$id."")->get();
+        $aux1 = Referralguideitem::whereRaw("iditem=".$id."")->get();
         if (count($aux1) == 0) {
             $aux = Item::find($id); 
             if ($aux->delete()) {
@@ -129,8 +129,14 @@ class ItemController extends Controller
     public function itemfiltro($parametro) 
     {
         $filtro = json_decode($parametro);
+        $sql = "";
+        if ($filtro->idcategoryitem != "") {
+            $sql .= " AND idcategoryitem =".$filtro->idcategoryitem." ";
+        } else if ($filtro->idunittype != "") {
+            $sql .= " AND idunittype =".$filtro->idunittype." ";
+        }
         $data = Item::with("nom_category","nom_unit")
-                        ->whereRaw("(itemname  LIKE '%".$filtro->Buscar."%' OR description  LIKE '%".$filtro->Buscar."%')")
+                        ->whereRaw("(itemname  LIKE '%".$filtro->Buscar."%' OR description  LIKE '%".$filtro->Buscar."%')".$sql)
                         ->get();
         return  Response::json($data,200);
     }

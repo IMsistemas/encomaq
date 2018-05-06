@@ -13,16 +13,32 @@
     </div>
 
     <div class="row">
-      <div class="col-6" >
+      <div class="col-3" >
 
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Buscar Item" #aux  (keyup)="descripcion=aux.value; get_list_item();">
+          <input type="text" class="form-control" placeholder="Buscar Item" #aux [(ngModel)]="descripcion"  (keyup)="get_list_item();">
           <div class="input-group-prepend">
             <label class="input-group-text" ><i class="fas fa-search"></i></label>
           </div>
         </div>
       </div>
-      <div class="col-6 text-right">
+      <div class="col-3">
+        <select class="custom-select" #cate [(ngModel)]="idcategory" (change)="get_list_item();">
+          <option *ngFor="let cat of lis_category" [ngValue]="cat.idcategoryitem">
+            {{cat.categoryitemname}}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-3">
+        <select class="custom-select" #unt [(ngModel)]="idunittype" (change)="get_list_item();">
+          <option *ngFor="let u of lis_unit" [ngValue]="u.idunittype">
+            {{u.unittypename}}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-3 text-right">
       
         <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Agregar" (click)="new_item()">
           Agregar

@@ -1,6 +1,8 @@
 import { Component, OnChanges, SimpleChanges, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ItemService } from '../../service/bitem/item.service';
+import { ItemcategoryService } from '../../service/ncategoryitem/itemcategory.service';
+import { UnittypeService } from '../../service/nunittype/unittype.service';
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -15,15 +17,23 @@ export class ItemComponent implements OnInit {
   tem_cancel_activate: any;
   msm_cancel_activate: any;
   descripcion: any = '';
-  constructor(private item: ItemService) { }
+  idcategory: any = '';
+  lis_category = [];
+  lis_unit = [];
+  idunittype: any = '';
+  constructor(private item: ItemService, private category: ItemcategoryService, private unit: UnittypeService) { }
 
   ngOnInit() {
     $('.dropdown-toggle').dropdown();
     this.get_list_item();
+    this.list_category();
+    this.list_unit();
   }
   get_list_item() {
     const o = {
-      Buscar: this.descripcion
+      Buscar: this.descripcion,
+      idcategoryitem: this.idcategory,
+      idunittype: this.idunittype
     };
     this.list_item = this.item.filtro_item(o);
   }
@@ -102,6 +112,38 @@ export class ItemComponent implements OnInit {
         this.message_info = 'Error al eliminar los datos..!!';
         $('#mdlMessageError').modal('show');
         $('#mdl_delete').modal('hide');
+      });
+  }
+  list_category() {
+    this.lis_category.push({ idcategoryitem: '', categoryitemname: '--Categoria--' });
+    this.category.get_categoryitem().subscribe(
+      (response) => {
+        for (const cat of response) {
+          const o = {
+            idcategoryitem: cat.idcategoryitem,
+            categoryitemname: cat.categoryitemname
+          };
+          this.lis_category.push(o);
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+  }
+  list_unit() {
+    this.lis_unit.push({ idunittype: '', unittypename: '--Unidad--' });
+    this.unit.get_unittype().subscribe(
+      (response) => {
+        for (const u of response) {
+          const o = {
+            idunittype: u.idunittype,
+            unittypename: u.unittypename
+          };
+          this.lis_unit.push(o);
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
       });
   }
 }
