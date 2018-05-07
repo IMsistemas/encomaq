@@ -11,7 +11,18 @@ declare var $: any;
   styleUrls: ['./company.component.css']
 })
 export class CompanyComponent implements OnInit {
-  @Input() tem_edit_role: any;
+  tem_edit_role = {
+
+    idcompany: 0,
+    businessname: '',
+    tradename: '',
+    identify: '',
+    phone: '',
+    address: '',
+    email: '',
+    urlweb: ''
+
+  };
   url_api = new UrlApi();
   message_success: any;
   message_error: any;
@@ -35,21 +46,6 @@ export class CompanyComponent implements OnInit {
               this.urlimage = this.url_api.get_url_api() + response[0].image;
 
           }
-
-        } else {
-
-          this.tem_edit_role = {
-
-            idcompany: 0,
-            businessname: '',
-            tradename: '',
-            identify: '',
-            phone: '',
-            address: '',
-            email: '',
-            urlweb: ''
-
-          };
 
         }
       },
