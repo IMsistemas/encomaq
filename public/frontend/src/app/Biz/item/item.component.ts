@@ -98,7 +98,7 @@ export class ItemComponent implements OnInit {
       (response) => {
         if (response.success !== undefined) {
           $('#mdl_delete').modal('hide');
-          this.message_info = 'Sea elimino correctamente los datos..!!';
+          this.message_info = 'Se elimino correctamente los datos..!!';
           $('#mdlMessageSuccess').modal('show');
           this.get_list_item();
         } else if (response.error !== undefined) {
@@ -115,7 +115,7 @@ export class ItemComponent implements OnInit {
       });
   }
   list_category() {
-    this.lis_category.push({ idcategoryitem: '', categoryitemname: '--Categoria--' });
+    this.lis_category.push({ idcategoryitem: '', categoryitemname: '-- Categoría --' });
     this.category.get_categoryitem().subscribe(
       (response) => {
         for (const cat of response) {
@@ -131,7 +131,7 @@ export class ItemComponent implements OnInit {
       });
   }
   list_unit() {
-    this.lis_unit.push({ idunittype: '', unittypename: '--Unidad--' });
+    this.lis_unit.push({ idunittype: '', unittypename: '-- Unidad --' });
     this.unit.get_unittype().subscribe(
       (response) => {
         for (const u of response) {
