@@ -17,6 +17,8 @@ declare var $: any;
 export class CreateuserComponent implements OnInit {
   @Output() update_component_father = new EventEmitter<boolean>();
   listRole = [];
+  message_success: any;
+  message_error: any;
   constructor(private user: UserService, private role: RoleService) { }
 
   ngOnInit() {
@@ -62,6 +64,10 @@ export class CreateuserComponent implements OnInit {
         $('#mdlCreate').modal('hide');
         this.update_component_father.emit(false);
       });
+  }
+
+  createRol() {
+    $('#mdlCreateRol').modal('show');
   }
 
 }

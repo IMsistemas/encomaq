@@ -48,10 +48,11 @@
 
                 <div class="form-group">
                   <label for="idrole">Rol <span class="required">(*)</span> </label>
+
                   <select class="form-control" id="idrole" name="idrole" ngModel #idrole="ngModel" required>
-                      <option *ngFor="let role of listRole" [ngValue]="role.idrole">
-                          {{role.rolename}}
-                      </option>
+                    <option *ngFor="let role of listRole" [ngValue]="role.idrole">
+                        {{role.rolename}}
+                    </option>
                   </select>
                 </div>
 
@@ -111,6 +112,8 @@
   </div>
 
 </form>
+
+
 
 
 

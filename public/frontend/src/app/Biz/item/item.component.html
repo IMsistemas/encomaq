@@ -10,11 +10,27 @@
 
       </div>
 
+      <div class="col-6 text-right">
+
+        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Agregar" (click)="new_item()">
+          Agregar
+          <i class="fas fa-plus-square fa-lg"></i>
+        </button>
+
+      </div>
+
     </div>
 
-    <div class="row">
-      <div class="col-3" >
+  </div>
 
+  <hr>
+
+
+  <div class="col-12">
+
+    <div class="row">
+
+      <div class="col-12 col-sm-6" style="margin-top: 5px;">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Buscar Item" #aux [(ngModel)]="descripcion"  (keyup)="get_list_item();">
           <div class="input-group-prepend">
@@ -22,7 +38,8 @@
           </div>
         </div>
       </div>
-      <div class="col-3">
+
+      <div class="col-12 col-sm-3" style="margin-top: 5px;">
         <select class="custom-select" #cate [(ngModel)]="idcategory" (change)="get_list_item();">
           <option *ngFor="let cat of lis_category" [ngValue]="cat.idcategoryitem">
             {{cat.categoryitemname}}
@@ -30,7 +47,7 @@
         </select>
       </div>
 
-      <div class="col-3">
+      <div class="col-12 col-sm-3" style="margin-top: 5px;">
         <select class="custom-select" #unt [(ngModel)]="idunittype" (change)="get_list_item();">
           <option *ngFor="let u of lis_unit" [ngValue]="u.idunittype">
             {{u.unittypename}}
@@ -38,19 +55,9 @@
         </select>
       </div>
 
-      <div class="col-3 text-right">
-      
-        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Agregar" (click)="new_item()">
-          Agregar
-          <i class="fas fa-plus-square fa-lg"></i>
-        </button>
-      
-      </div>
     </div>
 
   </div>
-
-  <hr>
 
 
   <div class="col-12 table-responsive">
