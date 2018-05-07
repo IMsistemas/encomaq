@@ -46,7 +46,7 @@ class CompanyController extends Controller
             $dirupload = 'uploads/image';
 
             $file = $request->file('file');
-            $destinationPath = public_path() . $dirupload;
+            $destinationPath = public_path() . '/' . $dirupload;
             $name = rand(0, 9999) . '_' . $file->getClientOriginalName();
 
             $company = Company::all();
