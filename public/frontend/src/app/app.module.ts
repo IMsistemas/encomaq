@@ -45,6 +45,10 @@ import { ItemService } from './service/bitem/item.service';
 import { ProfileComponent } from './system/profile/profile.component';
 import { ConfigemailComponent } from './system/configemail/configemail.component';
 import { ConfigemailService } from './service/sconfigemail/configemail.service';
+import { ClientComponent } from './Biz/client/client.component';
+import { AddclientComponent } from './Biz/client/addclient/addclient.component';
+import { EditclientComponent } from './Biz/client/editclient/editclient.component';
+import { ClienteService } from './service/bclient/cliente.service';
 
 @NgModule({
   declarations: [
@@ -78,6 +82,9 @@ import { ConfigemailService } from './service/sconfigemail/configemail.service';
     EdititemComponent,
     ProfileComponent,
     ConfigemailComponent,
+    ClientComponent,
+    AddclientComponent,
+    EditclientComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,7 +94,7 @@ import { ConfigemailService } from './service/sconfigemail/configemail.service';
   ],
   providers: [NomidentifytyService, RoleService, ItemcategoryService, LoginService,
               ReasontransferService, UnittypeService, UserService, WarehouseService,
-              BcompanyService, ItemService, ConfigemailService
+    BcompanyService, ItemService, ConfigemailService, ClienteService
   ],
   bootstrap: [AppComponent]
 })

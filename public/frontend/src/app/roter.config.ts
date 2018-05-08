@@ -11,6 +11,7 @@ import { WarehouseComponent } from './Biz/warehouse/warehouse.component';
 import { ItemComponent } from './Biz/item/item.component';
 import { ProfileComponent } from './system/profile/profile.component';
 import { ConfigemailComponent } from './system/configemail/configemail.component';
+import { ClientComponent } from './Biz/client/client.component';
 export const RouterConfig: Route[] = [
     { path: 'identiytype', component: NomIdentifytypeComponent},
     { path: 'role', component: RoleComponent },
@@ -23,6 +24,7 @@ export const RouterConfig: Route[] = [
     { path: 'item', component: ItemComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'configemail', component: ConfigemailComponent },
+    { path: 'client', component: ClientComponent },
 ];
 
 
