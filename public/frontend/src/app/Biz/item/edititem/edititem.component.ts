@@ -14,6 +14,7 @@ export class EdititemComponent implements OnInit {
   @Output() update_component_father = new EventEmitter<boolean>();
   lis_category = [];
   lis_unit = [];
+  auxcategory = false;
   constructor(private item: ItemService, private category: ItemcategoryService, private unit: UnittypeService) { }
 
   ngOnInit() {
@@ -26,10 +27,11 @@ export class EdititemComponent implements OnInit {
       (response) => {
         for (const cat of response) {
           const o = {
-            idcategoryitem: parseInt(cat.idcategoryitem),
+            idcategoryitem: cat.idcategoryitem,
             categoryitemname: cat.categoryitemname
           };
           this.lis_category.push(o);
+          this.auxcategory = true;
         }
       },
       (error) => {
