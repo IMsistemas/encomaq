@@ -13,7 +13,7 @@ declare var $: any;
 })
 export class UpdateuserComponent implements OnInit {
   @Input() tem_edit_user: any;
-  @Input() listRole: any;
+  @Input() listRole: Observable<any>;
   @Output() update_component_father = new EventEmitter<boolean>();
   // listRole: Observable<any>;
   constructor(private user: UserService, private role: RoleService) { }
@@ -22,9 +22,9 @@ export class UpdateuserComponent implements OnInit {
     // this.getListRole();
   }
 
-  getListRole() {
+  /* getListRole() {
     this.listRole = this.role.getActiveRole();
-  }
+  }*/
 
   update(data: any) {
     this.user.update(data.iduser, data).subscribe(

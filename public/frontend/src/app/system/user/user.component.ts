@@ -19,7 +19,7 @@ export class UserComponent implements OnInit {
   username_selected: any;
   message_success: any;
   message_error: any;
-  listRoles: any;
+  listRoles: Observable<any>;
   constructor(private user: UserService, private role: RoleService) { }
 
   ngOnInit() {
