@@ -1,5 +1,5 @@
- 
- 
+
+
  <form novalidate (ngSubmit)="update(tem_edit_user); frm_edit.reset();" #frm_edit="ngForm">
 
   <div class="modal-header bg-primary">
@@ -12,7 +12,7 @@
   <div class="modal-body">
       <div class="row" *ngIf="tem_edit_user">
         <div class="col-sm-12">
-          
+
             <div class="row">
               <div class="col-12 col-sm-6">
 
@@ -22,7 +22,7 @@
                     required>
                 </div>
 
-                <span *ngIf="personname.errors?.required && personname.touched">                  
+                <span *ngIf="personname.errors?.required && personname.touched">
                   <small id="emailHelp" class="form-text text-danger text-right">El Nombre es requerido</small>
                 </span>
 
@@ -36,7 +36,7 @@
                     required>
                 </div>
 
-                <span *ngIf="lastnameperson.errors?.required && lastnameperson.touched">                  
+                <span *ngIf="lastnameperson.errors?.required && lastnameperson.touched">
                   <small id="emailHelp" class="form-text text-danger text-right">Los Apellidos son requeridos</small>
                 </span>
 
@@ -51,13 +51,13 @@
                   <label for="idrole">Rol <span class="required">(*)</span> </label>
                   <select class="form-control" id="idrole" name="idrole" [(ngModel)]="tem_edit_user.idrole" #idrole="ngModel" required>
                       <option [value]="">-- Seleccione --</option>
-                      <option *ngFor="let role of listRole | async" [ngValue]="role.idrole" [selected]="">
+                      <option *ngFor="let role of listRole | async" [ngValue]="role.idrole">
                           {{role.rolename}}
                       </option>
                   </select>
                 </div>
 
-                <span *ngIf="idrole.errors?.required && idrole.touched">                  
+                <span *ngIf="idrole.errors?.required && idrole.touched">
                   <small id="emailHelp" class="form-text text-danger text-right">El Rol es requerido</small>
                 </span>
 
@@ -73,7 +73,7 @@
                     required>
                 </div>
 
-                <span *ngIf="email.errors?.required && email.touched">                  
+                <span *ngIf="email.errors?.required && email.touched">
                   <small id="emailHelp" class="form-text text-danger text-right">El Email es requerido</small>
                 </span>
 
@@ -90,11 +90,11 @@
 
               </div>
             </div>
-          
+
         </div>
       </div>
   </div>
-  
+
   <div class="modal-footer">
 
       <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -107,5 +107,5 @@
       </button>
 
   </div>
- 
+
 </form>
