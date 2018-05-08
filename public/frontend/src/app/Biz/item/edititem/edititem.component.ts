@@ -26,7 +26,7 @@ export class EdititemComponent implements OnInit {
       (response) => {
         for (const cat of response) {
           const o = {
-            idcategoryitem: cat.idcategoryitem,
+            idcategoryitem: parseInt(cat.idcategoryitem),
             categoryitemname: cat.categoryitemname
           };
           this.lis_category.push(o);
