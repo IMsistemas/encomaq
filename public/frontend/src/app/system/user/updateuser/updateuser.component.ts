@@ -13,12 +13,13 @@ declare var $: any;
 })
 export class UpdateuserComponent implements OnInit {
   @Input() tem_edit_user: any;
+  @Input() listRole: any;
   @Output() update_component_father = new EventEmitter<boolean>();
-  listRole: Observable<any>;
+  // listRole: Observable<any>;
   constructor(private user: UserService, private role: RoleService) { }
 
   ngOnInit() {
-    this.getListRole();
+    // this.getListRole();
   }
 
   getListRole() {

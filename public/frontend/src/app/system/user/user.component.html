@@ -95,7 +95,9 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
-        <app-updateuser [tem_edit_user]="user_selected" (update_component_father)="updateListUser($event, 'edit')" ></app-updateuser>
+        <app-updateuser [listRole]="listRoles" [tem_edit_user]="user_selected" (update_component_father)="updateListUser($event, 'edit')" >
+
+        </app-updateuser>
 
       </div>
     </div>

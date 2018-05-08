@@ -2,6 +2,7 @@ import { element } from 'protractor';
 import { Component, OnChanges, Output, EventEmitter, SimpleChanges, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { UserService } from './../../service/user/user.service';
+import { RoleService } from './../../service/role/role.service';
 
 declare var jquery: any;
 declare var $: any;
@@ -18,15 +19,21 @@ export class UserComponent implements OnInit {
   username_selected: any;
   message_success: any;
   message_error: any;
-  constructor(private user: UserService) { }
+  listRoles: any;
+  constructor(private user: UserService, private role: RoleService) { }
 
   ngOnInit() {
     $('.dropdown-toggle').dropdown();
     this.getListUser();
+    this.getListRole();
   }
 
   getListUser() {
     this.listUser = this.user.getListUser();
+  }
+
+  getListRole() {
+    this.listRoles = this.role.getActiveRole();
   }
 
   create() {
