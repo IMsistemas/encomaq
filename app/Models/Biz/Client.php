@@ -20,4 +20,8 @@ class Client extends Model
     {
         return $this->hasMany('App\Models\Biz\Contract',"idclient");
     }
+    public function nom_identifytype()
+    {
+        return $this->belongsTo('App\Models\Nomenclature\IndetifyType',"ididentifytype");
+    }
 }
