@@ -61,7 +61,7 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
-    Route::get('Item/filtro/{text}', 'Biz\ItemController@itemfiltro');
+    Route::get('Item/filtro', 'Biz\ItemController@itemfiltro');
     Route::get('Item/state/{id}', 'Biz\ItemController@stateitem');
     Route::resource('Item', 'Biz\ItemController');
 });

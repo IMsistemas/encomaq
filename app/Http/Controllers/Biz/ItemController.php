@@ -126,9 +126,9 @@ class ItemController extends Controller
         }
     }
 
-    public function itemfiltro($parametro) 
+    public function itemfiltro(Request $request) 
     {
-        $filtro = json_decode($parametro);
+        $filtro = json_decode($request->get('filter'));
         $sql = "";
         if ($filtro->idcategoryitem != "") {
             $sql .= " AND idcategoryitem =".$filtro->idcategoryitem." ";
@@ -136,9 +136,9 @@ class ItemController extends Controller
             $sql .= " AND idunittype =".$filtro->idunittype." ";
         }
         $data = Item::with("nom_category","nom_unit")
-                        ->whereRaw("(itemname  LIKE '%".$filtro->Buscar."%' OR description  LIKE '%".$filtro->Buscar."%')".$sql)
-                        ->get();
-        return  Response::json($data,200);
+                        ->whereRaw("(itemname  LIKE '%".$filtro->Buscar."%' OR description  LIKE '%".$filtro->Buscar."%')".$sql);
+
+        return  $data->paginate(5);
     }
     private function existitem($aux, $id)
     {

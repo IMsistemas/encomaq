@@ -12,7 +12,7 @@ declare var $: any;
 })
 export class ItemComponent implements OnInit {
   message_info: any;
-  list_item: Observable<any>;
+  list_item = [];
   info_tem_edit: any;
   tem_cancel_activate: any;
   msm_cancel_activate: any;
@@ -21,6 +21,13 @@ export class ItemComponent implements OnInit {
   lis_category = [];
   lis_unit = [];
   idunittype: any = '';
+  /*variables para paginar*/
+  loading = false;
+  total = 0;
+  page = 1;
+  limit = 20;
+  from = 0;
+  /*variables para paginar*/
   constructor(private item: ItemService, private category: ItemcategoryService, private unit: UnittypeService) { }
 
   ngOnInit() {
@@ -35,7 +42,16 @@ export class ItemComponent implements OnInit {
       idcategoryitem: this.idcategory,
       idunittype: this.idunittype
     };
-    this.list_item = this.item.filtro_item(o);
+    this.item.filtro_item(this.page, o).subscribe(
+      (response) => {
+        this.list_item = response.data;
+        this.from = response.from;
+        this.total = response.total;
+        this.loading = false;
+      },
+      (error) => {
+        console.log(error);
+      });
   }
   new_item() {
     $('#additem').modal('show');
@@ -145,5 +161,18 @@ export class ItemComponent implements OnInit {
       (error) => {
         console.log('POST call in error", respons', error);
       });
+  }
+
+  goToPage(n: number): void {
+    this.page = n;
+    this.get_list_item();
+  }
+  onNext(): void {
+    this.page++;
+    this.get_list_item();
+  }
+  onPrev(): void {
+    this.page--;
+    this.get_list_item();
   }
 }

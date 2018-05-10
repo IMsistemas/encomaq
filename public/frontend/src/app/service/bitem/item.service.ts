@@ -9,9 +9,7 @@ import { UrlApi } from '../url-api';
 export class ItemService {
   url_api = new UrlApi();
   constructor(private http: HttpClient) { }
-  get_item(): Observable<any> {
-    return this.http.get(this.url_api.get_url_api() + 'api/Item');
-  }
+
   add_item(data: any): Observable<any> {
     return this.http.post(this.url_api.get_url_api() + 'api/Item', data);
   }
@@ -24,8 +22,8 @@ export class ItemService {
   state_item(id: any): Observable<any> {
     return this.http.get(this.url_api.get_url_api() + 'api/Item/state/' + id);
   }
-  filtro_item(filtro: any): Observable<any> {
-    return this.http.get(this.url_api.get_url_api() + 'api/Item/filtro/' + JSON.stringify(filtro));
+  filtro_item(page: any, filtro: any): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/Item/filtro?page=' + page + '&filter=' + JSON.stringify(filtro));
   }
 
 }

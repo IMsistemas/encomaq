@@ -32,7 +32,7 @@
 
       <div class="col-12 col-sm-6" style="margin-top: 5px;">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Buscar Item" #aux [(ngModel)]="descripcion"  (keyup)="get_list_item();">
+          <input type="text" class="form-control" placeholder="Buscar Item" #aux [(ngModel)]="descripcion"  (keyup)="page = 1;get_list_item();">
           <div class="input-group-prepend">
             <label class="input-group-text" ><i class="fas fa-search"></i></label>
           </div>
@@ -40,7 +40,7 @@
       </div>
 
       <div class="col-12 col-sm-3" style="margin-top: 5px;">
-        <select class="custom-select" #cate [(ngModel)]="idcategory" (change)="get_list_item();">
+        <select class="custom-select" #cate [(ngModel)]="idcategory" (change)="page = 1; get_list_item(); ">
           <option *ngFor="let cat of lis_category" [ngValue]="cat.idcategoryitem">
             {{cat.categoryitemname}}
           </option>
@@ -48,7 +48,7 @@
       </div>
 
       <div class="col-12 col-sm-3" style="margin-top: 5px;">
-        <select class="custom-select" #unt [(ngModel)]="idunittype" (change)="get_list_item();">
+        <select class="custom-select" #unt [(ngModel)]="idunittype" (change)="page = 1; get_list_item(); ">
           <option *ngFor="let u of lis_unit" [ngValue]="u.idunittype">
             {{u.unittypename}}
           </option>
@@ -75,8 +75,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let ident of list_item | async;  let i = index " [ngClass]="{'text-danger':ident.state == 0 } ">
-          <td>{{i+1}}</td>
+        <tr *ngFor="let ident of list_item  let i = index " [ngClass]="{'text-danger':ident.state == 0 } ">
+          <td>{{i+from}}</td>
           <td>{{ident.itemname}}</td>
           <td>{{ident.description}}</td>
           <td>{{ident.nom_category.categoryitemname}}</td>
@@ -105,6 +105,15 @@
 
   </div>
 
+  <div class="col-12 ">
+    <div class="row">
+      <div class="col-12 text-right">
+        <app-pagination (goPage)="goToPage($event)" (goNext)="onNext()" (goPrev)="onPrev()" [pagesToShow]="3" [page]="page" [perPage]="3"
+          [count]="total">
+        </app-pagination>
+      </div>
+    </div>
+  </div>
 
   <div class="modal fade" id="mdlMessageError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
