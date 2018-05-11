@@ -23,9 +23,14 @@ export class UserComponent implements OnInit {
   constructor(private user: UserService, private role: RoleService) { }
 
   ngOnInit() {
-    $('.dropdown-toggle').dropdown();
+    this.loadInitJQuery();
     this.getListUser();
     this.getListRole();
+  }
+
+  loadInitJQuery() {
+    $('.dropdown-toggle').dropdown();
+    $('.modal-dialog').draggable();
   }
 
   getListUser() {
