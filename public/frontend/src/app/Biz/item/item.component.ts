@@ -28,6 +28,9 @@ export class ItemComponent implements OnInit {
   limit = 20;
   from = 0;
   /*variables para paginar*/
+
+  urlimage = './assets/image/no_image_available.jpg';
+  select_data: any = '';
   constructor(private item: ItemService, private category: ItemcategoryService, private unit: UnittypeService) { }
 
   ngOnInit() {
@@ -162,7 +165,10 @@ export class ItemComponent implements OnInit {
         console.log('POST call in error", respons', error);
       });
   }
-
+  load(data: any) {
+    this.select_data = data;
+    $('#mdlinfo').modal('show');
+  }
   goToPage(n: number): void {
     this.page = n;
     this.get_list_item();
