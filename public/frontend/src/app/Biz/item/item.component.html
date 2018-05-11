@@ -106,13 +106,9 @@
   </div>
 
   <div class="col-12 ">
-    <div class="row">
-      <div class="col-12 text-right">
-        <app-pagination (goPage)="goToPage($event)" (goNext)="onNext()" (goPrev)="onPrev()" [pagesToShow]="3" [page]="page" [perPage]="3"
-          [count]="total">
-        </app-pagination>
-      </div>
-    </div>
+    <app-pagination class="right_paginate" (goPage)="goToPage($event)" (goNext)="onNext()" (goPrev)="onPrev()"
+      [pagesToShow]="3" [page]="page" [perPage]="3" [count]="total">
+    </app-pagination>
   </div>
 
   <div class="modal fade" id="mdlMessageError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

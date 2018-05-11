@@ -3,3 +3,7 @@
 .required {
     color: red;
 } 
+.right_paginate {
+    position: relative; 
+    float:right;
+}
