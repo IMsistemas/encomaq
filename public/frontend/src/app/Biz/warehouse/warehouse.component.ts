@@ -17,6 +17,7 @@ export class WarehouseComponent implements OnInit {
   constructor(private ware: WarehouseService) { }
 
   ngOnInit() {
+    $('.modal').draggable();
     $('.dropdown-toggle').dropdown();
     this.get_list_warehouse();
   }

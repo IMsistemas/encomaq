@@ -34,6 +34,7 @@ export class ItemComponent implements OnInit {
   constructor(private item: ItemService, private category: ItemcategoryService, private unit: UnittypeService) { }
 
   ngOnInit() {
+    $('.modal').draggable();
     $('.dropdown-toggle').dropdown();
     this.get_list_item();
     this.list_category();

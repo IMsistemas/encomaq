@@ -17,6 +17,7 @@ export class NomIdentifytypeComponent implements OnInit {
   constructor(private identify: NomidentifytyService) { }
 
   ngOnInit() {
+    $('.modal').draggable();
     $('.dropdown-toggle').dropdown();
     this.get_list_identifytype();
   }

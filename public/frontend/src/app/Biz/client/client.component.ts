@@ -21,6 +21,7 @@ export class ClientComponent implements OnInit {
   constructor(private client: ClienteService, private tipo: NomidentifytyService) { }
 
   ngOnInit() {
+    $('.modal').draggable();
     $('.dropdown-toggle').dropdown();
     this.get_list_client();
     this.list_identifytype();

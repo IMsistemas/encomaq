@@ -17,6 +17,7 @@ export class TransferreasonComponent implements OnInit {
   constructor(private transfer: ReasontransferService) { }
 
   ngOnInit() {
+    $('.modal').draggable();
     $('.dropdown-toggle').dropdown();
     this.get_list_transferreason();
   }

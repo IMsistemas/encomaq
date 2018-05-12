@@ -17,6 +17,7 @@ export class CategoryitemComponent implements OnInit {
   constructor(private category: ItemcategoryService) { }
 
   ngOnInit() {
+    $('.modal').draggable();
     $('.dropdown-toggle').dropdown();
     this.get_list_categoryitem();
   }

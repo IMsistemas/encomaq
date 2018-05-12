@@ -17,6 +17,7 @@ export class UnittypeComponent implements OnInit {
   constructor(private unit: UnittypeService) { }
 
   ngOnInit() {
+    $('.modal').draggable();
     $('.dropdown-toggle').dropdown();
     this.get_list_unittype();
   }
