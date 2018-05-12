@@ -50,6 +50,7 @@ import { AddclientComponent } from './Biz/client/addclient/addclient.component';
 import { EditclientComponent } from './Biz/client/editclient/editclient.component';
 import { ClienteService } from './service/bclient/cliente.service';
 import { PaginationComponent } from './pagination/pagination.component';
+import { CarrierComponent } from './Biz/carrier/carrier.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     AddclientComponent,
     EditclientComponent,
     PaginationComponent,
+    CarrierComponent,
   ],
   imports: [
     BrowserModule,
