@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { ItemService } from '../../service/bitem/item.service';
 import { ItemcategoryService } from '../../service/ncategoryitem/itemcategory.service';
 import { UnittypeService } from '../../service/nunittype/unittype.service';
+import { UrlApi } from '../../service/url-api';
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -28,12 +29,14 @@ export class ItemComponent implements OnInit {
   limit = 20;
   from = 0;
   /*variables para paginar*/
-
+  url_api = new UrlApi();
+  url_basic: String = '';
   urlimage = './assets/image/no_image_available.jpg';
   select_data: any = '';
   constructor(private item: ItemService, private category: ItemcategoryService, private unit: UnittypeService) { }
 
   ngOnInit() {
+    this.url_basic = this.url_api.get_url_api();
     $('.modal').draggable();
     $('.dropdown-toggle').dropdown();
     this.get_list_item();

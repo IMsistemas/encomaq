@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ItemService } from '../../../service/bitem/item.service';
 import { ItemcategoryService } from '../../../service/ncategoryitem/itemcategory.service';
 import { UnittypeService } from '../../../service/nunittype/unittype.service';
+import { UrlApi } from '../../../service/url-api';
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -14,10 +15,15 @@ export class EdititemComponent implements OnInit {
   @Output() update_component_father = new EventEmitter<boolean>();
   lis_category = [];
   lis_unit = [];
+  urlapi = new UrlApi();
+  url_basic: String = '';
+  urlimage = './assets/image/no_image_available.jpg';
   auxcategory = false;
+  fileToUpload: File = null;
   constructor(private item: ItemService, private category: ItemcategoryService, private unit: UnittypeService) { }
 
   ngOnInit() {
+    this.url_basic = this.urlapi.get_url_api();
     this.list_category();
     this.list_unit();
   }
@@ -54,9 +60,14 @@ export class EdititemComponent implements OnInit {
         console.log('POST call in error", respons', error);
       });
   }
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+  }
   edit_item(data: any) {
-    this.item.edit_item(data.iditem, data).subscribe(
+    console.log(data);
+    this.item.add_item(data, this.fileToUpload).subscribe(
       (response) => {
+        console.log(response);
         if (response.success !== undefined) {
           $('#edititem').modal('hide');
           this.update_component_father.emit(true);

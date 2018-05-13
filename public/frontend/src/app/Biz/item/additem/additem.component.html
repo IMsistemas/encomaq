@@ -12,6 +12,18 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="form-group">
+          <label for="exampleFormControlInput1">Foto
+          </label>
+          <input type="file" class="form-control" id="image" lang="es" (change)="handleFileInput($event.target.files)">
+        </div>
+    
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
           <label for="exampleFormControlInput1">Categoria
             <span class="required">(*)</span>
           </label>

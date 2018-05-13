@@ -1,15 +1,32 @@
 <div *ngIf="auxcategory">
 <div *ngIf="tem_edit">
-  <form novalidate (ngSubmit)="edit_item(tem_edit); frmedititem.reset();" #frmedititem="ngForm">
+  <form novalidate (ngSubmit)="edit_item(tem_edit); " #frmedititem="ngForm">
 
   <div class="modal-header bg-primary">
-    <h5 class="modal-title">Nuevo Item</h5>
+    <h5 class="modal-title">Editar Item</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
 
   <div class="modal-body">
+
+    <div class="row">
+      <div class="col-12">
+        <img src="{{ ((tem_edit.image != '' && tem_edit.image != null)? url_basic + '' + tem_edit.image:urlimage)  }}" class="img-fluid"
+          alt="Responsive image" style="width: 95%;">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Foto
+        </label>
+        <input type="file" class="form-control" id="image" lang="es" (change)="handleFileInput($event.target.files)">
+      </div>
+  
+      </div>
+    </div>
 
     <div class="row">
       <div class="col-sm-12">

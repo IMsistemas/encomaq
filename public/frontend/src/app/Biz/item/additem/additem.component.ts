@@ -17,6 +17,7 @@ export class AdditemComponent implements OnInit {
   @Output() update_component_father = new EventEmitter<boolean>();
   lis_category = [];
   lis_unit = [];
+  fileToUpload: File = null;
   constructor(private item: ItemService, private category: ItemcategoryService, private unit: UnittypeService) { }
 
   ngOnInit() {
@@ -39,6 +40,9 @@ export class AdditemComponent implements OnInit {
         console.log('POST call in error", respons', error);
       });
   }
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+  }
   list_unit() {
     this.lis_unit.push({ idunittype: '', unittypename: '--Seleccione--' });
     this.unit.get_unittype().subscribe(
@@ -56,7 +60,7 @@ export class AdditemComponent implements OnInit {
       });
   }
   add_item(data) {
-    this.item.add_item(data).subscribe(
+    this.item.add_item(data, this.fileToUpload).subscribe(
       (response) => {
         if (response.success !== undefined) {
           $('#additem').modal('hide');

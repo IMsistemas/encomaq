@@ -249,7 +249,7 @@
 
 
     <div class="modal fade" id="mdlinfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header bg-info">
             <h5 class="modal-title">Información</h5>
@@ -261,7 +261,7 @@
             <div class="container" *ngIf="select_data">
               <div class="row">
                 <div class="col-5">
-                  <img src="{{ ((select_data.image != '' && select_data.image != null)? select_data.image:urlimage)  }}" class="img-fluid" alt="Responsive image"
+                  <img src="{{ ((select_data.image != '' && select_data.image != null)? url_basic + '' + select_data.image:urlimage)  }}" class="img-fluid" alt="Responsive image"
                     style="width: 95%;">
                 </div>
                 <div class="col-7">

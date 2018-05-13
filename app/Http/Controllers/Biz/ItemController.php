@@ -38,21 +38,77 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        if ($this->existitem($data["itemname"], null) == false ) {
-            $aux = new Item();
-            $aux->idcategoryitem = $data["idcategoryitem"];
-            $aux->idunittype = $data["idunittype"];
-            $aux->itemname = $data["itemname"];
-            $aux->description = $data["description"];
-            $aux->state = 1;
-            if($aux->save()){
-                return response()->json(['success' => $aux ]);
-            }else{
-                return response()->json(['error' => $aux ]);
+        $fulldata = $request->all();
+        $data = json_decode($fulldata["Data"]);
+        if( isset($data->iditem)) {
+            $id = $data->iditem;
+            if ($this->existitem($data->itemname, $id) == false ) {
+                $aux = Item::find($id);
+                $aux->idcategoryitem = $data->idcategoryitem;
+                $aux->idunittype = $data->idunittype;
+                $aux->itemname = $data->itemname;
+                $aux->description = $data->description;
+                $aux->state = 1;
+                if($aux->save()){
+                    if ($request->hasFile('file')) {
+                        $dirupload = 'uploads/items';
+                        $file = $request->file('file');
+                        $destinationPath = public_path() . '/' . $dirupload;
+                        $name = rand(0, 9999) . '_' . $file->getClientOriginalName();
+                        if($file->move($destinationPath, $name)) {
+                            $url_file = $dirupload . '/' . $name;
+                            $auxfile = Item::find($aux->iditem);
+                            unlink(public_path() . '/' .$auxfile->image);
+                            $auxfile->image = $url_file;
+                            if ($auxfile->save())  {
+                                return response()->json(['success' => $auxfile]);
+                            }
+                        } else {
+                            return response()->json(['error' => $auxfile]);
+                        } 
+
+                    }
+
+                    return response()->json(['success' => $aux ]);
+                }else{
+                    return response()->json(['error' => $aux ]);
+                }
+            } else {
+                return response()->json(['error' => 'exist']);
             }
+
         } else {
-            return response()->json(['error' => 'exist']);
+            if ($this->existitem($data->itemname, null) == false ) {
+                $aux = new Item();
+                $aux->idcategoryitem = $data->idcategoryitem;
+                $aux->idunittype = $data->idunittype;
+                $aux->itemname = $data->itemname;
+                $aux->description = $data->description;
+                $aux->state = 1;
+                if($aux->save()){
+                    if ($request->hasFile('file')) {
+                        $dirupload = 'uploads/items';
+                        $file = $request->file('file');
+                        $destinationPath = public_path() . '/' . $dirupload;
+                        $name = rand(0, 9999) . '_' . $file->getClientOriginalName();
+                        if($file->move($destinationPath, $name)) {
+                            $url_file = $dirupload . '/' . $name;
+                            $auxfile = Item::find($aux->iditem);
+                            $auxfile->image = $url_file;
+                            if ($auxfile->save())  {
+                                return response()->json(['success' => $auxfile]);
+                            }
+                        } else {
+                            return response()->json(['error' => $auxfile]);
+                        } 
+
+                    }
+                    return response()->json(['success' => $aux ]);
+                }
+
+            } else {
+                return response()->json(['error' => 'exist']);
+            }
         }
     }
 
@@ -87,15 +143,35 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
-        if ($this->existitem($data["itemname"], $id) == false ) {
+        $fulldata = $request->all();
+        $data = json_decode($fulldata["Data"]);
+        if ($this->existitem($data->itemname, $id) == false ) {
             $aux = Item::find($id);
-            $aux->idcategoryitem = $data["idcategoryitem"];
-            $aux->idunittype = $data["idunittype"];
-            $aux->itemname = $data["itemname"];
-            $aux->description = $data["description"];
+            $aux->idcategoryitem = $data->idcategoryitem;
+            $aux->idunittype = $data->idunittype;
+            $aux->itemname = $data->itemname;
+            $aux->description = $data->description;
             $aux->state = 1;
             if($aux->save()){
+                if ($request->hasFile('file')) {
+                    $dirupload = 'uploads/items';
+                    $file = $request->file('file');
+                    $destinationPath = public_path() . '/' . $dirupload;
+                    $name = rand(0, 9999) . '_' . $file->getClientOriginalName();
+                    if($file->move($destinationPath, $name)) {
+                        $url_file = $dirupload . '/' . $name;
+                        $auxfile = Item::find($aux->iditem);
+                        unlink(public_path() . '/' .$auxfile->image);
+                        $auxfile->image = $url_file;
+                        if ($auxfile->save())  {
+                            return response()->json(['success' => $auxfile]);
+                        }
+                    } else {
+                        return response()->json(['error' => $auxfile]);
+                    } 
+
+                }
+
                 return response()->json(['success' => $aux ]);
             }else{
                 return response()->json(['error' => $aux ]);
@@ -116,6 +192,9 @@ class ItemController extends Controller
         $aux1 = Referralguideitem::whereRaw("iditem=".$id."")->get();
         if (count($aux1) == 0) {
             $aux = Item::find($id); 
+            if(isset($aux->image)) {
+                unlink(public_path() . '/' .$aux->image);
+            }
             if ($aux->delete()) {
                 return response()->json(['success' => true ]);
             } else {
