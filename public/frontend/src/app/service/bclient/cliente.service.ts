@@ -24,8 +24,8 @@ export class ClienteService {
   state_client(id: any): Observable<any> {
     return this.http.get(this.url_api.get_url_api() + 'api/Client/state/' + id);
   }
-  filtro_client(filtro: any): Observable<any> {
-    return this.http.get(this.url_api.get_url_api() + 'api/Client/filtro/' + JSON.stringify(filtro));
+  filtro_client(page: any, filtro: any): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/Client/filtro?page=' + page + '&filter=' + JSON.stringify(filtro));
   }
 
 }

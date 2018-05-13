@@ -114,17 +114,16 @@ class ClienteController extends Controller
             return response()->json(['error' => 'used' ]);
         }
     }
-    public function clientfiltro($parametro) 
+    public function clientfiltro(Request $request) 
     {
-        $filtro = json_decode($parametro);
+        $filtro = json_decode($request->get('filter'));
         $sql = "";
         if ($filtro->ididentifytype != "") {
             $sql .= " AND ididentifytype =".$filtro->ididentifytype." ";
         }
         $data = Client::with("nom_identifytype")
-                        ->whereRaw("(businessname  LIKE '%".$filtro->Buscar."%' OR identify  LIKE '%".$filtro->Buscar."%')".$sql)
-                        ->get();
-        return  Response::json($data,200);
+                        ->whereRaw("(businessname  LIKE '%".$filtro->Buscar."%' OR identify  LIKE '%".$filtro->Buscar."%')".$sql);
+        return  $data->paginate(5);
     }
     private function existclient($aux, $id)
     {

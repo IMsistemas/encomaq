@@ -71,7 +71,7 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
-    Route::get('Client/filtro/{text}', 'Biz\ClienteController@clientfiltro');
+    Route::get('Client/filtro', 'Biz\ClienteController@clientfiltro');
     Route::get('Client/state/{id}', 'Biz\ClienteController@stateclient');
     Route::resource('Client', 'Biz\ClienteController');
 });

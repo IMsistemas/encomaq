@@ -11,13 +11,21 @@ declare var $: any;
 })
 export class ClientComponent implements OnInit {
   message_info: any;
-  list_client: Observable<any>;
+  list_client = [];
   info_tem_edit: any;
   tem_cancel_activate: any;
   msm_cancel_activate: any;
   descripcion: any = '';
   ididentifytype: any = '';
   lis_tipoident = [];
+  /*variables para paginar*/
+  loading = false;
+  total = 0;
+  page = 1;
+  limit = 20;
+  from = 0;
+  select_data: any = '';
+  /*variables para paginar*/
   constructor(private client: ClienteService, private tipo: NomidentifytyService) { }
 
   ngOnInit() {
@@ -31,7 +39,16 @@ export class ClientComponent implements OnInit {
       Buscar: this.descripcion,
       ididentifytype: this.ididentifytype
     };
-    this.list_client = this.client.filtro_client(o);
+    this.client.filtro_client(this.page, o).subscribe(
+      (response) => {
+        this.list_client = response.data;
+        this.from = response.from;
+        this.total = response.total;
+        this.loading = false;
+      },
+      (error) => {
+        console.log(error);
+      });
   }
   list_identifytype() {
     this.lis_tipoident.push({ ididentifytype: '', identifytypename: '-- Identificación --' });
@@ -121,5 +138,21 @@ export class ClientComponent implements OnInit {
         $('#mdlMessageError').modal('show');
         $('#mdl_delete').modal('hide');
       });
+  }
+  load(data: any) {
+    this.select_data = data;
+    $('#mdlinfo').modal('show');
+  }
+  goToPage(n: number): void {
+    this.page = n;
+    this.get_list_client();
+  }
+  onNext(): void {
+    this.page++;
+    this.get_list_client();
+  }
+  onPrev(): void {
+    this.page--;
+    this.get_list_client();
   }
 }
