@@ -1,6 +1,6 @@
 <div *ngIf="auxcategory">
 <div *ngIf="tem_edit">
-  <form novalidate (ngSubmit)="edit_item(tem_edit); " #frmedititem="ngForm">
+  <form novalidate (ngSubmit)="edit_item(tem_edit); frmedititem.reset();" #frmedititem="ngForm">
 
   <div class="modal-header bg-primary">
     <h5 class="modal-title">Editar Item</h5>

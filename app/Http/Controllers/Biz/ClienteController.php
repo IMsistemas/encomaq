@@ -90,7 +90,24 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        if ($this->existclient($data["identify"], $id) == false ) {
+            $aux = Client::find($id);
+            $aux->ididentifytype = $data["ididentifytype"];
+            $aux->businessname = $data["businessname"];
+            $aux->identify = $data["identify"];
+            $aux->phone = $data["phone"];
+            $aux->address = $data["address"];
+            $aux->email = $data["email"];
+            $aux->state = 1;
+            if($aux->save()){
+                return response()->json(['success' => $aux ]);
+            }else{
+                return response()->json(['error' => $aux ]);
+            }
+        } else {
+            return response()->json(['error' => 'exist']);
+        }
     }
 
     /**

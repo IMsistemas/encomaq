@@ -64,10 +64,8 @@ export class EdititemComponent implements OnInit {
     this.fileToUpload = files.item(0);
   }
   edit_item(data: any) {
-    console.log(data);
     this.item.add_item(data, this.fileToUpload).subscribe(
       (response) => {
-        console.log(response);
         if (response.success !== undefined) {
           $('#edititem').modal('hide');
           this.update_component_father.emit(true);

@@ -139,6 +139,10 @@ export class ClientComponent implements OnInit {
         $('#mdl_delete').modal('hide');
       });
   }
+  edit_client(data: any) {
+    this.info_tem_edit = data;
+    $('#editclient').modal('show');
+  }
   load(data: any) {
     this.select_data = data;
     $('#mdlinfo').modal('show');
