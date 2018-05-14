@@ -185,7 +185,9 @@ class LoginController extends Controller
                         $message->to($email)->subject('Actualización de Contraseña exitoso');
                     });
 
-                    return response()->json(['success' => true]);
+                    //return response()->json(['success' => true]);
+
+                    return 'Se ha actualizado correctamente su password, favor verifique su buzon de correo...';
 
                 } else {
 

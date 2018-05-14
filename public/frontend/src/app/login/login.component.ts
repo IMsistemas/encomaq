@@ -15,6 +15,8 @@ declare var $: any;
 })
 export class LoginComponent implements OnInit {
   login_failed: any;
+  message_success: any;
+  message_error: any;
   constructor(private login: LoginService) { }
 
   ngOnInit() {
@@ -53,13 +55,18 @@ export class LoginComponent implements OnInit {
   recover(data) {
     this.login.recover(data).subscribe(
       (response) => {
+
+        $('#mdlConfirmRecover').modal('hide');
+
         if (response.success === true) {
 
-          
+          this.message_success = 'Se ha enviado satisfactoriamente el email de verificacion a su correo...';
+          $('#mdlMessageSuccess').modal('show');
 
         } else  {
 
-          
+          this.message_error = 'Ha ocurrido un error al intentar enviar email de verificacion a su correo';
+          $('#mdlMessageError').modal('show');
 
         }
       },
