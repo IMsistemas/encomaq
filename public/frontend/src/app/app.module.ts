@@ -55,6 +55,7 @@ import { ProjectComponent } from './Biz/project/project.component';
 import { AddprojectComponent } from './Biz/project/addproject/addproject.component';
 import { EditprojectComponent } from './Biz/project/editproject/editproject.component';
 import { ProjectService } from './service/bproject/project.service';
+import { CarrierService } from './service/carrier/carrier.service';
 
 @NgModule({
   declarations: [
@@ -103,9 +104,11 @@ import { ProjectService } from './service/bproject/project.service';
     FormsModule,
     RouterModule.forRoot(RouterConfig),
   ],
-  providers: [NomidentifytyService, RoleService, ItemcategoryService, LoginService,
-              ReasontransferService, UnittypeService, UserService, WarehouseService,
-    BcompanyService, ItemService, ConfigemailService, ClienteService, ProjectService
+  providers: [
+    NomidentifytyService, RoleService, ItemcategoryService, LoginService,
+    ReasontransferService, UnittypeService, UserService, WarehouseService,
+    BcompanyService, ItemService, ConfigemailService, ClienteService, 
+    ProjectService, CarrierService
   ],
   bootstrap: [AppComponent]
 })
