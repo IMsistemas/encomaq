@@ -56,6 +56,8 @@ import { AddprojectComponent } from './Biz/project/addproject/addproject.compone
 import { EditprojectComponent } from './Biz/project/editproject/editproject.component';
 import { ProjectService } from './service/bproject/project.service';
 import { CarrierService } from './service/carrier/carrier.service';
+import { CreatecarrierComponent } from './Biz/carrier/createcarrier/createcarrier.component';
+import { UpdatecarrierComponent } from './Biz/carrier/updatecarrier/updatecarrier.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +99,8 @@ import { CarrierService } from './service/carrier/carrier.service';
     ProjectComponent,
     AddprojectComponent,
     EditprojectComponent,
+    CreatecarrierComponent,
+    UpdatecarrierComponent,
   ],
   imports: [
     BrowserModule,
