@@ -45,4 +45,28 @@ export class LoginComponent implements OnInit {
       });
 
   }
+
+  showModalRecover() {
+    $('#mdlConfirmRecover').modal('show');
+  }
+
+  recover(data) {
+    this.login.recover(data).subscribe(
+      (response) => {
+        if (response.success === true) {
+
+          
+
+        } else  {
+
+          
+
+        }
+      },
+      (error) => {
+
+        console.log('POST call in error", respons', error);
+
+      });
+  }
 }

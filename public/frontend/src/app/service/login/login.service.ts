@@ -21,4 +21,10 @@ export class LoginService {
   logout(): Observable<any> {
     return this.http.get(this.url_api.get_url_api() + 'api/login/logout');
   }
+
+  recover(data: any): Observable<any> {    
+    return this.http.post(this.url_api.get_url_api() + 'api/login/resetPassword', data);
+  }
+
+  
 }

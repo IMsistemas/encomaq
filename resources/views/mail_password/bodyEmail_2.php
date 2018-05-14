@@ -154,9 +154,7 @@
         ?>
 
         <div style="text-align: center;">
-            <a href="https://www.aquapotable.org/" target="_blank" >
-                <img src="https://<?= $_SERVER['HTTP_HOST'] . $file ?>/img/logotipo-interno.png" alt="AquaPotable" style="width: 25%;">
-            </a>
+
         </div>
 
         <div style="width:90%;background:white;margin:0 auto;">

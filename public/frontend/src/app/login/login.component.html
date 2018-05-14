@@ -19,7 +19,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-user"><i class="fas fa-envelope fa-lg"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" id="email" name="email" ngModel #email="ngModel"
+                                    <input type="email" class="form-control" id="email" name="email" ngModel #email="ngModel"
                                             aria-describedby="basic-user" placeholder="Email" required />
                                 </div>
                                 <span *ngIf="email.errors?.required && email.touched">
@@ -42,7 +42,7 @@
                             </div>
 
                             <div class="col-12 text-center" style="margin-top: 10px;">
-                                <a>Recuperar Password</a>
+                                <a (click)="showModalRecover()">Recuperar Password</a>
                             </div>
 
                             <div class="col-12" style="margin-top: 5px; display: none;" id="view-failed-login">
@@ -67,4 +67,48 @@
             </div>
         </div>
 
+    </div>
+
+    <div class="modal fade" id="mdlConfirmRecover" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <form novalidate (ngSubmit)="recover(frm_recover.value); frm_recover.reset();" #frm_recover="ngForm">
+                    <div class="modal-header bg-primary">
+                        <h5 class="modal-title">Confirmación Recuperar Password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12" style="margin-top: 5px;">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-user"><i class="fas fa-envelope fa-lg"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" id="email_r" name="email_r" ngModel #email_r="ngModel"
+                                            aria-describedby="basic-user" placeholder="Email" required />
+                                </div>
+                                <span *ngIf="email_r.errors?.required && email_r.touched">
+                                    <small id="emailHelp" class="form-text text-danger text-right">El Email es requerido</small>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Cancelar <i class="fas fa-ban"></i>
+                        </button>
+
+                        <button type="submit" class="btn btn-primary" [disabled]="frm_recover.invalid">
+                            Aceptar <i class="fas fa-sign-in-alt"></i>
+                        </button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
     </div>

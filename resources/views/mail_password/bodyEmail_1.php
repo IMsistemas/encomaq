@@ -150,13 +150,12 @@
             $file = $_SERVER['PHP_SELF'];
 
             $file = str_replace('index.php', '', $file);
+            $file = str_replace('/resetPassword', '', $file);
 
         ?>
 
         <div style="text-align: center;">
-            <a href="https://www.aquapotable.org/" target="_blank" >
-                <img src="https://<?= $_SERVER['HTTP_HOST'] . $file ?>/img/logotipo-interno.png" alt="AquaPotable" style="width: 25%;">
-            </a>
+
         </div>
 
         <div style="width:90%;background:white;margin:0 auto;">
@@ -168,7 +167,7 @@
             <div style="padding: 0px 10px;">
                 <h3 class="bodys"><b>Para reiniciar su contraseña, haga click en el siguiente enlace</b>
                     <br />
-                    <a target="_blank" href="https://<?= $_SERVER['HTTP_HOST'] . $file ?>/changePassword/<?= $token ?>">Recuperar Contraseña</a>
+                    <a target="_blank" href="http://<?= $_SERVER['HTTP_HOST'] . $file ?>/changePassword/<?= $token ?>">Recuperar Contraseña</a>
                 </h3>
             </div>
 

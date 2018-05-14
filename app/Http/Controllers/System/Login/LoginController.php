@@ -82,7 +82,7 @@ class LoginController extends Controller
     public function resetPassword(Request $request)
     {
 
-        $user = User::where( 'email', $request->input('email' ) )->get();
+        $user = User::where( 'email', $request->input('email_r' ) )->get();
 
         if ( count( $user ) > 0 ) {
 
@@ -102,10 +102,10 @@ class LoginController extends Controller
                         'mail.host' => $configSystemEmail[0]->server,
                         'mail.port' => $configSystemEmail[0]->port,
                         'mail.from'=> [
-                            'address' => $configSystemEmail[0]->usermail,
+                            'address' => $configSystemEmail[0]->useremail,
                             'name' => 'ENCOMAQ',
                         ],
-                        'mail.username' => $configSystemEmail[0]->usermail,
+                        'mail.username' => $configSystemEmail[0]->useremail,
                         'mail.password' => $configSystemEmail[0]->passwordemail,
                         'mail.encryption' => $configSystemEmail[0]->encryptation,
 
@@ -168,10 +168,10 @@ class LoginController extends Controller
                         'mail.host' => $configSystemEmail[0]->server,
                         'mail.port' => $configSystemEmail[0]->port,
                         'mail.from'=> [
-                            'address' => $configSystemEmail[0]->usermail,
+                            'address' => $configSystemEmail[0]->useremail,
                             'name' => 'ENCOMAQ',
                         ],
-                        'mail.username' => $configSystemEmail[0]->usermail,
+                        'mail.username' => $configSystemEmail[0]->useremail,
                         'mail.password' => $configSystemEmail[0]->passwordemail,
                         'mail.encryption' => $configSystemEmail[0]->encryptation,
 
