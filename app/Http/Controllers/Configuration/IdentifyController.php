@@ -22,6 +22,11 @@ class IdentifyController extends Controller
         return  Response::json($data,200);
     }
 
+    public function active()
+    {
+        return IndetifyType::where('state', 1)->get();
+    }
+
     /**
      * Show the form for creating a new resource.
      *

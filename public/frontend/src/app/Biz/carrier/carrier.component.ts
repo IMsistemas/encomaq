@@ -91,7 +91,7 @@ export class CarrierComponent implements OnInit {
   }
 
   setState() {
-    this.carrier.updateState(this.carrier_selected.iduser, this.carrier_selected).subscribe(
+    this.carrier.updateState(this.carrier_selected.idcarrier, this.carrier_selected).subscribe(
       (response) => {
         if (response.success === true) {
           $('#mdlConfirmSetState').modal('hide');

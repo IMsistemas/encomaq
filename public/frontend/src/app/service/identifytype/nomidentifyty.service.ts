@@ -12,6 +12,9 @@ export class NomidentifytyService {
   get_identifytype(): Observable<any> {
     return this.http.get(this.url_api.get_url_api() + 'api/Identifytype');
   }
+  get_identifytype_active(): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/Identifytype/active');
+  }
   add_identifytype(data: any): Observable<any> {
     return this.http.post(this.url_api.get_url_api() + 'api/Identifytype', data);
   }

@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('Identifytype/active', 'Configuration\IdentifyController@active');
     Route::get('Identifytype/delete/{id}', 'Configuration\IdentifyController@deleteidentify');
     Route::resource('Identifytype', 'Configuration\IdentifyController');
 });

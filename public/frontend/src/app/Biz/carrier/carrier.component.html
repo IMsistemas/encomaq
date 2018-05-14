@@ -53,7 +53,7 @@
                       </button>
                       <div class="dropdown-menu">
 
-                          <a class="dropdown-item" (click)="updateSelectedUser(item)">
+                          <a class="dropdown-item" (click)="updateSelected(item)">
                             <i class="fas fa-edit"></i> Editar
                           </a>
 
@@ -81,23 +81,23 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
-        <app-createuser (update_component_father)="updateListCarrier($event, 'create')" ></app-createuser>
+        <app-createcarrier (update_component_father)="updateListCarrier($event, 'create')" ></app-createcarrier>
 
       </div>
     </div>
   </div>
 
-  <div class="modal" id="mdlUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!--<div class="modal" id="mdlUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
-        <app-updateuser [tem_edit_user]="carrier_selected" (update_component_father)="updateListCarrier($event, 'edit')" >
+        <app-updatecarrier [tem_edit_user]="carrier_selected" (update_component_father)="updateListCarrier($event, 'edit')" >
 
-        </app-updateuser>
+        </app-updatecarrier>
 
       </div>
     </div>
-  </div>
+  </div>-->
 
   <div class="modal fade" id="mdlConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
