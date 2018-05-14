@@ -10,4 +10,8 @@ class Project extends Model
 
     protected $primaryKey = "idproject";
 
+    public function biz_client()
+    {
+        return $this->belongsTo('App\Models\Biz\Client',"idclient");
+    }
 }

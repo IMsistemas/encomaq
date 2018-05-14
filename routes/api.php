@@ -77,6 +77,7 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('Project/filtro', 'Biz\ProjectController@projectfiltro');
     Route::get('Project/state/{id}', 'Biz\ProjectController@stateproject');
     Route::resource('Project', 'Biz\ProjectController');
 });

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Biz;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
+use App\Models\Biz\Project;
 
 class ProjectController extends Controller
 {
@@ -82,4 +84,16 @@ class ProjectController extends Controller
     {
         //
     }
+    public function projectfiltro(Request $request) 
+    {
+        $filtro = json_decode($request->get('filter'));
+        $sql = "";
+        if ($filtro->Buscar != "") {
+            $sql .= " OR idclient IN (SELECT biz_client.idclient FROM biz_client WHERE (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%'))";
+        }
+        $data = Project::with("biz_client")
+                        ->whereRaw("projectname  LIKE '%".$filtro->Buscar."%' ".$sql);
+
+        return  $data->paginate(5);
+    }    
 }
