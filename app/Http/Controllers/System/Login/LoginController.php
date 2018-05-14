@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\System\Login;
 
+use App\Models\System\ConfigEmail;
 use App\Models\System\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
@@ -19,7 +21,23 @@ class LoginController extends Controller
         //
     }
 
+    private function generatePassword($lenght)
+    {
 
+        $code = '';
+
+        $character = "!'#$%&/()=?¡*][_:;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        $max = strlen($character) - 1;
+
+        for($i = 0; $i < $lenght; $i++) {
+
+            $code .= $character[rand(0, $max)];
+
+        }
+
+        return $code;
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -59,6 +77,134 @@ class LoginController extends Controller
             return response()->json(['success' => false]);
 
         }
+    }
+
+    public function resetPassword(Request $request)
+    {
+
+        $user = User::where( 'email', $request->input('email' ) )->get();
+
+        if ( count( $user ) > 0 ) {
+
+            $user = User::find($user[0]->iduser);
+
+            if ($user->email != null && $user->email != '') {
+
+                $user->token = md5(time().rand());
+
+                if ($user->save()) {
+
+                    $configSystemEmail = ConfigEmail::all();
+
+                    config([
+
+                        'mail.driver' => $configSystemEmail[0]->driver,
+                        'mail.host' => $configSystemEmail[0]->server,
+                        'mail.port' => $configSystemEmail[0]->port,
+                        'mail.from'=> [
+                            'address' => $configSystemEmail[0]->usermail,
+                            'name' => 'ENCOMAQ',
+                        ],
+                        'mail.username' => $configSystemEmail[0]->usermail,
+                        'mail.password' => $configSystemEmail[0]->passwordemail,
+                        'mail.encryption' => $configSystemEmail[0]->encryptation,
+
+                    ]);
+
+                    $email = $user->email;
+                    $token = $user->token;
+                    $username = $user->personname . ' ' . $user->lastnameperson;
+
+                    Mail::send('usuario.bodyEmail_1',['token' => $token, 'username' => $username] , function($message) use ($email)
+                    {
+                        $message->to($email)->subject('Verificación de Correo Electrónico');
+                    });
+
+                    return response()->json(['success' => true]);
+
+                } else {
+
+                    return response()->json(['success' => false]);
+
+                }
+
+
+            } else {
+
+                return response()->json(['success' => false, 'email' => false]);
+
+            }
+
+        } else {
+
+            return response()->json(['success' => false, 'user' => false]);
+
+        }
+
+    }
+
+    public function changePassword($token)
+    {
+
+        $user = User::where('token', $token)->get();
+
+        if ( count( $user ) > 0 ) {
+
+            $user = User::find($user[0]->iduser);
+
+            if ($user->email != null && $user->email != '') {
+
+                $newPassword = $this->generatePassword(10);
+
+                $user->password = Hash::make($newPassword);
+
+                if ($user->save()) {
+
+                    $configSystemEmail = ConfigEmail::all();
+
+                    config([
+
+                        'mail.driver' => $configSystemEmail[0]->driver,
+                        'mail.host' => $configSystemEmail[0]->server,
+                        'mail.port' => $configSystemEmail[0]->port,
+                        'mail.from'=> [
+                            'address' => $configSystemEmail[0]->usermail,
+                            'name' => 'ENCOMAQ',
+                        ],
+                        'mail.username' => $configSystemEmail[0]->usermail,
+                        'mail.password' => $configSystemEmail[0]->passwordemail,
+                        'mail.encryption' => $configSystemEmail[0]->encryptation,
+
+                    ]);
+
+                    $email = $user->email;
+                    $username = $user->personname . ' ' . $user->lastnameperson;
+
+                    Mail::send('usuario.bodyEmail_2',['newPassword' => $newPassword, 'username' => $username] , function($message) use ($email)
+                    {
+                        $message->to($email)->subject('Actualización de Contraseña exitoso');
+                    });
+
+                    return response()->json(['success' => true]);
+
+                } else {
+
+                    return response()->json(['success' => false]);
+
+                }
+
+            } else {
+
+                return response()->json(['success' => false, 'email' => false]);
+
+            }
+
+        } else {
+
+            return response()->json(['success' => false, 'user' => false]);
+
+        }
+
     }
 
     /**
