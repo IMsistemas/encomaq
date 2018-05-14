@@ -37,7 +37,22 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        if ($this->existproject($data["projectname"], null) == false ) {
+            $aux = new Project();
+            $aux->idclient = $data["idclient"];
+            $aux->projectname = $data["projectname"];
+            $aux->state = 1;
+            if($aux->save()){
+                
+                return response()->json(['success' => $aux ]);
+            } else {
+                return response()->json(['error' => $aux]);        
+            }
+
+        } else {
+            return response()->json(['error' => 'exist']);
+        }
     }
 
     /**
@@ -71,7 +86,22 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        if ($this->existproject($data["projectname"], $id) == false ) {
+            $aux =  Project::find($id);
+            $aux->idclient = $data["idclient"];
+            $aux->projectname = $data["projectname"];
+            $aux->state = 1;
+            if($aux->save()){
+                
+                return response()->json(['success' => $aux ]);
+            } else {
+                return response()->json(['error' => $aux]);        
+            }
+
+        } else {
+            return response()->json(['error' => 'exist']);
+        }
     }
 
     /**
@@ -82,7 +112,12 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $aux = Project::find($id); 
+        if ($aux->delete()) {
+            return response()->json(['success' => true ]);
+        } else {
+            return response()->json(['error' => 'error' ]);
+        }
     }
     public function projectfiltro(Request $request) 
     {
@@ -95,5 +130,34 @@ class ProjectController extends Controller
                         ->whereRaw("projectname  LIKE '%".$filtro->Buscar."%' ".$sql);
 
         return  $data->paginate(5);
-    }    
+    }
+    private function existproject($aux, $id)
+    {
+        $count = Project::where('projectname', $aux);
+        if ($id != null) {
+            $count = $count->where('idproject', '!=' , $id);
+        }
+        $count = $count->count();
+        return ($count == 0) ? false : true;
+    }
+        /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function stateproject($id)
+    {
+        $aux = Project::find($id);
+        if ($aux->state == 1) {
+            $aux->state = 0;
+        } else {
+            $aux->state = 1;
+        }
+        if($aux->save()){
+            return response()->json(['success' => $aux ]);
+        }else{
+            return response()->json(['error' => $aux ]);
+        }
+    }        
 }

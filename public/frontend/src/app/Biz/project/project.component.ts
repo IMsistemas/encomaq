@@ -56,4 +56,81 @@ export class ProjectComponent implements OnInit {
     this.page--;
     this.get_list_project();
   }
+  new_project() {
+    $('#addproject').modal('show');
+  }
+  update_list(evento, type) {
+    if (evento === true) {
+      if (type === 'create') {
+        this.message_info = 'Sea guardado correctamente los datos..!!';
+        $('#mdlMessageSuccess').modal('show');
+      } else if (type === 'edit') {
+        this.message_info = 'Sea editado correctamente los datos..!!';
+        $('#mdlMessageSuccess').modal('show');
+      }
+    } else {
+      if (type === 'create') {
+        this.message_info = 'Ha ocurrido un error al intentar agregar un pryecto o el mismo ya existe en el sistema..!!';
+        $('#mdlMessageError').modal('show');
+      } else if (type === 'edit') {
+        this.message_info = 'Ha ocurrido un error al intentar editar un pryecto o el mismo ya existe en el sistema..!!';
+        $('#mdlMessageError').modal('show');
+      }
+    }
+    this.get_list_project();
+  }
+  edit_project(data: any) {
+    this.info_tem_edit = data;
+    $('#editproject').modal('show');
+  }
+  cancel_activate(data: any) {
+    this.tem_cancel_activate = data;
+    $('#mdl_cancelactivate').modal('show');
+  }
+  ok_cancelactivate() {
+    this.project.state_project(this.tem_cancel_activate.idproject).subscribe(
+      (response) => {
+        if (response.success !== undefined) {
+          $('#mdl_cancelactivate').modal('hide');
+          this.message_info = 'Sea guardado correctamente los datos..!!';
+          $('#mdlMessageSuccess').modal('show');
+          this.get_list_project();
+        } else if (response.error !== undefined) {
+          $('#mdl_cancelactivate').modal('hide');
+          this.message_info = 'Error al anular los datos..!!';
+          $('#mdlMessageError').modal('show');
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+        this.message_info = 'Error al anular los datos..!!';
+        $('#mdlMessageError').modal('show');
+        $('#mdl_cancelactivate').modal('hide');
+      });
+  }
+  delete(data: any) {
+    this.tem_cancel_activate = data;
+    $('#mdl_delete').modal('show');
+  }
+  ok_delete() {
+    this.project.delete_project(this.tem_cancel_activate.idproject).subscribe(
+      (response) => {
+        if (response.success !== undefined) {
+          $('#mdl_delete').modal('hide');
+          this.message_info = 'Se elimino correctamente los datos..!!';
+          $('#mdlMessageSuccess').modal('show');
+          this.get_list_project();
+        } else if (response.error !== undefined) {
+          $('#mdl_delete').modal('hide');
+          this.message_info = 'Error al eliminar los datos..!!';
+          $('#mdlMessageError').modal('show');
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+        this.message_info = 'Error al eliminar los datos..!!';
+        $('#mdlMessageError').modal('show');
+        $('#mdl_delete').modal('hide');
+      });
+  }
 }
