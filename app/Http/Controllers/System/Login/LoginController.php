@@ -115,7 +115,7 @@ class LoginController extends Controller
                     $token = $user->token;
                     $username = $user->personname . ' ' . $user->lastnameperson;
 
-                    Mail::send('usuario.bodyEmail_1',['token' => $token, 'username' => $username] , function($message) use ($email)
+                    Mail::send('mail_password.bodyEmail_1',['token' => $token, 'username' => $username] , function($message) use ($email)
                     {
                         $message->to($email)->subject('Verificación de Correo Electrónico');
                     });
@@ -180,7 +180,7 @@ class LoginController extends Controller
                     $email = $user->email;
                     $username = $user->personname . ' ' . $user->lastnameperson;
 
-                    Mail::send('usuario.bodyEmail_2',['newPassword' => $newPassword, 'username' => $username] , function($message) use ($email)
+                    Mail::send('mail_password.bodyEmail_2',['newPassword' => $newPassword, 'username' => $username] , function($message) use ($email)
                     {
                         $message->to($email)->subject('Actualización de Contraseña exitoso');
                     });
