@@ -28,7 +28,10 @@ Route::get('role/getActiveRole', 'System\Role\RoleController@getActiveRole');
 Route::get('role/getListRole', 'System\Role\RoleController@getListRole');
 Route::resource('role', 'System\Role\RoleController');
 
+Route::get('login/changePassword/{token}', 'System\Login\LoginController@changePassword');
+Route::post('login/resetPassword', 'System\Login\LoginController@resetPassword');
 Route::resource('login', 'System\Login\LoginController');
+
 
 Route::group(['middleware' => 'cors'], function(){
     Route::get('CategoryItem/delete/{id}', 'Configuration\CategoryController@deletecategory');
