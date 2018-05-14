@@ -46,6 +46,7 @@ export class UserComponent implements OnInit {
   }
 
   updateSelectedUser(item: any) {
+    item.password = '';
     this.user_selected = item;
     $('#mdlUpdate').modal('show');
   }

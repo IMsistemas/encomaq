@@ -122,8 +122,9 @@ class UserController extends Controller
             $user->personname = $request->input('personname');
             $user->lastnameperson = $request->input('lastnameperson');
             $user->email = $request->input('email');
+            $user->token = null;
 
-            if ($request->input('password') != '') {
+            if ($request->input('password') != '' && $request->input('password') != $user->password) {
 
                 $user->password = Hash::make($request->input('password'));
 
