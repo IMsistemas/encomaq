@@ -13,15 +13,25 @@ declare var $: any;
 })
 export class CarrierComponent implements OnInit {
   @Output() update_component_father = new EventEmitter<boolean>();
+  listCarrier: Observable<any>;
+  carrier_selected: any;
+  carriername_selected: any;
+  message_success: any;
+  message_error: any;
   constructor(private carrier: CarrierService) { }
 
   ngOnInit() {
     this.loadInitJQuery();
+    this.getListCarrier();
   }
 
   loadInitJQuery() {
     $('.dropdown-toggle').dropdown();
     $('.modal-dialog').draggable();
+  }
+
+  getListCarrier() {
+    this.listCarrier = this.carrier.get();
   }
 
 }
