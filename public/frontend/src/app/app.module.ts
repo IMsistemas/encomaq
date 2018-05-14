@@ -51,6 +51,10 @@ import { EditclientComponent } from './Biz/client/editclient/editclient.componen
 import { ClienteService } from './service/bclient/cliente.service';
 import { PaginationComponent } from './pagination/pagination.component';
 import { CarrierComponent } from './Biz/carrier/carrier.component';
+import { ProjectComponent } from './Biz/project/project.component';
+import { AddprojectComponent } from './Biz/project/addproject/addproject.component';
+import { EditprojectComponent } from './Biz/project/editproject/editproject.component';
+import { ProjectService } from './service/bproject/project.service';
 
 @NgModule({
   declarations: [
@@ -89,6 +93,9 @@ import { CarrierComponent } from './Biz/carrier/carrier.component';
     EditclientComponent,
     PaginationComponent,
     CarrierComponent,
+    ProjectComponent,
+    AddprojectComponent,
+    EditprojectComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,7 +105,7 @@ import { CarrierComponent } from './Biz/carrier/carrier.component';
   ],
   providers: [NomidentifytyService, RoleService, ItemcategoryService, LoginService,
               ReasontransferService, UnittypeService, UserService, WarehouseService,
-    BcompanyService, ItemService, ConfigemailService, ClienteService
+    BcompanyService, ItemService, ConfigemailService, ClienteService, ProjectService
   ],
   bootstrap: [AppComponent]
 })

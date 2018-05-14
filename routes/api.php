@@ -75,3 +75,8 @@ Route::group(['middleware' => 'cors'], function(){
     Route::get('Client/state/{id}', 'Biz\ClienteController@stateclient');
     Route::resource('Client', 'Biz\ClienteController');
 });
+
+Route::group(['middleware' => 'cors'], function(){
+    Route::get('Project/state/{id}', 'Biz\ProjectController@stateproject');
+    Route::resource('Project', 'Biz\ProjectController');
+});
