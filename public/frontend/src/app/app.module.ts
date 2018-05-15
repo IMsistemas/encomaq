@@ -58,6 +58,10 @@ import { ProjectService } from './service/bproject/project.service';
 import { CarrierService } from './service/carrier/carrier.service';
 import { CreatecarrierComponent } from './Biz/carrier/createcarrier/createcarrier.component';
 import { UpdatecarrierComponent } from './Biz/carrier/updatecarrier/updatecarrier.component';
+import { ContractComponent } from './Biz/contract/contract.component';
+import { AddcontractComponent } from './Biz/contract/addcontract/addcontract.component';
+import { EditcontractComponent } from './Biz/contract/editcontract/editcontract.component';
+import { ContractService } from './service/bcontract/contract.service';
 
 @NgModule({
   declarations: [
@@ -101,6 +105,9 @@ import { UpdatecarrierComponent } from './Biz/carrier/updatecarrier/updatecarrie
     EditprojectComponent,
     CreatecarrierComponent,
     UpdatecarrierComponent,
+    ContractComponent,
+    AddcontractComponent,
+    EditcontractComponent,
   ],
   imports: [
     BrowserModule,
@@ -111,8 +118,8 @@ import { UpdatecarrierComponent } from './Biz/carrier/updatecarrier/updatecarrie
   providers: [
     NomidentifytyService, RoleService, ItemcategoryService, LoginService,
     ReasontransferService, UnittypeService, UserService, WarehouseService,
-    BcompanyService, ItemService, ConfigemailService, ClienteService, 
-    ProjectService, CarrierService
+    BcompanyService, ItemService, ConfigemailService, ClienteService,
+    ProjectService, CarrierService, ContractService
   ],
   bootstrap: [AppComponent]
 })

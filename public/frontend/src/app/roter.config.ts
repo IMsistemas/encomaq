@@ -14,6 +14,7 @@ import { ConfigemailComponent } from './system/configemail/configemail.component
 import { ClientComponent } from './Biz/client/client.component';
 import { ProjectComponent } from './Biz/project/project.component';
 import { CarrierComponent } from './Biz/carrier/carrier.component';
+import { ContractComponent } from './Biz/contract/contract.component';
 
 export const RouterConfig: Route[] = [
     { path: 'identiytype', component: NomIdentifytypeComponent},
@@ -30,6 +31,7 @@ export const RouterConfig: Route[] = [
     { path: 'client', component: ClientComponent },
     { path: 'project', component: ProjectComponent },
     { path: 'carrier', component: CarrierComponent },
+    { path: 'contract', component: ContractComponent },
 ];
 
 
