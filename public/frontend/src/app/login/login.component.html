@@ -10,7 +10,11 @@
 
                 <div class="card-body">
 
-                    <div class="col-12" style="margin-top: 125px;">
+                    <div class="col-12" style="margin-top: 30px;">
+                        <img class="img-fluid" src="../assets/image/LogoEncomaq-color.png" alt="Card image cap" style="width: 100%;">
+                    </div>
+
+                    <div class="col-12" style="margin-top: 40px;">
                       <input type="email" class="form-control" id="email" name="email" ngModel #email="ngModel"
                       aria-describedby="basic-user" placeholder="Email" required />
                         <span *ngIf="email.errors?.required && email.touched">
@@ -49,7 +53,11 @@
 
               <div class="card-body">
 
-                  <div class="card text-white bg-secondary">
+                  <div class="col-12" style="margin-top: 30px;">
+                      <img class="img-fluid" src="../assets/image/LogoEncomaq-color.png" alt="Card image cap" style="width: 100%;">
+                  </div>
+
+                  <div class="card text-white bg-secondary" style="margin-top: 40px;">
                     <div class="card-body">
                       <p class="card-text">
                           Ingrese su cuenta de correo para recibir un link que le permitira realizar el cambio de contraseña
@@ -93,22 +101,55 @@
 
 <footer>
 
-  <div class="container">
+  <div class="container-fluid">
 
-      <div class="col-12 col-sm-8 text-right" style="color: #9d1c30 !important;">
-          Copyright &copy; 2012 - 2018 Todos los derechos reservados
+      <div class="row">
 
-      </div>
+        <div class="col-12 col-sm-4 text-center" style="color: #9C182F !important;">
+            Copyright &copy; 2012 - 2018 Todos los derechos reservados
+        </div>
 
-      <div class="col-6 col-sm-2" style="padding: 0; float: left; margin-top: -2.3%;">
-          <a href="https://www.imnegocios.com" target="_blank"><img src="img/logo-powered.png" style="width: 65%;">
-          </a>
-      </div>
+        <div class="col-12 col-sm-4 text-center" style="">
+            <a href="https://www.imnegocios.com" target="_blank">
+              <img src="../assets/image/Poweredby.svg" style="width: 25%;">
+            </a>
+        </div>
 
-      <div class="col-6 col-sm-1 text-left" style="padding: 0; float: left; margin-top: -2%;">
-          <a href="https://www.facebook.com/SoftverAqua/" target="_blank" style="padding: 0; float: left;">
-              <img src="img/facebook-logo.png" style="width: 30px;">
-          </a>
+        <div class="col-12 col-sm-4" style="">
+
+            <div class="row">
+                <div style="width: 20%; position: relative;">
+                    <a href="https://www.imnegocios.com" target="_blank">
+                      <img src="../assets/image/yt.svg" style="width: 50%;">
+                    </a>
+                </div>
+                <div style="width: 20%;">
+                    <a href="https://www.imnegocios.com" target="_blank">
+                      <img src="../assets/image/instagram.svg" style="width: 50%;">
+                    </a>
+                </div>
+                <div style="width: 20%;">
+                    <a href="https://www.imnegocios.com" target="_blank">
+                      <img src="../assets/image/Linkedin.svg" style="width: 50%;">
+                    </a>
+                </div>
+                <div style="width: 20%;">
+                    <a href="https://www.imnegocios.com" target="_blank">
+                      <img src="../assets/image/twitter.svg" style="width: 50%;">
+                    </a>
+                </div>
+                <div style="width: 20%;">
+                    <a href="https://www.imnegocios.com" target="_blank">
+                      <img src="../assets/image/fb.svg" style="width: 50%;">
+                    </a>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
       </div>
 
   </div>

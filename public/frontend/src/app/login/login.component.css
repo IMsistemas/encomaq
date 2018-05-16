@@ -29,7 +29,7 @@
   display:flex;
 }*/
 
-.fila0 { background:rgba(0,0,128); height: 49vh;  z-index: 1; }
+.fila0 { background: #001F57; height: 49vh;  z-index: 1; }
 .fila1 { background:rgba(255,255,255); height: 49vh;  z-index: 1; }
 
 .card_login {
@@ -56,9 +56,9 @@ input {
 footer {
 	width: 100%;
 	bottom: 1px;
-	position: absolute;
-	height: 50px;
+	position: absolute !important;
+	height: 70px;
 	display: table-row;
   margin:0 auto auto auto;
-  position: absolute !important;
+  z-index: 2 !important;
 }
