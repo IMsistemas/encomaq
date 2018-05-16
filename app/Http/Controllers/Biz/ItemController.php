@@ -58,7 +58,10 @@ class ItemController extends Controller
                         if($file->move($destinationPath, $name)) {
                             $url_file = $dirupload . '/' . $name;
                             $auxfile = Item::find($aux->iditem);
-                            unlink(public_path() . '/' .$auxfile->image);
+                            if(isset($auxfile->image)) {
+                                unlink(public_path() . '/' .$aux->image);    
+                            }
+
                             $auxfile->image = $url_file;
                             if ($auxfile->save())  {
                                 return response()->json(['success' => $auxfile]);
@@ -215,7 +218,8 @@ class ItemController extends Controller
             $sql .= " AND idunittype =".$filtro->idunittype." ";
         }
         $data = Item::with("nom_category","nom_unit")
-                        ->whereRaw("(itemname  LIKE '%".$filtro->Buscar."%' OR description  LIKE '%".$filtro->Buscar."%')".$sql);
+                        ->whereRaw("(itemname  LIKE '%".$filtro->Buscar."%' OR description  LIKE '%".$filtro->Buscar."%') AND state='".$filtro->state."' ".$sql)
+                        ->orderBy("".$filtro->column, "".$filtro->order);
 
         return  $data->paginate(5);
     }

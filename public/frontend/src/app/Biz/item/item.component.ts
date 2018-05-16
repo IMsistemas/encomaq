@@ -22,6 +22,9 @@ export class ItemComponent implements OnInit {
   lis_category = [];
   lis_unit = [];
   idunittype: any = '';
+  state = '1';
+  column = 'itemname';
+  order = 'ASC';
   /*variables para paginar*/
   loading = false;
   total = 0;
@@ -47,7 +50,10 @@ export class ItemComponent implements OnInit {
     const o = {
       Buscar: this.descripcion,
       idcategoryitem: this.idcategory,
-      idunittype: this.idunittype
+      idunittype: this.idunittype,
+      state: this.state,
+      column: this.column,
+      order: this.order
     };
     this.item.filtro_item(this.page, o).subscribe(
       (response) => {

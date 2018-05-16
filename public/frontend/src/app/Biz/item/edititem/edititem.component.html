@@ -1,4 +1,3 @@
-<div *ngIf="auxcategory">
 <div *ngIf="tem_edit">
   <form novalidate (ngSubmit)="edit_item(tem_edit); frmedititem.reset();" #frmedititem="ngForm">
 
@@ -35,7 +34,7 @@
             <span class="required">(*)</span>
           </label>
           <select class="form-control" id="idcategoryitem" name="idcategoryitem" [(ngModel)]="tem_edit.idcategoryitem" #idcategoryitem="ngModel" required>
-            <option *ngFor="let cat of lis_category" [ngValue]="cat.idcategoryitem">
+            <option *ngFor="let cat of (lis_category | async ) " [ngValue]="cat.idcategoryitem">
               {{cat.categoryitemname}}
             </option>
           </select>
@@ -113,5 +112,4 @@
     </button>
   </div>
 </form>
-</div>
 </div>

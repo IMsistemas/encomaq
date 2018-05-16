@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { ItemService } from '../../../service/bitem/item.service';
 import { ItemcategoryService } from '../../../service/ncategoryitem/itemcategory.service';
 import { UnittypeService } from '../../../service/nunittype/unittype.service';
@@ -13,7 +14,7 @@ declare var $: any;
 export class EdititemComponent implements OnInit {
   @Input() tem_edit: any;
   @Output() update_component_father = new EventEmitter<boolean>();
-  lis_category = [];
+  lis_category: Observable<any>;
   lis_unit = [];
   urlapi = new UrlApi();
   url_basic: String = '';
@@ -28,21 +29,8 @@ export class EdititemComponent implements OnInit {
     this.list_unit();
   }
   list_category() {
-    this.lis_category.push({ idcategoryitem: '', categoryitemname: '--Seleccione--' });
-    this.category.get_categoryitem().subscribe(
-      (response) => {
-        for (const cat of response) {
-          const o = {
-            idcategoryitem: cat.idcategoryitem,
-            categoryitemname: cat.categoryitemname
-          };
-          this.lis_category.push(o);
-          this.auxcategory = true;
-        }
-      },
-      (error) => {
-        console.log('POST call in error", respons', error);
-      });
+//  this.lis_category.push({ idcategoryitem: '', categoryitemname: '--Seleccione--' });
+    this.lis_category = this.category.get_categoryitem();
   }
   list_unit() {
     this.lis_unit.push({ idunittype: '', unittypename: '--Seleccione--' });
