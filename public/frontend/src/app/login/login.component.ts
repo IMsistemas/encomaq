@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
+
   verify(data) {
 
     this.login.verifyLogin(data).subscribe(
@@ -60,8 +61,6 @@ export class LoginComponent implements OnInit {
   recover(data) {
     this.login.recover(data).subscribe(
       (response) => {
-
-        $('#mdlConfirmRecover').modal('hide');
 
         if (response.success === true) {
 

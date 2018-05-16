@@ -2,101 +2,153 @@
 
     <div class="contenedor">
 
-        <div class="fila0"></div>
+        <div class="row fila0"></div>
 
-        <div class="card text-center card_login">
+        <div class="row" style="z-index: 5;">
+            <div class="col-12 col-sm-4"></div>
 
-            <form novalidate *ngIf="login_view == true" (ngSubmit)="verify(frm_login.value); frm_login.reset();" #frm_login="ngForm">
+            <div class="col-12 col-sm-4">
 
-                <div class="card-body">
+              <div class="card text-center mx-auto w-75 card_login">
 
-                    <div class="col-12" style="margin-top: 30px;">
-                        <img class="img-fluid" src="../assets/image/LogoEncomaq-color.png" alt="Card image cap" style="width: 100%;">
-                    </div>
+                <form novalidate *ngIf="login_view == true" (ngSubmit)="verify(frm_login.value); frm_login.reset();" #frm_login="ngForm">
 
-                    <div class="col-12" style="margin-top: 40px;">
-                      <input type="email" class="form-control" id="email" name="email" ngModel #email="ngModel"
-                      aria-describedby="basic-user" placeholder="Email" required />
-                        <span *ngIf="email.errors?.required && email.touched">
-                            <small id="emailHelp" class="form-text text-danger text-right">El Email es requerido</small>
-                        </span>
-                    </div>
-
-                    <div class="col-12" style="margin-top: 5px;">
-                      <input type="password" class="form-control" id="password" name="password" ngModel #password="ngModel"
-                          aria-describedby="basic-pass" placeholder="Password" required />
-                        <span *ngIf="password.errors?.required && password.touched" class="">
-                            <small id="emailHelp" class="form-text text-danger text-right">El Password es requerido</small>
-                        </span>
-
-                    </div>
-
-                    <div class="col-12 text-center" style="margin-top: 20px;">
-                      <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="frm_login.invalid">
-                        LOGIN
-                      </button>
-                    </div>
-
-                    <div class="col-12 text-center" style="margin-top: 15px;">
-                        <button type="button" class="btn btn-link" (click)="showRecover()">¿Olvidaste tu contraseña?</button>
-                    </div>
-
-                    <div class="col-12" style="margin-top: 5px; display: none;" id="view-failed-login">
-                        <div class="alert alert-danger" style="font-size: 11px;" role="alert">{{login_failed}}</div>
-                    </div>
-
-                </div>
-
-            </form>
-
-            <form novalidate *ngIf="login_view == false" (ngSubmit)="recover(frm_recover.value); frm_recover.reset();" #frm_recover="ngForm">
-
-              <div class="card-body">
-
-                  <div class="col-12" style="margin-top: 30px;">
-                      <img class="img-fluid" src="../assets/image/LogoEncomaq-color.png" alt="Card image cap" style="width: 100%;">
-                  </div>
-
-                  <div class="card text-white bg-secondary" style="margin-top: 40px;">
                     <div class="card-body">
-                      <p class="card-text">
-                          Ingrese su cuenta de correo para recibir un link que le permitira realizar el cambio de contraseña
-                      </p>
+
+                        <div class="col-12" style="margin-top: 30px;">
+                            <img class="img-fluid" src="../assets/image/LogoEncomaq-color.png" alt="Card image cap" style="width: 80%;">
+                        </div>
+
+                        <div class="col-12" style="margin-top: 40px;">
+                          <input type="email" class="form-control" id="email" name="email" ngModel #email="ngModel"
+                          aria-describedby="basic-user" placeholder="Email" required />
+                            <span *ngIf="email.errors?.required && email.touched">
+                                <small id="emailHelp" class="form-text text-danger text-right">El Email es requerido</small>
+                            </span>
+                        </div>
+
+                        <div class="col-12" style="margin-top: 5px;">
+                          <input type="password" class="form-control" id="password" name="password" ngModel #password="ngModel"
+                              aria-describedby="basic-pass" placeholder="Password" required />
+                            <span *ngIf="password.errors?.required && password.touched" class="">
+                                <small id="emailHelp" class="form-text text-danger text-right">El Password es requerido</small>
+                            </span>
+
+                        </div>
+
+                        <div class="col-12 text-center" style="margin-top: 20px;">
+                          <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="frm_login.invalid">
+                            LOGIN
+                          </button>
+                        </div>
+
+                        <div class="col-12 text-center" style="margin-top: 15px;">
+                            <button type="button" class="btn btn-link" (click)="showRecover()">¿Olvidaste tu contraseña?</button>
+                        </div>
+
+                        <div class="col-12" style="margin-top: 5px; display: none;" id="view-failed-login">
+                            <div class="alert alert-danger" style="font-size: 11px;" role="alert">{{login_failed}}</div>
+                        </div>
+
                     </div>
+
+                </form>
+
+                <form novalidate *ngIf="login_view == false" (ngSubmit)="recover(frm_recover.value); frm_recover.reset();" #frm_recover="ngForm">
+
+                  <div class="card-body">
+
+                      <div class="col-12" style="margin-top: 30px;">
+                          <img class="img-fluid" src="../assets/image/LogoEncomaq-color.png" alt="Card image cap" style="width: 80%;">
+                      </div>
+
+                      <div class="card text-white bg-secondary" style="margin-top: 40px;">
+                        <div class="card-body">
+                          <p class="card-text">
+                              Ingrese su cuenta de correo para recibir un link que le permitira realizar el cambio de contraseña
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="col-12" style="margin-top: 10px;">
+                        <input type="email" class="form-control" id="email_r" name="email_r" ngModel #email_r="ngModel"
+                        aria-describedby="basic-user" placeholder="Email" required />
+                          <span *ngIf="email_r.errors?.required && email_r.touched">
+                              <small id="emailHelp" class="form-text text-danger text-right">El Email es requerido</small>
+                          </span>
+                      </div>
+
+                      <div class="col-12 text-center" style="margin-top: 20px;">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="frm_recover.invalid">
+                          SOLICITAR
+                        </button>
+                      </div>
+
+                      <div class="col-12 text-center" style="margin-top: 15px;">
+                          <button type="button" class="btn btn-link" (click)="showLogin()">Ir a Login</button>
+                      </div>
+
+                      <div class="col-12" style="margin-top: 5px; display: none;" id="view-failed-login">
+                          <div class="alert alert-danger" style="font-size: 11px;" role="alert">{{login_failed}}</div>
+                      </div>
+
                   </div>
 
-                  <div class="col-12" style="margin-top: 10px;">
-                    <input type="email" class="form-control" id="email_r" name="email_r" ngModel #email_r="ngModel"
-                    aria-describedby="basic-user" placeholder="Email" required />
-                      <span *ngIf="email_r.errors?.required && email_r.touched">
-                          <small id="emailHelp" class="form-text text-danger text-right">El Email es requerido</small>
-                      </span>
-                  </div>
-
-                  <div class="col-12 text-center" style="margin-top: 20px;">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="frm_recover.invalid">
-                      SOLICITAR
-                    </button>
-                  </div>
-
-                  <div class="col-12 text-center" style="margin-top: 15px;">
-                      <button type="button" class="btn btn-link" (click)="showLogin()">Ir a Login</button>
-                  </div>
-
-                  <div class="col-12" style="margin-top: 5px; display: none;" id="view-failed-login">
-                      <div class="alert alert-danger" style="font-size: 11px;" role="alert">{{login_failed}}</div>
-                  </div>
+                </form>
 
               </div>
 
-          </form>
+            </div>
 
-        </div>
+            <div class="col-12 col-sm-4"></div>
+        </div>        
 
-        <div class="fila1">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               </div>
+        <div class="row">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               </div>
 
     </div>
 
+</div>
+
+<div class="modal fade" id="mdlMessageSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title">Información</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{message_success}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Cerrar <i class="fa fa-ban" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="mdlMessageError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title">Información</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{message_error}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Cerrar <i class="fa fa-ban" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <footer>
@@ -106,7 +158,9 @@
       <div class="row">
 
         <div class="col-12 col-sm-4 text-center" style="color: #9C182F !important;">
-            Copyright &copy; 2012 - 2018 Todos los derechos reservados
+            <p style="margin-top: 10px;">
+              Copyright &copy; 2012 - 2018 Todos los derechos reservados
+            </p>
         </div>
 
         <div class="col-12 col-sm-4 text-center" style="">
@@ -115,32 +169,32 @@
             </a>
         </div>
 
-        <div class="col-12 col-sm-4" style="">
+        <div class="col-12 col-sm-4 text-center" style="">
 
-            <div class="row">
-                <div style="width: 20%; position: relative;">
-                    <a href="https://www.imnegocios.com" target="_blank">
-                      <img src="../assets/image/yt.svg" style="width: 50%;">
+            <div class="row text-center" style="">
+                <div style="width: 8%; margin-right: 10px;">
+                    <a href="https://www.youtube.com/channel/UCoTcPz_2c84giRLaadjsnnA" target="_blank">
+                      <img src="../assets/image/yt.svg" style="width: 100%;">
                     </a>
                 </div>
-                <div style="width: 20%;">
-                    <a href="https://www.imnegocios.com" target="_blank">
-                      <img src="../assets/image/instagram.svg" style="width: 50%;">
+                <div style="width: 8%; margin-right: 10px;">
+                    <a href="https://www.instagram.com/imnegocios/" target="_blank">
+                      <img src="../assets/image/instagram.svg" style="width: 100%;">
                     </a>
                 </div>
-                <div style="width: 20%;">
-                    <a href="https://www.imnegocios.com" target="_blank">
-                      <img src="../assets/image/Linkedin.svg" style="width: 50%;">
+                <div style="width: 8%; margin-right: 10px;">
+                    <a href="https://www.linkedin.com/in/im-negocios-544797162/" target="_blank">
+                      <img src="../assets/image/Linkedin.svg" style="width: 100%;">
                     </a>
                 </div>
-                <div style="width: 20%;">
-                    <a href="https://www.imnegocios.com" target="_blank">
-                      <img src="../assets/image/twitter.svg" style="width: 50%;">
+                <div style="width: 8%; margin-right: 10px;">
+                    <a href="https://twitter.com/IMnegocios" target="_blank">
+                      <img src="../assets/image/twitter.svg" style="width: 100%;">
                     </a>
                 </div>
-                <div style="width: 20%;">
-                    <a href="https://www.imnegocios.com" target="_blank">
-                      <img src="../assets/image/fb.svg" style="width: 50%;">
+                <div style="width: 8%;">
+                    <a href="https://www.facebook.com/IMnegocios/" target="_blank">
+                      <img src="../assets/image/fb.svg" style="width: 100%;">
                     </a>
                 </div>
             </div>
