@@ -14,6 +14,7 @@ declare var $: any;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  login_view = true;
   login_failed: any;
   message_success: any;
   message_error: any;
@@ -48,8 +49,12 @@ export class LoginComponent implements OnInit {
 
   }
 
-  showModalRecover() {
-    $('#mdlConfirmRecover').modal('show');
+  showLogin() {
+    this.login_view = true;
+  }
+
+  showRecover() {
+    this.login_view = false;
   }
 
   recover(data) {

@@ -1,0 +1,63 @@
+
+/* .login{
+  height: 100%;
+  background-color: #000;
+}
+
+.contenedor{
+  height: 50% !important;
+  background-color: #6A737C;
+  margin: 1% 1%;
+} */
+
+.login {
+  height: 98%;
+  margin:0;
+  padding:0;
+  position: relative;
+}
+
+.contenedor {
+  display:flex;
+  flex-direction: column;
+  min-height:100%;
+  position: relative;
+}
+
+/*.contenedor > div {
+  flex:1;
+  display:flex;
+}*/
+
+.fila0 { background:rgba(0,0,128); height: 49vh;  z-index: 1; }
+.fila1 { background:rgba(255,255,255); height: 49vh;  z-index: 1; }
+
+.card {
+  position: absolute !important;
+  top: 15% !important;
+  left: 35% !important;
+  z-index: 2 !important;
+  border-radius: 0px;
+  width: 25%;
+}
+
+.btn {
+  border-radius: 0px;
+}
+
+input {
+  border-radius: 0px;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+}
+
+footer {
+	width: 100%;
+	bottom: 1px;
+	position: absolute;
+	height: 50px;
+	display: table-row;
+  margin:0 auto auto auto;
+  position: absolute !important;
+}

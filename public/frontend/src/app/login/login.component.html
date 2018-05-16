@@ -1,158 +1,115 @@
-<div class="container">
+<div class="login">
 
-        <div class="row">
-            <div class="col-12 col-sm-4"></div>
-            <div class="col-12 col-sm-4">
+    <div class="contenedor">
 
-                <div class="card text-center" style="margin-top: 15%;">
-                    
-                    <form novalidate (ngSubmit)="verify(frm_login.value); frm_login.reset();" #frm_login="ngForm">
+        <div class="fila0"></div>
 
-                        <div class="card-header">
-                            ENTRAR
-                        </div>
+        <div class="card text-center">
 
-                        <div class="card-body">                        
+            <form novalidate *ngIf="login_view == true" (ngSubmit)="verify(frm_login.value); frm_login.reset();" #frm_login="ngForm">
 
-                            <div class="col-12" style="margin-top: 5px;">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-user"><i class="fas fa-envelope fa-lg"></i></span>
-                                    </div>
-                                    <input type="email" class="form-control" id="email" name="email" ngModel #email="ngModel"
-                                            aria-describedby="basic-user" placeholder="Email" required />
-                                </div>
-                                <span *ngIf="email.errors?.required && email.touched">
-                                    <small id="emailHelp" class="form-text text-danger text-right">El Email es requerido</small>
-                                </span>
-                            </div>
+                <div class="card-body">
 
-                            <div class="col-12" style="margin-top: 5px;">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-pass"><i class="fas fa-key fa-lg"></i></span>
-                                    </div>
-                                    <input type="password" class="form-control" id="password" name="password" ngModel #password="ngModel"
-                                            aria-describedby="basic-pass" placeholder="Password" required />
-                                </div>
-                                <span *ngIf="password.errors?.required && password.touched" class="">
-                                    <small id="emailHelp" class="form-text text-danger text-right">El Password es requerido</small>
-                                </span>
-                                
-                            </div>
-
-                            <div class="col-12 text-center" style="margin-top: 10px;">
-                                <button type="button" class="btn btn-link" (click)="showModalRecover()">Recuperar Password</button>
-                                <!--<a href="#" (click)="showModalRecover()">Recuperar Password</a>-->
-                            </div>
-
-                            <div class="col-12" style="margin-top: 5px; display: none;" id="view-failed-login">
-                                <div class="alert alert-danger" style="font-size: 11px;" role="alert">{{login_failed}}</div>
-                            </div>                        
-
-                        </div>
-
-                        <div class="card-footer text-muted">
-                            <button type="submit" class="btn btn-primary" [disabled]="frm_login.invalid">
-                                Aceptar <i class="fas fa-sign-in-alt fa-lg"></i>
-                            </button>
-                        </div>
-
-                    </form>
-
-                </div>
-
-            </div>
-            <div class="col-12 col-sm-4">
-
-            </div>
-        </div>
-
-    </div>
-
-    <div class="modal fade" id="mdlConfirmRecover" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-
-                <form novalidate (ngSubmit)="recover(frm_recover.value); frm_recover.reset();" #frm_recover="ngForm">
-                    <div class="modal-header bg-primary">
-                        <h5 class="modal-title">Confirmación Recuperar Password</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="col-12" style="margin-top: 125px;">
+                      <input type="email" class="form-control" id="email" name="email" ngModel #email="ngModel"
+                      aria-describedby="basic-user" placeholder="Email" required />
+                        <span *ngIf="email.errors?.required && email.touched">
+                            <small id="emailHelp" class="form-text text-danger text-right">El Email es requerido</small>
+                        </span>
                     </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-12" style="margin-top: 5px;">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-user"><i class="fas fa-envelope fa-lg"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" id="email_r" name="email_r" ngModel #email_r="ngModel"
-                                            aria-describedby="basic-user" placeholder="Email" required />
-                                </div>
-                                <span *ngIf="email_r.errors?.required && email_r.touched">
-                                    <small id="emailHelp" class="form-text text-danger text-right">El Email es requerido</small>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
 
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                            Cancelar <i class="fas fa-ban"></i>
-                        </button>
-
-                        <button type="submit" class="btn btn-primary" [disabled]="frm_recover.invalid">
-                            Aceptar <i class="fas fa-check-circle"></i>
-                        </button>
+                    <div class="col-12" style="margin-top: 5px;">
+                      <input type="password" class="form-control" id="password" name="password" ngModel #password="ngModel"
+                          aria-describedby="basic-pass" placeholder="Password" required />
+                        <span *ngIf="password.errors?.required && password.touched" class="">
+                            <small id="emailHelp" class="form-text text-danger text-right">El Password es requerido</small>
+                        </span>
 
                     </div>
-                </form>
 
-            </div>
+                    <div class="col-12 text-center" style="margin-top: 10px;">
+                      <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="frm_login.invalid">
+                        LOGIN
+                      </button>
+                    </div>
+
+                    <div class="col-12 text-center" style="margin-top: 10px;">
+                        <button type="button" class="btn btn-link" (click)="showRecover()">¿Olvidaste tu contraseña?</button>
+                    </div>
+
+                    <div class="col-12" style="margin-top: 5px; display: none;" id="view-failed-login">
+                        <div class="alert alert-danger" style="font-size: 11px;" role="alert">{{login_failed}}</div>
+                    </div>
+
+                </div>
+
+            </form>
+
+            <form novalidate *ngIf="login_view == false" (ngSubmit)="recover(frm_recover.value); frm_recover.reset();" #frm_recover="ngForm">
+
+              <div class="card-body">
+
+                  <div class="col-12 text-center" style="margin-top: 125px; background-color: rgb(201, 195, 195);">
+                      <p>
+                          Ingrese su cuenta de correo para recibir un link que le permitira realizar
+                          el cambio de contraseña
+                      </p>
+                  </div>
+
+                  <div class="col-12" style="margin-top: 10px;">
+                    <input type="email" class="form-control" id="email_r" name="email_r" ngModel #email_r="ngModel"
+                    aria-describedby="basic-user" placeholder="Email" required />
+                      <span *ngIf="email_r.errors?.required && email_r.touched">
+                          <small id="emailHelp" class="form-text text-danger text-right">El Email es requerido</small>
+                      </span>
+                  </div>
+
+                  <div class="col-12 text-center" style="margin-top: 10px;">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="frm_recover.invalid">
+                      SOLICITAR
+                    </button>
+                  </div>
+
+                  <div class="col-12 text-center" style="margin-top: 10px;">
+                      <button type="button" class="btn btn-link" (click)="showLogin()">Ir a Login</button>
+                  </div>
+
+                  <div class="col-12" style="margin-top: 5px; display: none;" id="view-failed-login">
+                      <div class="alert alert-danger" style="font-size: 11px;" role="alert">{{login_failed}}</div>
+                  </div>
+
+              </div>
+
+          </form>
+
         </div>
+
+        <div class="fila1">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               </div>
+
     </div>
 
+</div>
 
-    <div class="modal fade" id="mdlMessageSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-success">
-                    <h5 class="modal-title">Información</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    {{message_success}}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                        Cerrar <i class="fa fa-ban" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+<footer>
 
-    <div class="modal fade" id="mdlMessageError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-danger">
-                    <h5 class="modal-title">Información</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    {{message_error}}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                        Cerrar <i class="fa fa-ban" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+  <div class="container">
+
+      <div class="col-12 col-sm-8 text-right" style="color: #9d1c30 !important;">
+          Copyright &copy; 2012 - 2018 Todos los derechos reservados
+
+      </div>
+
+      <div class="col-6 col-sm-2" style="padding: 0; float: left; margin-top: -2.3%;">
+          <a href="https://www.imnegocios.com" target="_blank"><img src="img/logo-powered.png" style="width: 65%;">
+          </a>
+      </div>
+
+      <div class="col-6 col-sm-1 text-left" style="padding: 0; float: left; margin-top: -2%;">
+          <a href="https://www.facebook.com/SoftverAqua/" target="_blank" style="padding: 0; float: left;">
+              <img src="img/facebook-logo.png" style="width: 30px;">
+          </a>
+      </div>
+
+  </div>
+
+</footer>
