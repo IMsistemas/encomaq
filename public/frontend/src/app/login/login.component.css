@@ -32,13 +32,14 @@
 .fila0 { background:rgba(0,0,128); height: 49vh;  z-index: 1; }
 .fila1 { background:rgba(255,255,255); height: 49vh;  z-index: 1; }
 
-.card {
+.card_login {
   position: absolute !important;
   top: 15% !important;
   left: 35% !important;
   z-index: 2 !important;
   border-radius: 0px;
   width: 25%;
+  box-shadow: 1px 0px 5px 1px rgba(0,0,0,0.75);
 }
 
 .btn {

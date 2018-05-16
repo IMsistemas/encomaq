@@ -4,7 +4,7 @@
 
         <div class="fila0"></div>
 
-        <div class="card text-center">
+        <div class="card text-center card_login">
 
             <form novalidate *ngIf="login_view == true" (ngSubmit)="verify(frm_login.value); frm_login.reset();" #frm_login="ngForm">
 
@@ -27,13 +27,13 @@
 
                     </div>
 
-                    <div class="col-12 text-center" style="margin-top: 10px;">
+                    <div class="col-12 text-center" style="margin-top: 20px;">
                       <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="frm_login.invalid">
                         LOGIN
                       </button>
                     </div>
 
-                    <div class="col-12 text-center" style="margin-top: 10px;">
+                    <div class="col-12 text-center" style="margin-top: 15px;">
                         <button type="button" class="btn btn-link" (click)="showRecover()">¿Olvidaste tu contraseña?</button>
                     </div>
 
@@ -49,11 +49,12 @@
 
               <div class="card-body">
 
-                  <div class="col-12 text-center" style="margin-top: 125px; background-color: rgb(201, 195, 195);">
-                      <p>
-                          Ingrese su cuenta de correo para recibir un link que le permitira realizar
-                          el cambio de contraseña
+                  <div class="card text-white bg-secondary">
+                    <div class="card-body">
+                      <p class="card-text">
+                          Ingrese su cuenta de correo para recibir un link que le permitira realizar el cambio de contraseña
                       </p>
+                    </div>
                   </div>
 
                   <div class="col-12" style="margin-top: 10px;">
@@ -64,13 +65,13 @@
                       </span>
                   </div>
 
-                  <div class="col-12 text-center" style="margin-top: 10px;">
+                  <div class="col-12 text-center" style="margin-top: 20px;">
                     <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="frm_recover.invalid">
                       SOLICITAR
                     </button>
                   </div>
 
-                  <div class="col-12 text-center" style="margin-top: 10px;">
+                  <div class="col-12 text-center" style="margin-top: 15px;">
                       <button type="button" class="btn btn-link" (click)="showLogin()">Ir a Login</button>
                   </div>
 
