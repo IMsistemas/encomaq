@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { NgForm } from '@angular/forms';
 import { ItemService } from '../../../service/bitem/item.service';
 import { ItemcategoryService } from '../../../service/ncategoryitem/itemcategory.service';
 import { UnittypeService } from '../../../service/nunittype/unittype.service';
@@ -31,6 +32,9 @@ export class EdititemComponent implements OnInit {
   list_category() {
 //  this.lis_category.push({ idcategoryitem: '', categoryitemname: '--Seleccione--' });
     this.lis_category = this.category.get_categoryitem();
+  }
+  loadval(data) {
+    this.tem_edit = data;
   }
   list_unit() {
     this.lis_unit.push({ idunittype: '', unittypename: '--Seleccione--' });

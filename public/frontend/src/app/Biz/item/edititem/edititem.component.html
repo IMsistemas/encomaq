@@ -1,4 +1,5 @@
 <div *ngIf="tem_edit">
+  <div *ngIf="tem_edit">{{loadval(tem_edit)}}</div>
   <form novalidate (ngSubmit)="edit_item(tem_edit); frmedititem.reset();" #frmedititem="ngForm">
 
   <div class="modal-header bg-primary">
@@ -10,10 +11,10 @@
 
   <div class="modal-body">
 
-    <div class="row">
-      <div class="col-12">
-        <img src="{{ ((tem_edit.image != '' && tem_edit.image != null)? url_basic + '' + tem_edit.image:urlimage)  }}" class="img-fluid"
-          alt="Responsive image" style="width: 95%;">
+    <div class="row" >
+      <div class="col-12 text-center"  >
+        <img  src="{{ ((tem_edit.image != '' && tem_edit.image != null)? url_basic + '' + tem_edit.image:urlimage)  }}" 
+          alt="Responsive image" style="width:45%; " class="img-responsive">
       </div>
     </div>
     <div class="row">
