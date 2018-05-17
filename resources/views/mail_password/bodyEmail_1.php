@@ -9,7 +9,7 @@
 <style type="text/css">
 
     body {
-        background-color: #f6f6f6;
+        background-color: #EFEFEF;
         font-family: sans-serif;
         -webkit-font-smoothing: antialiased;
         font-size: 14px;
@@ -22,7 +22,7 @@
 
     .body {
 
-        background-color: #f6f6f6;
+        background-color: #EFEFEF;
         width: 100%;
     }
 
@@ -49,9 +49,9 @@
              HEADER, FOOTER, MAIN
          ------------------------------------- */
     .main {
-        background: #ffffff;
+        background: #EFEFEF;
         border-radius: 5px;
-        width: 90%;
+        width: 100%;
         margin: auto;
         text-align: center;
     }
@@ -130,75 +130,66 @@
     }
     .bodys{
 
-        color:#58595d;
+        /*color:#58595d;*/
     }
 
 </style>
 
 <body>
 
-<div style="text-align: center;">
-    <h2>Verificación de Correo Electrónico</h2>
-</div>
+    <div style="text-align: center; margin-bottom: 25px;">
 
-<div class="main" style="text-align: center;">
+        <img src="http://encomaq.imnegocios.com/assets/image/LogoEncomaq-gris.png" alt="">
 
-    <div style="width:50%;background:#f6f6f6;margin:0 auto;padding: 20px;">
-
-        <?php
-
-            $file = $_SERVER['PHP_SELF'];
-
-            $file = str_replace('index.php', '', $file);
-            $file = str_replace('/resetPassword', '', $file);
-
-        ?>
-
-        <div style="text-align: center;">
-
-        </div>
-
-        <div style="width:90%;background:white;margin:0 auto;">
-
-            <div style="padding:10px 15px;">
-                <h2 class="greeting" style="color:#0ca44c;">Estimado <?= $username ?></h2>
-            </div>
-
-            <div style="padding: 0px 10px;">
-                <h3 class="bodys"><b>Para reiniciar su contraseña, haga click en el siguiente enlace</b>
-                    <br />
-                    <a target="_blank" href="http://<?= $_SERVER['HTTP_HOST'] . $file ?>/changePassword/<?= $token ?>">Recuperar Contraseña</a>
-                </h3>
-            </div>
-
-
-            <div style="padding: 0px 10px 10px;">
-                <h3 class="bodys"><b>En unos instantes le llegará un email con su contraseña nueva</b></h3>
-            </div>
-
-
-
-        </div>
-        <!-- START FOOTER -->
-        <div class="footer" >
-
-            <div class="content-block" style="text-align:center">
-                <p class="greeting">Copyright &copy; 2012 - <?= date('Y'); ?> Todos los derechos reservados</p>
-            </div>
-
-
-
-
-        </div>
-        <!-- END FOOTER -->
-
-        <!--<div>
-                <h4>{{trans('email.verify-mail-user-qualify.body_2')}}</h4>
-            </div>-->
     </div>
-</div>
-</div>
 
+    <div class="main" style="text-align: center;">
+
+        <div style="width:80%; background:#EFEFEF; margin:0 auto; padding: 20px;">
+
+            <?php
+
+                $file = $_SERVER['PHP_SELF'];
+
+                $file = str_replace('index.php', '', $file);
+                $file = str_replace('/resetPassword', '', $file);
+
+            ?>
+
+            <div style="width:80%; background:white;margin:0 auto; ">
+
+                <div style="padding: 0px 10px;">
+                    <span style="margin-top: 50px;">
+                        Para reiniciar su contraseña, haga click en el siguiente enlace
+                        <br /><br /><br />
+                        <a target="_blank" href="http://<?= $_SERVER['HTTP_HOST'] . $file ?>/changePassword/<?= $token ?>">Recuperar Contraseña</a>
+                    </span>
+                </div>
+
+
+                <div style="padding: 0px 10px 10px;">
+                    <h3 class="bodys"><b>En unos instantes le llegará un email con su contraseña nueva</b></h3>
+                </div>
+
+                <div style="padding: 0px 10px 10px; margin-bottom: 100px;">
+                    <h3 class="bodys">Gracias <br> Apoyo tecnico de ENCOMAQ</h3>
+                </div>
+
+            </div>
+            <!-- START FOOTER -->
+            <div class="footer" >
+
+                <div class="content-block" style="text-align:center">
+                    <p class="greeting">Copyright &copy; 2012 - <?= date('Y'); ?> Todos los derechos reservados</p>
+                </div>
+
+            </div>
+            <!-- END FOOTER -->
+
+
+        </div>
+
+    </div>
 
 
 </body>
