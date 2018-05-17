@@ -25,6 +25,7 @@ export class ItemComponent implements OnInit {
   state = '1';
   column = 'itemname';
   order = 'ASC';
+  num_page = 5;
   /*variables para paginar*/
   loading = false;
   total = 0;
@@ -53,7 +54,8 @@ export class ItemComponent implements OnInit {
       idunittype: this.idunittype,
       state: this.state,
       column: this.column,
-      order: this.order
+      order: this.order,
+      num_page: this.num_page
     };
     this.item.filtro_item(this.page, o).subscribe(
       (response) => {

@@ -81,6 +81,18 @@
         </select>
       </div>
     
+      <div class="col-12 col-sm-3" style="margin-top: 5px;"></div>
+
+      <div class="col-12 col-sm-3" style="margin-top: 5px;">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text">
+              Pag.
+            </label>
+          </div>
+          <input type="number" class="form-control"  #pg [(ngModel)]="num_page" (keyup)="page = 1;get_list_item();" (change)="page = 1; get_list_item(); ">
+        </div>
+      </div>
     
     </div>
 
@@ -109,7 +121,7 @@
           <td>{{i+from}}</td>
           <td>
             <img src="{{ ((ident.image != '' && ident.image != null)? url_basic + '' + ident.image:urlimage)  }}"
-              class="img-fluid" alt="Responsive image" style="width: 100%;">
+              class="img-fluid mouse_point" alt="Responsive image" style="width: 100%;" (click)="load(ident)" >
           </td>
           <td>{{ident.itemname}}</td>
           <td>{{ident.description}}</td>
@@ -294,28 +306,28 @@
           <div class="modal-body">
             <div class="container" *ngIf="select_data">
               <div class="row">
-                <div class="col-5">
+                <div class="col-12 col-sm-5">
                   <img src="{{ ((select_data.image != '' && select_data.image != null)? url_basic + '' + select_data.image:urlimage)  }}" class="img-fluid" alt="Responsive image"
                     style="width: 95%;">
                 </div>
-                <div class="col-7">
+                <div class="col-12 col-sm-7">
 
                   <table class="table table-bordered table-condensed">
                     <tbody>
                       <tr>
-                        <th>Item:</th>
+                        <th>ITEM:</th>
                         <td>{{select_data.itemname}}</td>
                       </tr>
                       <tr>
-                        <th>Descripción:</th>
+                        <th>DESCRIPCIÓN:</th>
                         <td>{{select_data.description}}</td>
                       </tr>
                       <tr>
-                        <th>Categoria:</th>
+                        <th>CATEGORIA:</th>
                         <td>{{select_data.nom_category.categoryitemname}}</td>
                       </tr>
                       <tr>
-                        <th>Unidad:</th>
+                        <th>UNIDAD:</th>
                         <td>{{select_data.nom_unit.unittypename}}</td>
                       </tr>
                     </tbody>

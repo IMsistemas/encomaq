@@ -221,7 +221,7 @@ class ItemController extends Controller
                         ->whereRaw("(itemname  LIKE '%".$filtro->Buscar."%' OR description  LIKE '%".$filtro->Buscar."%') AND state='".$filtro->state."' ".$sql)
                         ->orderBy("".$filtro->column, "".$filtro->order);
 
-        return  $data->paginate(5);
+        return  $data->paginate($filtro->num_page);
     }
     private function existitem($aux, $id)
     {

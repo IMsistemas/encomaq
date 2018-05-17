@@ -7,3 +7,6 @@
     position: relative; 
     float:right;
 }
+.mouse_point {
+    cursor: pointer
+}
