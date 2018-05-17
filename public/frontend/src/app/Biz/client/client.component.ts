@@ -18,6 +18,9 @@ export class ClientComponent implements OnInit {
   descripcion: any = '';
   ididentifytype: any = '';
   lis_tipoident = [];
+  state = '1';
+  column = 'businessname';
+  order = 'ASC';
   /*variables para paginar*/
   loading = false;
   total = 0;
@@ -37,7 +40,10 @@ export class ClientComponent implements OnInit {
   get_list_client() {
     const o = {
       Buscar: this.descripcion,
-      ididentifytype: this.ididentifytype
+      ididentifytype: this.ididentifytype,
+      state: this.state,
+      column: this.column,
+      order: this.order
     };
     this.client.filtro_client(this.page, o).subscribe(
       (response) => {

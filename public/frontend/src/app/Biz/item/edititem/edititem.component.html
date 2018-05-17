@@ -35,7 +35,7 @@
             <span class="required">(*)</span>
           </label>
           <select class="form-control" id="idcategoryitem" name="idcategoryitem" [(ngModel)]="tem_edit.idcategoryitem" #idcategoryitem="ngModel" required>
-            <option *ngFor="let cat of (lis_category | async ) " [ngValue]="cat.idcategoryitem">
+            <option *ngFor="let cat of (lis_category | async ) "  value="{{cat.idcategoryitem}}">
               {{cat.categoryitemname}}
             </option>
           </select>

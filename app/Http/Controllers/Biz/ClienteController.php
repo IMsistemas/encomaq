@@ -140,7 +140,8 @@ class ClienteController extends Controller
             $sql .= " AND ididentifytype =".$filtro->ididentifytype." ";
         }
         $data = Client::with("nom_identifytype")
-                        ->whereRaw("(businessname  LIKE '%".$filtro->Buscar."%' OR identify  LIKE '%".$filtro->Buscar."%')".$sql);
+                        ->whereRaw("(businessname  LIKE '%".$filtro->Buscar."%' OR identify  LIKE '%".$filtro->Buscar."%')  AND state='".$filtro->state."'".$sql)
+                        ->orderBy("".$filtro->column, "".$filtro->order);
         return  $data->paginate(5);
     }
     private function existclient($aux, $id)
