@@ -28,7 +28,7 @@ class UserController extends Controller
         $where .= "email LIKE '%" . $filter->search . "%') AND state = " . $filter->state;
 
         if ($filter->idrole != '') {
-            $where .= ' AND idcategoryitem = ' . $filter->idrole;
+            $where .= ' AND idrole = ' . $filter->idrole;
         }
 
         return User::with('role')
