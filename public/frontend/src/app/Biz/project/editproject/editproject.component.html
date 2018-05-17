@@ -20,7 +20,7 @@
             <span class="required">(*)</span>
           </label>
           <select class="form-control"  id="idclient" name="idclient" [(ngModel)]="tem_edit.idclient" #idclient="ngModel" required>
-            <option *ngFor="let cli of lis_client" [ngValue]="cli.idclient">
+            <option *ngFor="let cli of lis_client" value="{{cli.idclient}}">
               {{cli.businessname}}
             </option>
           </select>
