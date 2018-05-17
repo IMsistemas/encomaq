@@ -1,5 +1,4 @@
 <div *ngIf="tem_edit">
-  <div *ngIf="tem_edit">{{loadval(tem_edit)}}</div>
   <form novalidate (ngSubmit)="edit_item(tem_edit); frmedititem.reset();" #frmedititem="ngForm">
 
   <div class="modal-header bg-primary">
@@ -54,7 +53,7 @@
             <span class="required">(*)</span>
           </label>
           <select class="form-control" id="idunittype" name="idunittype" [(ngModel)]="tem_edit.idunittype" #idunittype="ngModel" required>
-            <option *ngFor="let u of lis_unit" [ngValue]="u.idunittype">
+            <option *ngFor="let u of lis_unit" value="{{u.idunittype}}">
               {{u.unittypename}}
             </option>
           </select>

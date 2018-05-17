@@ -33,9 +33,6 @@ export class EdititemComponent implements OnInit {
 //  this.lis_category.push({ idcategoryitem: '', categoryitemname: '--Seleccione--' });
     this.lis_category = this.category.get_categoryitem();
   }
-  loadval(data) {
-    this.tem_edit = data;
-  }
   list_unit() {
     this.lis_unit.push({ idunittype: '', unittypename: '--Seleccione--' });
     this.unit.get_unittype().subscribe(
