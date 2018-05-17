@@ -30,7 +30,7 @@ export class ItemComponent implements OnInit {
   loading = false;
   total = 0;
   page = 1;
-  limit = 20;
+  limit = 0;
   from = 0;
   /*variables para paginar*/
   url_api = new UrlApi();

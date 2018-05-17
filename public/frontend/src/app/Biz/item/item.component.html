@@ -85,12 +85,12 @@
 
       <div class="col-12 col-sm-3" style="margin-top: 5px;">
         <div class="input-group mb-3">
+          <input type="number" class="form-control"  #pg [(ngModel)]="num_page" (keyup)="page = 1;get_list_item();" (change)="page = 1; get_list_item(); ">
           <div class="input-group-prepend">
             <label class="input-group-text">
               Pag.
             </label>
           </div>
-          <input type="number" class="form-control"  #pg [(ngModel)]="num_page" (keyup)="page = 1;get_list_item();" (change)="page = 1; get_list_item(); ">
         </div>
       </div>
     

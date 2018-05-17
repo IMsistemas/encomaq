@@ -27,6 +27,7 @@ export class ClientComponent implements OnInit {
   page = 1;
   limit = 20;
   from = 0;
+  num_page = 5;
   select_data: any = '';
   /*variables para paginar*/
   constructor(private client: ClienteService, private tipo: NomidentifytyService) { }
@@ -43,7 +44,8 @@ export class ClientComponent implements OnInit {
       ididentifytype: this.ididentifytype,
       state: this.state,
       column: this.column,
-      order: this.order
+      order: this.order,
+      num_page: this.num_page
     };
     this.client.filtro_client(this.page, o).subscribe(
       (response) => {
