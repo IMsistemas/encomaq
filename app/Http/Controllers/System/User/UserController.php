@@ -19,9 +19,21 @@ class UserController extends Controller
         //
     }
 
-    public function getListUser()
+    public function getListUser(Request $request)
     {
-        return User::with('role')->orderBy('personname', 'asc')->get();
+
+        $filter = json_decode($request->get('filter'));
+
+        $where = "(personname LIKE '%" . $filter->search . "%' OR lastnameperson LIKE '%" . $filter->search . "%' OR ";
+        $where .= "email LIKE '%" . $filter->search . "%') AND state = " . $filter->state;
+
+        if ($filter->idrole != '') {
+            $where .= ' AND idcategoryitem = ' . $filter->idrole;
+        }
+
+        return User::with('role')
+                        ->whereRaw($where)->orderBy($filter->column, $filter->order)
+                        ->paginate($filter->num_page);
     }
 
     /**

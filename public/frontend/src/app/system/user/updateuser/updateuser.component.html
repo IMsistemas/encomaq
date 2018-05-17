@@ -49,9 +49,8 @@
 
                 <div class="form-group">
                   <label for="idrole">Rol <span class="required">(*)</span> </label>
-                  <select class="form-control" id="idrole" name="idrole" [(ngModel)]="tem_edit_user.idrole" #idrole="ngModel" required>
-                      <option [value]="">-- Seleccione --</option>
-                      <option *ngFor="let role of listRole | async" [ngValue]="role.idrole">
+                  <select class="custom-select" id="idrole" name="idrole" [(ngModel)]="tem_edit_user.idrole" #idrole="ngModel" required>                      
+                      <option *ngFor="let role of listRole | async" value="{{role.idrole}}">
                           {{role.rolename}}
                       </option>
                   </select>

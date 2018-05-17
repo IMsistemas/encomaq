@@ -27,7 +27,7 @@ export class CreatecarrierComponent implements OnInit {
 
   getListIdentifyType() {
 
-    this.listIdentifyType.push({idrole: '', identifytypename: '-- Seleccione --'});
+    this.listIdentifyType.push({ididentifytype: '', identifytypename: '-- Seleccione --'});
     this.identifytype.get_identifytype_active().subscribe(
       (response) => {
 

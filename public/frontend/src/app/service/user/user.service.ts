@@ -11,8 +11,8 @@ export class UserService {
   url_api = new UrlApi();
   constructor(private http: HttpClient) { }
 
-  getListUser(): Observable<any> {
-    return this.http.get(this.url_api.get_url_api() + 'api/user/getListUser');
+  getListUser(page: any, filter: any): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/user/getListUser?page=' + page + '&filter=' + JSON.stringify(filter));
   }
 
   create(data: any): Observable<any> {

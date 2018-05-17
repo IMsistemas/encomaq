@@ -14,18 +14,35 @@ declare var $: any;
 })
 export class UserComponent implements OnInit {
   @Output() update_component_father = new EventEmitter<boolean>();
-  listUser: Observable<any>;
+  listUser = [];
   user_selected: any;
   username_selected: any;
   message_success: any;
   message_error: any;
-  listRoles: Observable<any>;
+  
+  listRole = [];
+  search: any = '';
+  idrole: any = '';
+  state = '1';
+  column = 'personname';
+  order = 'ASC';
+  num_page = 5;
+  /* variables para paginar */
+  loading = false;
+  total = 0;
+  page = 1;
+  limit = 0;
+  from = 0;
+  /* variables para paginar */
+
   constructor(private user: UserService, private role: RoleService) { }
 
   ngOnInit() {
+
     this.loadInitJQuery();
-    this.getListUser();
     this.getListRole();
+    this.getListUser();
+    
   }
 
   loadInitJQuery() {
@@ -33,13 +50,51 @@ export class UserComponent implements OnInit {
     $('.modal-dialog').draggable();
   }
 
-  getListUser() {
-    this.listUser = this.user.getListUser();
+  getListRole() {
+
+    this.listRole.push({idrole: '', rolename: '-- Seleccione Rol --'});
+    this.role.getActiveRole().subscribe(
+      (response) => {
+
+        for (let role of response) {
+          let obj: Object = {
+            idrole: role.idrole,
+            rolename: role.rolename
+          };
+          this.listRole.push(obj);
+        }
+
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+
   }
 
-  getListRole() {
-    this.listRoles = this.role.getActiveRole();
-  }
+  getListUser() {
+
+    const o = {
+      search: this.search,
+      idrole: this.idrole,
+      state: this.state,
+      column: this.column,
+      order: this.order,
+      num_page: this.num_page
+    };
+
+    this.user.getListUser(this.page, o).subscribe(
+      (response) => {
+        this.listUser = response.data;
+        this.from = response.from;
+        this.total = response.total;
+        this.loading = false;
+      },
+      (error) => {
+        console.log(error);
+      });
+
+     
+  }  
 
   create() {
     $('#mdlCreate').modal('show');
@@ -90,7 +145,6 @@ export class UserComponent implements OnInit {
         $('#mdlConfirmDelete').modal('hide');
       });
   }
-
 
   confirmSetState(item: any) {
     this.user_selected = item;
@@ -150,6 +204,22 @@ export class UserComponent implements OnInit {
 
     this.getListUser();
 
+  }
+
+  
+  goToPage(n: number): void {
+    this.page = n;
+    this.getListUser();
+  }
+
+  onNext(): void {
+    this.page++;
+    this.getListUser();
+  }
+
+  onPrev(): void {
+    this.page--;
+    this.getListUser();
   }
 
 }
