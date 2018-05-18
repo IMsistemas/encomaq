@@ -47,6 +47,7 @@ class WareHouseController extends Controller
             $aux->warehousename = $data["warehousename"];
             $aux->address = $data["address"];
             $aux->phone = $data["phone"];
+            $aux->email = $data["email"];
             $aux->state = 1;
             if($aux->save()){
                 return response()->json(['success' => $aux ]);
@@ -95,6 +96,7 @@ class WareHouseController extends Controller
             $aux->warehousename = $data["warehousename"];
             $aux->address = $data["address"];
             $aux->phone = $data["phone"];
+            $aux->email = $data["email"];
             $aux->state = 1;
             if($aux->save()){
                 return response()->json(['success' => $aux ]);

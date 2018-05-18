@@ -58,6 +58,24 @@
     </div>
 
 
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Correo
+            <span class="required">(*)</span>
+          </label>
+          <input type="email" class="form-control" maxlength="150" id="email" name="email" ngModel #email="ngModel" required>
+        </div>
+    
+        <div *ngIf="email.errors?.required && email.touched">
+          <small id="" class="form-text text-danger text-right">El correo es requerido</small>
+        </div>
+      </div>
+    </div>
+
+
+
   </div>
 
   <div class="modal-footer">

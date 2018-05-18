@@ -60,7 +60,20 @@
         </div>
       </div>
 
-
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Correo
+              <span class="required">(*)</span>
+            </label>
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="tem_edit.email" #email="ngModel" required>
+          </div>
+      
+          <div *ngIf="email.errors?.required && email.touched">
+            <small id="" class="form-text text-danger text-right">El correo es requerido</small>
+          </div>
+        </div>
+      </div>
 
     </div>
 
