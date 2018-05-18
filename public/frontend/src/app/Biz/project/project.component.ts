@@ -22,6 +22,10 @@ export class ProjectComponent implements OnInit {
   tem_cancel_activate: any;
   msm_cancel_activate: any;
   descripcion: any = '';
+  state = '1';
+  column = 'biz_project.projectname';
+  order = 'ASC';
+  num_page = 5;
   constructor(private project: ProjectService) { }
 
   ngOnInit() {
@@ -32,6 +36,10 @@ export class ProjectComponent implements OnInit {
   get_list_project() {
     const o = {
       Buscar: this.descripcion,
+      state: this.state,
+      column: this.column,
+      order: this.order,
+      num_page: this.num_page
     };
     this.project.filtro_project(this.page, o).subscribe(
       (response) => {

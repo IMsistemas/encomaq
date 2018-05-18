@@ -41,8 +41,46 @@
         </div>
       </div>
 
+      <div class="col-12 col-sm-3" style="margin-top: 5px;">
+        <select class="custom-select" #est [(ngModel)]="state" (change)="page = 1; get_list_project(); ">
+          <option value="1">ACTIVO</option>
+          <option value="0">INACTIVO</option>
+        </select>
+      </div>
+
     </div>
 
+        <div class="row">
+        
+          <div class="col-12 col-sm-3" style="margin-top: 5px;">
+            <select class="custom-select" #col [(ngModel)]="column" (change)="page = 1; get_list_project(); ">
+              <option value="biz_project.projectname">PROYECTO</option>
+              <option value="biz_client.businessname">CLIENTE</option>
+              <option value="biz_client.identify">IDENTIFICACIÓN</option>
+            </select>
+          </div>
+        
+          <div class="col-12 col-sm-3" style="margin-top: 5px;">
+            <select class="custom-select" #or [(ngModel)]="order" (change)="page = 1; get_list_project(); ">
+              <option value="ASC">ASCENDENTE</option>
+              <option value="DESC">DESENDENTE</option>
+            </select>
+          </div>
+        
+          <div class="col-12 col-sm-3" style="margin-top: 5px;"></div>
+        
+          <div class="col-12 col-sm-3" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+              <input type="number" class="form-control" #pg [(ngModel)]="num_page" (keyup)="page = 1;get_list_project();" (change)="page = 1; get_list_project(); ">
+              <div class="input-group-prepend">
+                <label class="input-group-text">
+                  Pag.
+                </label>
+              </div>
+            </div>
+          </div>
+        
+        </div>
   </div>
 
 

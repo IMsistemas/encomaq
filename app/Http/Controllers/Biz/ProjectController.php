@@ -123,13 +123,15 @@ class ProjectController extends Controller
     {
         $filtro = json_decode($request->get('filter'));
         $sql = "";
-        if ($filtro->Buscar != "") {
+        /*if ($filtro->Buscar != "") {
             $sql .= " OR idclient IN (SELECT biz_client.idclient FROM biz_client WHERE (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%'))";
-        }
+        }*/
         $data = Project::with("biz_client")
-                        ->whereRaw("projectname  LIKE '%".$filtro->Buscar."%' ".$sql);
-
-        return  $data->paginate(5);
+                        ->selectRaw("biz_project.*")
+                        ->join("biz_client", "biz_client.idclient", "=", "biz_project.idclient")
+                        ->whereRaw(" biz_project.state='".$filtro->state."' AND  ( biz_project.projectname  LIKE '%".$filtro->Buscar."%'  OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%'))  ")
+                        ->orderBy("".$filtro->column, "".$filtro->order);
+        return  $data->paginate($filtro->num_page);
     }
     private function existproject($aux, $id)
     {
