@@ -11,7 +11,7 @@
     <div class="modal-body">
   
       <div class="row">
-        <div class="col-sm-12">
+        <div class="col-12 col-sm-6">
           <div class="form-group">
             <label for="exampleFormControlInput1">Tipo Identificación
               <span class="required">(*)</span>
@@ -27,11 +27,8 @@
             <small id="" class="form-text text-danger text-right">El tipo de identificación es requerida</small>
           </div>
         </div>
-      </div>
-  
-  
-      <div class="row">
-        <div class="col-sm-12">
+
+        <div class="col-12 col-sm-6">
           <div class="form-group">
             <label for="exampleFormControlInput1">Identificación
               <span class="required">(*)</span>
@@ -44,6 +41,8 @@
           </div>
         </div>
       </div>
+  
+  
   
       <div class="row">
         <div class="col-sm-12">
@@ -67,16 +66,13 @@
             <label for="exampleFormControlInput1">Teléfono
               <span class="required">(*)</span>
             </label>
-            <input type="text" class="form-control" maxlength="9" pattern="^[0-9]*" id="phone" name="phone" [(ngModel)]="tem_edit.phone" #phone="ngModel" required>
+            <input type="text" class="form-control"  id="phone" name="phone" [(ngModel)]="tem_edit.phone" #phone="ngModel" required>
           </div>
   
           <div *ngIf="phone.errors?.required && phone.touched">
             <small id="" class="form-text text-danger text-right">El teléfono es requerido</small>
           </div>
-  
-          <div *ngIf="phone.errors?.pattern">
-            <small id="" class="form-text text-danger text-right">El teléfono es invalido</small>
-          </div>
+
         </div>
       </div>
   
@@ -111,6 +107,15 @@
       </div>
   
   
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Observación
+          </label>
+          <textarea cols="100" rows="3" class="form-control" id="observation" name="observation" [(ngModel)]="tem_edit.observation" #observation="ngModel"></textarea>
+        </div>
+      </div>
+    </div>
   
   
     </div>

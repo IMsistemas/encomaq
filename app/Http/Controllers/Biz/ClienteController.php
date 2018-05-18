@@ -49,6 +49,7 @@ class ClienteController extends Controller
             $aux->phone = $data["phone"];
             $aux->address = $data["address"];
             $aux->email = $data["email"];
+            $aux->observation = $data["observation"];
             $aux->state = 1;
             if($aux->save()){
                 return response()->json(['success' => $aux ]);
@@ -100,6 +101,7 @@ class ClienteController extends Controller
             $aux->phone = $data["phone"];
             $aux->address = $data["address"];
             $aux->email = $data["email"];
+            $aux->observation = $data["observation"];
             $aux->state = 1;
             if($aux->save()){
                 return response()->json(['success' => $aux ]);
