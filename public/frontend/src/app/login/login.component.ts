@@ -18,9 +18,14 @@ export class LoginComponent implements OnInit {
   login_failed: any;
   message_success: any;
   message_error: any;
+  year: any;
   constructor(private login: LoginService) { }
 
   ngOnInit() {
+
+    let date = new Date();
+    this.year = date.getFullYear();
+
   }
 
   verify(data) {

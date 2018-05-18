@@ -34,7 +34,7 @@
 
                 <div class="form-group">
                   <label for="ididentifytype">Tipo Identificación <span class="required">(*)</span> </label>
-                  <select class="form-control" id="ididentifytype" name="ididentifytype" [(ngModel)]="tem_edit_user.ididentifytype" #ididentifytype="ngModel" required>
+                  <select class="custom-select" id="ididentifytype" name="ididentifytype" [(ngModel)]="tem_edit_user.ididentifytype" #ididentifytype="ngModel" required>
                       <option *ngFor="let e of listIdentifyType" value="{{e.ididentifytype}}">
                           {{e.identifytypename}}
                       </option>
