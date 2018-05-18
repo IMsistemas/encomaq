@@ -14,15 +14,23 @@
 
     <div class="row">
       <div class="col-sm-12">
-        <div class="form-group">
+        <div class="form-group ">
           <label for="exampleFormControlInput1">Cliente
             <span class="required">(*)</span>
           </label>
-          <select class="form-control" id="idclient" name="idclient" ngModel #idclient="ngModel" required>
+          <div class="input-group">
+          <select class="form-control" id="idclient" name="idclient" [(ngModel)]="id_client" #idclient="ngModel" required>
             <option *ngFor="let cli of lis_client" [ngValue]="cli.idclient">
               {{cli.businessname}}
             </option>
           </select>
+
+          <div class="input-group-append">
+            <button class="btn btn-default" type="button" (click)="search_client()">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+          </div>
         </div>
 
         <div *ngIf="idclient.errors?.required && idclient.touched">
@@ -30,6 +38,8 @@
         </div>
       </div>
     </div>
+
+
 
 
     <div class="row">
@@ -66,3 +76,4 @@
     </button>
   </div>
 </form>
+

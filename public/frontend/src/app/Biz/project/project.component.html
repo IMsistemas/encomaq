@@ -30,7 +30,7 @@
 
     <div class="row">
 
-      <div class="col-12 col-sm-6" style="margin-top: 5px;">
+      <div class="col-12 col-sm-9" style="margin-top: 5px;">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Buscar Proyecto, Cliente" #aux [(ngModel)]="descripcion" (keyup)="page = 1;get_list_project();">
           <div class="input-group-prepend">
@@ -63,7 +63,7 @@
           <div class="col-12 col-sm-3" style="margin-top: 5px;">
             <select class="custom-select" #or [(ngModel)]="order" (change)="page = 1; get_list_project(); ">
               <option value="ASC">ASCENDENTE</option>
-              <option value="DESC">DESENDENTE</option>
+              <option value="DESC">DESCENDENTE</option>
             </select>
           </div>
         
@@ -177,11 +177,11 @@
     </div>
   </div>
 
-  <div class="modal" id="addproject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal" id="addproject" style="width: 100% !important; height: 100% !important;"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
-        <app-addproject (update_component_father)="update_list($event,'create')"></app-addproject>
+        <app-addproject [id_client]="idcliente_select"  (update_component_father)="update_list($event,'create')"></app-addproject>
 
       </div>
     </div>
@@ -191,7 +191,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
-        <app-editproject [tem_edit]="info_tem_edit" (update_component_father)="update_list($event,'edit')"></app-editproject>
+        <app-editproject [id_client]="idcliente_select" [tem_edit]="info_tem_edit" (update_component_father)="update_list($event,'edit')"></app-editproject>
 
       </div>
     </div>
@@ -306,5 +306,7 @@
       </div>
     </div>
   </div>-->
+
+  <app-listclient  (idcliente)="idclient_select($event)" ></app-listclient>
 
 </div>

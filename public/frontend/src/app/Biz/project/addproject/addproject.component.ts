@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { catchError, retry } from 'rxjs/operators';
@@ -15,6 +15,7 @@ declare var $: any;
 export class AddprojectComponent implements OnInit {
   @Output() update_component_father = new EventEmitter<boolean>();
   lis_client = [];
+  @Input() id_client: any;
   constructor(private project: ProjectService, private client: ClienteService) { }
 
   ngOnInit() {
@@ -42,6 +43,7 @@ export class AddprojectComponent implements OnInit {
         if (response.success !== undefined) {
           $('#addproject').modal('hide');
           this.update_component_father.emit(true);
+          this.id_client = '';
         } else if (response.error !== undefined) {
           $('#addproject').modal('hide');
           this.update_component_father.emit(false);
@@ -52,5 +54,9 @@ export class AddprojectComponent implements OnInit {
         $('#addproject').modal('hide');
         this.update_component_father.emit(false);
       });
+  }
+
+  search_client() {
+    $('.listclient').modal('show');
   }
 }

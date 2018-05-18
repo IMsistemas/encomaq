@@ -12,6 +12,7 @@ export class EditprojectComponent implements OnInit {
   lis_client = [];
   @Input() tem_edit: any;
   @Output() update_component_father = new EventEmitter<boolean>();
+  @Input() id_client: any;
   constructor(private project: ProjectService, private client: ClienteService) { }
 
   ngOnInit() {
@@ -34,10 +35,12 @@ export class EditprojectComponent implements OnInit {
       });
   }
   modify_project(data: any) {
+    data.idclient = this.id_client;
     this.project.edit_project(data.idproject, data).subscribe(
       (response) => {
         if (response.success !== undefined) {
           $('#editproject').modal('hide');
+          this.id_client = data.idclient;
           this.update_component_father.emit(true);
         } else if (response.error !== undefined) {
           $('#editproject').modal('hide');
@@ -49,5 +52,8 @@ export class EditprojectComponent implements OnInit {
         $('#editproject').modal('hide');
         this.update_component_father.emit(false);
       });
+  }
+  search_client() {
+    $('.listclient').modal('show');
   }
 }

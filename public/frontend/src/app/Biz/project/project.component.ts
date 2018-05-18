@@ -26,6 +26,7 @@ export class ProjectComponent implements OnInit {
   column = 'biz_project.projectname';
   order = 'ASC';
   num_page = 5;
+  idcliente_select = '';
   constructor(private project: ProjectService) { }
 
   ngOnInit() {
@@ -65,6 +66,7 @@ export class ProjectComponent implements OnInit {
     this.get_list_project();
   }
   new_project() {
+    this.idcliente_select = '';
     $('#addproject').modal('show');
   }
   update_list(evento, type) {
@@ -89,6 +91,7 @@ export class ProjectComponent implements OnInit {
   }
   edit_project(data: any) {
     this.info_tem_edit = data;
+    this.idcliente_select = data.idclient;
     $('#editproject').modal('show');
   }
   cancel_activate(data: any) {
@@ -140,5 +143,10 @@ export class ProjectComponent implements OnInit {
         $('#mdlMessageError').modal('show');
         $('#mdl_delete').modal('hide');
       });
+  }
+
+
+  idclient_select(n): void {
+    this.idcliente_select = n;
   }
 }
