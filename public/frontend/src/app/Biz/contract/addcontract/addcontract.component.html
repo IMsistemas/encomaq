@@ -1,3 +1,270 @@
-<p>
-  addcontract works!
-</p>
+<form novalidate (ngSubmit)="add_item(frmitem.value); frmitem.reset();" #frmitem="ngForm">
+
+  <div class="modal-header bg-primary">
+    <h5 class="modal-title">Nuevo Contrato</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    <div class="row"> 
+      <div class="col-md-3 col-sm-12 ">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home"
+            aria-selected="true">ARRENDATARIO</a>
+          <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile"
+            aria-selected="false">ITEMS</a>
+          <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages"
+            aria-selected="false">OBSERVACIONES</a>
+        </div>
+      </div>
+      <div class="col-md-9 col-sm-12 ">
+        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <strong>1. DATOS GENERALES DEL ARRENDATARIO</strong>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <div class="form-group ">
+                  <label for="exampleFormControlInput1">Cliente
+                    <span class="required">(*)</span>
+                  </label>
+                  <div class="input-group">
+                    <select class="form-control" id="idclient" name="idclient" [(ngModel)]="id_client" #idclient="ngModel" required>
+                      <option *ngFor="let cli of lis_client" [ngValue]="cli.idclient">
+                        {{cli.businessname}}
+                      </option>
+                    </select>
+              
+                    <div class="input-group-append">
+                      <button class="btn btn-default" type="button" (click)="search_client()">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              
+                <div *ngIf="idclient.errors?.required && idclient.touched">
+                  <small id="" class="form-text text-danger text-right">El cliente es requerido</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">C.I./RUC.
+                    <span class="required">(*)</span>
+                  </label>
+                  <input type="text" class="form-control" id="identify" name="identify" ngModel #identify="ngModel" required>
+                </div>
+            
+                <div *ngIf="identify.errors?.required && identify.touched">
+                  <small id="" class="form-text text-danger text-right">La identificación es requerida</small>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">TELÉFONO
+                    <span class="required">(*)</span>
+                  </label>
+                  <input type="text" class="form-control" id="phone" name="phone" ngModel #phone="ngModel" required>
+                </div>
+              
+                <div *ngIf="phone.errors?.required && phone.touched">
+                  <small id="" class="form-text text-danger text-right">El teléfono es requerido</small>
+                </div>
+              </div>
+              
+            </div>
+
+        
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">DIRECCIÓN
+                    <span class="required">(*)</span>
+                  </label>
+                  <input type="text" class="form-control" id="address" name="address" ngModel #address="ngModel" required>
+                </div>
+            
+                <div *ngIf="address.errors?.required && address.touched">
+                  <small id="" class="form-text text-danger text-right">El teléfono es requerido</small>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">FECHA DE INICIO
+                    <span class="required">(*)</span>
+                  </label>
+                  <input type="date" class="form-control" id="startdate" name="startdate" ngModel #startdate="ngModel" required>
+                </div>
+            
+                <div *ngIf="startdate.errors?.required && startdate.touched">
+                  <small id="" class="form-text text-danger text-right">La fecha de inicio es requerida</small>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">FECHA FIN
+                    <span class="required">(*)</span>
+                  </label>
+                  <input type="date" class="form-control" id="enddate" name="enddate" ngModel #enddate="ngModel" required>
+                </div>
+              
+                <div *ngIf="enddate.errors?.required && enddate.touched">
+                  <small id="" class="form-text text-danger text-right">La fecha de fin es requerida</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">ÁREA
+                    <span class="required">(*)</span>
+                  </label>
+                  <input type="text" class="form-control" id="area" name="area" ngModel #area="ngModel" required>
+                </div>
+            
+                <div *ngIf="area.errors?.required && area.touched">
+                  <small id="" class="form-text text-danger text-right">El área es requerida </small>
+                </div>
+              </div>
+            
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">PERÍODO DE ALQUILER
+                    <span class="required">(*)</span>
+                  </label>
+                  <input type="text" class="form-control" id="period" name="period" ngModel #period="ngModel" required>
+                </div>
+            
+                <div *ngIf="period.errors?.required && period.touched">
+                  <small id="" class="form-text text-danger text-right">El período es requerido </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">GARANTÍA ENTREGADA
+                    <span class="required">(*)</span>
+                  </label>
+                  <input type="text" class="form-control" id="guarantee" name="guarantee" ngModel #guarantee="ngModel" required>
+                </div>
+            
+                <div *ngIf="guarantee.errors?.required && guarantee.touched">
+                  <small id="" class="form-text text-danger text-right">La garantía es requerida </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">COSTO DE ALQUILER
+                    <span class="required">(*)</span>
+                  </label>
+                  <input type="text" class="form-control" id="cost" name="cost" ngModel #cost="ngModel" required>
+                </div>
+            
+                <div *ngIf="cost.errors?.required && cost.touched">
+                  <small id="" class="form-text text-danger text-right">El costo es requerido </small>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <p><strong>2. OBJETO DEL CONTRATO: </strong>El objetivo del presente contrato es el arrendamiento de equipos para la construcción, la cantidad del equipo arrendado se encuentra detallado a continuación:</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 text-right">
+                <button type="button" class="btn btn-primary" (click)="addrwo()"> Agregar
+                <i class="fas fa-plus-square fa-lg"></i></button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 table-responsive">
+                <table class="table table-bordered table-condensed ">
+                  <thead class="btn-dark">
+                    <tr>
+                      <th>NO</th>
+                      <th>DESCRIPCIÓN</th>
+                      <th>CANTIDAD</th>
+                      <th>OBSRVACIONES</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of list_itemcont let i = index">
+                      <td>{{i+1}}</td>
+                      <td><select class="form-control"></select></td>
+                      <td><input type="text" class="form-control" /></td>
+                      <td><input type="text" class="form-control" /></td>
+                      <td>
+                        <button type="button" class="btn btn-danger" (click)="removerow(item)">
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">OBSERVACIONES
+                    <span class="required">(*)</span>
+                  </label>
+                  <textarea cols="100" rows="5"  class="form-control" id="observation" name="observation" ngModel #observation="ngModel" required></textarea>
+                </div>
+            
+                <div *ngIf="observation.errors?.required && observation.touched">
+                  <small id="" class="form-text text-danger text-right">La obsercación es requerida </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+      Cancelar
+      <i class="fas fa-ban"></i>
+    </button>
+
+    <button type="submit" class="btn btn-success" [disabled]="frmitem.invalid">
+      Guardar
+      <i class="fas fa-save"></i>
+    </button>
+  </div>
+</form>
