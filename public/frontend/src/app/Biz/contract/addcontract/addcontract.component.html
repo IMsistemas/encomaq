@@ -36,7 +36,7 @@
                   </label>
                   <div class="input-group">
                     <select class="form-control" id="idclient" name="idclient" [(ngModel)]="id_client.idclient" disabled  #idclient="ngModel" required>
-                      <option *ngFor="let cli of lis_client" [ngValue]="cli.idclient">
+                      <option *ngFor="let cli of lis_client" value="{{cli.idclient}}">
                         {{cli.businessname}}
                       </option>
                     </select>
@@ -217,7 +217,13 @@
                   <tbody>
                     <tr *ngFor="let item of list_itemcont let i = index">
                       <td>{{i+1}}</td>
-                      <td><select class="form-control"></select></td>
+                      <td>
+                        <select class="form-control">
+                          <option *ngFor="let it of lis_item" value="{{it.iditem}}">
+                            {{it.itemname}}
+                          </option>
+                        </select>
+                      </td>
                       <td><input type="text" class="form-control" /></td>
                       <td><input type="text" class="form-control" /></td>
                       <td>

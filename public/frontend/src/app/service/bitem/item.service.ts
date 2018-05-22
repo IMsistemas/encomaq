@@ -10,7 +10,9 @@ import { UrlApi } from '../url-api';
 export class ItemService {
   url_api = new UrlApi();
   constructor(private http: HttpClient) { }
-
+  get_item(): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/Item');
+  }
   add_item(data: any, file: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('file', file);

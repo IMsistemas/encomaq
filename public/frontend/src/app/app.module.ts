@@ -63,6 +63,7 @@ import { AddcontractComponent } from './Biz/contract/addcontract/addcontract.com
 import { EditcontractComponent } from './Biz/contract/editcontract/editcontract.component';
 import { ContractService } from './service/bcontract/contract.service';
 import { ListclientComponent } from './Biz/client/listclient/listclient.component';
+import { ListitemComponent } from './Biz/item/listitem/listitem.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { ListclientComponent } from './Biz/client/listclient/listclient.componen
     AddcontractComponent,
     EditcontractComponent,
     ListclientComponent,
+    ListitemComponent,
   ],
   imports: [
     BrowserModule,

@@ -17,7 +17,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        return Item::whereRaw("state=1")->get();
     }
 
     /**
