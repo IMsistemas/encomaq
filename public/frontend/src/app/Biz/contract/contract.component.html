@@ -189,7 +189,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
 
-        <app-addcontract [id_client]="idcliente_select" (update_component_father)="update_list($event,'create')"></app-addcontract>
+        <app-addcontract [id_client]="idcliente_select" [item_select]="globalitem_select"  (update_component_father)="update_list($event,'create')"></app-addcontract>
 
       </div>
     </div>
@@ -276,5 +276,5 @@
 
 
   <app-listclient (idcliente)="idclient_select($event)"></app-listclient>
-
+  <app-listitem (itemglobal)="itemglobal_select($event)" ></app-listitem>
 </div>

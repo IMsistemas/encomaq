@@ -29,6 +29,7 @@ export class ContractComponent implements OnInit {
   from = 0;
   /*variables para paginar*/
   idcliente_select: any;
+  globalitem_select: any;
   constructor(private contract: ContractService) { }
 
   ngOnInit() {
@@ -75,6 +76,7 @@ export class ContractComponent implements OnInit {
   }
   new_contract() {
     this.idcliente_select = { idclient: '' };
+    this.globalitem_select = { iditem: ''};
     $('#addcontract').modal('show');
   }
   update_list(evento, type) {
@@ -100,5 +102,8 @@ export class ContractComponent implements OnInit {
 
   idclient_select(n): void {
     this.idcliente_select = n;
+  }
+  itemglobal_select(n): void {
+    this.globalitem_select = n;
   }
 }

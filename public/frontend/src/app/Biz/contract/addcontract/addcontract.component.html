@@ -209,7 +209,7 @@
                     <tr>
                       <th>NO</th>
                       <th>DESCRIPCIÓN</th>
-                      <th>CANTIDAD</th>
+                      <th style="width: 2%;">CANT.</th>
                       <th>OBSRVACIONES</th>
                       <th></th>
                     </tr>
@@ -218,14 +218,21 @@
                     <tr *ngFor="let item of list_itemcont let i = index">
                       <td>{{i+1}}</td>
                       <td>
-                        <select class="form-control">
-                          <option *ngFor="let it of lis_item" value="{{it.iditem}}">
-                            {{it.itemname}}
-                          </option>
-                        </select>
+                        <div class="input-group">
+                          <select class="form-control"   name="iditem"  #iditem="ngModel"   [(ngModel)]="item.iditem">
+                            <option *ngFor="let it of lis_item" value="{{it.iditem}}">
+                              {{it.itemname}}
+                            </option>
+                          </select>
+                          <div class="input-group-append">
+                            <button class="btn btn-default" type="button" (click)="search_item(item)">
+                              <i class="fas fa-search"></i>
+                            </button>
+                          </div>
+                        </div>
                       </td>
-                      <td><input type="text" class="form-control" /></td>
-                      <td><input type="text" class="form-control" /></td>
+                      <td><input type="text" class="form-control"  name="quantity"  #quantity="ngModel"  [(ngModel)]="item.quantity"  /></td>
+                      <td><input type="text" class="form-control"  name="observation"  #observation="ngModel"  [(ngModel)]="item.observation"  /></td>
                       <td>
                         <button type="button" class="btn btn-danger" (click)="removerow(item)">
                           <i class="fas fa-trash-alt"></i>

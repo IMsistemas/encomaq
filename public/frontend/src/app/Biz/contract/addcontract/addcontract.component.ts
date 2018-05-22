@@ -15,11 +15,13 @@ export class AddcontractComponent implements OnInit {
   lis_client = [];
   lis_item = [];
   list_itemcont = [];
-  @Input() id_client: any;
+  @Input() id_client: any; //
+  @Input() item_select: any;
   constructor(private contract: ContractService, private client: ClienteService, private item: ItemService) { }
 
   ngOnInit() {
     this.id_client = { idclient: '' };
+    this.item_select = { iditem: ''};
     this.list_clients();
     this.list_items();
   }
@@ -69,5 +71,11 @@ export class AddcontractComponent implements OnInit {
   removerow(data) {
     const posicion = this.list_itemcont.indexOf(data);
     this.list_itemcont.splice(posicion, 1);
+  }
+  search_item(fila) {
+    $('.listitems').modal('show');
+    fila.iditem = this.item_select.iditem;
+    console.log(fila);
+    console.log(this.item_select);
   }
 }
