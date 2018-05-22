@@ -17,6 +17,7 @@ export class AddcontractComponent implements OnInit {
   constructor(private contract: ContractService, private client: ClienteService) { }
 
   ngOnInit() {
+    this.id_client = { idclient: '' };
     this.list_clients();
   }
   list_clients() {

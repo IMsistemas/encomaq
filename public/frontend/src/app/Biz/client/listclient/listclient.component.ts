@@ -21,7 +21,7 @@ export class ListclientComponent implements OnInit {
   descripcion = '';
   ididentifytype = '';
   @Input() cliente: any;
-  @Output() idcliente = new EventEmitter<number>();
+  @Output() idcliente = new EventEmitter<any>();
   constructor(private client: ClienteService) { }
 
   ngOnInit() {
@@ -61,7 +61,7 @@ export class ListclientComponent implements OnInit {
   }
 
   select_client(data) {
-    this.idcliente.emit(data.idclient);
+    this.idcliente.emit(data);
     $('.listclient').modal('hide');
   }
 }

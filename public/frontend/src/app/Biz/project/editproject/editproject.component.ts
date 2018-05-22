@@ -16,6 +16,7 @@ export class EditprojectComponent implements OnInit {
   constructor(private project: ProjectService, private client: ClienteService) { }
 
   ngOnInit() {
+    this.id_client = { idclient: '' };
     this.list_clients();
   }
   list_clients() {
@@ -35,12 +36,12 @@ export class EditprojectComponent implements OnInit {
       });
   }
   modify_project(data: any) {
-    data.idclient = this.id_client;
+    data.idclient = this.id_client.idclient;
     this.project.edit_project(data.idproject, data).subscribe(
       (response) => {
         if (response.success !== undefined) {
           $('#editproject').modal('hide');
-          this.id_client = data.idclient;
+          this.id_client.idclient = data.idclient;
           this.update_component_father.emit(true);
         } else if (response.error !== undefined) {
           $('#editproject').modal('hide');

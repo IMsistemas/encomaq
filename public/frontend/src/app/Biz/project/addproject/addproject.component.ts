@@ -19,6 +19,7 @@ export class AddprojectComponent implements OnInit {
   constructor(private project: ProjectService, private client: ClienteService) { }
 
   ngOnInit() {
+    this.id_client = { idclient: ''};
     this.list_clients();
   }
   list_clients() {
@@ -43,7 +44,7 @@ export class AddprojectComponent implements OnInit {
         if (response.success !== undefined) {
           $('#addproject').modal('hide');
           this.update_component_father.emit(true);
-          this.id_client = '';
+          this.id_client.idclient = '';
         } else if (response.error !== undefined) {
           $('#addproject').modal('hide');
           this.update_component_father.emit(false);

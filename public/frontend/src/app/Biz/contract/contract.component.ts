@@ -28,7 +28,7 @@ export class ContractComponent implements OnInit {
   limit = 0;
   from = 0;
   /*variables para paginar*/
-  idcliente_select = '';
+  idcliente_select: any;
   constructor(private contract: ContractService) { }
 
   ngOnInit() {
@@ -74,7 +74,7 @@ export class ContractComponent implements OnInit {
     this.get_list_contract();
   }
   new_contract() {
-    this.idcliente_select = '';
+    this.idcliente_select = { idclient: '' };
     $('#addcontract').modal('show');
   }
   update_list(evento, type) {
