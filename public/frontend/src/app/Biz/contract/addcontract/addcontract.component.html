@@ -215,26 +215,26 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let item of list_itemcont let i = index">
+                    <tr *ngFor="let aux of list_itemcont let i = index">
                       <td>{{i+1}}</td>
                       <td>
                         <div class="input-group">
-                          <select class="form-control"   name="iditem"  #iditem="ngModel"   [(ngModel)]="item.iditem">
+                          <select class="form-control"  name="{{i}}iditem" [(ngModel)]="aux.iditem">
                             <option *ngFor="let it of lis_item" value="{{it.iditem}}">
                               {{it.itemname}}
                             </option>
                           </select>
                           <div class="input-group-append">
-                            <button class="btn btn-default" type="button" (click)="search_item(item)">
+                            <button class="btn btn-default" type="button" (click)="search_item(aux)">
                               <i class="fas fa-search"></i>
                             </button>
                           </div>
                         </div>
                       </td>
-                      <td><input type="text" class="form-control"  name="quantity"  #quantity="ngModel"  [(ngModel)]="item.quantity"  /></td>
-                      <td><input type="text" class="form-control"  name="observation"  #observation="ngModel"  [(ngModel)]="item.observation"  /></td>
+                      <td><input type="text" class="form-control"  name="{{i}}quantity"   [(ngModel)]="aux.quantity"  /></td>
+                      <td><input type="text" class="form-control"  name="{{i}}observation"   [(ngModel)]="aux.observation"  /></td>
                       <td>
-                        <button type="button" class="btn btn-danger" (click)="removerow(item)">
+                        <button type="button" class="btn btn-danger" (click)="removerow(aux)">
                           <i class="fas fa-trash-alt"></i>
                         </button>
                       </td>

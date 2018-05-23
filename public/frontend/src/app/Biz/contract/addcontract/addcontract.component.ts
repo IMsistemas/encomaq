@@ -61,15 +61,19 @@ export class AddcontractComponent implements OnInit {
     $('.listclient').modal('show');
   }
   addrwo() {
+    console.log(this.list_itemcont);
     const o = {
       iditem: '',
       quantity: 0,
       observation: ''
     };
     this.list_itemcont.push(o);
+    console.log(this.list_itemcont);
   }
   removerow(data) {
     const posicion = this.list_itemcont.indexOf(data);
+    console.log(posicion);
+    console.log(data);
     this.list_itemcont.splice(posicion, 1);
   }
   search_item(fila) {
