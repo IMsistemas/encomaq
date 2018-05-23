@@ -33,7 +33,7 @@ export const RouterConfig: Route[] = [
     { path: 'project', component: ProjectComponent },
     { path: 'carrier', component: CarrierComponent },
     { path: 'contract', component: ContractComponent },
-    { path: 'refferalguide', component: ContractComponent },
+    { path: 'referralguide', component: ReferralguideComponent },
 ];
 
 
