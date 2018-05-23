@@ -11,19 +11,7 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/company']" > Empresa </a>
-      </li>
-
-      <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/warehouse']"> Bodega </a>
-      </li>
-
-      <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/item']"> Productos  </a>
-      </li>
-
-      <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/client']"> Cliente </a>
+        <a class="nav-link" [routerLink]="['/contract']"> Contrato </a>
       </li>
 
       <li class="nav-item">
@@ -31,11 +19,22 @@
       </li>
 
       <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/carrier']"> Transportista </a>
+        <a class="nav-link" [routerLink]="['/referralguide']"> Guia Remision </a>
       </li>
 
-    <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/contract']"> Contrato </a>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        Empresa
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" [routerLink]="['/carrier']"> Transportista </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" [routerLink]="['/client']"> Cliente </a>
+        <a class="dropdown-item" [routerLink]="['/item']" > Producto </a>
+        <a class="dropdown-item" [routerLink]="['/warehouse']"> Bodega </a>
+        <a class="dropdown-item" [routerLink]="['/company']"> Informacion de Empresa </a>
+      </div>
     </li>
 
       <li class="nav-item dropdown">

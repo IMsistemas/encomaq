@@ -64,6 +64,8 @@ import { EditcontractComponent } from './Biz/contract/editcontract/editcontract.
 import { ContractService } from './service/bcontract/contract.service';
 import { ListclientComponent } from './Biz/client/listclient/listclient.component';
 import { ListitemComponent } from './Biz/item/listitem/listitem.component';
+import { ReferralguideComponent } from './Biz/referralguide/referralguide.component';
+import { ReferralguideService } from './service/referralguide/referralguide.service';
 
 @NgModule({
   declarations: [
@@ -112,6 +114,7 @@ import { ListitemComponent } from './Biz/item/listitem/listitem.component';
     EditcontractComponent,
     ListclientComponent,
     ListitemComponent,
+    ReferralguideComponent,
   ],
   imports: [
     BrowserModule,
@@ -123,7 +126,7 @@ import { ListitemComponent } from './Biz/item/listitem/listitem.component';
     NomidentifytyService, RoleService, ItemcategoryService, LoginService,
     ReasontransferService, UnittypeService, UserService, WarehouseService,
     BcompanyService, ItemService, ConfigemailService, ClienteService,
-    ProjectService, CarrierService, ContractService
+    ProjectService, CarrierService, ContractService, ReferralguideService
   ],
   bootstrap: [AppComponent]
 })
