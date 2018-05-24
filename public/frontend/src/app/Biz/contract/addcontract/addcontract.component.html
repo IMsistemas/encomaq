@@ -1,4 +1,4 @@
-<form novalidate (ngSubmit)="add_item(frmitem.value); frmitem.reset();" #frmitem="ngForm">
+<form novalidate (ngSubmit)="add_contract(frmcontract.value, frmcontract);" #frmcontract="ngForm">
 
   <div class="modal-header bg-primary">
     <h5 class="modal-title">Nuevo Contrato</h5>
@@ -35,7 +35,7 @@
                     <span class="required">(*)</span>
                   </label>
                   <div class="input-group">
-                    <select class="form-control" id="idclient" name="idclient" [(ngModel)]="id_client.idclient" disabled  #idclient="ngModel" required>
+                    <select class="form-control" id="idclient" name="idclient" [(ngModel)]="id_client.idclient" readonly  #idclient="ngModel" required>
                       <option *ngFor="let cli of lis_client" value="{{cli.idclient}}">
                         {{cli.businessname}}
                       </option>
@@ -61,7 +61,7 @@
                   <label for="exampleFormControlInput1">C.I./RUC.
                     <span class="required">(*)</span>
                   </label>
-                  <input type="text" class="form-control" id="identify" name="identify"  [(ngModel)]="id_client.identify" disabled #identify="ngModel" required>
+                  <input type="text" class="form-control" id="identify" name="identify"  [(ngModel)]="id_client.identify" readonly #identify="ngModel" required>
                 </div>
             
                 <div *ngIf="identify.errors?.required && identify.touched">
@@ -73,7 +73,7 @@
                   <label for="exampleFormControlInput1">TELÉFONO
                     <span class="required">(*)</span>
                   </label>
-                  <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="id_client.phone" disabled #phone="ngModel" required>
+                  <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="id_client.phone" readonly #phone="ngModel" required>
                 </div>
               
                 <div *ngIf="phone.errors?.required && phone.touched">
@@ -91,7 +91,7 @@
                   <label for="exampleFormControlInput1">DIRECCIÓN
                     <span class="required">(*)</span>
                   </label>
-                  <input type="text" class="form-control" id="address" name="address" [(ngModel)]="id_client.address" disabled #address="ngModel" required>
+                  <input type="text" class="form-control" id="address" name="address" [(ngModel)]="id_client.address" readonly #address="ngModel" required>
                 </div>
             
                 <div *ngIf="address.errors?.required && address.touched">
@@ -209,8 +209,8 @@
                     <tr>
                       <th>NO</th>
                       <th>DESCRIPCIÓN</th>
-                      <th style="width: 2%;">CANT.</th>
-                      <th>OBSRVACIONES</th>
+                      <th >CANT.</th>
+                      <th>OBSERVACIONES</th>
                       <th></th>
                     </tr>
                   </thead>
@@ -224,14 +224,14 @@
                               {{it.itemname}}
                             </option>
                           </select>
-                          <div class="input-group-append">
+                          <!--<div class="input-group-append">
                             <button class="btn btn-default" type="button" (click)="search_item(aux)">
                               <i class="fas fa-search"></i>
                             </button>
-                          </div>
+                          </div>-->
                         </div>
                       </td>
-                      <td><input type="text" class="form-control"  name="{{i}}quantity"   [(ngModel)]="aux.quantity"  /></td>
+                      <td><input type="number" min="1" max="100" class="form-control"  name="{{i}}quantity"   [(ngModel)]="aux.quantity"  /></td>
                       <td><input type="text" class="form-control"  name="{{i}}observation"   [(ngModel)]="aux.observation"  /></td>
                       <td>
                         <button type="button" class="btn btn-danger" (click)="removerow(aux)">
@@ -275,7 +275,7 @@
       <i class="fas fa-ban"></i>
     </button>
 
-    <button type="submit" class="btn btn-success" [disabled]="frmitem.invalid">
+    <button type="submit" class="btn btn-success" [disabled]="frmcontract.invalid">
       Guardar
       <i class="fas fa-save"></i>
     </button>

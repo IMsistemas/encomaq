@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Models\Biz\Contract;
+use App\Models\Biz\ContractItem;
 
 class CotractController extends Controller
 {
@@ -37,7 +38,38 @@ class CotractController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fila = Contract::all();
+        $last = $fila->last();
+        // (int) $last->nocontract
+        //         $str = "2";
+        //  echo str_pad($str,9,"0",STR_PAD_LEFT );
+        $data = $request->all();
+
+         $aux = new Contract();
+         $aux->idclient = $data["Data"]["idclient"];
+         $aux->nocontract = str_pad((((int) $last->nocontract) + 1 ),9,"0", STR_PAD_LEFT );;
+         $aux->startdate = $data["Data"]["startdate"];
+         $aux->enddate = $data["Data"]["enddate"];
+         $aux->area = $data["Data"]["area"];
+         $aux->period = $data["Data"]["period"];
+         $aux->cost = $data["Data"]["cost"];
+         $aux->guarantee = $data["Data"]["guarantee"];
+         $aux->observation = $data["Data"]["observation"];
+         $aux->state = 1;
+         if ($aux->save()) {
+             foreach ($data["list"] as $f) {
+                $caux = new ContractItem();
+                $caux->idcontract = $aux->idcontract;
+                $caux->iditem = $f["iditem"];
+                $caux->quantity = $f["quantity"];
+                $caux->observation = $f["observation"];
+                $caux->save();
+             }
+            return response()->json(['success' => $aux ]);
+         } else {
+             return response()->json(['error' => $aux]);
+         }
+
     }
 
     /**
@@ -48,7 +80,8 @@ class CotractController extends Controller
      */
     public function show($id)
     {
-        //
+        $fulldata = $request->all();
+        return $fulldata;
     }
 
     /**

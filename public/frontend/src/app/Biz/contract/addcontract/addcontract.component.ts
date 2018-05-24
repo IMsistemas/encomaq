@@ -32,7 +32,10 @@ export class AddcontractComponent implements OnInit {
         for (const cat of response) {
           const o = {
             idclient: cat.idclient,
-            businessname: cat.businessname
+            businessname: cat.businessname,
+            identify: cat.identify,
+            phone: cat.phone,
+            address: cat.address
           };
           this.lis_client.push(o);
         }
@@ -72,8 +75,6 @@ export class AddcontractComponent implements OnInit {
   }
   removerow(data) {
     const posicion = this.list_itemcont.indexOf(data);
-    console.log(posicion);
-    console.log(data);
     this.list_itemcont.splice(posicion, 1);
   }
   search_item(fila) {
@@ -81,5 +82,31 @@ export class AddcontractComponent implements OnInit {
     fila.iditem = this.item_select.iditem;
     console.log(fila);
     console.log(this.item_select);
+  }
+  add_contract(data, frm) {
+    const aux = {
+      Data: data,
+      list: this.list_itemcont
+    };
+    this.contract.add_contract(aux).subscribe(
+      (response) => {
+        console.log(response);
+        if (response.success !== undefined) {
+          $('#addcontract').modal('hide');
+          frm.reset();
+          this.list_itemcont = [];
+          this.update_component_father.emit(true);
+        } else if (response.error !== undefined) {
+          $('#addclient').modal('hide');
+          frm.reset();
+          this.update_component_father.emit(false);
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+        $('#addcontract').modal('hide');
+        frm.reset();
+        this.update_component_father.emit(false);
+      });
   }
 }
