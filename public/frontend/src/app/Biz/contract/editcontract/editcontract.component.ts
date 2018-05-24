@@ -78,23 +78,24 @@ export class EditcontractComponent implements OnInit {
     this.tem_edit.biz_contractitem.splice(posicion, 1);
   }
   edit_contract(data, frm) {
+    data.idclient = this.id_client.idclient;
     this.contract.edit_contract(data.idcontract , data).subscribe(
       (response) => {
         console.log(response);
         if (response.success !== undefined) {
-          $('#addcontract').modal('hide');
+          $('#editcontract').modal('hide');
           this.id_client = data.biz_client;
           frm.reset();
           this.update_component_father.emit(true);
         } else if (response.error !== undefined) {
-          $('#addclient').modal('hide');
+          $('#editcontract').modal('hide');
           frm.reset();
           this.update_component_father.emit(false);
         }
       },
       (error) => {
         console.log('POST call in error", respons', error);
-        $('#addcontract').modal('hide');
+        $('#editcontract').modal('hide');
         frm.reset();
         this.update_component_father.emit(false);
       });

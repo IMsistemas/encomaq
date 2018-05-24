@@ -40,9 +40,6 @@ class CotractController extends Controller
     {
         $fila = Contract::all();
         $last = $fila->last();
-        // (int) $last->nocontract
-        //         $str = "2";
-        //  echo str_pad($str,9,"0",STR_PAD_LEFT );
         $data = $request->all();
 
          $aux = new Contract();
@@ -104,7 +101,32 @@ class CotractController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $aux =  Contract::find($id);
+        $aux->idclient = $data["idclient"];
+        $aux->startdate = $data["startdate"];
+        $aux->enddate = $data["enddate"];
+        $aux->area = $data["area"];
+        $aux->period = $data["period"];
+        $aux->cost = $data["cost"];
+        $aux->guarantee = $data["guarantee"];
+        $aux->observation = $data["observation"];
+        $aux->state = 1;
+        if ($aux->save()) {
+            $temp = ContractItem::whereRaw("idcontract='".$id."'")->delete();
+             foreach ($data["biz_contractitem"] as $f) {
+                $caux = new ContractItem();
+                $caux->idcontract = $id;
+                $caux->iditem = $f["iditem"];
+                $caux->quantity = $f["quantity"];
+                $caux->observation = $f["observation"];
+                $caux->save();
+             }
+            return response()->json(['success' => $aux ]);
+         } else {
+             return response()->json(['error' => $aux]);
+         }
+
     }
 
     /**
