@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Models\Biz\Contract;
 use App\Models\Biz\ContractItem;
+use App\Models\Biz\Referralguide;
+
 
 class CotractController extends Controller
 {
@@ -137,7 +139,18 @@ class CotractController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $aux1 = Referralguide::whereRaw("idcontract=".$id."")->get();
+        if (count($aux1) == 0) {
+            $temp = ContractItem::whereRaw("idcontract='".$id."'")->delete();
+            $aux = Contract::find($id); 
+            if ($aux->delete()) {
+                return response()->json(['success' => true ]);
+            } else {
+                return response()->json(['error' => 'error' ]);
+            }
+        }else {
+            return response()->json(['error' => 'used' ]);
+        }
     }
     public function contractfiltro(Request $request) 
     {
@@ -149,5 +162,25 @@ class CotractController extends Controller
                         ->orderBy("".$filtro->column, "".$filtro->order);
 
         return  $data->paginate($filtro->num_page);
-    }    
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function statecontract($id)
+    {
+        $aux = Contract::find($id);
+        if ($aux->state == 1) {
+            $aux->state = 0;
+        } else {
+            $aux->state = 1;
+        }
+        if($aux->save()){
+            return response()->json(['success' => $aux ]);
+        }else{
+            return response()->json(['error' => $aux ]);
+        }
+    }        
 }
