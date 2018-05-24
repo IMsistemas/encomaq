@@ -106,4 +106,10 @@ export class ContractComponent implements OnInit {
   itemglobal_select(n): void {
     this.globalitem_select = n;
   }
+  edit_contract (data: any) {
+    this.info_tem_edit = data;
+    console.log(data);
+    this.idcliente_select = data.biz_client;
+    $('#editcontract').modal('show');
+  }
 }

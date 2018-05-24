@@ -117,9 +117,7 @@
                 <i class="fas fa-cogs"></i>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" (click)="load(ident)">
-                  <i class="fas fa-info"></i> Información</a>
-                <a class="dropdown-item" (click)="edit_item(ident)">
+                <a class="dropdown-item" (click)="edit_contract(ident)">
                   <i class="fas fa-edit"></i> Editar</a>
                 <a class="dropdown-item" (click)="cancel_activate(ident)">
                   <i class="fas fa-ban"></i> Cambiar estado</a>
@@ -195,11 +193,11 @@
     </div>
   </div>
 
-  <div class="modal" id="edititem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+  <div class="modal" id="editcontract" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
 
-        <app-edititem [tem_edit]="info_tem_edit" (update_component_father)="update_list($event,'edit')"></app-edititem>
+        <app-editcontract [tem_edit]="info_tem_edit" [id_client]="idcliente_select" (update_component_father)="update_list($event,'edit')"></app-editcontract>
 
       </div>
     </div>
