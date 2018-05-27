@@ -97,3 +97,9 @@ Route::group(['middleware' => 'cors'], function(){
     Route::get('Contract/state/{id}', 'Biz\CotractController@statecontract');
     Route::resource('Contract', 'Biz\CotractController');
 });
+
+Route::group(['middleware' => 'cors'], function(){
+    Route::get('referralguide/get', 'Biz\ReferralGuideController@get');
+    Route::get('referralguide/updateState/{id}', 'Biz\ReferralGuideController@updateState');
+    Route::resource('referralguide', 'Biz\ReferralGuideController');
+});
