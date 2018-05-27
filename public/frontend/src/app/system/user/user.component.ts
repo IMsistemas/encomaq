@@ -19,7 +19,7 @@ export class UserComponent implements OnInit {
   username_selected: any;
   message_success: any;
   message_error: any;
-  
+
   listRole = [];
   search: any = '';
   idrole: any = '';
@@ -38,11 +38,9 @@ export class UserComponent implements OnInit {
   constructor(private user: UserService, private role: RoleService) { }
 
   ngOnInit() {
-
     this.loadInitJQuery();
     this.getListRole();
     this.getListUser();
-    
   }
 
   loadInitJQuery() {
@@ -93,8 +91,8 @@ export class UserComponent implements OnInit {
         console.log(error);
       });
 
-     
-  }  
+
+  }
 
   create() {
     $('#mdlCreate').modal('show');
@@ -206,7 +204,6 @@ export class UserComponent implements OnInit {
 
   }
 
-  
   goToPage(n: number): void {
     this.page = n;
     this.getListUser();
