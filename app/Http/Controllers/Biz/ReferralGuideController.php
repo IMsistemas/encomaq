@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Biz;
 
+use App\Models\Biz\Referralguide;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,6 +16,30 @@ class ReferralGuideController extends Controller
     public function index()
     {
         //
+    }
+
+    public function get(Request $request)
+    {
+        $filter = json_decode($request->get('filter'));
+
+        $where = "(sequential LIKE '%" . $filter->search . "%' OR purchaseproof LIKE '%" . $filter->search . "%' OR ";
+        $where .= "email LIKE '%" . $filter->search . "%') AND state = " . $filter->state;
+
+        if ($filter->idcontract != '') {
+            $where .= ' AND idcontract = ' . $filter->idcontract;
+        }
+
+        if ($filter->idtransferreason != '') {
+            $where .= ' AND idtransferreason = ' . $filter->idtransferreason;
+        }
+
+        if ($filter->idcarrier != '') {
+            $where .= ' AND idcarrier = ' . $filter->idcarrier;
+        }
+
+        return Referralguide::with('biz_contract', 'biz_carrier', 'nom_transferreason')
+                                ->whereRaw($where)->orderBy($filter->column, $filter->order)
+                                ->paginate($filter->num_page);
     }
 
     /**
@@ -70,6 +95,31 @@ class ReferralGuideController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function updateState(Request $request, $id)
+    {
+        $guide = Referralguide::find($id);
+
+        if($request->input('state') == 1){
+
+            $guide->state = 0;
+
+        } else {
+
+            $guide->state = 1;
+
+        }
+
+        if ($guide->save()) {
+
+            return response()->json(['success' => true ]);
+
+        } else {
+
+            return response()->json(['success' => false ]);
+
+        }
     }
 
     /**

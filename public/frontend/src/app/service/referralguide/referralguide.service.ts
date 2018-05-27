@@ -11,8 +11,8 @@ export class ReferralguideService {
   url_api = new UrlApi();
   constructor(private http: HttpClient) { }
 
-  get(): Observable<any> {
-    return this.http.get(this.url_api.get_url_api() + 'api/referralguide/get');
+  get(page: any, filter: any): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/referralguide/get?page=' + page + '&filter=' + JSON.stringify(filter));
   }
 
   create(data: any): Observable<any> {

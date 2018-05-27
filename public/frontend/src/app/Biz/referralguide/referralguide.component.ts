@@ -22,7 +22,7 @@ export class ReferralguideComponent implements OnInit {
   idunittype: any = '';
   state = '1';
   column = 'biz_contract.nocontract';
-
+  search: any = '';
   order = 'ASC';
   num_page = 5;
   /*variables para paginar*/
@@ -35,7 +35,7 @@ export class ReferralguideComponent implements OnInit {
   idcliente_select: any;
   globalitem_select: any;
 
-  constructor(private contract: ReferralguideService) { }
+  constructor(private referralguide: ReferralguideService) { }
 
   ngOnInit() {
     this.loadInitJQuery();
@@ -47,6 +47,25 @@ export class ReferralguideComponent implements OnInit {
   }
 
   getList() {
+
+    const o = {
+      search: this.search,
+      state: this.state,
+      column: this.column,
+      order: this.order,
+      num_page: this.num_page
+    };
+
+    this.referralguide.get(this.page, o).subscribe(
+      (response) => {
+        this.listReferralGuide = response.data;
+        this.from = response.from;
+        this.total = response.total;
+        this.loading = false;
+      },
+      (error) => {
+        console.log(error);
+      });
 
   }
 
