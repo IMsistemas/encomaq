@@ -66,6 +66,8 @@ import { ListclientComponent } from './Biz/client/listclient/listclient.componen
 import { ListitemComponent } from './Biz/item/listitem/listitem.component';
 import { ReferralguideComponent } from './Biz/referralguide/referralguide.component';
 import { ReferralguideService } from './service/referralguide/referralguide.service';
+import { CreatereferralguideComponent } from './Biz/referralguide/createreferralguide/createreferralguide.component';
+import { UpdatereferralguideComponent } from './Biz/referralguide/updatereferralguide/updatereferralguide.component';
 
 @NgModule({
   declarations: [
@@ -115,6 +117,8 @@ import { ReferralguideService } from './service/referralguide/referralguide.serv
     ListclientComponent,
     ListitemComponent,
     ReferralguideComponent,
+    CreatereferralguideComponent,
+    UpdatereferralguideComponent,
   ],
   imports: [
     BrowserModule,

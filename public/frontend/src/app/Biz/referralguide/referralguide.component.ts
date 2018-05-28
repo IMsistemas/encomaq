@@ -16,6 +16,7 @@ export class ReferralguideComponent implements OnInit {
   message_success: any;
   message_error: any;
   referralguide_selected: any;
+  info_tem_edit: any;
 
   descripcion: any = '';
   idcategory: any = '';
@@ -42,6 +43,11 @@ export class ReferralguideComponent implements OnInit {
   }
 
   loadInitJQuery() {
+    $('#myTab a').on('click', function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    });
+    $('.modal').draggable();
     $('.dropdown-toggle').dropdown();
     $('.modal-dialog').draggable();
   }

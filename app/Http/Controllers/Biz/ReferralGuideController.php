@@ -22,10 +22,10 @@ class ReferralGuideController extends Controller
     {
         $filter = json_decode($request->get('filter'));
 
-        $where = "(sequential LIKE '%" . $filter->search . "%' OR purchaseproof LIKE '%" . $filter->search . "%' OR ";
-        $where .= "email LIKE '%" . $filter->search . "%') AND state = " . $filter->state;
+        $where = "(sequential LIKE '%" . $filter->search . "%' OR purchaseproof LIKE '%" . $filter->search . "%' ) ";
+        $where .= "AND state = " . $filter->state;
 
-        if ($filter->idcontract != '') {
+        /*if ($filter->idcontract != '') {
             $where .= ' AND idcontract = ' . $filter->idcontract;
         }
 
@@ -35,7 +35,7 @@ class ReferralGuideController extends Controller
 
         if ($filter->idcarrier != '') {
             $where .= ' AND idcarrier = ' . $filter->idcarrier;
-        }
+        }*/
 
         return Referralguide::with('biz_contract', 'biz_carrier', 'nom_transferreason')
                                 ->whereRaw($where)->orderBy($filter->column, $filter->order)
