@@ -76,7 +76,7 @@ export class ReferralguideComponent implements OnInit {
   }
 
   create() {
-
+    $('#createreferralguide').modal('show');
   }
 
   editSelected(item: any) {

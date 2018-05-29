@@ -32,6 +32,11 @@ class CotractController extends Controller
         //
     }
 
+    public function getContractActive()
+    {
+        return Contract::where('state', 1)->orderBy('nocontract', 'asc')->get();
+    }
+
     /**
      * Store a newly created resource in storage.
      *

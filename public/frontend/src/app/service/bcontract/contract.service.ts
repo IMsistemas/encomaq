@@ -10,7 +10,9 @@ import { UrlApi } from '../url-api';
 export class ContractService {
   url_api = new UrlApi();
   constructor(private http: HttpClient) { }
-
+  getContractActive(): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/Contract/getContractActive');
+  }
   add_contract(data: any): Observable<any> {
     return this.http.post(this.url_api.get_url_api() + 'api/Contract', data);
   }

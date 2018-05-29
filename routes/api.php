@@ -39,6 +39,7 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('Transferreason/getTransferActive', 'Configuration\TransferReasonController@getTransferActive');
     Route::get('Transferreason/delete/{id}', 'Configuration\TransferReasonController@deletetransseferreason');
     Route::resource('Transferreason', 'Configuration\TransferReasonController');
 });
@@ -93,6 +94,7 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('Contract/getContractActive', 'Biz\CotractController@getContractActive');
     Route::get('Contract/filtro', 'Biz\CotractController@contractfiltro');
     Route::get('Contract/state/{id}', 'Biz\CotractController@statecontract');
     Route::resource('Contract', 'Biz\CotractController');

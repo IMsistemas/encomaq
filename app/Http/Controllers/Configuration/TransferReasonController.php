@@ -22,6 +22,11 @@ class TransferReasonController extends Controller
         return  Response::json($data,200);
     }
 
+    public function getTransferActive()
+    {
+        return TransferReason::where('state', 1)->orderBy('transferreasonname', 'asc')->get();
+    }
+
     /**
      * Show the form for creating a new resource.
      *

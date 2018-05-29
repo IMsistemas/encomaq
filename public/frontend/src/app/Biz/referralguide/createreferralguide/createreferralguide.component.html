@@ -1,3 +1,346 @@
-<p>
-  createreferralguide works!
-</p>
+<form novalidate (ngSubmit)="add(frmreferralguide.value, frmreferralguide);" #frmreferralguide="ngForm">
+
+  <div class="modal-header bg-primary">
+
+    <h5 class="modal-title">Nueva Guia de Remisión</h5>
+
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+  </div>
+
+  <div class="modal-body">
+
+    <div class="row">
+
+      <div class="col-md-3 col-sm-12 ">
+
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+          <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home"
+            aria-selected="true">INFORMACION GENERAL I</a>
+
+          <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages"
+            aria-selected="false">INFORMACION GENERAL II</a>
+
+          <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile"
+            aria-selected="false">ITEMS</a>
+
+        </div>
+
+      </div>
+
+      <div class="col-md-9 col-sm-12 ">
+
+        <div class="tab-content" id="v-pills-tabContent">
+
+          <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+              <div class="row">
+
+                <div class="col-sm-6 col-12">
+
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Comprobante de Venta
+                      <span class="required">(*)</span>
+                    </label>
+                    <input type="text" class="form-control" id="purchaseproof" name="purchaseproof" ngModel #purchaseproof="ngModel" required>
+                  </div>
+
+                  <div *ngIf="purchaseproof.errors?.required && purchaseproof.touched">
+                    <small id="" class="form-text text-danger text-right">El Comprobante de Venta es requerido</small>
+                  </div>
+
+                </div>
+
+                <div class="col-sm-6 col-12">
+
+                    <div class="form-group ">
+                      <label for="exampleFormControlInput1">Contrato
+                        <span class="required">(*)</span>
+                      </label>
+                      <div class="input-group">
+                        <select class="form-control" id="idcontract" name="idcontract" [(ngModel)]="idcontract.idcontract" readonly  #idcontract="ngModel" required>
+                          <option *ngFor="let i of listContract" value="{{i.idcontract}}">
+                            {{i.nocontract}}
+                          </option>
+                        </select>
+
+                        <div class="input-group-append">
+                          <button class="btn btn-default" type="button" (click)="search_client()"  >
+                            <i class="fas fa-search"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div *ngIf="idcontract.errors?.required && idcontract.touched">
+                      <small id="" class="form-text text-danger text-right">El Contrato es requerido</small>
+                    </div>
+
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Fecha
+                      <span class="required">(*)</span>
+                    </label>
+                    <input type="date" class="form-control" id="datereferral" name="datereferral" ngModel #datereferral="ngModel" required>
+                  </div>
+
+                  <div *ngIf="datereferral.errors?.required && datereferral.touched">
+                    <small id="" class="form-text text-danger text-right">La Fecha es requerida</small>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Hora
+                      <span class="required">(*)</span>
+                    </label>
+                    <input type="time" class="form-control" id="timereferral" name="timereferral" ngModel #timereferral="ngModel" required>
+                  </div>
+
+                  <div *ngIf="timereferral.errors?.required && timereferral.touched">
+                    <small id="" class="form-text text-danger text-right">La Hora requerida</small>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="col-12">
+
+                    <div class="form-group ">
+                      <label for="exampleFormControlInput1">Motivo Traslado
+                        <span class="required">(*)</span>
+                      </label>
+                      <div class="input-group">
+                        <select class="form-control" id="idtransferreason" name="idtransferreason" ngModel #idtransferreason="ngModel" required>
+                          <option *ngFor="let i of listTransferReason" value="{{i.idtransferreason}}">
+                            {{i.transferreasonname}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div *ngIf="idtransferreason.errors?.required && idtransferreason.touched">
+                      <small id="" class="form-text text-danger text-right">El Motivo Traslado es requerido</small>
+                    </div>
+
+                </div>
+
+              </div>
+
+          </div>
+
+          <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+
+            <div class="row">
+
+                <div class="col-12">
+
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Punto de Partida
+                      <span class="required">(*)</span>
+                    </label>
+                    <input type="text" class="form-control" id="startingpoint" name="startingpoint" ngModel #startingpoint="ngModel" required>
+                  </div>
+
+                  <div *ngIf="startingpoint.errors?.required && startingpoint.touched">
+                    <small id="" class="form-text text-danger text-right">El Punto de Partida es requerido</small>
+                  </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-12">
+
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Punto de Llegada
+                      <span class="required">(*)</span>
+                    </label>
+                    <input type="text" class="form-control" id="arrivalpoint" name="arrivalpoint" ngModel #arrivalpoint="ngModel" required>
+                  </div>
+
+                  <div *ngIf="arrivalpoint.errors?.required && arrivalpoint.touched">
+                    <small id="" class="form-text text-danger text-right">El Punto de Llegada es requerido</small>
+                  </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-12">
+
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Cliente
+                      <span class="required">(*)</span>
+                    </label>
+                    <input type="text" class="form-control" id="client" name="client" readonly ngModel #client="ngModel" required>
+                  </div>
+
+                  <div *ngIf="client.errors?.required && client.touched">
+                    <small id="" class="form-text text-danger text-right">El Cliente es requerido</small>
+                  </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <div class="form-group ">
+                      <label for="exampleFormControlInput1">Transportista
+                        <span class="required">(*)</span>
+                      </label>
+                      <div class="input-group">
+                        <select class="form-control" id="idcontract" name="idcontract" [(ngModel)]="idcontract.idcontract" readonly  #idcontract="ngModel" required>
+                          <option *ngFor="let cli of lis_client" value="{{cli.idclient}}">
+                            {{cli.businessname}}
+                          </option>
+                        </select>
+
+                        <div class="input-group-append">
+                          <button class="btn btn-default" type="button" (click)="search_client()"  >
+                            <i class="fas fa-search"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div *ngIf="idcontract.errors?.required && idcontract.touched">
+                      <small id="" class="form-text text-danger text-right">El Contrato es requerido</small>
+                    </div>
+
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                  <div class="col-sm-6 col-12">
+
+                      <div class="form-group">
+                        <label for="exampleFormControlInput1">C.I.
+                          <span class="required">(*)</span>
+                        </label>
+                        <input type="text" class="form-control" id="purchaseproof" name="purchaseproof" ngModel #purchaseproof="ngModel" required>
+                      </div>
+
+                      <div *ngIf="purchaseproof.errors?.required && purchaseproof.touched">
+                        <small id="" class="form-text text-danger text-right">El Comprobante de Venta es requerido</small>
+                      </div>
+
+                    </div>
+
+                  <div class="col-sm-6 col-12">
+
+                    <div class="form-group">
+                      <label for="exampleFormControlInput1">Placa Nro
+                        <span class="required">(*)</span>
+                      </label>
+                      <input type="text" class="form-control" id="purchaseproof" name="purchaseproof" ngModel #purchaseproof="ngModel" required>
+                    </div>
+
+                    <div *ngIf="purchaseproof.errors?.required && purchaseproof.touched">
+                      <small id="" class="form-text text-danger text-right">El Comprobante de Venta es requerido</small>
+                    </div>
+
+                  </div>
+
+
+
+                </div>
+
+          </div>
+
+          <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+
+            <div class="row">
+
+              <div class="col-12 text-right">
+                <button type="button" class="btn btn-primary" (click)="addrwo()"> Agregar
+                <i class="fas fa-plus-square fa-lg"></i></button>
+              </div>
+
+            </div>
+
+            <div class="row">
+
+              <div class="col-sm-12 col-12 table-responsive">
+                <table class="table table-bordered table-condensed ">
+                  <thead class="btn-dark">
+                    <tr>
+                      <th>NO</th>
+                      <th>DESCRIPCIÓN</th>
+                      <th >CANT.</th>
+                      <th>OBSERVACIONES</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let aux of list_itemcont let i = index">
+                      <td>{{i+1}}</td>
+                      <td>
+                        <div class="input-group">
+                          <select class="form-control"  name="{{i}}iditem" [(ngModel)]="aux.iditem">
+                            <option *ngFor="let it of lis_item" value="{{it.iditem}}">
+                              {{it.itemname}}
+                            </option>
+                          </select>
+                          <!--<div class="input-group-append">
+                            <button class="btn btn-default" type="button" (click)="search_item(aux)">
+                              <i class="fas fa-search"></i>
+                            </button>
+                          </div>-->
+                        </div>
+                      </td>
+                      <td><input type="number" min="1" max="100" class="form-control"  name="{{i}}quantity"   [(ngModel)]="aux.quantity"  /></td>
+                      <td><input type="text" class="form-control"  name="{{i}}observation"   [(ngModel)]="aux.observation"  /></td>
+                      <td>
+                        <button type="button" class="btn btn-danger" (click)="removerow(aux)">
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+      Cancelar
+      <i class="fas fa-ban"></i>
+    </button>
+
+    <button type="submit" class="btn btn-success" [disabled]="frmreferralguide.invalid">
+      Guardar
+      <i class="fas fa-save"></i>
+    </button>
+  </div>
+</form>

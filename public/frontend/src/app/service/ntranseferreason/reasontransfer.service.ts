@@ -10,6 +10,9 @@ import { UrlApi } from '../url-api';
 export class ReasontransferService {
   url_api = new UrlApi();
   constructor(private http: HttpClient) { }
+  getTransferActive(): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/Transferreason/getTransferActive');
+  }
   get_transferreason(): Observable<any> {
     return this.http.get(this.url_api.get_url_api() + 'api/Transferreason');
   }
