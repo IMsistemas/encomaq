@@ -23,7 +23,7 @@ export class CreatereferralguideComponent implements OnInit {
   listTransferReason = [];
   listContract = [];
 
-  @Input() id_client: any; //
+  @Input() idcontract: any; //
   @Input() item_select: any;
 
   constructor(
@@ -34,6 +34,9 @@ export class CreatereferralguideComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.idcontract = { idcontract: '' };
+
     this.loadInitJQuery();
     this.getContractActive();
     this.getTransferActive();
