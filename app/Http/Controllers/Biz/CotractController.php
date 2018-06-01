@@ -51,7 +51,11 @@ class CotractController extends Controller
 
          $aux = new Contract();
          $aux->idclient = $data["Data"]["idclient"];
-         $aux->nocontract = str_pad((((int) $last->nocontract) + 1 ),9,"0", STR_PAD_LEFT );;
+         $num_contract = 0;
+         if(  isset($last->nocontract) ) {
+             $num_contract = $last->nocontract;
+         }
+         $aux->nocontract = str_pad((((int) $num_contract) + 1 ),9,"0", STR_PAD_LEFT );;
          $aux->startdate = $data["Data"]["startdate"];
          $aux->enddate = $data["Data"]["enddate"];
          $aux->area = $data["Data"]["area"];
@@ -62,12 +66,14 @@ class CotractController extends Controller
          $aux->state = 1;
          if ($aux->save()) {
              foreach ($data["list"] as $f) {
-                $caux = new ContractItem();
-                $caux->idcontract = $aux->idcontract;
-                $caux->iditem = $f["iditem"];
-                $caux->quantity = $f["quantity"];
-                $caux->observation = $f["observation"];
-                $caux->save();
+                 if( $f["iditem"]!="" ) {
+                    $caux = new ContractItem();
+                    $caux->idcontract = $aux->idcontract;
+                    $caux->iditem = $f["iditem"];
+                    $caux->quantity = $f["quantity"];
+                    $caux->observation = $f["observation"];
+                    $caux->save();
+                 }
              }
             return response()->json(['success' => $aux ]);
          } else {
@@ -122,12 +128,14 @@ class CotractController extends Controller
         if ($aux->save()) {
             $temp = ContractItem::whereRaw("idcontract='".$id."'")->delete();
              foreach ($data["biz_contractitem"] as $f) {
-                $caux = new ContractItem();
-                $caux->idcontract = $id;
-                $caux->iditem = $f["iditem"];
-                $caux->quantity = $f["quantity"];
-                $caux->observation = $f["observation"];
-                $caux->save();
+                 if( $f["iditem"]!="" ) {
+                    $caux = new ContractItem();
+                    $caux->idcontract = $id;
+                    $caux->iditem = $f["iditem"];
+                    $caux->quantity = $f["quantity"];
+                    $caux->observation = $f["observation"];
+                    $caux->save();
+                 }
              }
             return response()->json(['success' => $aux ]);
          } else {

@@ -64,14 +64,12 @@ export class AddcontractComponent implements OnInit {
     $('.listclient').modal('show');
   }
   addrwo() {
-    console.log(this.list_itemcont);
     const o = {
       iditem: '',
       quantity: 0,
       observation: ''
     };
     this.list_itemcont.push(o);
-    console.log(this.list_itemcont);
   }
   removerow(data) {
     const posicion = this.list_itemcont.indexOf(data);
@@ -80,8 +78,6 @@ export class AddcontractComponent implements OnInit {
   search_item(fila) {
     $('.listitems').modal('show');
     fila.iditem = this.item_select.iditem;
-    console.log(fila);
-    console.log(this.item_select);
   }
   add_contract(data, frm) {
     const aux = {
@@ -90,7 +86,6 @@ export class AddcontractComponent implements OnInit {
     };
     this.contract.add_contract(aux).subscribe(
       (response) => {
-        console.log(response);
         if (response.success !== undefined) {
           $('#addcontract').modal('hide');
           frm.reset();

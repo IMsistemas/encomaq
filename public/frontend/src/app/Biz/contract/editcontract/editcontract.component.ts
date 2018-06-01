@@ -70,7 +70,6 @@ export class EditcontractComponent implements OnInit {
       quantity: 0,
       observation: ''
     };
-    console.log(this.tem_edit.biz_contractitem);
     this.tem_edit.biz_contractitem.push(o);
   }
   removerow(data) {
@@ -81,7 +80,6 @@ export class EditcontractComponent implements OnInit {
     data.idclient = this.id_client.idclient;
     this.contract.edit_contract(data.idcontract , data).subscribe(
       (response) => {
-        console.log(response);
         if (response.success !== undefined) {
           $('#editcontract').modal('hide');
           this.id_client = data.biz_client;
