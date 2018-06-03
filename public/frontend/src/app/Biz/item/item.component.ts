@@ -193,4 +193,25 @@ export class ItemComponent implements OnInit {
     this.page--;
     this.get_list_item();
   }
+  pdf() {
+    const o = {
+      Buscar: this.descripcion,
+      idcategoryitem: this.idcategory,
+      idunittype: this.idunittype,
+      state: this.state,
+      column: this.column,
+      order: this.order,
+      num_page: this.num_page
+    };
+    const accion = this.item.filtro_itemexportarpdf(o);
+    $('#printtitle').html('Lista de items');
+    $('#print').modal('show');
+    $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
+  }
+  excel() {
+    $('#list_items').table2excel({
+      exclude: '.noExl',
+      filename: 'Lista de items'
+    });
+  }
 }
