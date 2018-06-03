@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Response;
 use App\Models\Biz\Client;
 use App\Models\Biz\Contract;
 use App\Models\Biz\Project;
+use App\Models\Biz\Company;
+
 
 class ClienteController extends Controller
 {
@@ -174,5 +176,24 @@ class ClienteController extends Controller
         }else{
             return response()->json(['error' => $aux ]);
         }
-    }        
+    }
+    public function exportarpdf ($data) {
+        ini_set('max_execution_time', 300);
+        $filtro = json_decode($data);
+        $sql = "";
+        if ($filtro->ididentifytype != "") {
+            $sql .= " AND ididentifytype =".$filtro->ididentifytype." ";
+        }
+        $data = Client::with("nom_identifytype")
+                        ->whereRaw("(businessname  LIKE '%".$filtro->Buscar."%' OR identify  LIKE '%".$filtro->Buscar."%')  AND state='".$filtro->state."'".$sql)
+                        ->orderBy("".$filtro->column, "".$filtro->order)
+                        ->get();
+        $company = Company::all();
+        $today=date("Y-m-d H:i:s");
+        $view =  \View::make('Print.ListClient', compact('data','company'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->stream("ListaDeClientes".$today.".pdf");
+    }     
 }

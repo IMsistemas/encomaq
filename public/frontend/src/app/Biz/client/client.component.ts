@@ -167,4 +167,19 @@ export class ClientComponent implements OnInit {
     this.page--;
     this.get_list_client();
   }
+  pdf() {
+    const o = {
+      Buscar: this.descripcion,
+      ididentifytype: this.ididentifytype,
+      state: this.state,
+      column: this.column,
+      order: this.order,
+      num_page: this.num_page
+    };
+    const accion = this.client.filtro_clientexportarpdf(o);
+    $('#printtitle').html('Lista de clientes');
+    $('#print').modal('show');
+    $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
+    console.log(22);
+  }
 }

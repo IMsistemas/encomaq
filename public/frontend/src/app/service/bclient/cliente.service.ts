@@ -27,5 +27,8 @@ export class ClienteService {
   filtro_client(page: any, filtro: any): Observable<any> {
     return this.http.get(this.url_api.get_url_api() + 'api/Client/filtro?page=' + page + '&filter=' + JSON.stringify(filtro));
   }
+  filtro_clientexportarpdf(data: any): any {
+    return this.url_api.get_url_api() + 'api/Client/exportarpdf/' + JSON.stringify(data);
+  }
 
 }
