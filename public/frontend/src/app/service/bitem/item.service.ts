@@ -39,7 +39,7 @@ export class ItemService {
   filtro_item(page: any, filtro: any): Observable<any> {
     return this.http.get(this.url_api.get_url_api() + 'api/Item/filtro?page=' + page + '&filter=' + JSON.stringify(filtro));
   }
-  filtro_itemexportarpdf(data: any): any {
+  filtro_itemexportarpdf(data): any {
     return this.url_api.get_url_api() + 'api/Item/exportarpdf/' + JSON.stringify(data);
   }
 }

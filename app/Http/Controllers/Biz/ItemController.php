@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Models\Biz\Item;
 use App\Models\Biz\Referralguideitem;
+use App\Models\Biz\Company;
 
 class ItemController extends Controller
 {
@@ -252,4 +253,26 @@ class ItemController extends Controller
             return response()->json(['error' => $aux ]);
         }
     }
+
+    public function exportarpdf ($paramentro) {
+        ini_set('max_execution_time', 300);
+        $filtro = json_decode($paramentro);
+        $sql = "";
+        if ($filtro->idcategoryitem != "") {
+            $sql .= " AND idcategoryitem =".$filtro->idcategoryitem." ";
+        } else if ($filtro->idunittype != "") {
+            $sql .= " AND idunittype =".$filtro->idunittype." ";
+        }
+        $data = Item::with("nom_category","nom_unit")
+                        ->whereRaw("(itemname  LIKE '%".$filtro->Buscar."%' OR description  LIKE '%".$filtro->Buscar."%') AND state='".$filtro->state."' ".$sql)
+                        ->orderBy("itemname", "ASC")
+                        ->get();
+        $company = Company::all();
+        $today=date("Y-m-d H:i:s");
+        $view =  \View::make('Print.ListItem', compact('data','company','filtro'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->stream("ListaDeItems".$today.".pdf");
+    } 
 }
