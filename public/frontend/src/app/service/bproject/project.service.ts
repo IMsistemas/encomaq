@@ -25,5 +25,7 @@ export class ProjectService {
   filtro_project(page: any, filtro: any): Observable<any> {
     return this.http.get(this.url_api.get_url_api() + 'api/Project/filtro?page=' + page + '&filter=' + JSON.stringify(filtro));
   }
-
+  filtro_projectexportarpdf(data): any {
+    return this.url_api.get_url_api() + 'api/Project/exportarpdf/' + JSON.stringify(data);
+  }
 }

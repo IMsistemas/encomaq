@@ -203,7 +203,6 @@ export class ItemComponent implements OnInit {
       order: this.order,
     };
     const accion = this.item.filtro_itemexportarpdf(o);
-    console.log(accion);
     $('#printtitle').html('Lista de items');
     $('#print').modal('show');
     $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");

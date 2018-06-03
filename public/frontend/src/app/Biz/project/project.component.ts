@@ -149,4 +149,25 @@ export class ProjectComponent implements OnInit {
   idclient_select(n): void {
     this.idcliente_select = n;
   }
+
+  pdf() {
+    const o = {
+      Buscar: this.descripcion,
+      state: this.state,
+      column: this.column,
+      order: this.order,
+      num_page: this.num_page
+    };
+    const accion = this.project.filtro_projectexportarpdf(o);
+    console.log(accion);
+    $('#printtitle').html('Lista de proyectos');
+    $('#print').modal('show');
+    $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
+  }
+  excel() {
+    $('#list_project').table2excel({
+      exclude: '.noExl',
+      filename: 'Lista de items'
+    });
+  }
 }

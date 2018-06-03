@@ -67,7 +67,14 @@
             </select>
           </div>
         
-          <div class="col-12 col-sm-3" style="margin-top: 5px;"></div>
+          <div class="col-12 col-sm-3" style="margin-top: 5px;">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" (click)="pdf()">
+                <i class="fas fa-file-pdf"></i> Pdf </button>
+              <button type="button" class="btn btn-success" (click)="excel()">
+                <i class="fas fa-file-excel"></i> Excel </button>
+            </div>
+          </div>
         
           <div class="col-12 col-sm-3" style="margin-top: 5px;">
             <div class="input-group mb-3">
@@ -86,7 +93,7 @@
 
   <div class="col-12 table-responsive">
 
-    <table class="table table-striped table-hover table-bordered">
+    <table class="table table-striped table-hover table-bordered" id="list_project">
       <thead class="thead-dark">
         <tr>
           <th style="width: 8%;">NO</th>
@@ -94,7 +101,7 @@
           <th>CLIENTE</th>
           <th>IDENTIFICACIÓN</th>
           <th style="width: 12%;">ESTADO</th>
-          <th style="width: 5%;"></th>
+          <th class="noExl" style="width: 5%;"></th>
         </tr>
       </thead>
       <tbody>
@@ -104,7 +111,7 @@
           <td>{{ident.biz_client.businessname}}</td>
           <td>{{ident.biz_client.identify}}</td>
           <td>{{ ((ident.state == 1)? 'ACTIVO':'INACTIVO') }}</td>
-          <td>
+          <td class="noExl">
             <div class="dropdown">
               <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
