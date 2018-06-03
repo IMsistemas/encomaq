@@ -149,6 +149,26 @@
                 <th>OBSERVACIÓN</th>
                 <th>ESTADO</th>
             </tr>
+            <?php
+                $x = 1;
+                foreach ($data as $c) {
+                    echo "<tr>";
+                    echo "<td>".$x."</td>";
+                    echo "<td>".$c["identify"]."</td>";
+                    echo "<td>".$c["businessname"]."</td>";
+                    echo "<td>".$c["address"]."</td>";
+                    echo "<td>".$c["phone"]."</td>";
+                    echo "<td>".$c["email"]."</td>";
+                    echo "<td>".$c["observation"]."</td>";
+                    if ($c["state"] == 1) {
+                        echo "<td>ACTIVO</td>";
+                    } else {
+                        echo "<td>INACTIVO</td>";
+                    }
+                    echo "</tr>";
+                    $x++;
+                }
+            ?>
         </thead>
     </table>
 </body>

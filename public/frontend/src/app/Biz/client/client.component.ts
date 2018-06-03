@@ -180,6 +180,5 @@ export class ClientComponent implements OnInit {
     $('#printtitle').html('Lista de clientes');
     $('#print').modal('show');
     $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
-    console.log(22);
   }
 }
