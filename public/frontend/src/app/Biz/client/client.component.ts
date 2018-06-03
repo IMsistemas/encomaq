@@ -181,4 +181,10 @@ export class ClientComponent implements OnInit {
     $('#print').modal('show');
     $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
   }
+  excel () {
+    $('#list_clientes').table2excel({
+      exclude: '.noExl',
+      filename: 'Lista de clientes'
+    });
+  }
 }
