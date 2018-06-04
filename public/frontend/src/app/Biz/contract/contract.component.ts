@@ -162,4 +162,26 @@ export class ContractComponent implements OnInit {
         $('#mdl_delete').modal('hide');
       });
   }
+
+  pdf() {
+    const o = {
+      Buscar: this.descripcion,
+      idcategoryitem: this.idcategory,
+      idunittype: this.idunittype,
+      state: this.state,
+      column: this.column,
+      order: this.order
+    };
+    const accion = this.contract.filtro_contractexportarpdf(o);
+    console.log(accion);
+    $('#printtitle').html('Lista de proyectos');
+    $('#print').modal('show');
+    $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
+  }
+  excel() {
+    $('#list_contract').table2excel({
+      exclude: '.noExl',
+      filename: 'Lista de contratos'
+    });
+  }
 }
