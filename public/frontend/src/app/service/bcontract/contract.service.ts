@@ -28,5 +28,7 @@ export class ContractService {
   filtro_contract(page: any, filtro: any): Observable<any> {
     return this.http.get(this.url_api.get_url_api() + 'api/Contract/filtro?page=' + page + '&filter=' + JSON.stringify(filtro));
   }
-
+  filtro_contractexportarpdf(data): any {
+    return this.url_api.get_url_api() + 'api/Contract/exportarpdf/' + JSON.stringify(data);
+  }
 }
