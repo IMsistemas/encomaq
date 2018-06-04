@@ -174,7 +174,7 @@ export class ContractComponent implements OnInit {
     };
     const accion = this.contract.filtro_contractexportarpdf(o);
     console.log(accion);
-    $('#printtitle').html('Lista de proyectos');
+    $('#printtitle').html('Lista de contratos');
     $('#print').modal('show');
     $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
   }

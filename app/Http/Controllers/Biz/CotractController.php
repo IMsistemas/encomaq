@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Response;
 use App\Models\Biz\Contract;
 use App\Models\Biz\ContractItem;
 use App\Models\Biz\Referralguide;
-
+use App\Models\Biz\Company;
 
 class CotractController extends Controller
 {
@@ -195,5 +195,24 @@ class CotractController extends Controller
         }else{
             return response()->json(['error' => $aux ]);
         }
-    }        
+    }
+    public function exportarpdf ($paramentro) {
+        ini_set('max_execution_time', 300);
+        $filtro = json_decode($paramentro);
+       
+       $data = Contract::with("biz_client","biz_contractitem")
+                        ->selectRaw("biz_contract.*")
+                        ->join("biz_client","biz_client.idclient","=","biz_contract.idclient")
+                        ->whereRaw("biz_contract.state='".$filtro->state."' AND ( biz_contract.nocontract LIKE '%".$filtro->Buscar."%' OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%') )")
+                        ->orderBy("".$filtro->column, "".$filtro->order)
+                        ->get();
+
+        $company = Company::all();
+        $today=date("Y-m-d H:i:s");
+        $view =  \View::make('Print.ListContract', compact('data','company'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->stream("ListaDeContratos".$today.".pdf");
+    }            
 }

@@ -181,6 +181,6 @@ class ProjectController extends Controller
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         $pdf->setPaper('A4', 'portrait');
-        return $pdf->stream("ListaDeItems".$today.".pdf");
+        return $pdf->stream("ListaDeProyectos".$today.".pdf");
     } 
 }
