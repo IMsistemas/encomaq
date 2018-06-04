@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Models\Biz\Project;
+use App\Models\Biz\Company;
 
 class ProjectController extends Controller
 {
@@ -161,5 +162,25 @@ class ProjectController extends Controller
         }else{
             return response()->json(['error' => $aux ]);
         }
-    }        
+    }
+    
+    public function exportarpdf ($paramentro) {
+        ini_set('max_execution_time', 300);
+        $filtro = json_decode($paramentro);
+       
+       $data = Project::with("biz_client")
+                        ->selectRaw("biz_project.*")
+                        ->join("biz_client", "biz_client.idclient", "=", "biz_project.idclient")
+                        ->whereRaw(" biz_project.state='".$filtro->state."' AND  ( biz_project.projectname  LIKE '%".$filtro->Buscar."%'  OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%'))  ")
+                        ->orderBy("".$filtro->column, "".$filtro->order)
+                        ->get();
+
+        $company = Company::all();
+        $today=date("Y-m-d H:i:s");
+        $view =  \View::make('Print.ListProject', compact('data','company'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->stream("ListaDeItems".$today.".pdf");
+    } 
 }

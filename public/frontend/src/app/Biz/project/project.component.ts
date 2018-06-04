@@ -167,7 +167,7 @@ export class ProjectComponent implements OnInit {
   excel() {
     $('#list_project').table2excel({
       exclude: '.noExl',
-      filename: 'Lista de items'
+      filename: 'Lista de proyectos'
     });
   }
 }

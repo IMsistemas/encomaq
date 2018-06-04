@@ -134,36 +134,26 @@
     </div>
     <div class="row text-center">
         <h3>
-            Lista De Items
+            Lista De Proyectos
         </h3>
     </div>
     <table class="table table-bordered table-condensed">
         <thead>
             <tr>
                 <th style="width: 8%;">NO</th>
-                <th  style="width: 10%;">IMAGEN</th>
-                <th>ITEM</th>
-                <th>DESCRIPCIÓN</th>
-                <th>CATEGORIA</th>
-                <th>UNIDAD</th>
-                <th  style="width: 12%;">ESTADO</th>
+                <th>PROYECTO</th>
+                <th>CLIENTE</th>
+                <th>IDENTIFICACIÓN</th>
+                <th style="width: 12%;">ESTADO</th>
             </tr>
             <?php
                 $x = 1;
                 foreach ($data as $c) {
                     echo "<tr>";
                     echo "<td>".$x."</td>";
-                    echo "<td>";
-                    if(isset($c["image"]) & $c["image"]!="") {
-                        //echo "<img src='".asset($c["image"])."' style='width: 100%;' />";
-                        echo "";
-                    }
-                    echo "</td>";
-
-                    echo "<td>".$c["itemname"]."</td>";
-                    echo "<td>".$c["description"]."</td>";
-                    echo "<td>".$c["nom_category"]["categoryitemname"]."</td>";
-                    echo "<td>".$c["nom_unit"]["unittypename"]."</td>";
+                    echo "<td>".$c["projectname"]."</td>";
+                    echo "<td>".$c["biz_client"]["businessname"]."</td>";
+                    echo "<td>".$c["biz_client"]["identify"]."</td>";
                     if ($c["state"] == 1) {
                         echo "<td>ACTIVO</td>";
                     } else {
