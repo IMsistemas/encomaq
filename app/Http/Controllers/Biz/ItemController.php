@@ -49,6 +49,7 @@ class ItemController extends Controller
                 $aux->idunittype = $data->idunittype;
                 $aux->itemname = $data->itemname;
                 $aux->description = $data->description;
+                $aux->price = $data->price;
                 $aux->state = 1;
                 if($aux->save()){
                     if ($request->hasFile('file')) {
@@ -88,6 +89,7 @@ class ItemController extends Controller
                 $aux->idunittype = $data->idunittype;
                 $aux->itemname = $data->itemname;
                 $aux->description = $data->description;
+                $aux->price = $data->price;
                 $aux->state = 1;
                 if($aux->save()){
                     if ($request->hasFile('file')) {
@@ -155,6 +157,7 @@ class ItemController extends Controller
             $aux->idunittype = $data->idunittype;
             $aux->itemname = $data->itemname;
             $aux->description = $data->description;
+            $aux->price = $data->price;
             $aux->state = 1;
             if($aux->save()){
                 if ($request->hasFile('file')) {

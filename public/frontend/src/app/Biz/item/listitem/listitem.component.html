@@ -31,6 +31,7 @@
                         <th>ITEM</th>
                         <th>CATEGORIA</th>
                         <th>UNIDAD</th>
+                        <th>PRECIO</th>
                         <th style="width: 12%;">ESTADO</th>
                         <th style="width: 5%;"></th>
                       </tr>
@@ -45,6 +46,7 @@
                         <td>{{ident.itemname}}</td>
                         <td>{{ident.nom_category.categoryitemname}}</td>
                         <td>{{ident.nom_unit.unittypename}}</td>
+                        <td>{{ident.price}}</td>
                         <td>{{ ((ident.state == 1)? 'ACTIVO':'INACTIVO') }}</td>
                         <td>
                             <button type="button" class="btn btn-success" (click)="select_client(ident)">

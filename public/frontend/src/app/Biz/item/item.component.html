@@ -119,6 +119,7 @@
           <th>DESCRIPCIÓN</th>
           <th>CATEGORIA</th>
           <th>UNIDAD</th>
+          <th>PRECIO</th>
           <th style="width: 12%;">ESTADO</th>
           <th class="noExl" style="width: 5%;"></th>
         </tr>
@@ -134,6 +135,7 @@
           <td>{{ident.description}}</td>
           <td>{{ident.nom_category.categoryitemname}}</td>
           <td>{{ident.nom_unit.unittypename}}</td>
+          <td>{{ident.price}}</td>
           <td>{{ ((ident.state == 1)? 'ACTIVO':'INACTIVO') }}</td>
           <td class="noExl">
             <div class="dropdown">
