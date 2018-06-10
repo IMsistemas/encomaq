@@ -68,6 +68,8 @@ import { ReferralguideComponent } from './Biz/referralguide/referralguide.compon
 import { ReferralguideService } from './service/referralguide/referralguide.service';
 import { CreatereferralguideComponent } from './Biz/referralguide/createreferralguide/createreferralguide.component';
 import { UpdatereferralguideComponent } from './Biz/referralguide/updatereferralguide/updatereferralguide.component';
+import { ListcontractComponent } from './Biz/contract/listcontract/listcontract.component';
+import { ListcarrierComponent } from './Biz/carrier/listcarrier/listcarrier.component';
 
 @NgModule({
   declarations: [
@@ -119,6 +121,8 @@ import { UpdatereferralguideComponent } from './Biz/referralguide/updatereferral
     ReferralguideComponent,
     CreatereferralguideComponent,
     UpdatereferralguideComponent,
+    ListcontractComponent,
+    ListcarrierComponent,
   ],
   imports: [
     BrowserModule,

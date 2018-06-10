@@ -33,8 +33,9 @@ export class ReferralguideComponent implements OnInit {
   limit = 0;
   from = 0;
   /*variables para paginar*/
-  idcliente_select: any;
+  idcontract_select: any;
   globalitem_select: any;
+  objectcarrier_select: any;
 
   constructor(private referralguide: ReferralguideService) { }
 
@@ -97,6 +98,18 @@ export class ReferralguideComponent implements OnInit {
 
   delete() {
 
+  }
+
+  contract_select(n): void {
+    this.idcontract_select = n;
+  }
+
+  itemglobal_select(n): void {
+    this.globalitem_select = n;
+  }
+
+  carrier_select(n): void {
+    this.objectcarrier_select = n;
   }
 
   updateList(event, type) {

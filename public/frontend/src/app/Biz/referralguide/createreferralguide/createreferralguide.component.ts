@@ -23,7 +23,7 @@ export class CreatereferralguideComponent implements OnInit {
   listTransferReason = [];
   listContract = [];
 
-  @Input() idcontract: any; //
+  @Input() idcontract_s: any; //
   @Input() item_select: any;
 
   constructor(
@@ -35,7 +35,7 @@ export class CreatereferralguideComponent implements OnInit {
 
   ngOnInit() {
 
-    this.idcontract = { idcontract: '' };
+    this.idcontract_s = { idcontract: '', biz_client: {businessname: ''} };
 
     this.loadInitJQuery();
     this.getContractActive();
@@ -78,7 +78,7 @@ export class CreatereferralguideComponent implements OnInit {
             idcontract: cat.idcontract,
             nocontract: cat.nocontract
           };
-          this.listTransferReason.push(o);
+          this.listContract.push(o);
         }
       },
       (error) => {
@@ -102,8 +102,8 @@ export class CreatereferralguideComponent implements OnInit {
         console.log('POST call in error", respons', error);
       });
   }
-  search_client() {
-    $('.listclient').modal('show');
+  searchContract() {
+    $('.listcontract').modal('show');
   }
   addrwo() {
     console.log(this.list_itemcont);

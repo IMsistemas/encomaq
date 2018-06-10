@@ -41,34 +41,19 @@
 
                 <div class="col-sm-6 col-12">
 
-                  <div class="form-group">
-                    <label for="exampleFormControlInput1">Comprobante de Venta
-                      <span class="required">(*)</span>
-                    </label>
-                    <input type="text" class="form-control" id="purchaseproof" name="purchaseproof" ngModel #purchaseproof="ngModel" required>
-                  </div>
-
-                  <div *ngIf="purchaseproof.errors?.required && purchaseproof.touched">
-                    <small id="" class="form-text text-danger text-right">El Comprobante de Venta es requerido</small>
-                  </div>
-
-                </div>
-
-                <div class="col-sm-6 col-12">
-
                     <div class="form-group ">
                       <label for="exampleFormControlInput1">Contrato
                         <span class="required">(*)</span>
                       </label>
                       <div class="input-group">
-                        <select class="form-control" id="idcontract" name="idcontract" [(ngModel)]="idcontract.idcontract" readonly  #idcontract="ngModel" required>
+                        <select class="form-control" id="idcontract" name="idcontract" [(ngModel)]="idcontract_s.idcontract" readonly  #idcontract="ngModel" required>
                           <option *ngFor="let i of listContract" value="{{i.idcontract}}">
                             {{i.nocontract}}
                           </option>
                         </select>
 
                         <div class="input-group-append">
-                          <button class="btn btn-default" type="button" (click)="search_client()"  >
+                          <button class="btn btn-default" type="button" (click)="searchContract()"  >
                             <i class="fas fa-search"></i>
                           </button>
                         </div>
@@ -78,6 +63,17 @@
                     <div *ngIf="idcontract.errors?.required && idcontract.touched">
                       <small id="" class="form-text text-danger text-right">El Contrato es requerido</small>
                     </div>
+
+                </div>
+
+                <div class="col-sm-6 col-12">
+
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Cliente
+                      <span class="required">(*)</span>
+                    </label>
+                    <input type="text" class="form-control" id="client" name="client" readonly [(ngModel)]="idcontract_s.biz_client.businessname" #client="ngModel">
+                  </div>
 
                 </div>
 
@@ -180,24 +176,7 @@
 
             </div>
 
-            <div class="row">
 
-                <div class="col-12">
-
-                  <div class="form-group">
-                    <label for="exampleFormControlInput1">Cliente
-                      <span class="required">(*)</span>
-                    </label>
-                    <input type="text" class="form-control" id="client" name="client" readonly ngModel #client="ngModel" required>
-                  </div>
-
-                  <div *ngIf="client.errors?.required && client.touched">
-                    <small id="" class="form-text text-danger text-right">El Cliente es requerido</small>
-                  </div>
-
-                </div>
-
-            </div>
 
             <div class="row">
 
