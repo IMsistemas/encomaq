@@ -1,4 +1,4 @@
-<div class="modal listcontract"   tabindex="-1" role="dialog">
+<div class="modal listcarrier"   tabindex="-1" role="dialog">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header bg-info">
@@ -12,7 +12,7 @@
           <div class="row">
             <div class="col-12 col-sm-6" style="margin-top: 5px;">
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Buscar Contrato" #aux [(ngModel)]="descripcion" (keyup)="page = 1; get_list_contract();">
+                <input type="text" class="form-control" placeholder="Buscar Transportista" #aux [(ngModel)]="descripcion" (keyup)="page = 1; get_list_carrier();">
                 <div class="input-group-prepend">
                   <label class="input-group-text">
                     <i class="fas fa-search"></i>
@@ -38,7 +38,7 @@
                         <td>{{ident.nocontract}}</td>
                         <td>{{ident.biz_client.businessname}}</td>
                         <td>
-                          <button type="button" class="btn btn-success" (click)="select_contract(ident)">
+                          <button type="button" class="btn btn-success" (click)="select_carrier(ident)">
                             <i class="fas fa-check"></i>
                           </button>
                         </td>

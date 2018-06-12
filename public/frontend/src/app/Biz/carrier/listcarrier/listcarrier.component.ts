@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { ContractService } from '../../../service/bcontract/contract.service';
+import { CarrierService } from '../../../service/carrier/carrier.service';
+
 declare var jquery: any;
 declare var $: any;
 
@@ -21,14 +22,14 @@ export class ListcarrierComponent implements OnInit {
   from = 0;
   /*variables para paginar*/
   @Input() cliente: any;
-  @Output() idcontract = new EventEmitter<any>();
-  constructor(private contract: ContractService) { }
+  @Output() carrier_s = new EventEmitter<any>();
+  constructor(private carrier: CarrierService) { }
 
   ngOnInit() {
-    this.get_list_contract();
+    this.get_list_carrier();
   }
 
-  get_list_contract() {
+  get_list_carrier() {
     const o = {
       Buscar: this.descripcion,
       state: '1',
@@ -36,7 +37,7 @@ export class ListcarrierComponent implements OnInit {
       order: 'DESC',
       num_page: 5
     };
-    this.contract.filtro_contract(this.page, o).subscribe(
+    this.carrier.get().subscribe(
       (response) => {
         this.list_contract = response.data;
         this.from = response.from;
@@ -50,19 +51,19 @@ export class ListcarrierComponent implements OnInit {
 
   goToPage(n: number): void {
     this.page = n;
-    this.get_list_contract();
+    this.get_list_carrier();
   }
   onNext(): void {
     this.page++;
-    this.get_list_contract();
+    this.get_list_carrier();
   }
   onPrev(): void {
     this.page--;
-    this.get_list_contract();
+    this.get_list_carrier();
   }
 
-  select_contract(data) {
-    this.idcontract.emit(data);
+  select_carrier(data) {
+    this.carrier_s.emit(data);
     $('.listcontract').modal('hide');
   }
 

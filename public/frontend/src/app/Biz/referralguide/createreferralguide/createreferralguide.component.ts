@@ -105,6 +105,9 @@ export class CreatereferralguideComponent implements OnInit {
   searchContract() {
     $('.listcontract').modal('show');
   }
+  searchCarrier() {
+    $('.listcarrier').modal('show');
+  }
   addrwo() {
     console.log(this.list_itemcont);
     const o = {
