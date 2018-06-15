@@ -33,7 +33,7 @@ export class CarrierComponent implements OnInit {
   getListCarrier() {
     this.listCarrier = this.carrier.get();
   }
-  
+
   create() {
     $('#mdlCreate').modal('show');
   }

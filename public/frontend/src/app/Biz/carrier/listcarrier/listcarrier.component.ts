@@ -12,7 +12,7 @@ declare var $: any;
 })
 export class ListcarrierComponent implements OnInit {
 
-  list_contract = [];
+  listCarrier = [];
   descripcion: any = '';
   /*variables para paginar*/
   loading = false;
@@ -39,7 +39,7 @@ export class ListcarrierComponent implements OnInit {
     };
     this.carrier.get().subscribe(
       (response) => {
-        this.list_contract = response.data;
+        this.listCarrier = response.data;
         this.from = response.from;
         this.total = response.total;
         this.loading = false;

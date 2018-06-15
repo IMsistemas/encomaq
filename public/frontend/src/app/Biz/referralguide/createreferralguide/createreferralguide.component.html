@@ -187,14 +187,14 @@
                         <span class="required">(*)</span>
                       </label>
                       <div class="input-group">
-                        <select class="form-control" id="idcontract" name="idcontract" [(ngModel)]="idcontract.idcontract" readonly  #idcontract="ngModel" required>
-                          <option *ngFor="let cli of lis_client" value="{{cli.idclient}}">
-                            {{cli.businessname}}
+                        <select class="form-control" id="idcontract" name="idcontract" [(ngModel)]="idcontract.idcarrier" readonly  #idcontract="ngModel" required>
+                          <option *ngFor="let cli of listCarrier" value="{{cli.idcarrier}}">
+                            {{cli.carriername}}
                           </option>
                         </select>
 
                         <div class="input-group-append">
-                          <button class="btn btn-default" type="button" (click)="search_client()"  >
+                          <button class="btn btn-default" type="button" (click)="searchCarrier()"  >
                             <i class="fas fa-search"></i>
                           </button>
                         </div>

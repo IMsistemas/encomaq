@@ -26,19 +26,22 @@
                   <table class="table table-striped table-hover table-bordered">
                     <thead class="thead-dark">
                       <tr>
-                        <th style="width: 8%;">NO</th>
-                        <th># CONTRATO</th>
-                        <th>CLIENTE</th>
-                        <th style="width: 5%;"></th>
+                          <th style="width: 8%;">NO</th>
+                          <th>NOMBRE(S) Y APELLIDOS</th>
+                          <th>IDENTIFICACION</th>
+                          <th>PLACA</th>
+                          <th style="width: 8%;">ESTADO</th>
+                          <th style="width: 5%;"></th>
                       </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let ident of list_contract   let i = index " [ngClass]="{'text-danger':ident.state == 0 } ">
-                        <td>{{i+from}}</td>
-                        <td>{{ident.nocontract}}</td>
-                        <td>{{ident.biz_client.businessname}}</td>
+                  </thead>
+                  <tbody> 
+                    <tr *ngFor="let item of listCarrier;  let i = index " [ngClass]= "{'text-danger':item.state == 0}" >
+                      <td>{{i + 1}}</td>
+                      <td class="text-left">{{item.carriername}}</td>
+                      <td class="text-left">{{item.identify}}</td>
+                      <td class="text-left">{{item.licenseplate}}</td>
                         <td>
-                          <button type="button" class="btn btn-success" (click)="select_carrier(ident)">
+                          <button type="button" class="btn btn-success" (click)="select_carrier(item)">
                             <i class="fas fa-check"></i>
                           </button>
                         </td>

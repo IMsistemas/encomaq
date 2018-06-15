@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { NgForm } from '@angular/forms';
 import { ContractService } from '../../../service/bcontract/contract.service';
-import { ClienteService } from '../../../service/bclient/cliente.service';
+import { CarrierService } from '../../../service/carrier/carrier.service';
 import { ItemService } from '../../../service/bitem/item.service';
 import { ReasontransferService } from '../../../service/ntranseferreason/reasontransfer.service';
 
@@ -22,13 +22,14 @@ export class CreatereferralguideComponent implements OnInit {
   list_itemcont = [];
   listTransferReason = [];
   listContract = [];
+  listCarrier = [];
 
   @Input() idcontract_s: any; //
   @Input() item_select: any;
 
   constructor(
     private contract: ContractService,
-    private client: ClienteService,
+    private carrier: CarrierService,
     private item: ItemService,
     private transferreason: ReasontransferService
   ) { }
@@ -40,6 +41,7 @@ export class CreatereferralguideComponent implements OnInit {
     this.loadInitJQuery();
     this.getContractActive();
     this.getTransferActive();
+    this.getCarrierActive();
   }
 
   loadInitJQuery() {
@@ -79,6 +81,23 @@ export class CreatereferralguideComponent implements OnInit {
             nocontract: cat.nocontract
           };
           this.listContract.push(o);
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+  }
+
+  getCarrierActive() {
+    this.listContract.push({ idcarrier: '', carriername: '--Seleccione--' });
+    this.carrier.get().subscribe(
+      (response) => {
+        for (const cat of response) {
+          const o = {
+            idcarrier: cat.idcarrier,
+            carriername: cat.carriername
+          };
+          this.listCarrier.push(o);
         }
       },
       (error) => {
