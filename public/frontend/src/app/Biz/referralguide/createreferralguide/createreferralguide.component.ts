@@ -22,7 +22,7 @@ export class CreatereferralguideComponent implements OnInit {
   list_itemcont = [];
   listTransferReason = [];
   listContract = [];
-  listCarrier = [];
+  list_carrier = [];
 
   @Input() idcontract_s: any; //
   @Input() item_select: any;
@@ -89,7 +89,7 @@ export class CreatereferralguideComponent implements OnInit {
   }
 
   getCarrierActive() {
-    this.listContract.push({ idcarrier: '', carriername: '--Seleccione--' });
+    this.list_carrier.push({ idcarrier: '', carriername: '--Seleccione--' });
     this.carrier.get().subscribe(
       (response) => {
         for (const cat of response) {
@@ -97,7 +97,7 @@ export class CreatereferralguideComponent implements OnInit {
             idcarrier: cat.idcarrier,
             carriername: cat.carriername
           };
-          this.listCarrier.push(o);
+          this.list_carrier.push(o);
         }
       },
       (error) => {

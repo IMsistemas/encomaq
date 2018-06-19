@@ -188,7 +188,7 @@
                       </label>
                       <div class="input-group">
                         <select class="form-control" id="idcontract" name="idcontract" [(ngModel)]="idcontract.idcarrier" readonly  #idcontract="ngModel" required>
-                          <option *ngFor="let cli of listCarrier" value="{{cli.idcarrier}}">
+                          <option *ngFor="let cli of list_carrier" value="{{cli.idcarrier}}">
                             {{cli.carriername}}
                           </option>
                         </select>
