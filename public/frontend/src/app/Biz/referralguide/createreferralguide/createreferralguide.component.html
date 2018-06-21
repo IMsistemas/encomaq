@@ -86,10 +86,10 @@
                     <label for="exampleFormControlInput1">Fecha
                       <span class="required">(*)</span>
                     </label>
-                    <input type="date" class="form-control" id="datereferral" name="datereferral" ngModel #datereferral="ngModel" required>
+                    <input type="date" class="form-control" id="datetimereferral" name="datetimereferral" ngModel #datetimereferral="ngModel" required>
                   </div>
 
-                  <div *ngIf="datereferral.errors?.required && datereferral.touched">
+                  <div *ngIf="datetimereferral.errors?.required && datetimereferral.touched">
                     <small id="" class="form-text text-danger text-right">La Fecha es requerida</small>
                   </div>
                 </div>
@@ -99,10 +99,10 @@
                     <label for="exampleFormControlInput1">Hora
                       <span class="required">(*)</span>
                     </label>
-                    <input type="time" class="form-control" id="timereferral" name="timereferral" ngModel #timereferral="ngModel" required>
+                    <input type="time" class="form-control" id="sequential" name="sequential" ngModel #sequential="ngModel" required>
                   </div>
 
-                  <div *ngIf="timereferral.errors?.required && timereferral.touched">
+                  <div *ngIf="sequential.errors?.required && sequential.touched">
                     <small id="" class="form-text text-danger text-right">La Hora requerida</small>
                   </div>
                 </div>
@@ -187,7 +187,7 @@
                         <span class="required">(*)</span>
                       </label>
                       <div class="input-group">
-                        <select class="form-control" id="idcontract" name="idcontract" [(ngModel)]="idcontract.idcarrier" readonly  #idcontract="ngModel" required>
+                        <select class="form-control" id="idcarrier" name="idcarrier" [(ngModel)]="carrier_select.idcarrier" readonly  #idcarrier="ngModel" required>
                           <option *ngFor="let cli of list_carrier" value="{{cli.idcarrier}}">
                             {{cli.carriername}}
                           </option>
@@ -217,11 +217,11 @@
                         <label for="exampleFormControlInput1">C.I.
                           <span class="required">(*)</span>
                         </label>
-                        <input type="text" class="form-control" id="purchaseproof" name="purchaseproof" ngModel #purchaseproof="ngModel" required>
+                        <input type="text" class="form-control" id="identify" name="identify" [(ngModel)]="carrier_select.identify" #identify="ngModel" required>
                       </div>
 
-                      <div *ngIf="purchaseproof.errors?.required && purchaseproof.touched">
-                        <small id="" class="form-text text-danger text-right">El Comprobante de Venta es requerido</small>
+                      <div *ngIf="identify.errors?.required && identify.touched">
+                        <small id="" class="form-text text-danger text-right">El C.I. es requerido</small>
                       </div>
 
                     </div>
@@ -232,11 +232,11 @@
                       <label for="exampleFormControlInput1">Placa Nro
                         <span class="required">(*)</span>
                       </label>
-                      <input type="text" class="form-control" id="purchaseproof" name="purchaseproof" ngModel #purchaseproof="ngModel" required>
+                      <input type="text" class="form-control" id="licenseplate" name="licenseplate" [(ngModel)]="carrier_select.licenseplate" #licenseplate="ngModel" required>
                     </div>
 
-                    <div *ngIf="purchaseproof.errors?.required && purchaseproof.touched">
-                      <small id="" class="form-text text-danger text-right">El Comprobante de Venta es requerido</small>
+                    <div *ngIf="licenseplate.errors?.required && licenseplate.touched">
+                      <small id="" class="form-text text-danger text-right">La Placa es requerido</small>
                     </div>
 
                   </div>
@@ -276,7 +276,7 @@
                       <td>{{i+1}}</td>
                       <td>
                         <div class="input-group">
-                          <select class="form-control"  name="{{i}}iditem" [(ngModel)]="aux.iditem">
+                          <select class="form-control" name="{{i}}iditem" [(ngModel)]="aux.iditem">
                             <option *ngFor="let it of lis_item" value="{{it.iditem}}">
                               {{it.itemname}}
                             </option>

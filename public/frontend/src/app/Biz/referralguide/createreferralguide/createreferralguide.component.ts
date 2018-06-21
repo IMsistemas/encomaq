@@ -5,6 +5,7 @@ import { ContractService } from '../../../service/bcontract/contract.service';
 import { CarrierService } from '../../../service/carrier/carrier.service';
 import { ItemService } from '../../../service/bitem/item.service';
 import { ReasontransferService } from '../../../service/ntranseferreason/reasontransfer.service';
+import { ReferralguideService } from '../../../service/referralguide/referralguide.service';
 
 declare var jquery: any;
 declare var $: any;
@@ -26,22 +27,26 @@ export class CreatereferralguideComponent implements OnInit {
 
   @Input() idcontract_s: any; //
   @Input() item_select: any;
+  @Input() carrier_select: any;
 
   constructor(
     private contract: ContractService,
     private carrier: CarrierService,
     private item: ItemService,
-    private transferreason: ReasontransferService
+    private transferreason: ReasontransferService,
+    private referra: ReferralguideService
   ) { }
 
   ngOnInit() {
 
     this.idcontract_s = { idcontract: '', biz_client: {businessname: ''} };
+    this.carrier_select = { idcarrier: '', carriername: '', identify: '', licenseplate: '' };
 
     this.loadInitJQuery();
     this.getContractActive();
     this.getTransferActive();
     this.getCarrierActive();
+    this.list_items();
   }
 
   loadInitJQuery() {
@@ -152,11 +157,11 @@ export class CreatereferralguideComponent implements OnInit {
       Data: data,
       list: this.list_itemcont
     };
-    this.contract.add_contract(aux).subscribe(
+    this.referra.create(aux).subscribe(
       (response) => {
         console.log(response);
         if (response.success !== undefined) {
-          $('#addcontract').modal('hide');
+          $('#createreferralguide').modal('hide');
           frm.reset();
           this.list_itemcont = [];
           this.update_component_father.emit(true);
@@ -168,7 +173,7 @@ export class CreatereferralguideComponent implements OnInit {
       },
       (error) => {
         console.log('POST call in error", respons', error);
-        $('#addcontract').modal('hide');
+        $('#createreferralguide').modal('hide');
         frm.reset();
         this.update_component_father.emit(false);
       });

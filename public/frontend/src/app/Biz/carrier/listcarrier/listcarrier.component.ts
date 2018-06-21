@@ -12,7 +12,7 @@ declare var $: any;
 })
 export class ListcarrierComponent implements OnInit {
 
-  listCarrier = [];
+  listCarrier: Observable<any>;
   descripcion: any = '';
   /*variables para paginar*/
   loading = false;
@@ -37,8 +37,10 @@ export class ListcarrierComponent implements OnInit {
       order: 'DESC',
       num_page: 5
     };
-    this.carrier.get().subscribe(
+    this.listCarrier = this.carrier.get();
+    /*this.carrier.get().subscribe(
       (response) => {
+        console.log(response);
         this.listCarrier = response.data;
         this.from = response.from;
         this.total = response.total;
@@ -46,7 +48,7 @@ export class ListcarrierComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-      });
+      });*/
   }
 
   goToPage(n: number): void {
@@ -64,7 +66,8 @@ export class ListcarrierComponent implements OnInit {
 
   select_carrier(data) {
     this.carrier_s.emit(data);
-    $('.listcontract').modal('hide');
+    $('.listcarrier').modal('hide');
+    console.log(this.carrier_s);
   }
 
 }

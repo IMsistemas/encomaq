@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\Biz;
 
 use App\Models\Biz\Referralguide;
+use App\Models\Biz\Referralguideitem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
+
+
+
 
 class ReferralGuideController extends Controller
 {
@@ -23,7 +28,7 @@ class ReferralGuideController extends Controller
         $filter = json_decode($request->get('filter'));
 
         $where = "(sequential LIKE '%" . $filter->search . "%' OR purchaseproof LIKE '%" . $filter->search . "%' ) ";
-        $where .= "AND state = " . $filter->state;
+        $where .= "AND biz_referralguide.state = " . $filter->state;
 
         /*if ($filter->idcontract != '') {
             $where .= ' AND idcontract = ' . $filter->idcontract;
@@ -37,7 +42,10 @@ class ReferralGuideController extends Controller
             $where .= ' AND idcarrier = ' . $filter->idcarrier;
         }*/
 
-        return Referralguide::with('biz_contract', 'biz_carrier', 'nom_transferreason')
+        return Referralguide::with('biz_contract.biz_client', 'biz_carrier', 'nom_transferreason')
+                                ->selectRaw("biz_referralguide.* ")
+                                ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")
+                                ->join("biz_client", "biz_client.idclient", "=", "biz_contract.idclient" )
                                 ->whereRaw($where)->orderBy($filter->column, $filter->order)
                                 ->paginate($filter->num_page);
     }
@@ -60,7 +68,32 @@ class ReferralGuideController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $aux = new Referralguide();
+        $aux->idcontract = $data["Data"]["idcontract"];
+        $aux->idtransferreason = $data["Data"]["idtransferreason"];
+        $aux->idcarrier = $data["Data"]["idcarrier"];
+        $aux->datetimereferral = $data["Data"]["datetimereferral"];
+        $aux->sequential = $data["Data"]["sequential"];
+        $aux->startingpoint = $data["Data"]["startingpoint"];
+        $aux->arrivalpoint = $data["Data"]["arrivalpoint"];
+        $aux->state = 1;
+         if ($aux->save()) {
+             foreach ($data["list"] as $f) {
+                 if( $f["iditem"]!="" ) {
+                    $caux = new Referralguideitem();
+                    $caux->idreferralguide = $aux->idreferralguide;
+                    $caux->iditem = $f["iditem"];
+                    $caux->quantify = $f["quantity"];
+                    $caux->observation = $f["observation"];
+                    $caux->save();
+                 }
+             }
+            return response()->json(['success' => $aux ]);
+         } else {
+             return response()->json(['error' => $aux]);
+         }
     }
 
     /**

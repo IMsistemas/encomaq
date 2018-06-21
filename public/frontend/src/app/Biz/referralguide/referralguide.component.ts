@@ -41,6 +41,7 @@ export class ReferralguideComponent implements OnInit {
 
   ngOnInit() {
     this.loadInitJQuery();
+    this.getList();
   }
 
   loadInitJQuery() {
@@ -65,6 +66,7 @@ export class ReferralguideComponent implements OnInit {
 
     this.referralguide.get(this.page, o).subscribe(
       (response) => {
+        console.log(response.data);
         this.listReferralGuide = response.data;
         this.from = response.from;
         this.total = response.total;
@@ -110,6 +112,7 @@ export class ReferralguideComponent implements OnInit {
 
   carrier_select(n): void {
     this.objectcarrier_select = n;
+    console.log(this.objectcarrier_select);
   }
 
   updateList(event, type) {

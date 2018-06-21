@@ -30,12 +30,11 @@
                           <th>NOMBRE(S) Y APELLIDOS</th>
                           <th>IDENTIFICACION</th>
                           <th>PLACA</th>
-                          <th style="width: 8%;">ESTADO</th>
                           <th style="width: 5%;"></th>
                       </tr>
                   </thead>
                   <tbody> 
-                    <tr *ngFor="let item of listCarrier;  let i = index " [ngClass]= "{'text-danger':item.state == 0}" >
+                    <tr *ngFor="let item of listCarrier | async ;  let i = index " [ngClass]= "{'text-danger':item.state == 0}" >
                       <td>{{i + 1}}</td>
                       <td class="text-left">{{item.carriername}}</td>
                       <td class="text-left">{{item.identify}}</td>
