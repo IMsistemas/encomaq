@@ -116,7 +116,7 @@
                                     <div class="col-12">
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" (click)="select_permission(item)" id="defaultCheck1">
+                                            <input class="form-check-input" type="checkbox" [checked]="item.state" value="" (click)="select_permission(item)" id="defaultCheck1">
                                         </div>
 
                                     </div>
@@ -136,7 +136,7 @@
                     </button>
 
                     <button type="button" class="btn btn-success" (click)="init_save_perssion()">
-                        Aceptar <i class="fas fa-trash-alt"></i>
+                        Aceptar <i class="fas fa-save"></i>
                     </button>
 
                 </div>

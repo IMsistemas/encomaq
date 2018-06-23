@@ -49,24 +49,36 @@ export class RoleComponent implements OnInit {
 
   getPermission(item: any) {
     this.aux_temprole = item;
-    this.listtemp_permission = []
+    this.listtemp_permission = [];
     this.role.getPermission(item.idrole).subscribe(
       (response) => {
-        console.log(response);
         this.listPermission = [];
 
-        for (let element of response[0]) {
-
-          let obj: Object = {
-            permissionname: element.permissionname,
-            idpermission: element.idpermission,
+        for (const x of response[0] ) {
+          const obj = {
+            permissionname: x.permissionname,
+            idpermission: x.idpermission,
             idrole: item.idrole,
             state: 0
           };
-
           this.listPermission.push(obj);
         }
 
+        for (const j  of response[1] ) {
+          const o = {
+            permissionname: j.sys_permission.permissionname,
+            idpermission: j.idpermission,
+            idrole: j.idrole,
+            state: 0
+          };
+          this.listtemp_permission.push(o);
+        }
+        for (const i of this.listPermission) {
+          const pos = this.listtemp_permission.map(function (e) { return e.idpermission; }).indexOf(i.idpermission);
+          if (pos >= 0) {
+            i.state = 1;
+          }
+        }
         $('#mdlPermission').modal('show');
 
       },
@@ -148,7 +160,7 @@ export class RoleComponent implements OnInit {
     if (this.listtemp_permission.length === 0) {
       this.listtemp_permission.push(item);
     } else {
-      const pos = this.listtemp_permission.indexOf(item);
+      const pos = this.listtemp_permission.map(function (e) { return e.idpermission; }).indexOf(item.idpermission);
       if (pos >= 0) {
         this.listtemp_permission.splice(pos, 1);
       } else {
@@ -163,7 +175,15 @@ export class RoleComponent implements OnInit {
     };
     this.role.permission_role(data).subscribe(
       (response) => {
-        console.log(response);
+        if (response.success === true) {
+          this.message_success = 'Se ha guardado correctamente!';
+          $('#mdlMessageSuccess').modal('show');
+        } else {
+          this.message_error = 'Error al guardar los datos!';
+          $('#mdlMessageError').modal('show');
+        }
+        this.getListRole();
+        $('#mdlPermission').modal('hide');
       },
       (error) => {
         console.log('POST call in error", respons', error);

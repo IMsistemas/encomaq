@@ -11,4 +11,9 @@ class RolePermission extends Model
     protected $primaryKey = null;
     public $incrementing = false;
     public $timestamps = false;
+
+    public function sys_permission()
+    {
+        return $this->belongsTo('App\Models\System\Permission',"idpermission");
+    }
 }

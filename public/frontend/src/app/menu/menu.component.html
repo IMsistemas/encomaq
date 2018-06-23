@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark bg-dark navbar-expand-lg ">
+<nav *ngIf="listPermission.length > 0" class="navbar navbar-dark bg-dark navbar-expand-lg ">
   <a class="navbar-brand" href="#">
     <img class="img-fluid" src="../assets/image/LogoEncomaq-color.png" alt="Card image cap" width="100" height="30">
   </a>
@@ -11,11 +11,11 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/contract']"> Contrato </a>
+        <a class="nav-link" [routerLink]="['/contract']" [hidden]="listPermission[14].state === false" > {{listPermission[14].permissionname}} </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/referralguide']"> Guía Remisión </a>
+        <a class="nav-link" [routerLink]="['/referralguide']" [hidden]="listPermission[13].state === false" > {{listPermission[13].permissionname}}  </a>
       </li>
 
     <li class="nav-item dropdown">
@@ -24,13 +24,13 @@
         Empresa
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" [routerLink]="['/carrier']"> Transportista </a>
+        <a class="dropdown-item" [routerLink]="['/carrier']" [hidden]="listPermission[7].state === false" > {{listPermission[7].permissionname}} </a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" [routerLink]="['/client']"> Cliente </a>
-        <a class="dropdown-item" [routerLink]="['/item']" > Producto </a>
-        <a class="dropdown-item" [routerLink]="['/warehouse']"> Bodega </a>
-        <a class="dropdown-item" [routerLink]="['/company']"> Información de Empresa </a>
-        <a class="dropdown-item" [routerLink]="['/project']"> Proyecto </a>
+        <a class="dropdown-item" [routerLink]="['/client']" [hidden]="listPermission[8].state === false" > {{listPermission[8].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/item']" [hidden]="listPermission[9].state === false"  > {{listPermission[9].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/warehouse']" [hidden]="listPermission[10].state === false" > {{listPermission[10].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/company']" [hidden]="listPermission[11].state === false" > {{listPermission[11].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/project']" [hidden]="listPermission[12].state === false" > {{listPermission[12].permissionname}} </a>
       </div>
     </li>
 
@@ -40,10 +40,10 @@
           Nomencladores
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/identiytype']" > Tipo Identificación </a>
-          <a class="dropdown-item" [routerLink]="['/categoryitem']"> Categoría Item </a>
-          <a class="dropdown-item" [routerLink]="['/transferreason']"> Motivo Traslado (Guía Remisión) </a>
-          <a class="dropdown-item" [routerLink]="['/unittype']"> Unidad </a>
+          <a class="dropdown-item" [routerLink]="['/identiytype']" [hidden]="listPermission[3].state === false"  >  {{listPermission[3].permissionname}} </a>
+          <a class="dropdown-item" [routerLink]="['/categoryitem']" [hidden]="listPermission[4].state === false" >  {{listPermission[4].permissionname}} </a>
+          <a class="dropdown-item" [routerLink]="['/transferreason']" [hidden]="listPermission[5].state === false">  {{listPermission[5].permissionname}} </a>
+          <a class="dropdown-item" [routerLink]="['/unittype']" [hidden]="listPermission[6].state === false" > {{listPermission[6].permissionname}} </a>
         </div>
       </li>
 
@@ -53,9 +53,9 @@
           Sistema
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/role']" > Roles </a>
-          <a class="dropdown-item" [routerLink]="['/user']"> Usuarios </a>
-        <a class="dropdown-item" [routerLink]="['/configemail']"> Email </a>
+          <a class="dropdown-item" [routerLink]="['/role']" [hidden]="listPermission[0].state === false" > {{listPermission[0].permissionname}} </a>
+          <a class="dropdown-item" [routerLink]="['/user']" [hidden]="listPermission[1].state === false" > {{listPermission[1].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/configemail']" [hidden]="listPermission[2].state === false" > {{listPermission[2].permissionname}} </a>
           <!--<div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>-->
         </div>

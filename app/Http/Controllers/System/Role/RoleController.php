@@ -34,7 +34,7 @@ class RoleController extends Controller
     public function getPermission($id)
     {
         $permission = Permission::orderBy('permissionname', 'asc')->get();
-        $permissionrole = RolePermission::where('idrole', $id)->get();
+        $permissionrole = RolePermission::with("sys_permission")->where('idrole', $id)->get();
 
         return [$permission, $permissionrole];
     }
