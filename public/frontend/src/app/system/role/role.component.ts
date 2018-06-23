@@ -18,6 +18,9 @@ export class RoleComponent implements OnInit {
   rolename_selected: any;
   message_success: any;
   message_error: any;
+
+  aux_temprole: any;
+  listtemp_permission = [];
   constructor(private role: RoleService) { }
 
   ngOnInit() {
@@ -45,9 +48,11 @@ export class RoleComponent implements OnInit {
   }
 
   getPermission(item: any) {
+    this.aux_temprole = item;
+    this.listtemp_permission = []
     this.role.getPermission(item.idrole).subscribe(
       (response) => {
-
+        console.log(response);
         this.listPermission = [];
 
         for (let element of response[0]) {
@@ -139,5 +144,29 @@ export class RoleComponent implements OnInit {
     this.getListRole();
 
   }
-
+  select_permission(item: any) {
+    if (this.listtemp_permission.length === 0) {
+      this.listtemp_permission.push(item);
+    } else {
+      const pos = this.listtemp_permission.indexOf(item);
+      if (pos >= 0) {
+        this.listtemp_permission.splice(pos, 1);
+      } else {
+        this.listtemp_permission.push(item);
+      }
+    }
+  }
+  init_save_perssion () {
+    const data = {
+      idrole: this.aux_temprole.idrole,
+      listpermission: this.listtemp_permission
+    };
+    this.role.permission_role(data).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+  }
 }

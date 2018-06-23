@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     this.login.verifyLogin(data).subscribe(
       (response) => {
         if (response.success === true) {
-
+          console.log(response);
           response.user.password = '';
 
           localStorage.setItem('user', JSON.stringify(response.user));

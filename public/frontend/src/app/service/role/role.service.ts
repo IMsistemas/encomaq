@@ -34,4 +34,7 @@ export class RoleService {
   delete(id: any): Observable<any> {
     return this.http.delete(this.url_api.get_url_api() + 'api/role/' + id);
   }
+  permission_role(data: any): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/role/save_permissionrole/' + JSON.stringify(data));
+  }
 }

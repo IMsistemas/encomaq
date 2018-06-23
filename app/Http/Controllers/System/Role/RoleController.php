@@ -39,6 +39,21 @@ class RoleController extends Controller
         return [$permission, $permissionrole];
     }
 
+    public function save_permissionrole($data)
+    {
+        $aux = json_decode($data);
+        //$aux->idrole
+        RolePermission::where('idrole', $aux->idrole)->delete();
+        foreach ($aux->listpermission as $f) {
+            $perm = new RolePermission;
+            $perm->idrole = $aux->idrole;
+            $perm->idpermission = $f->idpermission;
+            $perm->save();
+        }
+        return response()->json(['success' => true ]);
+    }
+
+    
     /**
      * Show the form for creating a new resource.
      *
