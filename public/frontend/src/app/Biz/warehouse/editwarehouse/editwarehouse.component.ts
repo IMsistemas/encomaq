@@ -10,6 +10,7 @@ declare var $: any;
 export class EditwarehouseComponent implements OnInit {
   @Input() tem_edit: any;
   @Output() update_component_father = new EventEmitter<boolean>();
+  @Output() refresh_component_father = new EventEmitter<boolean>();
   constructor(private ware: WarehouseService) { }
 
   ngOnInit() {
@@ -30,5 +31,8 @@ export class EditwarehouseComponent implements OnInit {
         $('#editwarehouse').modal('hide');
         this.update_component_father.emit(false);
       });
+  }
+  refresh() {
+    this.refresh_component_father.emit(false);
   }
 }

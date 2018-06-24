@@ -116,7 +116,7 @@
     </div>
   </div>
 
-  <div class="modal" id="addwarehouse" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal" id="addwarehouse" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
@@ -126,11 +126,11 @@
     </div>
   </div>
 
-  <div class="modal" id="editwarehouse" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal" id="editwarehouse" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
-        <app-editwarehouse [tem_edit]="info_tem_edit" (update_component_father)="update_list($event,'edit')"></app-editwarehouse>
+        <app-editwarehouse [tem_edit]="info_tem_edit" (update_component_father)="update_list($event,'edit')" (refresh_component_father)="refresfather($event)" ></app-editwarehouse>
 
       </div>
     </div>

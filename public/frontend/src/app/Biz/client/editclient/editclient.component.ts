@@ -12,6 +12,7 @@ export class EditclientComponent implements OnInit {
   lis_tipoident = [];
   @Input() tem_edit: any;
   @Output() update_component_father = new EventEmitter<boolean>();
+  @Output() refresh_component_father = new EventEmitter<boolean>();
   constructor(private client: ClienteService, private tipo: NomidentifytyService) { }
 
   ngOnInit() {
@@ -49,5 +50,8 @@ export class EditclientComponent implements OnInit {
         $('#editclient').modal('hide');
         this.update_component_father.emit(false);
       });
+  }
+  refresh() {
+    this.refresh_component_father.emit(false);
   }
 }

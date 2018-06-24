@@ -10,6 +10,7 @@ declare var $: any;
 export class EdittransferreasonComponent implements OnInit {
   @Input() tem_edit: any;
   @Output() update_component_father = new EventEmitter<boolean>();
+  @Output() refresh_component_father = new EventEmitter<boolean>();
   constructor(private transfer: ReasontransferService) { }
 
   ngOnInit() {
@@ -30,5 +31,8 @@ export class EdittransferreasonComponent implements OnInit {
         $('#edittransferreason').modal('hide');
         this.update_component_father.emit(false);
       });
+  }
+  refresh() {
+    this.refresh_component_father.emit(false);
   }
 }

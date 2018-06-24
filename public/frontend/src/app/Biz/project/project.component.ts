@@ -170,4 +170,7 @@ export class ProjectComponent implements OnInit {
       filename: 'Lista de proyectos'
     });
   }
+  refresfather(data: any) {
+    this.get_list_project();
+  }
 }

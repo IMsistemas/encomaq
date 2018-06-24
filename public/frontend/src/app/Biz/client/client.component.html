@@ -204,7 +204,7 @@
     </div>
   </div>
 
-  <div class="modal" id="addclient" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal" id="addclient" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
@@ -214,11 +214,11 @@
     </div>
   </div>
 
-  <div class="modal" id="editclient" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal" id="editclient" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
-        <app-editclient [tem_edit]="info_tem_edit" (update_component_father)="update_list($event,'edit')"></app-editclient>
+        <app-editclient [tem_edit]="info_tem_edit" (update_component_father)="update_list($event,'edit')" (refresh_component_father)="refresfather($event)" ></app-editclient>
 
       </div>
     </div>

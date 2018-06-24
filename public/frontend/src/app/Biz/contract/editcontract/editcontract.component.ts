@@ -16,6 +16,7 @@ export class EditcontractComponent implements OnInit {
   lis_item = [];
   @Input() tem_edit: any;
   @Output() update_component_father = new EventEmitter<boolean>();
+  @Output() refresh_component_father = new EventEmitter<boolean>();
   @Input() id_client: any; //
   @Input() item_select: any;
   constructor(private contract: ContractService, private client: ClienteService, private item: ItemService) { }
@@ -97,5 +98,8 @@ export class EditcontractComponent implements OnInit {
         frm.reset();
         this.update_component_father.emit(false);
       });
+  }
+  refresh() {
+    this.refresh_component_father.emit(false);
   }
 }

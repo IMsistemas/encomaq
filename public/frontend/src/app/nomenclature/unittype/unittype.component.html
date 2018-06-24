@@ -110,7 +110,7 @@
     </div>
   </div>
 
-  <div class="modal" id="addunittype" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal" id="addunittype" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
@@ -120,11 +120,11 @@
     </div>
   </div>
 
-  <div class="modal" id="editunittype" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal" id="editunittype" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
-        <app-editunittype [tem_edit]="info_tem_edit" (update_component_father)="update_list($event,'edit')"></app-editunittype>
+        <app-editunittype [tem_edit]="info_tem_edit" (update_component_father)="update_list($event,'edit')" (refresh_component_father)="refresfather($event)" ></app-editunittype>
 
       </div>
     </div>

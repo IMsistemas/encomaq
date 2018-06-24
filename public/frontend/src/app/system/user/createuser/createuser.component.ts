@@ -70,4 +70,6 @@ export class CreateuserComponent implements OnInit {
     $('#mdlCreateRol').modal('show');
   }
 
+
+
 }

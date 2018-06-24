@@ -10,6 +10,7 @@ declare var $: any;
 export class UpdateComponent implements OnInit {
   @Input() tem_edit_role: any;
   @Output() update_component_father = new EventEmitter<boolean>();
+  @Output() refresh_component_father = new EventEmitter<boolean>();
   constructor(private role: RoleService) { }
 
   ngOnInit() {
@@ -30,5 +31,8 @@ export class UpdateComponent implements OnInit {
         $('#mdlUpdate').modal('hide');
         this.update_component_father.emit(false);
       });
+  }
+  refresh() {
+    this.refresh_component_father.emit(false);
   }
 }

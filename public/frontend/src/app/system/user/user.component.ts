@@ -219,4 +219,8 @@ export class UserComponent implements OnInit {
     this.getListUser();
   }
 
+  refresfather( data: any ) {
+    this.getListUser();
+  }
+
 }

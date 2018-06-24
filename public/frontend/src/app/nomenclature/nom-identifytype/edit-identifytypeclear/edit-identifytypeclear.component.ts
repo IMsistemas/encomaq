@@ -10,6 +10,7 @@ declare var $: any;
 export class EditIdentifytypeclearComponent implements OnInit {
   @Input() tem_edit_identify: any;
   @Output() update_component_father = new EventEmitter<boolean>();
+  @Output() refresh_component_father = new EventEmitter<boolean>();
   constructor(private identify: NomidentifytyService) { }
 
   ngOnInit() {
@@ -31,5 +32,7 @@ export class EditIdentifytypeclearComponent implements OnInit {
         this.update_component_father.emit(false);
       });
   }
-
+  refresh() {
+    this.refresh_component_father.emit(false);
+  }
 }

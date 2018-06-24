@@ -189,4 +189,7 @@ export class RoleComponent implements OnInit {
         console.log('POST call in error", respons', error);
       });
   }
+  refresfather(data: any) {
+    this.getListRole();
+  }
 }

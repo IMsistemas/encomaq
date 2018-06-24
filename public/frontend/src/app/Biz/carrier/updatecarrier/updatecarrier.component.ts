@@ -14,6 +14,7 @@ declare var $: any;
 export class UpdatecarrierComponent implements OnInit {
   @Input() tem_edit_user: any;
   @Output() update_component_father = new EventEmitter<boolean>();
+  @Output() refresh_component_father = new EventEmitter<boolean>();
   listIdentifyType = [];
   constructor(private carrier: CarrierService, private identifytype: NomidentifytyService) { }
 
@@ -61,5 +62,7 @@ export class UpdatecarrierComponent implements OnInit {
         this.update_component_father.emit(false);
       });
   }
-
+  refresh() {
+    this.refresh_component_father.emit(false);
+  }
 }

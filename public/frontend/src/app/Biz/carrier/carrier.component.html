@@ -77,7 +77,7 @@
 
   </div>
 
-  <div class="modal" id="mdlCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal" id="mdlCreate" tabindex="-1"  data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
@@ -87,11 +87,11 @@
     </div>
   </div>
 
-  <div class="modal" id="mdlUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal" id="mdlUpdate" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
-        <app-updatecarrier [tem_edit_user]="carrier_selected" (update_component_father)="updateListCarrier($event, 'edit')" >
+        <app-updatecarrier [tem_edit_user]="carrier_selected" (update_component_father)="updateListCarrier($event, 'edit')" (refresh_component_father)="refresfather($event)" >
 
         </app-updatecarrier>
 

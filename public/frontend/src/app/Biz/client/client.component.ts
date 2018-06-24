@@ -187,4 +187,7 @@ export class ClientComponent implements OnInit {
       filename: 'Lista de clientes'
     });
   }
+  refresfather(data: any) {
+    this.get_list_client();
+  }
 }

@@ -12,6 +12,7 @@ export class EditprojectComponent implements OnInit {
   lis_client = [];
   @Input() tem_edit: any;
   @Output() update_component_father = new EventEmitter<boolean>();
+  @Output() refresh_component_father = new EventEmitter<boolean>();
   @Input() id_client: any;
   constructor(private project: ProjectService, private client: ClienteService) { }
 
@@ -56,5 +57,8 @@ export class EditprojectComponent implements OnInit {
   }
   search_client() {
     $('.listclient').modal('show');
+  }
+  refresh() {
+    this.refresh_component_father.emit(false);
   }
 }

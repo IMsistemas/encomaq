@@ -213,4 +213,7 @@ export class ItemComponent implements OnInit {
       filename: 'Lista de items'
     });
   }
+  refresfather(data: any) {
+    this.get_list_item();
+  }
 }

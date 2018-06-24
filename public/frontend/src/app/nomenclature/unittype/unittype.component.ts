@@ -106,4 +106,7 @@ export class UnittypeComponent implements OnInit {
         $('#mdl_delete').modal('hide');
       });
   }
+  refresfather(data: any) {
+    this.get_list_unittype();
+  }
 }

@@ -10,6 +10,7 @@ declare var $: any;
 export class EditunittypeComponent implements OnInit {
   @Input() tem_edit: any;
   @Output() update_component_father = new EventEmitter<boolean>();
+  @Output() refresh_component_father = new EventEmitter<boolean>();
   constructor(private unit: UnittypeService) { }
 
   ngOnInit() {
@@ -30,5 +31,8 @@ export class EditunittypeComponent implements OnInit {
         $('#editunittype').modal('hide');
         this.update_component_father.emit(false);
       });
+  }
+  refresh() {
+    this.refresh_component_father.emit(false);
   }
 }

@@ -184,4 +184,7 @@ export class ContractComponent implements OnInit {
       filename: 'Lista de contratos'
     });
   }
+  refresfather(data: any) {
+    this.get_list_contract();
+  }
 }

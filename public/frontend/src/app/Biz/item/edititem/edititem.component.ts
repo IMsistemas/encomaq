@@ -15,6 +15,7 @@ declare var $: any;
 export class EdititemComponent implements OnInit {
   @Input() tem_edit: any;
   @Output() update_component_father = new EventEmitter<boolean>();
+  @Output() refresh_component_father = new EventEmitter<boolean>();
   lis_category: Observable<any>;
   lis_unit = [];
   urlapi = new UrlApi();
@@ -68,5 +69,8 @@ export class EdititemComponent implements OnInit {
         $('#edititem').modal('hide');
         this.update_component_father.emit(false);
       });
+  }
+  refresh() {
+    this.refresh_component_father.emit(false);
   }
 }

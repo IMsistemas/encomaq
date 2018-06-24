@@ -106,4 +106,7 @@ export class TransferreasonComponent implements OnInit {
         $('#mdl_delete').modal('hide');
       });
   }
+  refresfather(data: any) {
+    this.get_list_transferreason();
+  }
 }

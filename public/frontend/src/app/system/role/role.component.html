@@ -66,7 +66,7 @@
 
   </div>
 
-  <div class="modal" id="mdlCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal" id="mdlCreate" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
@@ -76,11 +76,11 @@
     </div>
   </div>
 
-  <div class="modal" id="mdlUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal" id="mdlUpdate" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
-        <app-update [tem_edit_role]="role_selected" (update_component_father)="updateListRole($event, 'edit')" ></app-update>
+        <app-update [tem_edit_role]="role_selected" (update_component_father)="updateListRole($event, 'edit')"  (refresh_component_father)="refresfather($event)" ></app-update>
 
       </div>
     </div>

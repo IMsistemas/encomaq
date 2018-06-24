@@ -184,7 +184,7 @@
     </div>
   </div>
 
-  <div class="modal" id="addproject" style="width: 100% !important; height: 100% !important;"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal" id="addproject" style="width: 100% !important; height: 100% !important;"  tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
@@ -194,11 +194,11 @@
     </div>
   </div>
 
-  <div class="modal" id="editproject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal" id="editproject" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
-        <app-editproject [id_client]="idcliente_select" [tem_edit]="info_tem_edit" (update_component_father)="update_list($event,'edit')"></app-editproject>
+        <app-editproject [id_client]="idcliente_select" [tem_edit]="info_tem_edit" (update_component_father)="update_list($event,'edit')" (refresh_component_father)="refresfather($event)" ></app-editproject>
 
       </div>
     </div>

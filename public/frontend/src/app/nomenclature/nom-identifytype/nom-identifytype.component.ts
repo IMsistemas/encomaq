@@ -100,4 +100,7 @@ export class NomIdentifytypeComponent implements OnInit {
         $('#mdlMessageError').modal('show');
       });
   }
+  refresfather(data: any) {
+    this.get_list_identifytype();
+  }
 }

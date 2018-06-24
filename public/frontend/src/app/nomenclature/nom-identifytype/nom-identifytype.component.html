@@ -67,7 +67,7 @@
 
 
 
-  <div class="modal" id="mdl_new_identifytype" tabindex="-1" role="dialog">
+  <div class="modal" id="mdl_new_identifytype" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
@@ -77,11 +77,11 @@
     </div>
   </div>
 
-  <div class="modal" id="mdl_edit_identifytype" tabindex="-1" role="dialog">
+  <div class="modal" id="mdl_edit_identifytype" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
-        <app-edit-identifytypeclear [tem_edit_identify]="info_identifytype_select" (update_component_father)="update_list($event, 'edit')"></app-edit-identifytypeclear>
+        <app-edit-identifytypeclear [tem_edit_identify]="info_identifytype_select" (update_component_father)="update_list($event, 'edit')" (refresh_component_father)="refresfather($event)" ></app-edit-identifytypeclear>
 
       </div>
     </div>
