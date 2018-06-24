@@ -36,12 +36,13 @@
                     <span class="required">(*)</span>
                   </label>
                   <div class="input-group">
-                    <select class="form-control" id="idclient" name="idclient" [(ngModel)]="id_client.idclient" readonly #idclient="ngModel"
+                    <select class="form-control auxcliente2" style="display: none;" id="idclient" name="idclient" [(ngModel)]="id_client.idclient" readonly #idclient="ngModel"
                       required>
                       <option *ngFor="let cli of lis_client" value="{{cli.idclient}}">
                         {{cli.businessname}}
                       </option>
                     </select>
+                    <input type="text" class="form-control" name="tembuinesname"  [(ngModel)]="id_client.businessname" readonly />
 
                     <div class="input-group-append">
                       <button class="btn btn-default" type="button" (click)="search_client()">

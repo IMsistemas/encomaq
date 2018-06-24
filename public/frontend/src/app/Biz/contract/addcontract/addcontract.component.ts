@@ -24,6 +24,7 @@ export class AddcontractComponent implements OnInit {
     this.item_select = { iditem: ''};
     this.list_clients();
     this.list_items();
+    $('.auxcliente').prop('disabled' , true);
   }
   list_clients() {
     this.lis_client.push({ idclient: '', businessname: '--Seleccione--' });
@@ -86,6 +87,7 @@ export class AddcontractComponent implements OnInit {
     };
     this.contract.add_contract(aux).subscribe(
       (response) => {
+        this.id_client = { idclient: '' };
         if (response.success !== undefined) {
           $('#addcontract').modal('hide');
           frm.reset();

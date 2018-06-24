@@ -35,7 +35,7 @@
                     <span class="required">(*)</span>
                   </label>
                   <div class="input-group">
-                    <select class="form-control" id="idclient" name="idclient" [(ngModel)]="id_client.idclient" readonly  #idclient="ngModel" required>
+                    <select class="form-control auxcliente" id="idclient" name="idclient" [(ngModel)]="id_client.idclient" readonly  #idclient="ngModel" required>
                       <option *ngFor="let cli of lis_client" value="{{cli.idclient}}">
                         {{cli.businessname}}
                       </option>

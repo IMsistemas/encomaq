@@ -26,6 +26,7 @@ export class EditcontractComponent implements OnInit {
     this.item_select = { iditem: '' };
     this.list_clients();
     this.list_items();
+    $('.auxcliente2').prop('disabled', true);
   }
   list_clients() {
     this.lis_client.push({ idclient: '', businessname: '--Seleccione--' });
