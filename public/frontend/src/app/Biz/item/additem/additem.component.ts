@@ -33,7 +33,7 @@ export class AdditemComponent implements OnInit {
             idcategoryitem: cat.idcategoryitem,
             categoryitemname: cat.categoryitemname
           };
-          this.lis_category.push(o);
+          if (cat.state === 1) { this.lis_category.push(o); }
         }
       },
       (error) => {
@@ -52,7 +52,7 @@ export class AdditemComponent implements OnInit {
             idunittype: u.idunittype,
             unittypename: u.unittypename
           };
-          this.lis_unit.push(o);
+          if (u.state === 1) { this.lis_unit.push(o); }
         }
       },
       (error) => {

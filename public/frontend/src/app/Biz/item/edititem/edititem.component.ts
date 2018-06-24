@@ -16,7 +16,7 @@ export class EdititemComponent implements OnInit {
   @Input() tem_edit: any;
   @Output() update_component_father = new EventEmitter<boolean>();
   @Output() refresh_component_father = new EventEmitter<boolean>();
-  lis_category: Observable<any>;
+  lis_category = [];
   lis_unit = [];
   urlapi = new UrlApi();
   url_basic: String = '';
@@ -32,7 +32,20 @@ export class EdititemComponent implements OnInit {
   }
   list_category() {
 //  this.lis_category.push({ idcategoryitem: '', categoryitemname: '--Seleccione--' });
-    this.lis_category = this.category.get_categoryitem();
+    this.lis_category.push({ idcategoryitem: '', categoryitemname: '--Seleccione--' });
+    this.category.get_categoryitem().subscribe(
+      (response) => {
+        for (const cat of response) {
+          const o = {
+            idcategoryitem: cat.idcategoryitem,
+            categoryitemname: cat.categoryitemname
+          };
+          if (cat.state === 1) { this.lis_category.push(o); }
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
   }
   list_unit() {
     this.lis_unit.push({ idunittype: '', unittypename: '--Seleccione--' });
@@ -43,7 +56,7 @@ export class EdititemComponent implements OnInit {
             idunittype: u.idunittype,
             unittypename: u.unittypename
           };
-          this.lis_unit.push(o);
+          if (u.state === 1) { this.lis_unit.push(o); }
         }
       },
       (error) => {
