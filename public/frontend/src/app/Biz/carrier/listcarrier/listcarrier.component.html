@@ -10,16 +10,26 @@
       <div class="modal-body">
         <div class="container">
           <div class="row">
-            <div class="col-12 col-sm-6" style="margin-top: 5px;">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Buscar Transportista" #aux [(ngModel)]="descripcion" (keyup)="page = 1; get_list_carrier();">
-                <div class="input-group-prepend">
-                  <label class="input-group-text">
-                    <i class="fas fa-search"></i>
-                  </label>
-                </div>
-              </div>
-            </div>
+                    <div class="col-12 col-sm-9" style="margin-top: 5px;">
+                      <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Buscar Transportista" #aux [(ngModel)]="descripcion" (keyup)="page = 1; getListCarrier();">
+                        <div class="input-group-prepend">
+                          <label class="input-group-text">
+                            <i class="fas fa-search"></i>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    
+                    
+                    <div class="col-12 col-sm-3" style="margin-top: 5px;">
+                      <select class="custom-select" #est [(ngModel)]="state" (change)="page = 1; getListCarrier(); ">
+                        <option value="1">ACTIVO</option>
+                        <option value="0">INACTIVO</option>
+                      </select>
+                    </div>
+                    
           </div>
           <div class="row">
             <div class="col-sm-12 table-responsive">
@@ -34,7 +44,7 @@
                       </tr>
                   </thead>
                   <tbody> 
-                    <tr *ngFor="let item of listCarrier | async ;  let i = index " [ngClass]= "{'text-danger':item.state == 0}" >
+                    <tr *ngFor="let item of listCarrier  ;  let i = index " [ngClass]= "{'text-danger':item.state == 0}" >
                       <td>{{i + 1}}</td>
                       <td class="text-left">{{item.carriername}}</td>
                       <td class="text-left">{{item.identify}}</td>

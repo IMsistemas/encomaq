@@ -184,4 +184,14 @@ class CarrierController extends Controller
 
         }
     }
+    public function carrierfiltro(Request $request) 
+    {
+        $filtro = json_decode($request->get('filter'));
+        $data = Carrier::with("nom_identifytype")
+                        ->whereRaw("(identify  LIKE '%".$filtro->Buscar."%' OR carriername  LIKE '%".$filtro->Buscar."%' OR licenseplate  LIKE '%".$filtro->Buscar."%' ) AND state='".$filtro->state."' ")
+                        ->orderBy("".$filtro->column, "".$filtro->order);
+
+        return  $data->paginate($filtro->num_page);
+    }
+
 }

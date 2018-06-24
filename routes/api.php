@@ -92,6 +92,7 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('carrier/filtro', 'Biz\CarrierController@carrierfiltro');
     Route::get('carrier/get', 'Biz\CarrierController@get');
     Route::put('carrier/updateState/{id}', 'Biz\CarrierController@updateState');
     Route::resource('carrier', 'Biz\CarrierController');

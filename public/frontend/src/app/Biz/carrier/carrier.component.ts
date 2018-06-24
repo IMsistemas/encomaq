@@ -13,11 +13,25 @@ declare var $: any;
 })
 export class CarrierComponent implements OnInit {
   @Output() update_component_father = new EventEmitter<boolean>();
-  listCarrier: Observable<any>;
   carrier_selected: any;
   carriername_selected: any;
   message_success: any;
   message_error: any;
+
+  descripcion: any = '';
+  listCarrier = [];
+  /*variables para paginar*/
+  state = '1';
+  column = 'carriername';
+  order = 'ASC';
+  loading = false;
+  total = 0;
+  page = 1;
+  limit = 20;
+  from = 0;
+  num_page = 5;
+  select_data: any = '';
+  /*variables para paginar*/
   constructor(private carrier: CarrierService) { }
 
   ngOnInit() {
@@ -31,7 +45,25 @@ export class CarrierComponent implements OnInit {
   }
 
   getListCarrier() {
-    this.listCarrier = this.carrier.get();
+   // this.listCarrier = this.carrier.get();
+
+    const o = {
+      Buscar: this.descripcion,
+      state: this.state,
+      column: this.column,
+      order: this.order,
+      num_page: this.num_page
+    };
+    this.carrier.filtro_carrier(this.page, o).subscribe(
+      (response) => {
+        this.listCarrier = response.data;
+        this.from = response.from;
+        this.total = response.total;
+        this.loading = false;
+      },
+      (error) => {
+        console.log(error);
+      });
   }
 
   create() {
@@ -146,6 +178,18 @@ export class CarrierComponent implements OnInit {
   }
 
   refresfather(data: any) {
+    this.getListCarrier();
+  }
+  goToPage(n: number): void {
+    this.page = n;
+    this.getListCarrier();
+  }
+  onNext(): void {
+    this.page++;
+    this.getListCarrier();
+  }
+  onPrev(): void {
+    this.page--;
     this.getListCarrier();
   }
 }

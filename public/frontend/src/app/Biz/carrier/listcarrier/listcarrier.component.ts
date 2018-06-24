@@ -15,11 +15,16 @@ export class ListcarrierComponent implements OnInit {
   listCarrier: Observable<any>;
   descripcion: any = '';
   /*variables para paginar*/
+  state = '1';
+  column = 'carriername';
+  order = 'ASC';
   loading = false;
   total = 0;
   page = 1;
-  limit = 0;
+  limit = 20;
   from = 0;
+  num_page = 5;
+  select_data: any = '';
   /*variables para paginar*/
   @Input() cliente: any;
   @Output() carrier_s = new EventEmitter<any>();
@@ -30,17 +35,16 @@ export class ListcarrierComponent implements OnInit {
   }
 
   get_list_carrier() {
+    // this.listCarrier = this.carrier.get();
     const o = {
       Buscar: this.descripcion,
-      state: '1',
-      column: 'nocontract',
-      order: 'DESC',
-      num_page: 5
+      state: this.state,
+      column: this.column,
+      order: this.order,
+      num_page: this.num_page
     };
-    this.listCarrier = this.carrier.get();
-    /*this.carrier.get().subscribe(
+    this.carrier.filtro_carrier(this.page, o).subscribe(
       (response) => {
-        console.log(response);
         this.listCarrier = response.data;
         this.from = response.from;
         this.total = response.total;
@@ -48,7 +52,7 @@ export class ListcarrierComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-      });*/
+      });
   }
 
   goToPage(n: number): void {

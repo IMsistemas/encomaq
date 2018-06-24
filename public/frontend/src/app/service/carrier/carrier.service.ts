@@ -31,4 +31,7 @@ export class CarrierService {
     return this.http.put(this.url_api.get_url_api() + 'api/carrier/updateState/' + id, data);
   }
 
+  filtro_carrier(page: any, filtro: any): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/carrier/filtro?page=' + page + '&filter=' + JSON.stringify(filtro));
+  }
 }

@@ -23,7 +23,70 @@
 
   </div>
 
-  <hr>
+<div class="col-12">
+
+    <div class="row">
+
+        <div class="col-12 col-sm-9" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Buscar Transportista" #aux [(ngModel)]="descripcion" (keyup)="page = 1; getListCarrier();">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">
+                        <i class="fas fa-search"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+     
+
+        <div class="col-12 col-sm-3" style="margin-top: 5px;">
+            <select class="custom-select" #est [(ngModel)]="state" (change)="page = 1; getListCarrier(); ">
+                <option value="1">ACTIVO</option>
+                <option value="0">INACTIVO</option>
+            </select>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-12 col-sm-3" style="margin-top: 5px;">
+            <select class="custom-select" #col [(ngModel)]="column" (change)="page = 1; getListCarrier(); ">
+                <option value="carriername">NOMBRE</option>
+                <option value="identify">IDENTIFICACIÓN</option>
+                <option value="licenseplate">PLACA</option>
+            </select>
+        </div>
+
+        <div class="col-12 col-sm-3" style="margin-top: 5px;">
+            <select class="custom-select" #or [(ngModel)]="order" (change)="page = 1; getListCarrier(); ">
+                <option value="ASC">ASCENDENTE</option>
+                <option value="DESC">DESENDENTE</option>
+            </select>
+        </div>
+
+        <div class="col-12 col-sm-3" style="margin-top: 5px;">
+        </div>
+
+        <div class="col-12 col-sm-3" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+                <input type="number" class="form-control" #pg [(ngModel)]="num_page" (keyup)="page = 1;getListCarrier();" (change)="page = 1; getListCarrier(); ">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">
+                        Pag.
+                    </label>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+<br>
+
 
   <div class="col-12 table-responsive">
 
@@ -39,7 +102,7 @@
               </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of listCarrier | async;  let i = index " [ngClass]= "{'text-danger':item.state == 0}" >
+          <tr *ngFor="let item of listCarrier   let i = index " [ngClass]= "{'text-danger':item.state == 0}" >
               <td>{{i + 1}}</td>
               <td class="text-left">{{item.carriername}}</td>
               <td class="text-left">{{item.identify}}</td>
@@ -76,6 +139,13 @@
       </table>
 
   </div>
+
+    <div class="col-12 ">
+        <app-pagination class="right_paginate" (goPage)="goToPage($event)" (goNext)="onNext()" (goPrev)="onPrev()" [pagesToShow]="3"
+            [page]="page" [perPage]="3" [count]="total">
+        </app-pagination>
+    </div>
+
 
   <div class="modal" id="mdlCreate" tabindex="-1"  data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
