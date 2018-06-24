@@ -39,7 +39,7 @@ export class CreatereferralguideComponent implements OnInit {
 
   ngOnInit() {
 
-    this.idcontract_s = { idcontract: '', biz_client: {businessname: ''} };
+    this.idcontract_s = { idcontract: '', biz_client: { businessname: '' }, nocontract: ''};
     this.carrier_select = { idcarrier: '', carriername: '', identify: '', licenseplate: '' };
 
     this.loadInitJQuery();
@@ -165,6 +165,9 @@ export class CreatereferralguideComponent implements OnInit {
           frm.reset();
           this.list_itemcont = [];
           this.update_component_father.emit(true);
+
+          this.idcontract_s = { idcontract: '', biz_client: { businessname: '' }, nocontract: '' };
+          this.carrier_select = { idcarrier: '', carriername: '', identify: '', licenseplate: '' };
         } else if (response.error !== undefined) {
           $('#addclient').modal('hide');
           frm.reset();

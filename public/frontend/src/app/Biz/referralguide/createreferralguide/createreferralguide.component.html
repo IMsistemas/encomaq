@@ -46,11 +46,13 @@
                         <span class="required">(*)</span>
                       </label>
                       <div class="input-group">
-                        <select class="form-control" id="idcontract" name="idcontract" [(ngModel)]="idcontract_s.idcontract" readonly  #idcontract="ngModel" required>
+                        <select class="form-control" style="display: none;" id="idcontract" name="idcontract" [(ngModel)]="idcontract_s.idcontract" readonly  #idcontract="ngModel" required>
                           <option *ngFor="let i of listContract" value="{{i.idcontract}}">
                             {{i.nocontract}}
                           </option>
                         </select>
+
+                        <input type="text" class="form-control"  name="temnomcontrato" readonly [(ngModel)]="idcontract_s.nocontract" />
 
                         <div class="input-group-append">
                           <button class="btn btn-default" type="button" (click)="searchContract()"  >
@@ -187,11 +189,12 @@
                         <span class="required">(*)</span>
                       </label>
                       <div class="input-group">
-                        <select class="form-control" id="idcarrier" name="idcarrier" [(ngModel)]="carrier_select.idcarrier" readonly  #idcarrier="ngModel" required>
+                        <select class="form-control" style="display: none;" id="idcarrier" name="idcarrier" [(ngModel)]="carrier_select.idcarrier" readonly  #idcarrier="ngModel" required>
                           <option *ngFor="let cli of list_carrier" value="{{cli.idcarrier}}">
                             {{cli.carriername}}
                           </option>
                         </select>
+                        <input type="text" class="form-control" name="temtransportisa" readonly [(ngModel)]="carrier_select.carriername" />
 
                         <div class="input-group-append">
                           <button class="btn btn-default" type="button" (click)="searchCarrier()"  >
@@ -217,7 +220,7 @@
                         <label for="exampleFormControlInput1">C.I.
                           <span class="required">(*)</span>
                         </label>
-                        <input type="text" class="form-control" id="identify" name="identify" [(ngModel)]="carrier_select.identify" #identify="ngModel" required>
+                        <input type="text" class="form-control" readonly id="identify" name="identify" [(ngModel)]="carrier_select.identify" #identify="ngModel" required />
                       </div>
 
                       <div *ngIf="identify.errors?.required && identify.touched">
@@ -232,7 +235,7 @@
                       <label for="exampleFormControlInput1">Placa Nro
                         <span class="required">(*)</span>
                       </label>
-                      <input type="text" class="form-control" id="licenseplate" name="licenseplate" [(ngModel)]="carrier_select.licenseplate" #licenseplate="ngModel" required>
+                      <input type="text" class="form-control" readonly  id="licenseplate" name="licenseplate" [(ngModel)]="carrier_select.licenseplate" #licenseplate="ngModel" required>
                     </div>
 
                     <div *ngIf="licenseplate.errors?.required && licenseplate.touched">

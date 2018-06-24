@@ -82,7 +82,6 @@ export class MenuComponent implements OnInit {
           }
           return 0;
         });
-        console.log(this.listPermission);
 
       },
       (error) => {

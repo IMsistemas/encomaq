@@ -112,7 +112,6 @@ export class ReferralguideComponent implements OnInit {
 
   carrier_select(n): void {
     this.objectcarrier_select = n;
-    console.log(this.objectcarrier_select);
   }
 
   updateList(event, type) {
