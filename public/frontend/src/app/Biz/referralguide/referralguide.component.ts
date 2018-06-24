@@ -120,11 +120,11 @@ export class ReferralguideComponent implements OnInit {
 
       if (type === 'create') {
 
-        this.message_success = 'Se ha creado satisfactoriamente el Usuario';
+        this.message_success = 'Se ha creado satisfactoriamente la guía de remisión';
 
       } else {
 
-        this.message_success = 'Se ha editado satisfactoriamente el Usuario seleccionado';
+        this.message_success = 'Se ha editado satisfactoriamente la guía de remisión';
 
       }
 
@@ -135,11 +135,11 @@ export class ReferralguideComponent implements OnInit {
 
       if (type === 'create') {
 
-        this.message_error = 'Ha ocurrido un error al intentar agregar un Usuario o el mismo ya existe en el sistema...';
+        this.message_error = 'Ha ocurrido un error al intentar agregar la guía de remisión o la misma ya existe en el sistema';
 
       } else {
 
-        this.message_error = 'Ha ocurrido un error al intentar editar el Usuario seleccionado o el mismo nombre ya existe en el sistema';
+        this.message_error = 'Ha ocurrido un error al intentar editar la guía de remisión o la misma  ya existe en el sistema';
 
       }
 

@@ -133,7 +133,7 @@ export class CarrierComponent implements OnInit {
       } else {
 
         // tslint:disable-next-line:max-line-length
-        this.message_error = 'Ha ocurrido un error al intentar editar el Transportista seleccionado o el mismo identificador ya existe en el sistema';
+        this.message_error = 'Ha ocurrido un error al intentar editar el Transportista seleccionado o el mismo  ya existe en el sistema';
 
       }
 
