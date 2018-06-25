@@ -11,11 +11,11 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/contract']" *ngIf="listPermission[14].state == 0" > {{listPermission[14].permissionname}} </a>
+        <a class="nav-link" [routerLink]="['/contract']"  > {{listPermission[14].permissionname}} </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/referralguide']" *ngIf="listPermission[13].state == 0" > {{listPermission[13].permissionname}}  </a>
+        <a class="nav-link" [routerLink]="['/referralguide']"  > {{listPermission[13].permissionname}}  </a>
       </li>
 
     <li class="nav-item dropdown">
@@ -24,13 +24,13 @@
         Empresa
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" [routerLink]="['/carrier']" *ngIf="listPermission[7].state == 0" > {{listPermission[7].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/carrier']" > {{listPermission[7].permissionname}} </a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" [routerLink]="['/client']" *ngIf="listPermission[8].state == 0" > {{listPermission[8].permissionname}} </a>
-        <a class="dropdown-item" [routerLink]="['/item']" *ngIf="listPermission[9].state == 0"  > {{listPermission[9].permissionname}} </a>
-        <a class="dropdown-item" [routerLink]="['/warehouse']" *ngIf="listPermission[10].state == 0" > {{listPermission[10].permissionname}} </a>
-        <a class="dropdown-item" [routerLink]="['/company']" *ngIf="listPermission[11].state == 0" > {{listPermission[11].permissionname}} </a>
-        <a class="dropdown-item" [routerLink]="['/project']" *ngIf="listPermission[12].state == 0" > {{listPermission[12].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/client']" > {{listPermission[8].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/item']"   > {{listPermission[9].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/warehouse']"  > {{listPermission[10].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/company']" > {{listPermission[11].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/project']" > {{listPermission[12].permissionname}} </a>
       </div>
     </li>
 
@@ -40,10 +40,10 @@
           Nomencladores
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/identiytype']"  *ngIf="listPermission[3].state == 0"  >  {{listPermission[3].permissionname}} </a>
-          <a class="dropdown-item" [routerLink]="['/categoryitem']" *ngIf="listPermission[4].state == 0" >  {{listPermission[4].permissionname}} </a>
-          <a class="dropdown-item" [routerLink]="['/transferreason']" *ngIf="listPermission[5].state == 0">  {{listPermission[5].permissionname}} </a>
-          <a class="dropdown-item" [routerLink]="['/unittype']" *ngIf="listPermission[6].state == 0" > {{listPermission[6].permissionname}} </a>
+          <a class="dropdown-item" [routerLink]="['/identiytype']"    >  {{listPermission[3].permissionname}} </a>
+          <a class="dropdown-item" [routerLink]="['/categoryitem']"  >  {{listPermission[4].permissionname}} </a>
+          <a class="dropdown-item" [routerLink]="['/transferreason']" >  {{listPermission[5].permissionname}} </a>
+          <a class="dropdown-item" [routerLink]="['/unittype']" > {{listPermission[6].permissionname}} </a>
         </div>
       </li>
 
@@ -53,9 +53,9 @@
           Sistema
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/role']" *ngIf="listPermission[0].state == 0" > {{listPermission[0].permissionname}} </a>
-          <a class="dropdown-item" [routerLink]="['/user']" *ngIf="listPermission[1].state == 0" > {{listPermission[1].permissionname}} </a>
-        <a class="dropdown-item" [routerLink]="['/configemail']" *ngIf="listPermission[2].state == 0" > {{listPermission[2].permissionname}} </a>
+          <a class="dropdown-item" [routerLink]="['/role']"  > {{listPermission[0].permissionname}} </a>
+          <a class="dropdown-item" [routerLink]="['/user']"  > {{listPermission[1].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/configemail']" > {{listPermission[2].permissionname}} </a>
           <!--<div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>-->
         </div>
