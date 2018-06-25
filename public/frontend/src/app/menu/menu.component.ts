@@ -67,7 +67,7 @@ export class MenuComponent implements OnInit {
             i.state = true;
           }
         }
-        if (this.user.idrole === 1) { /// administrador
+        if (this.user.idrole == 1) { /// administrador
           for (const i of this.listPermission) {
             i.state = true;
           }

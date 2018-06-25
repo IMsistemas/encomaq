@@ -157,7 +157,7 @@ export class RoleComponent implements OnInit {
 
   }
   select_permission(item: any) {
-    if (this.listtemp_permission.length === 0) {
+    if (this.listtemp_permission.length == 0) {
       this.listtemp_permission.push(item);
     } else {
       const pos = this.listtemp_permission.map(function (e) { return e.idpermission; }).indexOf(item.idpermission);
@@ -175,7 +175,7 @@ export class RoleComponent implements OnInit {
     };
     this.role.permission_role(data).subscribe(
       (response) => {
-        if (response.success === true) {
+        if (response.success == true) {
           this.message_success = 'Se ha guardado correctamente!';
           $('#mdlMessageSuccess').modal('show');
         } else {
