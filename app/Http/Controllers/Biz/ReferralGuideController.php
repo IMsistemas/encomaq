@@ -7,7 +7,7 @@ use App\Models\Biz\Referralguideitem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
-
+use App\Models\Biz\Company;
 
 
 
@@ -27,20 +27,11 @@ class ReferralGuideController extends Controller
     {
         $filter = json_decode($request->get('filter'));
 
-        $where = "(sequential LIKE '%" . $filter->search . "%' OR purchaseproof LIKE '%" . $filter->search . "%' ) ";
-        $where .= "AND biz_referralguide.state = " . $filter->state;
-
-        /*if ($filter->idcontract != '') {
-            $where .= ' AND idcontract = ' . $filter->idcontract;
-        }
-
-        if ($filter->idtransferreason != '') {
-            $where .= ' AND idtransferreason = ' . $filter->idtransferreason;
-        }
-
-        if ($filter->idcarrier != '') {
-            $where .= ' AND idcarrier = ' . $filter->idcarrier;
-        }*/
+        $where = " biz_referralguide.state ='" . $filter->state."' ";
+        $where .= " AND (sequential LIKE '%" . $filter->search . "%' OR purchaseproof LIKE '%" . $filter->search . "%'  ";
+        $where .= " OR biz_contract.nocontract LIKE '%" . $filter->search . "%'   ";
+        $where .= " OR biz_client.businessname LIKE '%" . $filter->search . "%'  ) ";
+        
 
         return Referralguide::with('biz_contract.biz_client', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem')
                                 ->selectRaw("biz_referralguide.* ")
@@ -157,30 +148,6 @@ class ReferralGuideController extends Controller
          }       
     }
 
-    public function updateState(Request $request, $id)
-    {
-        $guide = Referralguide::find($id);
-
-        if($request->input('state') == 1){
-
-            $guide->state = 0;
-
-        } else {
-
-            $guide->state = 1;
-
-        }
-
-        if ($guide->save()) {
-
-            return response()->json(['success' => true ]);
-
-        } else {
-
-            return response()->json(['success' => false ]);
-
-        }
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -190,6 +157,52 @@ class ReferralGuideController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $aux = Referralguide::find($id); 
+        if ($aux->delete()) {
+            return response()->json(['success' => true ]);
+        } else {
+            return response()->json(['error' => 'error' ]);
+        }
     }
+
+    public function updateState($id)
+    {
+        $aux = Referralguide::find($id);
+        if ($aux->state == 1) {
+            $aux->state = 0;
+        } else {
+            $aux->state = 1;
+        }
+        if($aux->save()){
+            return response()->json(['success' => $aux ]);
+        }else{
+            return response()->json(['error' => $aux ]);
+        }
+    }
+
+    public function exportarpdf ($paramentro) {
+        ini_set('max_execution_time', 300);
+        $filter = json_decode($paramentro);
+       
+        $where = " biz_referralguide.state ='" . $filter->state."' ";
+        $where .= " AND (sequential LIKE '%" . $filter->search . "%' OR purchaseproof LIKE '%" . $filter->search . "%'  ";
+        $where .= " OR biz_contract.nocontract LIKE '%" . $filter->search . "%'   ";
+        $where .= " OR biz_client.businessname LIKE '%" . $filter->search . "%'  ) ";
+
+        $data = Referralguide::with('biz_contract.biz_client', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem')
+                        ->selectRaw("biz_referralguide.* ")
+                        ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")
+                        ->join("biz_client", "biz_client.idclient", "=", "biz_contract.idclient" )
+                        ->whereRaw($where)->orderBy($filter->column, $filter->order)
+                        ->get();
+
+        $company = Company::all();
+        $today=date("Y-m-d H:i:s");
+        $view =  \View::make('Print.ListGuia', compact('data','company'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->stream("ListaDeGuias".$today.".pdf");
+    }     
+
 }

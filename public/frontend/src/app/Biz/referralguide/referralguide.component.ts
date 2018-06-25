@@ -14,8 +14,10 @@ export class ReferralguideComponent implements OnInit {
 
   listReferralGuide: Observable<any>;
   message_success: any;
+  message_info: any;
   message_error: any;
   referralguide_selected: any;
+  tem_cancel_activate: any;
   info_tem_edit: any;
 
   descripcion: any = '';
@@ -57,7 +59,7 @@ export class ReferralguideComponent implements OnInit {
   getList() {
 
     const o = {
-      search: this.search,
+      search: this.descripcion,
       state: this.state,
       column: this.column,
       order: this.order,
@@ -66,7 +68,6 @@ export class ReferralguideComponent implements OnInit {
 
     this.referralguide.get(this.page, o).subscribe(
       (response) => {
-        console.log(response.data);
         this.listReferralGuide = response.data;
         this.from = response.from;
         this.total = response.total;
@@ -90,19 +91,13 @@ export class ReferralguideComponent implements OnInit {
     $('#updatereferralguide').modal('show');
   }
 
-  confirmSetState(item: any) {
 
-  }
 
   confirmDelete(item: any) {
 
   }
 
   setState() {
-
-  }
-
-  delete() {
 
   }
 
@@ -170,5 +165,75 @@ export class ReferralguideComponent implements OnInit {
   }
   refresfather(data: any) {
     this.getList();
+  }
+  cancel_activate(data: any) {
+    this.tem_cancel_activate = data;
+    $('#mdl_cancelactivate').modal('show');
+  }
+  ok_cancelactivate() {
+    this.referralguide.updateState(this.tem_cancel_activate.idreferralguide).subscribe(
+      (response) => {
+        if (response.success !== undefined) {
+          $('#mdl_cancelactivate').modal('hide');
+          this.message_info = 'Se ha guardado correctamente los datos!';
+          $('#mdlMessageSuccess').modal('show');
+          this.getList();
+        } else if (response.error !== undefined) {
+          $('#mdl_cancelactivate').modal('hide');
+          this.message_info = 'Error al anular los datos!';
+          $('#mdlMessageError').modal('show');
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+        this.message_info = 'Error al anular los datos!';
+        $('#mdlMessageError').modal('show');
+        $('#mdl_cancelactivate').modal('hide');
+      });
+  }
+  delete(data: any) {
+    this.tem_cancel_activate = data;
+    $('#mdl_delete').modal('show');
+  }
+  ok_delete() {
+    this.referralguide.delete(this.tem_cancel_activate.idreferralguide).subscribe(
+      (response) => {
+        if (response.success !== undefined) {
+          $('#mdl_delete').modal('hide');
+          this.message_info = 'Se elimino correctamente los datos!';
+          $('#mdlMessageSuccess').modal('show');
+          this.getList();
+        } else if (response.error !== undefined) {
+          $('#mdl_delete').modal('hide');
+          this.message_info = 'Error al eliminar los datos!';
+          $('#mdlMessageError').modal('show');
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+        this.message_info = 'Error al eliminar los datos!';
+        $('#mdlMessageError').modal('show');
+        $('#mdl_delete').modal('hide');
+      });
+  }
+  excel() {
+    $('#list_guiaremision').table2excel({
+      exclude: '.noExl',
+      filename: 'Lista de guía de remisión'
+    });
+  }
+  pdf() {
+    const o = {
+      search: this.descripcion,
+      state: this.state,
+      column: this.column,
+      order: this.order,
+      num_page: this.num_page
+    };
+    const accion = this.referralguide.filtro_referraexportarpdf(o);
+    console.log(accion);
+    $('#printtitle').html('Lista de guía de remisión');
+    $('#print').modal('show');
+    $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
   }
 }

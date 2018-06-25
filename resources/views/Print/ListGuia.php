@@ -134,16 +134,21 @@
     </div>
     <div class="row text-center">
         <h3>
-            Lista De Proyectos
+            Lista De Guías De Remisión
         </h3>
     </div>
     <table class="table table-bordered table-condensed">
         <thead>
             <tr>
                 <th style="width: 8%;">NO</th>
-                <th>PROYECTO</th>
+                <th># CONTRATO</th>
                 <th>CLIENTE</th>
-                <th>IDENTIFICACIÓN</th>
+                <th>FECHA</th>
+                <th>HORA</th>
+                <th>MOTIVO</th>
+                <th>P. PARTIDA</th>
+                <th>P. LLEGADA</th>
+                <th>TRANSPORTISTA</th>
                 <th style="width: 12%;">ESTADO</th>
             </tr>
             <?php
@@ -151,9 +156,14 @@
                 foreach ($data as $c) {
                     echo "<tr>";
                     echo "<td>".$x."</td>";
-                    echo "<td>".$c["projectname"]."</td>";
-                    echo "<td>".$c["biz_client"]["businessname"]."</td>";
-                    echo "<td>".$c["biz_client"]["identify"]."</td>";
+                    echo "<td>".$c["biz_contract"]["nocontract"]."</td>";
+                    echo "<td>".$c["biz_contract"]["biz_client"]["businessname"]."</td>";
+                    echo "<td>".$c["datetimereferral"]."</td>";
+                    echo "<td>".$c["sequential"]."</td>";
+                    echo "<td>".$c["nom_transferreason"]["transferreasonname"]."</td>";
+                    echo "<td>".$c["startingpoint"]."</td>";
+                    echo "<td>".$c["arrivalpoint"]."</td>";
+                    echo "<td>".$c["biz_carrier"]["carriername"]."</td>";
                     if ($c["state"] == 1) {
                         echo "<td>ACTIVO</td>";
                     } else {

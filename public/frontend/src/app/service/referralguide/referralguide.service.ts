@@ -27,8 +27,11 @@ export class ReferralguideService {
     return this.http.delete(this.url_api.get_url_api() + 'api/referralguide/' + id);
   }
 
-  updateState(id: any, data: any): Observable<any> {
-    return this.http.put(this.url_api.get_url_api() + 'api/referralguide/updateState/' + id, data);
+  updateState(id: any): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/referralguide/updateState/' + id);
   }
 
+  filtro_referraexportarpdf(data): any {
+    return this.url_api.get_url_api() + 'api/referralguide/exportarpdf/' + JSON.stringify(data);
+  }
 }

@@ -27,6 +27,6 @@ class Referralguide extends Model
 
     public function nom_transferreason()
     {
-        return $this->belongsTo('App\Models\Biz\Carrier', 'idtransferreason');
+        return $this->belongsTo('App\Models\Nomenclature\TransferReason', 'idtransferreason');
     }
 }
