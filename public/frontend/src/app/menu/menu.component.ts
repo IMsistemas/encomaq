@@ -47,7 +47,7 @@ export class MenuComponent implements OnInit {
             permissionname: x.permissionname,
             idpermission: x.idpermission,
             idrole: this.user.idrole,
-            state: false
+            state: 0
           };
           this.listPermission.push(obj);
         }
@@ -57,19 +57,19 @@ export class MenuComponent implements OnInit {
             permissionname: j.sys_permission.permissionname,
             idpermission: j.idpermission,
             idrole: j.idrole,
-            state: false
+            state: 0
           };
           this.listtemp_permission.push(o);
         }
         for (const i of this.listPermission) {
           const pos = this.listtemp_permission.map(function (e) { return e.idpermission; }).indexOf(i.idpermission);
           if (pos >= 0) {
-            i.state = true;
+            i.state = 1;
           }
         }
         if (this.user.idrole == 1) { /// administrador
           for (const i of this.listPermission) {
-            i.state = true;
+            i.state = 1;
           }
         }
 

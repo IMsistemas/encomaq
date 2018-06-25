@@ -3,7 +3,7 @@
     <img class="img-fluid" src="../assets/image/LogoEncomaq-color.png" alt="Card image cap" width="100" height="30">
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-    aria-expanded="false" aria-label="Toggle navigation">
+    aria-expanded="0" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -11,51 +11,51 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/contract']" [hidden]="listPermission[14].state == false" > {{listPermission[14].permissionname}} </a>
+        <a class="nav-link" [routerLink]="['/contract']" *ngIf="listPermission[14].state == 0" > {{listPermission[14].permissionname}} </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/referralguide']" [hidden]="listPermission[13].state == false" > {{listPermission[13].permissionname}}  </a>
+        <a class="nav-link" [routerLink]="['/referralguide']" *ngIf="listPermission[13].state == 0" > {{listPermission[13].permissionname}}  </a>
       </li>
 
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">
+        aria-expanded="0">
         Empresa
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" [routerLink]="['/carrier']" [hidden]="listPermission[7].state == false" > {{listPermission[7].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/carrier']" *ngIf="listPermission[7].state == 0" > {{listPermission[7].permissionname}} </a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" [routerLink]="['/client']" [hidden]="listPermission[8].state == false" > {{listPermission[8].permissionname}} </a>
-        <a class="dropdown-item" [routerLink]="['/item']" [hidden]="listPermission[9].state == false"  > {{listPermission[9].permissionname}} </a>
-        <a class="dropdown-item" [routerLink]="['/warehouse']" [hidden]="listPermission[10].state == false" > {{listPermission[10].permissionname}} </a>
-        <a class="dropdown-item" [routerLink]="['/company']" [hidden]="listPermission[11].state == false" > {{listPermission[11].permissionname}} </a>
-        <a class="dropdown-item" [routerLink]="['/project']" [hidden]="listPermission[12].state == false" > {{listPermission[12].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/client']" *ngIf="listPermission[8].state == 0" > {{listPermission[8].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/item']" *ngIf="listPermission[9].state == 0"  > {{listPermission[9].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/warehouse']" *ngIf="listPermission[10].state == 0" > {{listPermission[10].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/company']" *ngIf="listPermission[11].state == 0" > {{listPermission[11].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/project']" *ngIf="listPermission[12].state == 0" > {{listPermission[12].permissionname}} </a>
       </div>
     </li>
 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
+          aria-expanded="0">
           Nomencladores
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/identiytype']" [hidden]="listPermission[3].state == false"  >  {{listPermission[3].permissionname}} </a>
-          <a class="dropdown-item" [routerLink]="['/categoryitem']" [hidden]="listPermission[4].state == false" >  {{listPermission[4].permissionname}} </a>
-          <a class="dropdown-item" [routerLink]="['/transferreason']" [hidden]="listPermission[5].state == false">  {{listPermission[5].permissionname}} </a>
-          <a class="dropdown-item" [routerLink]="['/unittype']" [hidden]="listPermission[6].state == false" > {{listPermission[6].permissionname}} </a>
+          <a class="dropdown-item" [routerLink]="['/identiytype']"  *ngIf="listPermission[3].state == 0"  >  {{listPermission[3].permissionname}} </a>
+          <a class="dropdown-item" [routerLink]="['/categoryitem']" *ngIf="listPermission[4].state == 0" >  {{listPermission[4].permissionname}} </a>
+          <a class="dropdown-item" [routerLink]="['/transferreason']" *ngIf="listPermission[5].state == 0">  {{listPermission[5].permissionname}} </a>
+          <a class="dropdown-item" [routerLink]="['/unittype']" *ngIf="listPermission[6].state == 0" > {{listPermission[6].permissionname}} </a>
         </div>
       </li>
 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
+          aria-expanded="0">
           Sistema
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/role']" [hidden]="listPermission[0].state == false" > {{listPermission[0].permissionname}} </a>
-          <a class="dropdown-item" [routerLink]="['/user']" [hidden]="listPermission[1].state == false" > {{listPermission[1].permissionname}} </a>
-        <a class="dropdown-item" [routerLink]="['/configemail']" [hidden]="listPermission[2].state == false" > {{listPermission[2].permissionname}} </a>
+          <a class="dropdown-item" [routerLink]="['/role']" *ngIf="listPermission[0].state == 0" > {{listPermission[0].permissionname}} </a>
+          <a class="dropdown-item" [routerLink]="['/user']" *ngIf="listPermission[1].state == 0" > {{listPermission[1].permissionname}} </a>
+        <a class="dropdown-item" [routerLink]="['/configemail']" *ngIf="listPermission[2].state == 0" > {{listPermission[2].permissionname}} </a>
           <!--<div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>-->
         </div>
@@ -64,7 +64,7 @@
     <ul class="navbar-nav">
 
       <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="0">
                <strong>{{username}}</strong>  <i class="fas fa-user-circle fa-lg"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right">
