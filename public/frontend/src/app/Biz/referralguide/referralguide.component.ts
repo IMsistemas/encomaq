@@ -83,7 +83,11 @@ export class ReferralguideComponent implements OnInit {
   }
 
   editSelected(item: any) {
-
+    console.log(item);
+    this.info_tem_edit = item;
+    this.idcontract_select = item.biz_contract;
+    this.objectcarrier_select = item.biz_carrier;
+    $('#updatereferralguide').modal('show');
   }
 
   confirmSetState(item: any) {
@@ -164,5 +168,7 @@ export class ReferralguideComponent implements OnInit {
     this.page--;
     this.getList();
   }
-
+  refresfather(data: any) {
+    this.getList();
+  }
 }

@@ -42,7 +42,7 @@ class ReferralGuideController extends Controller
             $where .= ' AND idcarrier = ' . $filter->idcarrier;
         }*/
 
-        return Referralguide::with('biz_contract.biz_client', 'biz_carrier', 'nom_transferreason')
+        return Referralguide::with('biz_contract.biz_client', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem')
                                 ->selectRaw("biz_referralguide.* ")
                                 ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")
                                 ->join("biz_client", "biz_client.idclient", "=", "biz_contract.idclient" )
@@ -127,7 +127,34 @@ class ReferralGuideController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        
+        $aux =  Referralguide::find($id);;
+        $aux->idcontract = $data["idcontract"];
+        $aux->idtransferreason = $data["idtransferreason"];
+        $aux->idcarrier = $data["idcarrier"];
+        $aux->datetimereferral = $data["datetimereferral"];
+        $aux->sequential = $data["sequential"];
+        $aux->startingpoint = $data["startingpoint"];
+        $aux->arrivalpoint = $data["arrivalpoint"];
+        $aux->state = 1;
+         if ($aux->save()) {
+             $temp = Referralguideitem::whereRaw("idreferralguide='".$id."'")->delete();
+
+             foreach ($data["biz__referralguideitem"] as $f) {
+                 if( $f["iditem"]!="" ) {
+                    $caux = new Referralguideitem();
+                    $caux->idreferralguide = $aux->idreferralguide;
+                    $caux->iditem = $f["iditem"];
+                    $caux->quantify = $f["quantify"];
+                    $caux->observation = $f["observation"];
+                    $caux->save();
+                 }
+             }
+            return response()->json(['success' => $aux ]);
+         } else {
+             return response()->json(['error' => $aux]);
+         }       
     }
 
     public function updateState(Request $request, $id)
