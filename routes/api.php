@@ -112,3 +112,11 @@ Route::group(['middleware' => 'cors'], function(){
     Route::get('referralguide/updateState/{id}', 'Biz\ReferralGuideController@updateState');
     Route::resource('referralguide', 'Biz\ReferralGuideController');
 });
+
+Route::group(['middleware' => 'cors'], function(){
+    Route::get('Liquidation/exportarpdf/{data}', 'Biz\LiquidationController@exportarpdf');
+    Route::get('Liquidation/getLiquidationActive', 'Biz\LiquidationController@getLiquidationtActive');
+    Route::get('Liquidation/filtro', 'Biz\LiquidationController@liquidationfiltro');
+    Route::get('Liquidation/state/{id}', 'Biz\LiquidationController@stateliquidation');
+    Route::resource('Liquidation', 'Biz\LiquidationController');
+});

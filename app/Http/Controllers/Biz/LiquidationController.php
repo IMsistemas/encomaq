@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Biz;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
+use App\Models\Biz\Liquidation;
+use App\Models\Biz\Referralguideliquidation;
+use App\Models\Biz\Company;
 
 class LiquidationController extends Controller
 {
@@ -35,7 +39,35 @@ class LiquidationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fila = Liquidation::all();
+        $last = $fila->last();
+        $data = $request->all();
+
+         $aux = new Liquidation();
+         
+         $num_contract = 0;
+         if(  isset($last->number) ) {
+             $num_contract = $last->number;
+         }
+         $aux->number = str_pad((((int) $num_contract) + 1 ),9,"0", STR_PAD_LEFT );
+         $aux->dateinit = $data["Data"]["dateinit"];
+         $aux->dateend = $data["Data"]["dateend"];
+         $aux->observation = $data["Data"]["observation"];
+         $aux->subtotal = $data["Subtotal"];
+         $aux->iva = $data["Iva"];
+         $aux->total = $data["Total"];
+         $aux->state = 1;
+         if ($aux->save()) {
+             foreach ($data["list"] as $f) {
+                 $real =  new Referralguideliquidation;
+                 $real->idliquidation = $aux->idliquidation;
+                 $real->idreferralguide = $f["idreferralguide"];
+                 $real->save();
+             }
+             return response()->json(['success' => $aux ]);
+         } else {
+             return response()->json(['error' => $aux]);
+         }
     }
 
     /**
@@ -81,5 +113,15 @@ class LiquidationController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function liquidationfiltro(Request $request) 
+    {
+        $filtro = json_decode($request->get('filter'));
+        $data = Liquidation::with("biz_referralguideliquidation.biz_referralguide.biz_contract.biz_client","biz_referralguideliquidation.biz_referralguide.biz_Referralguideitem.biz_item")
+                        ->whereRaw("biz_liquidation.state='".$filtro->state."' AND ( biz_liquidation.number LIKE '%".$filtro->Buscar."%'  )")
+                        ->orderBy("".$filtro->column, "".$filtro->order);
+
+        return  $data->paginate($filtro->num_page);
     }
 }

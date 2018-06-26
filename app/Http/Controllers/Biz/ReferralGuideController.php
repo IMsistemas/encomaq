@@ -33,7 +33,7 @@ class ReferralGuideController extends Controller
         $where .= " OR biz_client.businessname LIKE '%" . $filter->search . "%'  ) ";
         
 
-        return Referralguide::with('biz_contract.biz_client', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem')
+        return Referralguide::with('biz_contract.biz_client', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem.biz_item')
                                 ->selectRaw("biz_referralguide.* ")
                                 ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")
                                 ->join("biz_client", "biz_client.idclient", "=", "biz_contract.idclient" )
