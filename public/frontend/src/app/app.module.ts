@@ -70,6 +70,10 @@ import { CreatereferralguideComponent } from './Biz/referralguide/createreferral
 import { UpdatereferralguideComponent } from './Biz/referralguide/updatereferralguide/updatereferralguide.component';
 import { ListcontractComponent } from './Biz/contract/listcontract/listcontract.component';
 import { ListcarrierComponent } from './Biz/carrier/listcarrier/listcarrier.component';
+import { LiquidationComponent } from './Biz/liquidation/liquidation.component';
+import { AddliquidationComponent } from './Biz/liquidation/addliquidation/addliquidation.component';
+import { EditliquidationComponent } from './Biz/liquidation/editliquidation/editliquidation.component';
+import { LiquidationService } from './service/bliquidation/liquidation.service';
 
 @NgModule({
   declarations: [
@@ -123,6 +127,9 @@ import { ListcarrierComponent } from './Biz/carrier/listcarrier/listcarrier.comp
     UpdatereferralguideComponent,
     ListcontractComponent,
     ListcarrierComponent,
+    LiquidationComponent,
+    AddliquidationComponent,
+    EditliquidationComponent,
   ],
   imports: [
     BrowserModule,
@@ -134,7 +141,7 @@ import { ListcarrierComponent } from './Biz/carrier/listcarrier/listcarrier.comp
     NomidentifytyService, RoleService, ItemcategoryService, LoginService,
     ReasontransferService, UnittypeService, UserService, WarehouseService,
     BcompanyService, ItemService, ConfigemailService, ClienteService,
-    ProjectService, CarrierService, ContractService, ReferralguideService
+    ProjectService, CarrierService, ContractService, ReferralguideService, LiquidationService
   ],
   bootstrap: [AppComponent]
 })

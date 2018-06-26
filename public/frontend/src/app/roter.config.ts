@@ -16,6 +16,7 @@ import { ProjectComponent } from './Biz/project/project.component';
 import { CarrierComponent } from './Biz/carrier/carrier.component';
 import { ContractComponent } from './Biz/contract/contract.component';
 import { ReferralguideComponent } from './Biz/referralguide/referralguide.component';
+import { LiquidationComponent } from './Biz/liquidation/liquidation.component';
 
 export const RouterConfig: Route[] = [
     { path: 'identiytype', component: NomIdentifytypeComponent},
@@ -34,6 +35,7 @@ export const RouterConfig: Route[] = [
     { path: 'carrier', component: CarrierComponent },
     { path: 'contract', component: ContractComponent },
     { path: 'referralguide', component: ReferralguideComponent },
+    { path: 'liquidation', component: LiquidationComponent },
 ];
 
 
