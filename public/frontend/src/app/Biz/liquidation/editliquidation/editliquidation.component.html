@@ -1,3 +1,290 @@
-<p>
-  editliquidation works!
-</p>
+<div *ngIf="tem_edit">
+<form novalidate (ngSubmit)="edit_liquidation(tem_edit, frmeditliquidatio);" #frmeditliquidatio="ngForm">
+
+  <div class="modal-header bg-primary">
+    <h5 class="modal-title">Editar Liquidación</h5>
+    <button type="button" class="close" data-dismiss="modal" (click)="refresh()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body" style="overflow-y: scroll; height: 70vh;">
+
+    <div class="row">
+      <div class="col-md-3 col-sm-12 ">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <a class="nav-link active" id="v-pills-home-tab" (click)="calcula()" data-toggle="pill" href="#v-pills-home3" role="tab" aria-controls="v-pills-home"
+            aria-selected="true">LIQUIDACIÓN</a>
+          <a class="nav-link" id="v-pills-profile-tab" (click)="calcula()" data-toggle="pill" href="#v-pills-profile3" role="tab" aria-controls="v-pills-profile"
+            aria-selected="false">GUÍAS REMISIÓN</a>
+
+        </div>
+      </div>
+      <div class="col-md-9 col-sm-12 ">
+        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane fade show active" id="v-pills-home3" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <strong>1. DATOS GENERALES DE LA LIQUIDACIÓN</strong>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Fecha de inicio
+                    <span class="required">(*)</span>
+                  </label>
+                  <input type="date" class="form-control" id="dateinit" name="dateinit"  [(ngModel)]="tem_edit.dateinit" #dateinit="ngModel" required>
+                </div>
+
+                <div *ngIf="dateinit.errors?.required && dateinit.touched">
+                  <small id="" class="form-text text-danger text-right">La fecha de inicio es requerida</small>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Fecha de fin
+                    <span class="required">(*)</span>
+                  </label>
+                  <input type="date" class="form-control" id="dateend" name="dateend" [(ngModel)]="tem_edit.dateend" #dateend="ngModel" required>
+                </div>
+
+                <div *ngIf="dateend.errors?.required && dateend.touched">
+                  <small id="" class="form-text text-danger text-right">La fecha de fin es requerida</small>
+                </div>
+              </div>
+
+            </div>
+
+
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Obsercación
+                    <span class="required">(*)</span>
+                  </label>
+                  <textarea cols="100" rows="5" class="form-control" id="observation" name="observation" [(ngModel)]="tem_edit.observation"  #observation="ngModel" required></textarea>
+                </div>
+
+                <div *ngIf="observation.errors?.required && observation.touched">
+                  <small id="" class="form-text text-danger text-right">La obsercación es requerida</small>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="tab-pane fade" id="v-pills-profile3" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <p>
+                  <strong>2. GUÍAS DE REMISIÓN </strong>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 text-right">
+                <button type="button" class="btn btn-primary" (click)="addliuidation()"> Agregar
+                  <i class="fas fa-plus-square fa-lg"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-sm-12">
+                <table style="font-size: 11px;" *ngFor="let item of tem_edit.biz_referralguideliquidation" class="table table-bordered table-striped table-condensed">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th colspan="4">
+                        <button type="button" class="btn btn-danger" (click)="removerow(item)">
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>N. Contrato</th>
+                      <th>{{item.biz_referralguide.biz_contract.nocontract}}</th>
+
+                      <th>Cliente</th>
+                      <th>{{item.biz_referralguide.biz_contract.biz_client.businessname}}</th>
+                    </tr>
+
+                    <tr>
+                      <th>P. Partida</th>
+                      <th>{{item.biz_referralguide.startingpoint}}</th>
+
+                      <th>P. Llegada</th>
+                      <th>{{item.biz_referralguide.arrivalpoint}}</th>
+                    </tr>
+
+                    <tr>
+                      <th>Item</th>
+                      <th>Cant.</th>
+                      <th>Precio</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let it of item.biz_referralguide.biz__referralguideitem">
+                      <td>{{it.biz_item.itemname}}</td>
+                      <td>{{it.quantify}}</td>
+                      <td>{{ it.biz_item.price }}</td>
+                      <td>{{ it.biz_item.price*it.quantify }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-6 col-sm-6"></div>
+              <div class="col-6 col-sm-6 text-right">
+                <table class="table table-bordered table-striped table-condensed">
+                  <tbody>
+                    <tr>
+                      <th>Subtotal</th>
+                      <th>{{subtotal}}</th>
+                    </tr>
+
+                    <tr>
+                      <th>Iva 12%</th>
+                      <th>{{iva}}</th>
+                    </tr>
+
+                    <tr>
+                      <th>Total</th>
+                      <th>{{totalprecio}}</th>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="refresh()" data-dismiss="modal">
+      Cancelar
+      <i class="fas fa-ban"></i>
+    </button>
+
+    <button type="submit" class="btn btn-success" [disabled]="frmeditliquidatio.invalid">
+      Guardar
+      <i class="fas fa-save"></i>
+    </button>
+  </div>
+</form>
+
+
+
+<div class="modal" id="addliquidationedit" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title">Guías De Remisión</h5>
+        <button type="button" class="close" (click)="close_listguias()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="row">
+          <div class="col-12 col-sm-9" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Buscar Guía" #aux [(ngModel)]="descripcion" (keyup)="page = 1; getList();">
+              <div class="input-group-prepend">
+                <label class="input-group-text">
+                  <i class="fas fa-search"></i>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 table-responsive">
+
+            <table class="table table-striped table-hover table-bordered" id="list_guiaremision">
+              <thead class="thead-dark">
+                <tr>
+                  <th style="width: 8%;">NO</th>
+                  <th># CONTRATO</th>
+                  <th>CLIENTE</th>
+                  <th>MOTIVO</th>
+                  <th>TRANSPORTISTA</th>
+                  <th style="width: 12%;">ESTADO</th>
+                  <th class="noExl" style="width: 5%;"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of listReferralGuide  let i = index" [ngClass]="{'text-danger':item.state == 0 } ">
+                  <td>{{i+from}}</td>
+                  <td>{{item.biz_contract.nocontract}}</td>
+                  <td>{{item.biz_contract.biz_client.businessname}}</td>
+                  <td>{{item.nom_transferreason.transferreasonname}}</td>
+                  <td>{{item.biz_carrier.carriername}}</td>
+
+                  <td>{{ ((item.state == 1)? 'ACTIVO':'INACTIVO') }}</td>
+                  <td class="noExl">
+                    <button type="button" class="btn btn-success" (click)="select_guia(item)">
+                      <i class="fas fa-check"></i>
+                    </button>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+        <div class="col-12 ">
+          <app-pagination class="right_paginate" (goPage)="goToPage($event)" (goNext)="onNext()" (goPrev)="onPrev()" [pagesToShow]="3"
+            [page]="page" [perPage]="3" [count]="total">
+          </app-pagination>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close_listguias()"> Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" id="infoerrorsliquidation" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-info">
+        <h5 class="modal-title">Información</h5>
+        <button type="button" class="close" (click)="close_info()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{mensage}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close_info()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+</div>

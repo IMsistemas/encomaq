@@ -96,7 +96,7 @@
 
   <div class="col-12 table-responsive">
 
-    <table class="table table-striped table-hover table-bordered" id="list_contract">
+    <table class="table table-striped table-hover table-bordered" id="list_liquidation">
       <thead class="thead-dark">
         <tr>
           <th style="width: 8%;">NO</th>
@@ -129,7 +129,7 @@
                 <i class="fas fa-cogs"></i>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" (click)="edit_contract(ident)">
+                <a class="dropdown-item" (click)="edit_liquidation(ident)">
                   <i class="fas fa-edit"></i> Editar</a>
                 <a class="dropdown-item" (click)="cancel_activate(ident)">
                   <i class="fas fa-ban"></i> Cambiar estado</a>
@@ -206,13 +206,12 @@
     </div>
   </div>
 
-  <div class="modal" id="editcontract" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel"
+  <div class="modal" id="editliquidation" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
 
-        <app-editcontract [tem_edit]="info_tem_edit" [id_client]="idcliente_select" (update_component_father)="update_list($event,'edit')"
-          (refresh_component_father)="refresfather($event)"></app-editcontract>
+        <app-editliquidation [tem_edit]="info_tem_edit" (update_component_father)="update_list($event,'edit')" (refresh_component_father)="refresfather($event)" ></app-editliquidation>
 
       </div>
     </div>
@@ -233,7 +232,7 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-12">
-              ¿Está seguro que desea cambiar el estado del Contrato ?
+              ¿Está seguro que desea cambiar el estado de la liquidación ?
             </div>
           </div>
         </div>
@@ -266,7 +265,7 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-12">
-              ¿Está seguro que desea eliminar el Contrato ?
+              ¿Está seguro que desea eliminar la liquidación ?
             </div>
           </div>
         </div>

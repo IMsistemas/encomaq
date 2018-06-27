@@ -101,7 +101,30 @@ class LiquidationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $aux = Liquidation::find($id);
+     
+         $aux->dateinit = $data["dateinit"];
+         $aux->dateend = $data["dateend"];
+         $aux->observation = $data["observation"];
+         $aux->subtotal = $data["subtotal"];
+         $aux->iva = $data["iva"];
+         $aux->total = $data["total"];
+         $aux->state = 1;
+         if ($aux->save()) {
+             $temp = Referralguideliquidation::whereRaw("idliquidation=".$aux->idliquidation."")->delete();
+             foreach ($data["biz_referralguideliquidation"] as $f) {
+                 $real =  new Referralguideliquidation;
+                 $real->idliquidation = $aux->idliquidation;
+                 $real->idreferralguide = $f["idreferralguide"];
+                 $real->save();
+             }
+             return response()->json(['success' => $aux ]);
+         } else {
+             return response()->json(['error' => $aux]);
+         }
+
     }
 
     /**
@@ -112,7 +135,13 @@ class LiquidationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $aux1 = Referralguideliquidation::whereRaw("idliquidation=".$id."")->delete();
+        $aux = Liquidation::find($id); 
+        if ($aux->delete()) {
+            return response()->json(['success' => true ]);
+        } else {
+            return response()->json(['error' => 'error' ]);
+        }
     }
 
     public function liquidationfiltro(Request $request) 
@@ -124,4 +153,35 @@ class LiquidationController extends Controller
 
         return  $data->paginate($filtro->num_page);
     }
+    public function stateliquidation($id)
+    {
+        $aux = Liquidation::find($id);
+        if ($aux->state == 1) {
+            $aux->state = 0;
+        } else {
+            $aux->state = 1;
+        }
+        if($aux->save()){
+            return response()->json(['success' => $aux ]);
+        }else{
+            return response()->json(['error' => $aux ]);
+        }
+    }
+    public function exportarpdf ($paramentro) {
+        ini_set('max_execution_time', 300);
+        $filtro = json_decode($paramentro);
+       
+       $data = Liquidation::with("biz_referralguideliquidation.biz_referralguide.biz_contract.biz_client","biz_referralguideliquidation.biz_referralguide.biz_Referralguideitem.biz_item")
+                        ->whereRaw("biz_liquidation.state='".$filtro->state."' AND ( biz_liquidation.number LIKE '%".$filtro->Buscar."%'  )")
+                        ->orderBy("".$filtro->column, "".$filtro->order)
+                        ->get();
+
+        $company = Company::all();
+        $today=date("Y-m-d H:i:s");
+        $view =  \View::make('Print.ListLiquidation', compact('data','company'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->stream("ListaDeLiquidaciones".$today.".pdf");
+    }     
 }

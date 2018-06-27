@@ -11,6 +11,9 @@ declare var $: any;
 export class LiquidationComponent implements OnInit {
   message_info: any;
   list_liquidation = [];
+  info_tem_edit: any;
+  tem_cancel_activate: any;
+  msm_cancel_activate: any;
   /*variables para paginar*/
   descripcion: any = '';
   state = '1';
@@ -82,5 +85,80 @@ export class LiquidationComponent implements OnInit {
       }
     }
     this.get_list_liquidation();
+  }
+  edit_liquidation(data: any) {
+    this.info_tem_edit = data;
+    $('#editliquidation').modal('show');
+  }
+  refresfather(data: any) {
+    this.get_list_liquidation();
+  }
+  cancel_activate(data: any) {
+    this.tem_cancel_activate = data;
+    $('#mdl_cancelactivate').modal('show');
+  }
+  ok_cancelactivate() {
+    this.liquidation.state_liquidation(this.tem_cancel_activate.idliquidation).subscribe(
+      (response) => {
+        if (response.success !== undefined) {
+          $('#mdl_cancelactivate').modal('hide');
+          this.message_info = 'Se ha guardado correctamente los datos!';
+          $('#mdlMessageSuccess').modal('show');
+          this.get_list_liquidation();
+        } else if (response.error !== undefined) {
+          $('#mdl_cancelactivate').modal('hide');
+          this.message_info = 'Error al anular los datos!';
+          $('#mdlMessageError').modal('show');
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+        this.message_info = 'Error al anular los datos!';
+        $('#mdlMessageError').modal('show');
+        $('#mdl_cancelactivate').modal('hide');
+      });
+  }
+  delete(data: any) {
+    this.tem_cancel_activate = data;
+    $('#mdl_delete').modal('show');
+  }
+  ok_delete() {
+    this.liquidation.delete_liquidation(this.tem_cancel_activate.idliquidation).subscribe(
+      (response) => {
+        if (response.success !== undefined) {
+          $('#mdl_delete').modal('hide');
+          this.message_info = 'Se elimino correctamente los datos!';
+          $('#mdlMessageSuccess').modal('show');
+          this.get_list_liquidation();
+        } else if (response.error !== undefined) {
+          $('#mdl_delete').modal('hide');
+          this.message_info = 'Error al eliminar los datos!';
+          $('#mdlMessageError').modal('show');
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+        this.message_info = 'Error al eliminar los datos!';
+        $('#mdlMessageError').modal('show');
+        $('#mdl_delete').modal('hide');
+      });
+  }
+  excel() {
+    $('#list_liquidation').table2excel({
+      exclude: '.noExl',
+      filename: 'Lista de liquidaciones'
+    });
+  }
+  pdf() {
+    const o = {
+      Buscar: this.descripcion,
+      state: this.state,
+      column: this.column,
+      order: this.order
+    };
+    const accion = this.liquidation.filtro_liquidationexportarpdf(o);
+    $('#printtitle').html('Lista de Liquidaciones');
+    $('#print').modal('show');
+    $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
   }
 }
