@@ -149,5 +149,10 @@ class CategoryController extends Controller
         }else {
             return response()->json(['error' => 'used' ]);
         }
+    }
+    public function active()
+    {
+        $data = CategoryItem::whereRaw("state=1")->get();
+        return  Response::json($data,200);
     }    
 }

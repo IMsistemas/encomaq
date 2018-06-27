@@ -147,14 +147,14 @@ export class ItemComponent implements OnInit {
   }
   list_category() {
     this.lis_category.push({ idcategoryitem: '', categoryitemname: '-- Categoría --' });
-    this.category.get_categoryitem().subscribe(
+    this.category.get_categoryitem_active().subscribe(
       (response) => {
         for (const cat of response) {
           const o = {
             idcategoryitem: cat.idcategoryitem,
             categoryitemname: cat.categoryitemname
           };
-          if (cat.state === 1) { this.lis_category.push(o); }
+          this.lis_category.push(o);
         }
       },
       (error) => {
@@ -163,14 +163,14 @@ export class ItemComponent implements OnInit {
   }
   list_unit() {
     this.lis_unit.push({ idunittype: '', unittypename: '-- Unidad --' });
-    this.unit.get_unittype().subscribe(
+    this.unit.get_unittype_active().subscribe(
       (response) => {
         for (const u of response) {
           const o = {
             idunittype: u.idunittype,
             unittypename: u.unittypename
           };
-          if (u.state === 1) { this.lis_unit.push(o); }
+          this.lis_unit.push(o);
         }
       },
       (error) => {

@@ -23,5 +23,8 @@ export class ItemcategoryService {
   delete_okcategoryitem(id: any): Observable<any> {
     return this.http.get(this.url_api.get_url_api() + 'api/CategoryItem/delete/' + id);
   }
+  get_categoryitem_active(): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/CategoryItem/active');
+  }
 
 }

@@ -103,12 +103,15 @@
           <label for="exampleFormControlInput1">Precio
             <span class="required">(*)</span>
           </label>
-          <input type="text" class="form-control" id="price" name="price" [(ngModel)]="tem_edit.price" #price="ngModel"
+          <input type="text" class="form-control" id="price" pattern="^[0-9]+([.][0-9]+)?$"  name="price" [(ngModel)]="tem_edit.price" #price="ngModel"
             required>
         </div>
     
         <div *ngIf="price.errors?.required && price.touched">
           <small id="" class="form-text text-danger text-right">El precio es requerido</small>
+        </div>
+        <div *ngIf="price.errors?.pattern">
+          <small id="" class="form-text text-danger text-right">El precio es incorrecto debe ser un numero entero o decimal</small>
         </div>
       </div>
     </div>

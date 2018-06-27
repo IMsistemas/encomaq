@@ -30,18 +30,18 @@ export class CategoryitemComponent implements OnInit {
   update_list(evento, type) {
     if (evento === true) {
       if (type === 'create') {
-        this.message_info = 'Sea guardado correctamente los datos..!!';
+        this.message_info = 'Se ha guardado correctamente los datos!';
         $('#mdlMessageSuccess').modal('show');
       } else if (type === 'edit') {
-        this.message_info = 'Sea editado correctamente los datos..!!';
+        this.message_info = 'Se ha editado correctamente los datos!';
         $('#mdlMessageSuccess').modal('show');
       }
     } else {
       if (type === 'create') {
-        this.message_info = 'Ha ocurrido un error al itentar agregar una categoria o la misma ya existe en el sistema..!!';
+        this.message_info = 'Ha ocurrido un error al itentar agregar una categoria o la misma ya existe en el sistema!';
         $('#mdlMessageError').modal('show');
       } else if (type === 'edit') {
-        this.message_info = 'Ha ocurrido un error al itentar editar una categoria o la misma ya existe en el sistema..!!';
+        this.message_info = 'Ha ocurrido un error al itentar editar una categoria o la misma ya existe en el sistema!';
         $('#mdlMessageError').modal('show');
       }
     }
@@ -65,7 +65,7 @@ export class CategoryitemComponent implements OnInit {
       (response) => {
         if (response.success !== undefined) {
           $('#mdl_cancelactivate').modal('hide');
-          this.message_info = 'Sea guardado correctamente los datos..!!';
+          this.message_info = 'Se ha guardado correctamente los datos..!!';
           $('#mdlMessageSuccess').modal('show');
           this.get_list_categoryitem();
         } else if (response.error !== undefined) {
@@ -90,7 +90,7 @@ export class CategoryitemComponent implements OnInit {
       (response) => {
         if (response.success !== undefined) {
           $('#mdl_delete').modal('hide');
-          this.message_info = 'Sea eliminado correctamente los datos..!!';
+          this.message_info = 'Se ha eliminado correctamente los datos..!!';
           $('#mdlMessageSuccess').modal('show');
           this.get_list_categoryitem();
         } else if (response.error !== undefined) {

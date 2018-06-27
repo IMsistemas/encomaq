@@ -35,6 +35,7 @@ Route::resource('login', 'System\Login\LoginController');
 
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('CategoryItem/active', 'Configuration\CategoryController@active');
     Route::get('CategoryItem/delete/{id}', 'Configuration\CategoryController@deletecategory');
     Route::resource('CategoryItem', 'Configuration\CategoryController');
 });
@@ -46,6 +47,7 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('UnitType/active', 'Configuration\UnitTypeController@active');
     Route::get('UnitType/delete/{id}', 'Configuration\UnitTypeController@deleteunit');
     Route::resource('UnitType', 'Configuration\UnitTypeController');
 });

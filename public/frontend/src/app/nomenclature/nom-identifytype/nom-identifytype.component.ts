@@ -30,18 +30,18 @@ export class NomIdentifytypeComponent implements OnInit {
   update_list(evento, type) {
     if (evento === true) {
       if (type === 'create') {
-        this.message_info = 'Sea guardado correctamente los datos..!!';
+        this.message_info = 'Se ha guardado correctamente los datos!';
         $('#mdlMessageSuccess').modal('show');
       } else if (type === 'edit') {
-        this.message_info = 'Sea editado correctamente los datos..!!';
+        this.message_info = 'Se ha editado correctamente los datos!';
         $('#mdlMessageSuccess').modal('show');
       }
     } else {
       if (type === 'create') {
-        this.message_info = 'Ha ocurrido un error al intentar agregar el tipo de identificación o la misma ya existe en el sistema..!!';
+        this.message_info = 'Ha ocurrido un error al intentar agregar el tipo de identificación o la misma ya existe en el sistema!';
         $('#mdlMessageError').modal('show');
       } else if (type === 'edit') {
-        this.message_info = 'Ha ocurrido un error al intentar editar el tipo de identificación o la misma ya existe en el sistema..!!';
+        this.message_info = 'Ha ocurrido un error al intentar editar el tipo de identificación o la misma ya existe en el sistema!';
         $('#mdlMessageError').modal('show');
       }
     }
@@ -85,18 +85,18 @@ export class NomIdentifytypeComponent implements OnInit {
         if (response.success !== undefined) {
           $('#mdl_delete').modal('hide');
           this.get_list_identifytype();
-          this.message_info = 'Sea elimino correctamente los datos..!!';
+          this.message_info = 'Se ha eliminado correctamente los datos!';
           $('#mdlMessageSuccess').modal('show');
         } else if (response.error !== undefined) {
           $('#mdl_delete').modal('hide');
-          this.message_info = 'Error al eliminar los datos..!!';
+          this.message_info = 'Error al eliminar los datos!';
           $('#mdlMessageError').modal('show');
         }
       },
       (error) => {
         console.log('POST call in error", respons', error);
         $('#mdl_delete').modal('hide');
-        this.message_info = 'Error al eliminar los datos..!!';
+        this.message_info = 'Error al eliminar los datos!';
         $('#mdlMessageError').modal('show');
       });
   }

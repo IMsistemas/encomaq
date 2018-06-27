@@ -140,11 +140,15 @@
                   <label for="exampleFormControlInput1">ÁREA
                     <span class="required">(*)</span>
                   </label>
-                  <input type="text" class="form-control"  id="area" name="area" [(ngModel)]="tem_edit.area" #area="ngModel" required>
+                  <input type="text" class="form-control" pattern="^[0-9]+([.][0-9]+)?$"   id="area" name="area" [(ngModel)]="tem_edit.area" #area="ngModel" required>
                 </div>
 
                 <div *ngIf="area.errors?.required && area.touched">
                   <small id="" class="form-text text-danger text-right">El área es requerida </small>
+                </div>
+
+                <div *ngIf="area.errors?.pattern">
+                  <small id="" class="form-text text-danger text-right">El área es incorrecta debe ser un numero entero o decimal</small>
                 </div>
               </div>
 
@@ -153,12 +157,17 @@
                   <label for="exampleFormControlInput1">PERÍODO DE ALQUILER
                     <span class="required">(*)</span>
                   </label>
-                  <input type="text" class="form-control" id="period" name="period" [(ngModel)]="tem_edit.period" #period="ngModel" required>
+                  <input type="text" class="form-control" pattern="^[0-9]+([.][0-9]+)?$"  id="period" name="period" [(ngModel)]="tem_edit.period" #period="ngModel" required>
                 </div>
 
                 <div *ngIf="period.errors?.required && period.touched">
                   <small id="" class="form-text text-danger text-right">El período es requerido </small>
                 </div>
+
+                <div *ngIf="period.errors?.pattern">
+                  <small id="" class="form-text text-danger text-right">El periodo es incorrecto debe ser un numero entero o decimal</small>
+                </div>
+
               </div>
             </div>
 
@@ -168,11 +177,15 @@
                   <label for="exampleFormControlInput1">GARANTÍA ENTREGADA
                     <span class="required">(*)</span>
                   </label>
-                  <input type="text" class="form-control" id="guarantee" name="guarantee" [(ngModel)]="tem_edit.guarantee" #guarantee="ngModel" required>
+                  <input type="text" class="form-control" pattern="^[0-9]+([.][0-9]+)?$"  id="guarantee" name="guarantee" [(ngModel)]="tem_edit.guarantee" #guarantee="ngModel" required>
                 </div>
 
                 <div *ngIf="guarantee.errors?.required && guarantee.touched">
                   <small id="" class="form-text text-danger text-right">La garantía es requerida </small>
+                </div>
+
+                <div *ngIf="guarantee.errors?.pattern">
+                  <small id="" class="form-text text-danger text-right">La garantía es incorrecta debe ser un numero entero o decimal</small>
                 </div>
               </div>
             </div>
@@ -183,11 +196,14 @@
                   <label for="exampleFormControlInput1">COSTO DE ALQUILER
                     <span class="required">(*)</span>
                   </label>
-                  <input type="text" class="form-control"  id="cost" name="cost" [(ngModel)]="tem_edit.cost" #cost="ngModel" required>
+                  <input type="text" class="form-control" pattern="^[0-9]+([.][0-9]+)?$"  id="cost" name="cost" [(ngModel)]="tem_edit.cost" #cost="ngModel" required>
                 </div>
 
                 <div *ngIf="cost.errors?.required && cost.touched">
                   <small id="" class="form-text text-danger text-right">El costo es requerido </small>
+                </div>
+                <div *ngIf="cost.errors?.pattern">
+                  <small id="" class="form-text text-danger text-right">El costo es incorrecto debe ser un numero entero o decimal</small>
                 </div>
               </div>
             </div>

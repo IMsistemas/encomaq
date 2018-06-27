@@ -21,7 +21,11 @@ class UnitTypeController extends Controller
         $data = UnitType::all();
         return  Response::json($data,200);
     }
-
+    public function active()
+    {
+        $data = UnitType::whereRaw("state=1")->get();
+        return  Response::json($data,200);
+    }
     /**
      * Show the form for creating a new resource.
      *
