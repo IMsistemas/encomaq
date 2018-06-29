@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ReferralguideService } from '../../../service/referralguide/referralguide.service';
 import { LiquidationService } from '../../../service/bliquidation/liquidation.service';
+import { ProjectService } from '../../../service/bproject/project.service';
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -35,15 +36,56 @@ export class AddliquidationComponent implements OnInit {
   porcentaje = 12;
   iva: any;
   totalprecio: any;
-  constructor(private referralguide: ReferralguideService, private liquidation: LiquidationService ) { }
+  list_client = [];
+  list_project = [];
+  client_guiar: any;
+  constructor(private referralguide: ReferralguideService, private liquidation: LiquidationService, private project: ProjectService ) { }
   ngOnInit() {
-    this.getList();
+    this.getListclient_referralguide();
   }
 
-  addliuidation() {
-    $('#addrwo').modal('show');
+  addliuidation(data: any) {
+    if (data.idcliente != '') {
+      this.client_guiar = data.idcliente;
+      this.getList();
+      $('#addrwo').modal('show');
+    } else {
+      $('#infoerrors').modal('show');
+      this.mensage = 'Seleccione un cliente para agregar una guía de remisión';
+    }
+    console.log(data);
   }
 
+  getListclient_referralguide() {
+    this.list_client.push({ idclient: '', businessname: '--Seleccione--' });
+    this.referralguide.listclient_referralguide().subscribe(
+      (response) => {
+        console.log(response);
+        for (const cat of response) {
+          const o = {
+            idclient: cat.idclient,
+            businessname: cat.businessname,
+            identify: cat.identify,
+            phone: cat.phone,
+            address: cat.address
+          };
+          this.list_client.push(o);
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+  }
+
+  projects_client(id: any) {
+    this.project.client_project(id).subscribe(
+      (response) => {
+        this.list_project = response;
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+    });
+  }
 
   getList() {
 
@@ -52,7 +94,8 @@ export class AddliquidationComponent implements OnInit {
       state: this.state,
       column: this.column,
       order: this.order,
-      num_page: this.num_page
+      num_page: this.num_page,
+      client: this.client_guiar
     };
 
     this.referralguide.get(this.page, o).subscribe(
@@ -142,6 +185,7 @@ export class AddliquidationComponent implements OnInit {
           $('#addliquidation').modal('hide');
           frm.reset();
           this.list_guias = [];
+          this.list_project = [],
           this.calcula();
           this.update_component_father.emit(true);
         } else if (response.error !== undefined) {

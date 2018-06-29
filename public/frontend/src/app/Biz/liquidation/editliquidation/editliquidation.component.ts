@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { NgForm } from '@angular/forms';
 import { ReferralguideService } from '../../../service/referralguide/referralguide.service';
 import { LiquidationService } from '../../../service/bliquidation/liquidation.service';
+import { ProjectService } from '../../../service/bproject/project.service';
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -35,16 +36,60 @@ export class EditliquidationComponent implements OnInit {
   limit = 0;
   from = 0;
   /*variables para paginar*/
-  constructor(private referralguide: ReferralguideService, private liquidation: LiquidationService) { }
+  list_client = [];
+  list_project = [];
+  temp_project = [];
+  client_guiar: any;
+  constructor(private referralguide: ReferralguideService, private liquidation: LiquidationService, private project: ProjectService) { }
 
   ngOnInit() {
-    this.getList();
+    this.getListclient_referralguide();
   }
-  addliuidation() {
-    $('#addliquidationedit').modal('show');
-    this.getList();
+  addliuidation(data: any) {
+    if (data.idcliente != '') {
+      this.client_guiar = data.idcliente;
+      this.getList();
+      $('#addliquidationedit').modal('show');
+    } else {
+      $('#temperrorsliquidation').modal('show');
+      this.mensage = 'Seleccione un cliente para agregar una guía de remisión';
+    }
+    console.log(data);
   }
-
+  projects_client(id: any) {
+    this.temp_project = [];
+    for (const i of this.tem_edit.biz_liquidationproject) {
+      this.temp_project.push('' + i.idproject + '');
+    }
+    console.log(this.temp_project);
+    this.project.client_project(id).subscribe(
+      (response) => {
+        this.list_project = response;
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+  }
+  getListclient_referralguide() {
+    this.list_client.push({ idclient: '', businessname: '--Seleccione--' });
+    this.referralguide.listclient_referralguide().subscribe(
+      (response) => {
+        console.log(response);
+        for (const cat of response) {
+          const o = {
+            idclient: cat.idclient,
+            businessname: cat.businessname,
+            identify: cat.identify,
+            phone: cat.phone,
+            address: cat.address
+          };
+          this.list_client.push(o);
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+  }
   getList() {
 
     const o = {
@@ -52,7 +97,8 @@ export class EditliquidationComponent implements OnInit {
       state: this.state,
       column: this.column,
       order: this.order,
-      num_page: this.num_page
+      num_page: this.num_page,
+      client: this.client_guiar
     };
 
     this.referralguide.get(this.page, o).subscribe(
@@ -85,7 +131,7 @@ export class EditliquidationComponent implements OnInit {
     $('#addliquidationedit').modal('hide');
   }
   close_info() {
-    $('#infoerrorsliquidation').modal('hide');
+    $('#temperrorsliquidation').modal('hide');
   }
   select_guia(data: any) {
     // biz_referralguide.biz__referralguideitem
@@ -100,7 +146,7 @@ export class EditliquidationComponent implements OnInit {
     } else {
       const resultado = this.tem_edit.biz_referralguideliquidation.find(guia => guia.idreferralguide === data.idreferralguide);
       if (resultado != undefined) {
-        $('#infoerrors').modal('show');
+        $('#temperrorsliquidation').modal('show');
         this.mensage = 'La guía de remisión seleccionada ya esta asignada a la liquidación';
       } else {
         const aux = {
@@ -137,12 +183,16 @@ export class EditliquidationComponent implements OnInit {
     this.tem_edit.biz_referralguideliquidation.splice(posicion, 1);
     this.calcula();
   }
-  edit_liquidation(data: any, frm: any) {
+  edit_liquidation(data: any, frm: any, datos: any) {
 
     data.subtotal = this.subtotal;
     data.iva = this.iva;
     data.total = this.totalprecio;
-    this.liquidation.edit_liquidation(data.idliquidation, data).subscribe(
+    const o = {
+      Data: data,
+      list: datos
+    };
+    this.liquidation.edit_liquidation(data.idliquidation, o).subscribe(
       (response) => {
         if (response.success !== undefined) {
           $('#editliquidation').modal('hide');

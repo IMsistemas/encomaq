@@ -105,5 +105,18 @@ export class UpdatereferralguideComponent implements OnInit {
   refresh() {
     this.refresh_component_father.emit(false);
   }
+  excel() {
+    $('#guiaderemision').table2excel({
+      exclude: '.noExl',
+      filename: 'Guía de remisión'
+    });
+  }
+  pdf() {
+    const accion = this.referra.referraexportarpdf(this.tem_edit.idreferralguide);
+    console.log(accion);
+    $('#printtitle').html('Guía De Remisión');
+    $('#print').modal('show');
+    $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
+  }
 
 }

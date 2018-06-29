@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Models\Biz\Liquidation;
 use App\Models\Biz\Referralguideliquidation;
+use App\Models\Biz\Liquidationproject;
 use App\Models\Biz\Company;
 
 class LiquidationController extends Controller
@@ -56,6 +57,7 @@ class LiquidationController extends Controller
          $aux->subtotal = $data["Subtotal"];
          $aux->iva = $data["Iva"];
          $aux->total = $data["Total"];
+         //$aux->projects = json_encode($data["Data"]["projects"]);
          $aux->state = 1;
          if ($aux->save()) {
              foreach ($data["list"] as $f) {
@@ -63,6 +65,12 @@ class LiquidationController extends Controller
                  $real->idliquidation = $aux->idliquidation;
                  $real->idreferralguide = $f["idreferralguide"];
                  $real->save();
+             }
+             foreach ($data["Data"]["projects"] as $f) {
+                 $lqpr =  new Liquidationproject;
+                 $lqpr->idliquidation = $aux->idliquidation;
+                 $lqpr->idproject = $f;
+                 $lqpr->save();
              }
              return response()->json(['success' => $aux ]);
          } else {
@@ -105,20 +113,27 @@ class LiquidationController extends Controller
 
         $aux = Liquidation::find($id);
      
-         $aux->dateinit = $data["dateinit"];
-         $aux->dateend = $data["dateend"];
-         $aux->observation = $data["observation"];
-         $aux->subtotal = $data["subtotal"];
-         $aux->iva = $data["iva"];
-         $aux->total = $data["total"];
+         $aux->dateinit = $data["Data"]["dateinit"];
+         $aux->dateend = $data["Data"]["dateend"];
+         $aux->observation = $data["Data"]["observation"];
+         $aux->subtotal = $data["Data"]["subtotal"];
+         $aux->iva = $data["Data"]["iva"];
+         $aux->total = $data["Data"]["total"];
          $aux->state = 1;
          if ($aux->save()) {
              $temp = Referralguideliquidation::whereRaw("idliquidation=".$aux->idliquidation."")->delete();
-             foreach ($data["biz_referralguideliquidation"] as $f) {
+             $temp2 = Liquidationproject::whereRaw("idliquidation=".$aux->idliquidation."")->delete();
+             foreach ($data["Data"]["biz_referralguideliquidation"] as $f) {
                  $real =  new Referralguideliquidation;
                  $real->idliquidation = $aux->idliquidation;
                  $real->idreferralguide = $f["idreferralguide"];
                  $real->save();
+             }
+             foreach ($data["list"]["projects"] as $f) {
+                 $lqpr =  new Liquidationproject;
+                 $lqpr->idliquidation = $aux->idliquidation;
+                 $lqpr->idproject = $f;
+                 $lqpr->save();
              }
              return response()->json(['success' => $aux ]);
          } else {
@@ -147,7 +162,7 @@ class LiquidationController extends Controller
     public function liquidationfiltro(Request $request) 
     {
         $filtro = json_decode($request->get('filter'));
-        $data = Liquidation::with("biz_referralguideliquidation.biz_referralguide.biz_contract.biz_client","biz_referralguideliquidation.biz_referralguide.biz_Referralguideitem.biz_item")
+        $data = Liquidation::with("biz_liquidationproject.biz_project","biz_referralguideliquidation.biz_referralguide.biz_contract.biz_client","biz_referralguideliquidation.biz_referralguide.biz_Referralguideitem.biz_item")
                         ->whereRaw("biz_liquidation.state='".$filtro->state."' AND ( biz_liquidation.number LIKE '%".$filtro->Buscar."%'  )")
                         ->orderBy("".$filtro->column, "".$filtro->order);
 

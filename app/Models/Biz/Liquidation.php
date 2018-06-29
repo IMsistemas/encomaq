@@ -13,6 +13,10 @@ class Liquidation extends Model
     {
         return $this->hasMany('App\Models\Biz\Referralguideliquidation','idliquidation');
     }
+    public function biz_liquidationproject()
+    {
+        return $this->hasMany('App\Models\Biz\Liquidationproject','idliquidation');
+    }
 
 
 }

@@ -323,10 +323,62 @@
 
 
 
-
+    <div class="row" style="display: none;">
+      <table id="guiaderemision">
+        <tr>
+          <th>Contrato</th> <td>{{idcontract_s.nocontract}}</td>
+          <th>Cliente</th>
+          <td>{{idcontract_s.biz_client.businessname}}</td>
+        </tr>
+        <tr>
+          <th>Fecha</th>
+          <td>{{tem_edit.datetimereferral}}</td>
+          <th>Hora</th>
+          <td>{{tem_edit.sequential}}</td>
+        </tr>
+        <tr>
+          <th>Motivo Traslado</th>
+          <td colspan="3">{{tem_edit.nom_transferreason.transferreasonname}}</td>
+        </tr>
+        <tr>
+          <th>Punto de Partida</th>
+          <td>{{tem_edit.startingpoint}}</td>
+          <th>Punto de Llegada</th>
+          <td>{{tem_edit.arrivalpoint}}</td>
+        </tr>
+        <tr>
+          <th>Transportista</th>
+          <td>{{tem_edit.biz_carrier.carriername}}</td>
+          <th>C.I.</th>
+          <td>{{tem_edit.biz_carrier.identify}}</td>
+          <th>Placa Nro.</th>
+          <td>{{tem_edit.biz_carrier.licenseplate}}</td>
+        </tr>
+        <tr>
+          <th>No</th>
+          <th>DESCRIPCIÓN</th>
+          <th>CANT.</th>
+          <th>OBSERVACIONES</th>
+        </tr>
+        <tr *ngFor="let ax of tem_edit.biz__referralguideitem let i = index">
+          <td>{{i+1}}</td>
+          <td>{{ax.biz_item.itemname}}</td>
+          <td>{{ax.quantify}}</td>
+          <td>{{ax.observation}}</td>
+        </tr>
+      </table>
+    </div>
   </div>
 
   <div class="modal-footer">
+
+    <div class="btn-group">
+      <button type="button" class="btn btn-default" (click)="pdf()">
+        <i class="fas fa-file-pdf"></i> Pdf </button>
+      <button type="button" class="btn btn-success" (click)="excel()">
+        <i class="fas fa-file-excel"></i> Excel </button>
+    </div>
+
     <button type="button" class="btn btn-secondary" data-dismiss="modal">
       Cancelar
       <i class="fas fa-ban"></i>

@@ -34,4 +34,11 @@ export class ReferralguideService {
   filtro_referraexportarpdf(data): any {
     return this.url_api.get_url_api() + 'api/referralguide/exportarpdf/' + JSON.stringify(data);
   }
+
+  listclient_referralguide(): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/referralguide/listclient_referralguide');
+  }
+  referraexportarpdf(id: any): any {
+    return this.url_api.get_url_api() + 'api/referralguide/exportarpdfid/' + id;
+  }
 }

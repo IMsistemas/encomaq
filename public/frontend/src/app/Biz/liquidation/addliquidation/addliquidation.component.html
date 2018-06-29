@@ -24,7 +24,7 @@
           <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
             <div class="row">
               <div class="col-md-12 col-sm-12">
-                <strong>1. DATOS GENERALES DE LA LIQUIDACIÓN</strong>
+                <strong>DATOS GENERALES DE LA LIQUIDACIÓN</strong>
               </div>
             </div>
 
@@ -62,7 +62,7 @@
             <div class="row">
               <div class="col-md-12 col-sm-12">
                 <div class="form-group">
-                  <label for="exampleFormControlInput1">Obsercación
+                  <label for="exampleFormControlInput1">Observación
                     <span class="required">(*)</span>
                   </label>
                   <textarea cols="100" rows="5" class="form-control" id="observation" name="observation" ngModel  #observation="ngModel"
@@ -70,7 +70,7 @@
                 </div>
 
                 <div *ngIf="observation.errors?.required && observation.touched">
-                  <small id="" class="form-text text-danger text-right">La obsercación es requerida</small>
+                  <small id="" class="form-text text-danger text-right">La observación es requerida</small>
                 </div>
               </div>
             </div>
@@ -79,29 +79,67 @@
           </div>
 
           <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+            
+
             <div class="row">
+
               <div class="col-md-12 col-sm-12">
-                <p>
-                  <strong>2. GUÍAS DE REMISIÓN </strong>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Cliente 
+                    <span class="required">(*)</span>
+                  </label>
+                  <select class="form-control" id="idcliente" name="idcliente" ngModel #idcliente="ngModel" (change)="projects_client(idcliente.viewModel)" required>
+                    <option *ngFor="let c of list_client" value="{{c.idclient}}">{{c.businessname}}</option>
+                  </select>
+                </div>
               </div>
             </div>
+
             <div class="row">
-              <div class="col-md-12 col-sm-12 text-right">
-                <button type="button" class="btn btn-primary" (click)="addliuidation()"> Agregar
-                  <i class="fas fa-plus-square fa-lg"></i>
-                </button>
+            
+              <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Proyectos
+                    <span class="required">(*)</span>
+                  </label>
+                  <select class="form-control" id="projects" multiple  name="projects" ngModel #projects="ngModel" required>
+                    <option *ngFor="let c of list_project" value="{{c.idproject}}">{{c.projectname}}</option>
+                  </select>
+                </div>
               </div>
+            </div>          
+
+
+
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+            <label >Guías De Remisión
+              <span class="required">(*)</span>
+            </label>
             </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 text-right">
+              <button type="button" class="btn btn-primary" (click)="addliuidation(frmcontract.value)"> Agregar Guía Remisión
+                <i class="fas fa-plus-square fa-lg"></i>
+              </button>
+            </div>
+          </div>
 
             <div class="row">
               <div class="col-12 col-sm-12">
                 <table style="font-size: 11px;" *ngFor="let item of list_guias" class="table table-bordered table-striped table-condensed">
                   <thead class="thead-dark">
                     <tr>
-                      <th colspan="4">
+                      <th colspan="2" class="text-left">
                         <button type="button" class="btn btn-danger" (click)="removerow(item)">
                           <i class="fas fa-trash-alt"></i>
                         </button>
+                      </th>
+                      <th colspan="2">
+                        
                       </th>
                     </tr>
                     <tr>

@@ -32,13 +32,28 @@ class ReferralGuideController extends Controller
         $where .= " OR biz_contract.nocontract LIKE '%" . $filter->search . "%'   ";
         $where .= " OR biz_client.businessname LIKE '%" . $filter->search . "%'  ) ";
         
+        if (isset($filter->client)) {
+            $where .= " AND  biz_client.idclient=".$filter->client." ";
+        }
 
-        return Referralguide::with('biz_contract.biz_client', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem.biz_item')
+        return Referralguide::with('biz_contract.biz_client.biz_Project', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem.biz_item')
                                 ->selectRaw("biz_referralguide.* ")
                                 ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")
                                 ->join("biz_client", "biz_client.idclient", "=", "biz_contract.idclient" )
                                 ->whereRaw($where)->orderBy($filter->column, $filter->order)
                                 ->paginate($filter->num_page);
+    }
+
+    public function listclient_referralguide()
+    {
+        $where = " biz_referralguide.state ='1' ";
+        return Referralguide::selectRaw("biz_client.* ")
+                                ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")
+                                ->join("biz_client", "biz_client.idclient", "=", "biz_contract.idclient" )
+                                ->whereRaw($where)
+                                ->orderBy("biz_client.businessname", "ASC")
+                                ->groupBy("biz_client.idclient")
+                                ->get();
     }
 
     /**
@@ -189,7 +204,7 @@ class ReferralGuideController extends Controller
         $where .= " OR biz_contract.nocontract LIKE '%" . $filter->search . "%'   ";
         $where .= " OR biz_client.businessname LIKE '%" . $filter->search . "%'  ) ";
 
-        $data = Referralguide::with('biz_contract.biz_client', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem')
+        $data = Referralguide::with('biz_contract.biz_client.biz_Project', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem')
                         ->selectRaw("biz_referralguide.* ")
                         ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")
                         ->join("biz_client", "biz_client.idclient", "=", "biz_contract.idclient" )
@@ -203,6 +218,30 @@ class ReferralGuideController extends Controller
         $pdf->loadHTML($view);
         $pdf->setPaper('A4', 'portrait');
         return $pdf->stream("ListaDeGuias".$today.".pdf");
-    }     
+    }
+    
+    public function exportarpdfid ($id) {
+        ini_set('max_execution_time', 300);
+        
+       
+        $where = " biz_referralguide.state ='1' ";
+        $where .= " AND biz_referralguide.idreferralguide=".$id." ";
+        
+
+        $data = Referralguide::with('biz_contract.biz_client.biz_Project', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem')
+                        ->selectRaw("biz_referralguide.* ")
+                        ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")
+                        ->join("biz_client", "biz_client.idclient", "=", "biz_contract.idclient" )
+                        ->whereRaw($where)
+                        ->get();
+
+        $company = Company::all();
+        $today=date("Y-m-d H:i:s");
+        $view =  \View::make('Print.Guia', compact('data','company'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->stream("GuiaRemision".$today.".pdf");
+    }
 
 }

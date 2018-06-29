@@ -134,6 +134,14 @@ class ProjectController extends Controller
                         ->orderBy("".$filtro->column, "".$filtro->order);
         return  $data->paginate($filtro->num_page);
     }
+
+    public function projectclient($id) 
+    {
+        return  Project::whereRaw(" biz_project.state='1' AND   biz_project.idclient='".$id."'  ")
+                        ->orderBy("biz_project.projectname","ASC")
+                        ->get();
+    }
+
     private function existproject($aux, $id)
     {
         $count = Project::where('projectname', $aux);

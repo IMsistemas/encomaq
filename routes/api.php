@@ -87,6 +87,7 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('Project/clientproject/{id}', 'Biz\ProjectController@projectclient');
     Route::get('Project/exportarpdf/{data}', 'Biz\ProjectController@exportarpdf');
     Route::get('Project/filtro', 'Biz\ProjectController@projectfiltro');
     Route::get('Project/state/{id}', 'Biz\ProjectController@stateproject');
@@ -109,6 +110,8 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('referralguide/exportarpdfid/{data}', 'Biz\ReferralGuideController@exportarpdfid');
+    Route::get('referralguide/listclient_referralguide', 'Biz\ReferralGuideController@listclient_referralguide');
     Route::get('referralguide/exportarpdf/{data}', 'Biz\ReferralGuideController@exportarpdf');
     Route::get('referralguide/get', 'Biz\ReferralGuideController@get');
     Route::get('referralguide/updateState/{id}', 'Biz\ReferralGuideController@updateState');

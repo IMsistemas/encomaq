@@ -28,4 +28,7 @@ export class ProjectService {
   filtro_projectexportarpdf(data): any {
     return this.url_api.get_url_api() + 'api/Project/exportarpdf/' + JSON.stringify(data);
   }
+  client_project(id: any): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/Project/clientproject/' + id);
+  }
 }
