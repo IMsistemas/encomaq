@@ -134,47 +134,42 @@
     </div>
     <div class="row text-center">
         <h3>
-            Guía De Remisión
+            Contrato
         </h3>
     </div>
     
     <table class="table">
         <tr>
-            <th>Contrato</th>
-            <td><?php echo $data[0]["biz_contract"]["nocontract"]; ?></td>
             <th>Cliente</th>
-            <td><?php echo $data[0]["biz_contract"]["biz_client"]["businessname"]; ?></td>
+            <td><?php echo $data[0]["biz_client"]["businessname"]; ?></td>
+            <th>C.I./ RUC</th>
+            <td><?php echo $data[0]["biz_client"]["identify"]; ?></td>
         </tr>
         <tr>
-            <th>Fecha</th>
-            <td><?php echo $data[0]["datetimereferral"]; ?></td>
-            <th>Hora</th>
-            <td><?php echo $data[0]["sequential"]; ?></td>
+            <th>Teléfono</th>
+            <td><?php echo $data[0]["biz_client"]["phone"]; ?></td>
+            <th>Dirección</th>
+            <td><?php echo $data[0]["biz_client"]["address"]; ?></td>
         </tr>
         <tr>
-            <th>Motivo Traslado</th>
-            <td colspan="3"><?php echo $data[0]["nom_transferreason"]["transferreasonname"]; ?></td>
+            <th>Fecha de inicio</th>
+            <td ><?php echo $data[0]["startdate"]; ?></td>
+            <th>Fecha de fin</th>
+            <td ><?php echo $data[0]["enddate"]; ?></td>
         </tr>
         <tr>
-            <th>Punto de partida</th>
-            <td><?php echo $data[0]["startingpoint"]; ?></td>
+            <th>Área</th>
+            <td><?php echo $data[0]["area"]; ?></td>
 
-            <th>Punto de llegada</th>
-            <td><?php echo $data[0]["arrivalpoint"]; ?></td>
+            <th>Periodo de alquiler</th>
+            <td><?php echo $data[0]["period"]; ?></td>
 
         </tr>
         <tr>
-            <th>Transportista</th>
-            <td colspan="3"><?php echo $data[0]["biz_carrier"]["carriername"]; ?></td>
-        </tr>
-
-        <tr>
-            <th>C.I.</th>
-            <td><?php echo $data[0]["biz_carrier"]["identify"]; ?></td>
-
-            <th>Placa Nro.</th>
-            <td><?php echo $data[0]["biz_carrier"]["licenseplate"]; ?></td>
-
+            <th>Costo de alquiler</th>
+            <td ><?php echo $data[0]["cost"]; ?></td>
+            <th>Obsercación</th>
+            <td ><?php echo $data[0]["observation"]; ?></td>
         </tr>
     </table>
     
@@ -193,11 +188,11 @@
              <?php
              $x=1;
               
-                foreach ($data[0]["biz_Referralguideitem"] as $c) {
+                foreach ($data[0]["biz_contractitem"] as $c) {
                   echo "<tr>";
                   echo "<td>".$x."</td>";
                   echo "<td>".$c["biz_item"]["itemname"]."</td>";
-                  echo "<td>".$c["quantify"]."</td>";
+                  echo "<td>".$c["quantity"]."</td>";
                   echo "<td>".$c["observation"]."</td>";
                   echo "</tr>";
                   $x++;

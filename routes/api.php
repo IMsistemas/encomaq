@@ -102,6 +102,7 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('Contract/exportarpdfid/{data}', 'Biz\CotractController@exportarpdfid');
     Route::get('Contract/exportarpdf/{data}', 'Biz\CotractController@exportarpdf');
     Route::get('Contract/getContractActive', 'Biz\CotractController@getContractActive');
     Route::get('Contract/filtro', 'Biz\CotractController@contractfiltro');
@@ -119,6 +120,7 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('Liquidation/exportarpdfid/{data}', 'Biz\LiquidationController@exportarpdfid');
     Route::get('Liquidation/exportarpdf/{data}', 'Biz\LiquidationController@exportarpdf');
     Route::get('Liquidation/getLiquidationActive', 'Biz\LiquidationController@getLiquidationtActive');
     Route::get('Liquidation/filtro', 'Biz\LiquidationController@liquidationfiltro');

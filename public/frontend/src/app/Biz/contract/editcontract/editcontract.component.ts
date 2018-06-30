@@ -102,4 +102,18 @@ export class EditcontractComponent implements OnInit {
   refresh() {
     this.refresh_component_father.emit(false);
   }
+  excel() {
+    $('#exlcontrato').table2excel({
+      exclude: '.noExl',
+      filename: 'Contrato'
+    });
+  }
+  pdf() {
+    const accion = this.contract.contractexportarpdf(this.tem_edit.idcontract);
+    console.log(accion);
+    $('#printtitle').html('Contrato');
+    $('#print').modal('show');
+    $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
+  }
+
 }

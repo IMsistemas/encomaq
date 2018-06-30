@@ -362,7 +362,7 @@
         </tr>
         <tr *ngFor="let ax of tem_edit.biz__referralguideitem let i = index">
           <td>{{i+1}}</td>
-          <td>{{ax.biz_item.itemname}}</td>
+          <td *ngIf="ax.biz_item" >{{ax.biz_item.itemname}}</td>
           <td>{{ax.quantify}}</td>
           <td>{{ax.observation}}</td>
         </tr>

@@ -198,5 +198,21 @@ class LiquidationController extends Controller
         $pdf->loadHTML($view);
         $pdf->setPaper('A4', 'portrait');
         return $pdf->stream("ListaDeLiquidaciones".$today.".pdf");
-    }     
+    } 
+    
+    public function exportarpdfid ($id) {
+        ini_set('max_execution_time', 300);
+       
+       $data = Liquidation::with("biz_referralguideliquidation.biz_referralguide.biz_contract.biz_client","biz_referralguideliquidation.biz_referralguide.biz_Referralguideitem.biz_item")
+                        ->whereRaw("biz_liquidation.state='1' AND  biz_liquidation.idliquidation=".$id."")
+                        ->get();
+
+        $company = Company::all();
+        $today=date("Y-m-d H:i:s");
+        $view =  \View::make('Print.Liquidacion', compact('data','company'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->stream("ListaDeLiquidaciones".$today.".pdf");
+    } 
 }

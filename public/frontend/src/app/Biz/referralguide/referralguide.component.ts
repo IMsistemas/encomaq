@@ -118,11 +118,11 @@ export class ReferralguideComponent implements OnInit {
 
       if (type === 'create') {
 
-        this.message_success = 'Se ha creado satisfactoriamente la guía de remisión';
+        this.message_info = 'Se ha creado satisfactoriamente la guía de remisión';
 
       } else {
 
-        this.message_success = 'Se ha editado satisfactoriamente la guía de remisión';
+        this.message_info = 'Se ha editado satisfactoriamente la guía de remisión';
 
       }
 
@@ -133,11 +133,11 @@ export class ReferralguideComponent implements OnInit {
 
       if (type === 'create') {
 
-        this.message_error = 'Ha ocurrido un error al intentar agregar la guía de remisión o la misma ya existe en el sistema';
+        this.message_info = 'Ha ocurrido un error al intentar agregar la guía de remisión o la misma ya existe en el sistema';
 
       } else {
 
-        this.message_error = 'Ha ocurrido un error al intentar editar la guía de remisión o la misma  ya existe en el sistema';
+        this.message_info = 'Ha ocurrido un error al intentar editar la guía de remisión o la misma  ya existe en el sistema';
 
       }
 

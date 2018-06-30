@@ -40,6 +40,7 @@ export class EditliquidationComponent implements OnInit {
   list_project = [];
   temp_project = [];
   client_guiar: any;
+  guiarm: any;
   constructor(private referralguide: ReferralguideService, private liquidation: LiquidationService, private project: ProjectService) { }
 
   ngOnInit() {
@@ -212,5 +213,36 @@ export class EditliquidationComponent implements OnInit {
   }
   refresh() {
     this.refresh_component_father.emit(false);
+  }
+  excel() {
+    $('#tablefinal').html($('#exlliquidation').html() + $('.tbldinamic').html() + $('#fulltotales').html());
+    $('#tablefinal').table2excel({
+      exclude: '.noExl',
+      filename: 'Liquidacion'
+    });
+  }
+  pdf() {
+    const accion = this.liquidation.liquidationexportarpdf(this.tem_edit.idliquidation);
+    console.log(accion);
+    $('#printtitle').html('Liquidación');
+    $('#print').modal('show');
+    $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
+  }
+  pdfid(id: any) {
+    console.log(id);
+    const accion = this.referralguide.referraexportarpdf(id.idreferralguide);
+    console.log(accion);
+    $('#printtitle').html('Guía De Remisión');
+    $('#print').modal('show');
+    $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
+
+  }
+  excelid(id: any) {
+    console.log(id);
+    this.guiarm = id;
+    $('#guiaremisionliquidacion').table2excel({
+      exclude: '.noExl',
+      filename: 'Guía de remisión'
+    });
   }
 }

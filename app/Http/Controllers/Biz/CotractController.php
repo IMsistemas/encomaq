@@ -168,7 +168,7 @@ class CotractController extends Controller
     public function contractfiltro(Request $request) 
     {
         $filtro = json_decode($request->get('filter'));
-        $data = Contract::with("biz_client","biz_contractitem")
+        $data = Contract::with("biz_client","biz_contractitem.biz_item")
                         ->selectRaw("biz_contract.*")
                         ->join("biz_client","biz_client.idclient","=","biz_contract.idclient")
                         ->whereRaw("biz_contract.state='".$filtro->state."' AND ( biz_contract.nocontract LIKE '%".$filtro->Buscar."%' OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%') )")
@@ -214,5 +214,23 @@ class CotractController extends Controller
         $pdf->loadHTML($view);
         $pdf->setPaper('A4', 'portrait');
         return $pdf->stream("ListaDeContratos".$today.".pdf");
-    }            
+    }   
+
+    public function exportarpdfid ($id) {
+        ini_set('max_execution_time', 300);
+       
+       $data = Contract::with("biz_client","biz_contractitem.biz_item")
+                        ->selectRaw("biz_contract.*")
+                        ->join("biz_client","biz_client.idclient","=","biz_contract.idclient")
+                        ->whereRaw("biz_contract.state='1' AND biz_contract.idcontract=".$id."")
+                        ->get();
+
+        $company = Company::all();
+        $today=date("Y-m-d H:i:s");
+        $view =  \View::make('Print.Contrato', compact('data','company'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->stream("ListaDeContratos".$today.".pdf");
+    }                    
 }

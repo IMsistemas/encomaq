@@ -32,5 +32,8 @@ export class LiquidationService {
   filtro_liquidationexportarpdf(data): any {
     return this.url_api.get_url_api() + 'api/Liquidation/exportarpdf/' + JSON.stringify(data);
   }
+  liquidationexportarpdf(id: any): any {
+    return this.url_api.get_url_api() + 'api/Liquidation/exportarpdfid/' + id;
+  }
 
 }

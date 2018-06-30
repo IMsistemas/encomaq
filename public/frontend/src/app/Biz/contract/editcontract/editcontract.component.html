@@ -294,11 +294,68 @@
     </div>
 
 
+    <div class="row" style="display: none;">
+      <table id="exlcontrato">
+        <tr>
+          <th>Cliente</th>
+          <td>{{tem_edit.biz_client.businessname}}</td>
+          <th>C.I./ RUC</th>
+          <td>{{tem_edit.biz_client.identify}}</td>
+        </tr>
+        <tr>
+          <th>Teléfono</th>
+          <td>{{tem_edit.biz_client.phone}}</td>
+          <th>Dirección</th>
+          <td>{{tem_edit.biz_client.address}}</td>
+        </tr>
+        <tr>
+          <th>Fecha de inicio</th>
+          <td>{{tem_edit.startdate}}</td>
+          <th>Fecha de fin</th>
+          <td>{{tem_edit.enddate}}</td>
+        </tr>
+        <tr>
+          <th>Área</th>
+          <td>{{tem_edit.area}}</td>
+          <th>Periodo de alquiler</th>
+          <td>{{tem_edit.period}}</td>
+        </tr>
+        <tr>
+          <th>Costo de alquiler</th>
+          <td>{{tem_edit.cost}}</td>
+          <th>Obsercación</th>
+          <td>{{tem_edit.observation}}</td>
+        </tr>
+        <tr>
+          <td colspan="4"></td>
+        </tr>
+        <tr>
+          <th>NO</th>
+          <th>DESCRIPCIÓN</th>
+          <th>CANT.</th>
+          <th>OBSERVACIONES</th>
+        </tr>
+        <tr *ngFor="let it of tem_edit.biz_contractitem let i = index">
+          <td>{{i+1}}</td>
+          <td *ngIf="it.biz_item">{{it.biz_item.itemname}}</td>
+          <td>{{it.quantity}}</td>
+          <td>{{it.observation}}</td>
+        </tr>
+      </table>
+    </div>
 
 
   </div>
 
   <div class="modal-footer">
+
+    <div class="btn-group">
+      <button type="button" class="btn btn-default" (click)="pdf()">
+        <i class="fas fa-file-pdf"></i> Pdf </button>
+      <button type="button" class="btn btn-success" (click)="excel()">
+        <i class="fas fa-file-excel"></i> Excel </button>
+    </div>
+
     <button type="button" class="btn btn-secondary" (click)="refresh()" data-dismiss="modal">
       Cancelar
       <i class="fas fa-ban"></i>

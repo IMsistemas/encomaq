@@ -62,7 +62,7 @@
             <div class="row">
               <div class="col-md-12 col-sm-12">
                 <div class="form-group">
-                  <label for="exampleFormControlInput1">Obsercación
+                  <label for="exampleFormControlInput1">Observación
                     <span class="required">(*)</span>
                   </label>
                   <textarea cols="100" rows="5" class="form-control" id="observation" name="observation" [(ngModel)]="tem_edit.observation"  #observation="ngModel" required></textarea>
@@ -127,11 +127,20 @@
                 <table style="font-size: 11px;" *ngFor="let item of tem_edit.biz_referralguideliquidation" class="table table-bordered table-striped table-condensed">
                   <thead class="thead-dark">
                     <tr>
-                      <th colspan="4">
+                      <th colspan="2">
                         <button type="button" class="btn btn-danger" (click)="removerow(item)">
                           <i class="fas fa-trash-alt"></i>
                         </button>
                       </th>
+                      <th colspan="2">
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-default" (click)="pdfid(item)">
+                              <i class="fas fa-file-pdf"></i> Pdf </button>
+                            <button type="button" class="btn btn-success" (click)="excelid(item)">
+                              <i class="fas fa-file-excel"></i> Excel </button>
+                          </div>
+                      </th>
+
                     </tr>
                     <tr>
                       <th>N. Contrato</th>
@@ -201,11 +210,113 @@
     </div>
 
 
+    <div class="row" style="display: none;">
+      <table id="exlliquidation">
+        <tr>
+          <th>Fecha de Inicio</th>
+          <td>{{tem_edit.dateinit}}</td>
+          <th>Fecha de Fin</th>
+          <td>{{tem_edit.dateend}}</td>  
+        </tr>
+        <tr>
+          <th>Observación</th>
+          <td colspan="3">{{tem_edit.observation}}</td>
+        </tr>
+
+        <tr>
+          <th>Cliente</th>
+          <td colspan="3">{{tem_edit.biz_referralguideliquidation[0].biz_referralguide.biz_contract.biz_client.businessname}}</td>
+        </tr>
+        <tr>
+          <th>Proyectos</th>
+          <td *ngFor="let pr of tem_edit.biz_liquidationproject">{{pr.biz_project.projectname}}</td>
+        </tr>
+      </table>
+
+      <table class="tbldinamic" *ngFor="let item of tem_edit.biz_referralguideliquidation">
+        <tr>
+          <td colspan="4"></td>
+        </tr>
+      <tr>
+        <th>P. Partida</th>
+        <th>{{item.biz_referralguide.startingpoint}}</th>
+      
+        <th>P. Llegada</th>
+        <th>{{item.biz_referralguide.arrivalpoint}}</th>
+      </tr>
+      <tr>
+        <th>Item</th>
+        <th>Cant.</th>
+        <th>Precio</th>
+        <th>Total</th>
+      </tr>
+     
+      <tr *ngFor="let it of item.biz_referralguide.biz__referralguideitem">
+        <td>{{it.biz_item.itemname}}</td>
+        <td>{{it.quantify}}</td>
+        <td>{{ it.biz_item.price }}</td>
+        <td>{{ it.biz_item.price*it.quantify }}</td>
+      </tr>
+      </table>
+
+      <table id="fulltotales">
+        <tr>
+          <td colspan="4"></td>
+        </tr>
+        <tr>
+          <th>Subtotal</th>
+          <th>{{tem_edit.subtotal}}</th>
+        </tr>
+        <tr>
+          <th>Iva</th>
+          <th>{{tem_edit.iva}}</th>
+        </tr>
+        <tr>
+          <th>Total</th>
+          <th>{{tem_edit.total}}</th>
+        </tr>
+      </table>
+
+      <table id="tablefinal">
+
+      </table>
+
+      <div *ngIf="guiarm">
+        <table id="guiaremisionliquidacion">
+          <tr>
+            <th>P. Partida</th>
+            <td>{{guiarm.biz_referralguide.startingpoint}}</td>
+            <th>P. Llegada</th>
+            <td>{{guiarm.biz_referralguide.arrivalpoint}}</td>
+          </tr>
+          <tr>
+            <th>NO</th>
+            <th>ITEM</th>
+            <th>CANT.</th>
+            <th>OBSERVACIÓN</th>
+          </tr>
+          <tr *ngFor="let item of guiarm.biz_referralguide.biz__referralguideitem let i = index">
+            <td>{{i+1}}</td>
+            <td>{{item.biz_item.itemname}}</td>
+            <td>{{item.quantify}}</td>
+            <td>{{item.observation}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
 
 
   </div>
 
   <div class="modal-footer">
+
+    <div class="btn-group">
+      <button type="button" class="btn btn-default" (click)="pdf()">
+        <i class="fas fa-file-pdf"></i> Pdf </button>
+      <button type="button" class="btn btn-success" (click)="excel()">
+        <i class="fas fa-file-excel"></i> Excel </button>
+    </div>
+
     <button type="button" class="btn btn-secondary" (click)="refresh()" data-dismiss="modal">
       Cancelar
       <i class="fas fa-ban"></i>

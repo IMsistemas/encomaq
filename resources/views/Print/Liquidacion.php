@@ -134,77 +134,76 @@
     </div>
     <div class="row text-center">
         <h3>
-            Guía De Remisión
+            Liquidación
         </h3>
     </div>
     
     <table class="table">
         <tr>
-            <th>Contrato</th>
-            <td><?php echo $data[0]["biz_contract"]["nocontract"]; ?></td>
+            <th>Fecha de Inicio</th>
+            <td><?php echo $data[0]["dateinit"]; ?></td>
+            <th>Fecha de Fin</th>
+            <td><?php echo $data[0]["dateend"]; ?></td>
+        </tr>
+        <tr>
+            <th>Observación</th>
+            <td colspan="3"><?php echo $data[0]["observation"]; ?></td>
+        </tr>
+        <tr>
             <th>Cliente</th>
-            <td><?php echo $data[0]["biz_contract"]["biz_client"]["businessname"]; ?></td>
-        </tr>
-        <tr>
-            <th>Fecha</th>
-            <td><?php echo $data[0]["datetimereferral"]; ?></td>
-            <th>Hora</th>
-            <td><?php echo $data[0]["sequential"]; ?></td>
-        </tr>
-        <tr>
-            <th>Motivo Traslado</th>
-            <td colspan="3"><?php echo $data[0]["nom_transferreason"]["transferreasonname"]; ?></td>
-        </tr>
-        <tr>
-            <th>Punto de partida</th>
-            <td><?php echo $data[0]["startingpoint"]; ?></td>
-
-            <th>Punto de llegada</th>
-            <td><?php echo $data[0]["arrivalpoint"]; ?></td>
-
-        </tr>
-        <tr>
-            <th>Transportista</th>
-            <td colspan="3"><?php echo $data[0]["biz_carrier"]["carriername"]; ?></td>
-        </tr>
-
-        <tr>
-            <th>C.I.</th>
-            <td><?php echo $data[0]["biz_carrier"]["identify"]; ?></td>
-
-            <th>Placa Nro.</th>
-            <td><?php echo $data[0]["biz_carrier"]["licenseplate"]; ?></td>
-
+            <td colspan="3"><?php echo $data[0]["biz_referralguideliquidation"][0]["biz_referralguide"]["biz_contract"]["biz_client"]["businessname"]; ?></td>
         </tr>
     </table>
     
     <br/>
 
-    <table class="table table-bordered table-condensed table-striped">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>DESCRIPCIÓN</th>
-                <th>CANT.</th>
-                <th>OBSERVACIONES</th>
-            </tr>
-        </thead>
-        <tbody>
-             <?php
-             $x=1;
-              
-                foreach ($data[0]["biz_Referralguideitem"] as $c) {
-                  echo "<tr>";
-                  echo "<td>".$x."</td>";
-                  echo "<td>".$c["biz_item"]["itemname"]."</td>";
-                  echo "<td>".$c["quantify"]."</td>";
-                  echo "<td>".$c["observation"]."</td>";
-                  echo "</tr>";
-                  $x++;
-                }
-             ?>
-        </tbody>
-    </table>
+<?php
+
+    foreach ($data[0]["biz_referralguideliquidation"] as $c) {
+
+        echo "<table class='table table-bordered table-condensed table-striped '>";
+            echo "<tr>";
+                echo "<td colspan='4'></td>";
+            echo "</tr>";    
+            
+            echo "<tr>";
+                echo "<th>P. Partida</th><td>".$c["biz_referralguide"]["startingpoint"]."</td> <th>P. Llegada</th><td>".$c["biz_referralguide"]["arrivalpoint"]."</td>";
+            echo "</tr>";
+
+            echo "<tr>";
+                echo "<th>ITEM</th> <th>CANT.</th> <th>PRECIO</th> <th>TOTAL</th> ";
+            echo "</tr>";
+            foreach ($c["biz_referralguide"]["biz_Referralguideitem"] as $i) {
+                echo "<tr>";
+                    echo "<td>".$i["biz_item"]["itemname"]."</td> <td>".$i["quantify"]."</td> <td>".$i["biz_item"]["price"]."</td> <td>". ($i["quantify"]*$i["biz_item"]["price"]) ."</td> ";
+                echo "</tr>";
+            }
+        echo "</table>";
+    }
+?>
+    <br/>
+    <div class="row">
+        <div class="col-xs-6">
+        </div>
+        <div class="col-xs-3">
+        </div>
+        <div class="col-xs-3 text-right">
+            <table class=' table-condensed table-striped '>
+                <tr>
+                    <th>Subtotal</th>
+                    <td><?php  echo $data[0]["subtotal"]; ?></td>
+                </tr>
+                <tr>
+                    <th>Iva</th>
+                    <td><?php  echo $data[0]["iva"]; ?></td>
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    <td><?php  echo $data[0]["total"]; ?></td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
 
   

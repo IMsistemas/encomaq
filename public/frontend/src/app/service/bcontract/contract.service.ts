@@ -31,4 +31,7 @@ export class ContractService {
   filtro_contractexportarpdf(data): any {
     return this.url_api.get_url_api() + 'api/Contract/exportarpdf/' + JSON.stringify(data);
   }
+  contractexportarpdf(id: any): any {
+    return this.url_api.get_url_api() + 'api/Contract/exportarpdfid/' + id;
+  }
 }
