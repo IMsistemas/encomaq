@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
 
   <div class="col-12" style="margin-top: 15px;">
 
@@ -100,9 +100,12 @@
         <tr>
           <th style="width: 8%;">NO</th>
           <th># CONTRATO</th>
-          <th>CLIENTE</th>
           <th>INICIO</th>
           <th>FIN </th>
+          <th>CLIENTE</th>
+          <th>DIRECCIÓN</th>
+          <th>TELÉFONO</th>
+          <th>COSTO</th>
           <th>OBSERVACIÓN</th>
           <th style="width: 12%;">ESTADO</th>
           <th class="noExl" style="width: 5%;"></th>
@@ -112,9 +115,12 @@
         <tr *ngFor="let ident of list_contract  let i = index " [ngClass]="{'text-danger':ident.state == 0 } ">
           <td>{{i+from}}</td>
           <td>{{ident.nocontract}}</td>
-          <td>{{ident.biz_client.businessname}}</td>
           <td>{{ident.startdate}}</td>
           <td>{{ident.enddate}}</td>
+          <td>{{ident.biz_client.businessname}}</td>
+          <td>{{ident.biz_client.address}}</td>
+          <td>{{ident.biz_client.phone}}</td>
+          <td>{{ident.cost}}</td>
           <td>{{ident.observation}}</td>
           <td>{{ ((ident.state == 1)? 'ACTIVO':'INACTIVO') }}</td>
           <td class="noExl" >
@@ -124,6 +130,9 @@
                 <i class="fas fa-cogs"></i>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" (click)="view_info(ident)">
+                  <i class="fas fa-info"></i> Información</a>
+
                 <a class="dropdown-item" (click)="edit_contract(ident)">
                   <i class="fas fa-edit"></i> Editar</a>
                 <a class="dropdown-item" (click)="cancel_activate(ident)">
@@ -190,9 +199,9 @@
     </div>
   </div>
 
-  <div class="modal" id="addcontract"  tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
+  <div class="modal " id="addcontract"    tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg"   role="document">
+      <div class="modal-content" >
 
         <app-addcontract [id_client]="idcliente_select" [item_select]="globalitem_select"  (update_component_father)="update_list($event,'create')"></app-addcontract>
 
@@ -278,6 +287,103 @@
       </div>
     </div>
   </div>
+
+
+  <div class="modal" id="info_datacontract" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-info">
+          <h5 class="modal-title">Información</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body"  style="overflow-y: scroll; height: 70vh;"  *ngIf="info_datacontract">
+          <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <h5>Datos Generales Del Arrendatario</h5>
+            </div>
+
+            <div class="col-sm-12 col-md-12">
+              <table class="table table-bordered">
+                <tr>
+                  <th>Cliente</th>
+                  <td>{{info_datacontract.biz_client.businessname}}</td>
+                  <th>C.I./RUC</th>
+                  <td>{{info_datacontract.biz_client.identify}}</td>
+                </tr>
+                <tr>
+                  <th>Teléfono</th>
+                  <td>{{info_datacontract.biz_client.phone}}</td>
+                  <th>Dirección</th>
+                  <td>{{info_datacontract.biz_client.address}}</td>
+                </tr>
+                <tr>
+                  <th>Fecha Inicio</th>
+                  <td>{{info_datacontract.startdate}}</td>
+                  <th>Fecha Fin</th>
+                  <td>{{info_datacontract.enddate}}</td>
+                </tr>
+
+                <tr>
+                  <th>Área</th>
+                  <td>{{info_datacontract.area}}</td>
+                  <th>Período de alquiler </th>
+                  <td>{{info_datacontract.period}}</td>
+                </tr>
+
+
+                <tr>
+                  <th>Garantía entregada</th>
+                  <td>{{info_datacontract.guarantee}}</td>
+                  <th>Costo de alquiler </th>
+                  <td>{{info_datacontract.cost}}</td>
+                </tr>
+                <tr>
+                  <th>Observaciones</th>
+                  <td colspan="3">
+                    {{info_datacontract.observation}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <h5>Objetos del contrato</h5>
+            </div>
+
+            <div class="col-sm-12 col-md-12">
+              <table class="table table-bordered table-striped table-condensed">
+                <thead class="btn-dark">
+                  <th>N.</th>
+                  <th>Descripción</th>
+                  <th>Cant.</th>
+                  <th>Observaciones</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of info_datacontract.biz_contractitem let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{item.biz_item.itemname}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.observation}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 
   <app-listclient (idcliente)="idclient_select($event)"></app-listclient>

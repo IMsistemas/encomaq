@@ -1,6 +1,6 @@
 <form novalidate (ngSubmit)="add_contract(frmcontract.value, frmcontract);" #frmcontract="ngForm">
 
-  <div class="modal-header bg-primary">
+  <div class="modal-header bg-primary" >
     <h5 class="modal-title">Nuevo Contrato</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
@@ -133,18 +133,11 @@
               <div class="col-md-6 col-sm-12">
                 <div class="form-group">
                   <label for="exampleFormControlInput1">ÁREA
-                    <span class="required">(*)</span>
                   </label>
-                  <input type="text" class="form-control" pattern="^[0-9]+([.][0-9]+)?$" id="area" name="area" ngModel #area="ngModel" required>
+                  <input type="text" class="form-control"  id="area" name="area" ngModel #area="ngModel" >
                 </div>
             
-                <div *ngIf="area.errors?.required && area.touched">
-                  <small id="" class="form-text text-danger text-right">El área es requerida </small>
-                </div>
-
-                <div *ngIf="area.errors?.pattern">
-                  <small id="" class="form-text text-danger text-right">El área es incorrecta debe ser un numero entero o decimal</small>
-                </div>
+               
               </div>
             
               <div class="col-md-6 col-sm-12">
@@ -222,9 +215,9 @@
                 <table class="table table-bordered table-condensed ">
                   <thead class="btn-dark">
                     <tr>
-                      <th>NO</th>
+                      <th style="width: 2%;">N</th>
                       <th>DESCRIPCIÓN</th>
-                      <th >CANT.</th>
+                      <th style="width: 30% !important;" >CANT.</th>
                       <th>OBSERVACIONES</th>
                       <th></th>
                     </tr>
@@ -264,14 +257,11 @@
               <div class="col-md-12 col-sm-12">
                 <div class="form-group">
                   <label for="exampleFormControlInput1">OBSERVACIONES
-                    <span class="required">(*)</span>
                   </label>
-                  <textarea cols="100" rows="5"  class="form-control" id="observation" name="observation" ngModel #observation="ngModel" required></textarea>
+                  <textarea cols="100" rows="5"  class="form-control" id="observation" name="observation" ngModel #observation="ngModel" ></textarea>
                 </div>
             
-                <div *ngIf="observation.errors?.required && observation.touched">
-                  <small id="" class="form-text text-danger text-right">La obsercación es requerida </small>
-                </div>
+                
               </div>
             </div>
           </div>

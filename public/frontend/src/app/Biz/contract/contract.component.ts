@@ -30,6 +30,7 @@ export class ContractComponent implements OnInit {
   /*variables para paginar*/
   idcliente_select: any;
   globalitem_select: any;
+  info_datacontract: any;
   constructor(private contract: ContractService) { }
 
   ngOnInit() {
@@ -186,5 +187,10 @@ export class ContractComponent implements OnInit {
   }
   refresfather(data: any) {
     this.get_list_contract();
+  }
+  view_info(data: any) {
+    console.log(data);
+    this.info_datacontract = data;
+    $('#info_datacontract').modal('show');
   }
 }
