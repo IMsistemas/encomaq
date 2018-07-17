@@ -30,6 +30,33 @@
             </div>
 
             <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Cliente 
+                    <span class="required">(*)</span>
+                  </label>
+                  <select class="form-control" id="idcliente" name="idcliente" [(ngModel)]="tem_edit.biz_liquidationproject[0].biz_project.idclient"  #idcliente="ngModel" (change)="projects_client(idcliente.viewModel)" required>
+                    <option *ngFor="let c of list_client" value="{{c.idclient}}">{{c.businessname}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+            
+              <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Proyectos
+                    <span class="required">(*)</span>
+                  </label>
+                  <select class="form-control" id="projects" multiple name="projects" [(ngModel)]="temp_project" #projects="ngModel" required>
+                    <option *ngFor="let c of list_project" value="{{c.idproject}}">{{c.projectname}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
               <div class="col-md-6 col-sm-12">
                 <div class="form-group">
                   <label for="exampleFormControlInput1">Fecha de inicio
@@ -63,13 +90,9 @@
               <div class="col-md-12 col-sm-12">
                 <div class="form-group">
                   <label for="exampleFormControlInput1">Observación
-                    <span class="required">(*)</span>
+                    
                   </label>
-                  <textarea cols="100" rows="5" class="form-control" id="observation" name="observation" [(ngModel)]="tem_edit.observation"  #observation="ngModel" required></textarea>
-                </div>
-
-                <div *ngIf="observation.errors?.required && observation.touched">
-                  <small id="" class="form-text text-danger text-right">La obsercación es requerida</small>
+                  <textarea cols="100" rows="5" class="form-control" id="observation" name="observation" [(ngModel)]="tem_edit.observation"  #observation="ngModel" ></textarea>
                 </div>
               </div>
             </div>
@@ -79,32 +102,7 @@
 
           <div class="tab-pane fade" id="v-pills-profile3" role="tabpanel" aria-labelledby="v-pills-profile-tab">
             
-            <div class="row">
-              <div class="col-md-12 col-sm-12">
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Cliente 
-                    <span class="required">(*)</span>
-                  </label>
-                  <select class="form-control" id="idcliente" name="idcliente" [(ngModel)]="tem_edit.biz_liquidationproject[0].biz_project.idclient"  #idcliente="ngModel" (change)="projects_client(idcliente.viewModel)" required>
-                    <option *ngFor="let c of list_client" value="{{c.idclient}}">{{c.businessname}}</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
             
-              <div class="col-md-12 col-sm-12">
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Proyectos
-                    <span class="required">(*)</span>
-                  </label>
-                  <select class="form-control" id="projects" multiple name="projects" [(ngModel)]="temp_project" #projects="ngModel" required>
-                    <option *ngFor="let c of list_project" value="{{c.idproject}}">{{c.projectname}}</option>
-                  </select>
-                </div>
-              </div>
-            </div>
 
             <div class="row">
               <div class="col-md-12 col-sm-12">
