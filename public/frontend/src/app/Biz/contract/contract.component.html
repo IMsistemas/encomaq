@@ -53,21 +53,21 @@
     </div>
 
     <div class="row">
-    
+
       <div class="col-12 col-sm-3" style="margin-top: 5px;">
         <select class="custom-select" #col [(ngModel)]="column" (change)="page = 1; get_list_contract(); ">
           <option value="biz_contract.nocontract"># CONTRATO</option>
           <option value="biz_client.businessname">CLIENTE</option>
         </select>
       </div>
-    
+
       <div class="col-12 col-sm-3" style="margin-top: 5px;">
         <select class="custom-select" #or [(ngModel)]="order" (change)="page = 1; get_list_contract(); ">
           <option value="ASC">ASCENDENTE</option>
           <option value="DESC">DESENDENTE</option>
         </select>
       </div>
-    
+
       <div class="col-12 col-sm-3" style="margin-top: 5px;">
         <div class="btn-group">
           <button type="button" class="btn btn-default" (click)="pdf()">
@@ -76,7 +76,7 @@
             <i class="fas fa-file-excel"></i> Excel </button>
         </div>
       </div>
-    
+
       <div class="col-12 col-sm-3" style="margin-top: 5px;">
         <div class="input-group mb-3">
           <input type="number" class="form-control" #pg [(ngModel)]="num_page" (keyup)="page = 1;get_list_contract();" (change)="page = 1; get_list_contract(); ">
@@ -87,7 +87,7 @@
           </div>
         </div>
       </div>
-    
+
     </div>
 
   </div>
