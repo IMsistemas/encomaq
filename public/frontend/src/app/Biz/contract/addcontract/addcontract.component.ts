@@ -4,6 +4,7 @@ import { ContractService } from '../../../service/bcontract/contract.service';
 import { ClienteService } from '../../../service/bclient/cliente.service';
 import { ItemService } from '../../../service/bitem/item.service';
 import { BperiodService } from '../../../service/bperiod/bperiod.service';
+import { BpaymentformService } from '../../../service/bpaymentform/bpaymentform.service';
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -17,16 +18,18 @@ export class AddcontractComponent implements OnInit {
   lis_item = [];
   list_itemcont = [];
   list_period = [];
+  list_paymentform = [];
   @Input() id_client: any; //
   @Input() item_select: any;
   constructor(private contract: ContractService, private client: ClienteService,
-                private item: ItemService, private period: BperiodService) { }
+                private item: ItemService, private period: BperiodService, private paymentform: BpaymentformService) { }
 
   ngOnInit() {
     this.id_client = { idclient: '' };
     this.item_select = { iditem: ''};
     this.list_clients();
     this.list_periods();
+    this.list_paymentforms();
     this.list_items();
     $('.auxcliente').prop('disabled' , true);
   }
@@ -75,6 +78,22 @@ export class AddcontractComponent implements OnInit {
             periodname: cat.periodname,
           };
           this.list_period.push(o);
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+  }
+  list_paymentforms() {
+    this.paymentform.get().subscribe(
+      (response) => {
+        for (const cat of response) {
+          const o = {
+            idpaymentform: cat.idpaymentform,
+            paymentformname: cat.paymentformname,
+            valor: 0
+          };
+          this.list_paymentform.push(o);
         }
       },
       (error) => {

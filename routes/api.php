@@ -69,6 +69,11 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('paymentform/get', 'Configuration\PaymentFormController@get');
+    Route::resource('paymentform', 'Configuration\PaymentFormController');
+});
+
+Route::group(['middleware' => 'cors'], function(){
     Route::get('WareHouse/state/{id}', 'Biz\WareHouseController@statewarehouse');
     Route::resource('WareHouse', 'Biz\WareHouseController');
 });
