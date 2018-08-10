@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ContractService } from '../../../service/bcontract/contract.service';
 import { ClienteService } from '../../../service/bclient/cliente.service';
 import { ItemService } from '../../../service/bitem/item.service';
+import { BperiodService } from '../../../service/bperiod/bperiod.service';
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -14,17 +15,20 @@ declare var $: any;
 export class EditcontractComponent implements OnInit {
   lis_client = [];
   lis_item = [];
+  list_period = [];
   @Input() tem_edit: any;
   @Output() update_component_father = new EventEmitter<boolean>();
   @Output() refresh_component_father = new EventEmitter<boolean>();
   @Input() id_client: any; //
   @Input() item_select: any;
-  constructor(private contract: ContractService, private client: ClienteService, private item: ItemService) { }
+  constructor(private contract: ContractService, private client: ClienteService,
+                private item: ItemService, private period: BperiodService) { }
 
   ngOnInit() {
     this.id_client = { idclient: '' };
     this.item_select = { iditem: '' };
     this.list_clients();
+    this.list_periods();
     this.list_items();
   }
   list_clients() {
@@ -56,6 +60,22 @@ export class EditcontractComponent implements OnInit {
             itemname: cat.itemname
           };
           this.lis_item.push(o);
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+  }
+  list_periods() {
+    this.list_period.push({ idperiod: '', periodname: '--Seleccione--' });
+    this.period.get().subscribe(
+      (response) => {
+        for (const cat of response) {
+          const o = {
+            idperiod: cat.idperiod,
+            periodname: cat.periodname,
+          };
+          this.list_period.push(o);
         }
       },
       (error) => {

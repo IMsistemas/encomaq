@@ -107,7 +107,7 @@
 
 
             <div class="row">
-              <div class="col-md-6 col-sm-12">
+              <div class="col-md-4 col-sm-12">
                 <div class="form-group">
                   <label for="exampleFormControlInput1">FECHA DE INICIO
                     <span class="required">(*)</span>
@@ -120,7 +120,7 @@
                 </div>
               </div>
 
-              <div class="col-md-6 col-sm-12">
+              <div class="col-md-4 col-sm-12">
                 <div class="form-group">
                   <label for="exampleFormControlInput1">FECHA FIN
                     <span class="required">(*)</span>
@@ -132,22 +132,41 @@
                   <small id="" class="form-text text-danger text-right">La fecha de fin es requerida</small>
                 </div>
               </div>
+
+              <div class="col-md-4 col-sm-12">
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">ÁREA (m<sup>2</sup>)
+                    </label>
+                    <input type="text" class="form-control" id="area" name="area" [(ngModel)]="tem_edit.area" #area="ngModel" >
+                  </div>               
+                </div>
             </div>
 
             <div class="row">
-              <div class="col-md-6 col-sm-12">
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">ÁREA
-                  </label>
-                  <input type="text" class="form-control"    id="area" name="area" [(ngModel)]="tem_edit.area" #area="ngModel" >
+              
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group ">
+                    <label for="exampleFormControlInput1">PERÍODO DE ALQUILER
+                      <span class="required">(*)</span>
+                    </label>
+                    <div class="input-group">
+                      <select class="form-control" id="idperiod" name="idperiod" [(ngModel)]="tem_edit.idperiod" #idperiod="ngModel" required>
+                        <option *ngFor="let cli of list_period" value="{{cli.idperiod}}">
+                          {{cli.periodname}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                
+                  <div *ngIf="idperiod.errors?.required && idperiod.touched">
+                    <small id="" class="form-text text-danger text-right">El Periodo es requerido</small>
+                  </div>
                 </div>
-
-               
-              </div>
+              
 
               <div class="col-md-6 col-sm-12">
                 <div class="form-group">
-                  <label for="exampleFormControlInput1">PERÍODO DE ALQUILER
+                  <label for="exampleFormControlInput1">CANTIDAD
                     <span class="required">(*)</span>
                   </label>
                   <input type="text" class="form-control" pattern="^[0-9]+([.][0-9]+)?$"  id="period" name="period" [(ngModel)]="tem_edit.period" #period="ngModel" required>

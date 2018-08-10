@@ -59,6 +59,7 @@ class CotractController extends Controller
          $aux->startdate = $data["Data"]["startdate"];
          $aux->enddate = $data["Data"]["enddate"];
          $aux->area = $data["Data"]["area"];
+         $aux->idperiod = $data["Data"]["idperiod"];
          $aux->period = $data["Data"]["period"];
          $aux->cost = $data["Data"]["cost"];
          $aux->guarantee = $data["Data"]["guarantee"];
@@ -120,6 +121,7 @@ class CotractController extends Controller
         $aux->startdate = $data["startdate"];
         $aux->enddate = $data["enddate"];
         $aux->area = $data["area"];
+        $aux->idperiod = $data["idperiod"];
         $aux->period = $data["period"];
         $aux->cost = $data["cost"];
         $aux->guarantee = $data["guarantee"];
@@ -168,7 +170,7 @@ class CotractController extends Controller
     public function contractfiltro(Request $request) 
     {
         $filtro = json_decode($request->get('filter'));
-        $data = Contract::with("biz_client","biz_contractitem.biz_item")
+        $data = Contract::with("biz_client","biz_contractitem.biz_item", 'biz_period')
                         ->selectRaw("biz_contract.*")
                         ->join("biz_client","biz_client.idclient","=","biz_contract.idclient")
                         ->whereRaw("biz_contract.state='".$filtro->state."' AND ( biz_contract.nocontract LIKE '%".$filtro->Buscar."%' OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%') )")
