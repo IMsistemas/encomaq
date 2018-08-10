@@ -43,6 +43,7 @@ class ProjectController extends Controller
             $aux = new Project();
             $aux->idclient = $data["idclient"];
             $aux->projectname = $data["projectname"];
+            $aux->place = $data["place"];
             $aux->state = 1;
             if($aux->save()){
                 
@@ -92,6 +93,7 @@ class ProjectController extends Controller
             $aux =  Project::find($id);
             $aux->idclient = $data["idclient"];
             $aux->projectname = $data["projectname"];
+            $aux->place = $data["place"];
             $aux->state = 1;
             if($aux->save()){
                 

@@ -49,8 +49,11 @@ class ClienteController extends Controller
             $aux->businessname = $data["businessname"];
             $aux->identify = $data["identify"];
             $aux->phone = $data["phone"];
+            $aux->phone_2 = $data["phone_2"];
             $aux->address = $data["address"];
             $aux->email = $data["email"];
+            $aux->email_2 = $data["email_2"];
+            $aux->email_3 = $data["email_3"];
             $aux->observation = $data["observation"];
             $aux->state = 1;
             if($aux->save()){
@@ -101,8 +104,11 @@ class ClienteController extends Controller
             $aux->businessname = $data["businessname"];
             $aux->identify = $data["identify"];
             $aux->phone = $data["phone"];
+            $aux->phone_2 = $data["phone_2"];
             $aux->address = $data["address"];
             $aux->email = $data["email"];
+            $aux->email_2 = $data["email_2"];
+            $aux->email_3 = $data["email_3"];
             $aux->observation = $data["observation"];
             $aux->state = 1;
             if($aux->save()){

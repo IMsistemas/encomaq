@@ -4,6 +4,8 @@ import { NgForm } from '@angular/forms';
 import { ContractService } from '../../../service/bcontract/contract.service';
 import { ClienteService } from '../../../service/bclient/cliente.service';
 import { ItemService } from '../../../service/bitem/item.service';
+import { BperiodService } from '../../../service/bperiod/bperiod.service';
+import { BpaymentformService } from '../../../service/bpaymentform/bpaymentform.service';
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -14,17 +16,24 @@ declare var $: any;
 export class EditcontractComponent implements OnInit {
   lis_client = [];
   lis_item = [];
+  list_period = [];
+  list_paymentform = [];
+  counter = 0;
   @Input() tem_edit: any;
   @Output() update_component_father = new EventEmitter<boolean>();
   @Output() refresh_component_father = new EventEmitter<boolean>();
   @Input() id_client: any; //
   @Input() item_select: any;
-  constructor(private contract: ContractService, private client: ClienteService, private item: ItemService) { }
+  constructor(private contract: ContractService, private client: ClienteService,
+                private item: ItemService, private period: BperiodService, private paymentform: BpaymentformService) { }
 
   ngOnInit() {
     this.id_client = { idclient: '' };
     this.item_select = { iditem: '' };
     this.list_clients();
+    this.list_periods();
+    // this.list_paymentforms();
+    // this.counter = 0;
     this.list_items();
   }
   list_clients() {
@@ -62,6 +71,57 @@ export class EditcontractComponent implements OnInit {
         console.log('POST call in error", respons', error);
       });
   }
+  list_periods() {
+    this.list_period.push({ idperiod: '', periodname: '--Seleccione--' });
+    this.period.get().subscribe(
+      (response) => {
+        for (const cat of response) {
+          const o = {
+            idperiod: cat.idperiod,
+            periodname: cat.periodname,
+          };
+          this.list_period.push(o);
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+  }
+  list_paymentforms() {
+
+    if (this.tem_edit.idcontract !== null && this.tem_edit.idcontract !== undefined && this.counter === 0) {
+      this.counter = 1;
+      this.contract.getPFByContract(this.tem_edit.idcontract).subscribe(
+        (response) => {
+
+          console.log(response);
+
+          this.list_paymentform = [];
+
+          for (const cat of response) {
+            const o = {
+              idpaymentform: cat.idpaymentform,
+              paymentformname: cat.paymentformname,
+              valor: 0
+            };
+
+            if (cat.biz_contract_paymentform.length > 0) {
+              o.valor = cat.biz_contract_paymentform[0].cost;
+            }
+
+            this.list_paymentform.push(o);
+          }
+
+          // return true;
+        },
+        (error) => {
+          console.log('POST call in error", respons', error);
+        });
+    }
+
+    return true;
+
+  }
   search_client() {
     $('.listclient').modal('show');
   }
@@ -79,7 +139,11 @@ export class EditcontractComponent implements OnInit {
   }
   edit_contract(data, frm) {
     data.idclient = this.id_client.idclient;
-    this.contract.edit_contract(data.idcontract , data).subscribe(
+    const aux = {
+      Data: data,
+      paymentform: this.list_paymentform
+    };
+    this.contract.edit_contract(data.idcontract , aux).subscribe(
       (response) => {
         if (response.success !== undefined) {
           $('#editcontract').modal('hide');

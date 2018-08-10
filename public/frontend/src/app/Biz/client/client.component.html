@@ -205,7 +205,7 @@
   </div>
 
   <div class="modal" id="addclient" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
 
         <app-addclient (update_component_father)="update_list($event,'create')"></app-addclient>
@@ -215,7 +215,7 @@
   </div>
 
   <div class="modal" id="editclient" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
 
         <app-editclient [tem_edit]="info_tem_edit" (update_component_father)="update_list($event,'edit')" (refresh_component_father)="refresfather($event)" ></app-editclient>
@@ -323,12 +323,24 @@
                           <td>{{select_data.address}}</td>
                         </tr>
                         <tr>
-                          <th>TELÉFONO :</th>
+                          <th>TELÉFONO PRINCIPAL:</th>
                           <td>{{select_data.phone}}</td>
                         </tr>
                         <tr>
-                          <th>CORREO :</th>
+                          <th>TELÉFONO (2):</th>
+                          <td>{{select_data.phone_2}}</td>
+                        </tr>
+                        <tr>
+                          <th>CORREO PRINCIPAL:</th>
                           <td>{{select_data.email}}</td>
+                        </tr>
+                        <tr>
+                          <th>CORREO (2):</th>
+                          <td>{{select_data.email_2}}</td>
+                        </tr>
+                        <tr>
+                          <th>CORREO (3):</th>
+                          <td>{{select_data.email_3}}</td>
                         </tr>
                         <tr>
                           <th>OBSERVACIÓN :</th>

@@ -64,6 +64,16 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('period/get', 'Configuration\PeriodController@get');
+    Route::resource('period', 'Configuration\PeriodController');
+});
+
+Route::group(['middleware' => 'cors'], function(){
+    Route::get('paymentform/get', 'Configuration\PaymentFormController@get');
+    Route::resource('paymentform', 'Configuration\PaymentFormController');
+});
+
+Route::group(['middleware' => 'cors'], function(){
     Route::get('WareHouse/state/{id}', 'Biz\WareHouseController@statewarehouse');
     Route::resource('WareHouse', 'Biz\WareHouseController');
 });
@@ -102,6 +112,7 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('Contract/getPFByContract/{id}', 'Biz\CotractController@getPFByContract');
     Route::get('Contract/exportarpdfid/{data}', 'Biz\CotractController@exportarpdfid');
     Route::get('Contract/exportarpdf/{data}', 'Biz\CotractController@exportarpdf');
     Route::get('Contract/getContractActive', 'Biz\CotractController@getContractActive');

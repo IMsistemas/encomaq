@@ -21,5 +21,10 @@ class Contract extends Model
     public function biz_contractitem()
     {
         return $this->hasMany('App\Models\Biz\ContractItem',"idcontract");
-    }   
+    }
+
+    public function biz_period()
+    {
+        return $this->belongsTo('App\Models\Biz\Period',"idperiod");
+    }
 }
