@@ -137,19 +137,19 @@ class CotractController extends Controller
     {
         $data = $request->all();
         $aux =  Contract::find($id);
-        $aux->idclient = $data["idclient"];
-        $aux->startdate = $data["startdate"];
-        $aux->enddate = $data["enddate"];
-        $aux->area = $data["area"];
-        $aux->idperiod = $data["idperiod"];
-        $aux->period = $data["period"];
-        $aux->cost = $data["cost"];
-        // $aux->guarantee = $data["guarantee"];
-        $aux->observation = $data["observation"];
-        $aux->state = 1;
+        $aux->idclient = $data["Data"]["idclient"];
+        $aux->startdate = $data["Data"]["startdate"];
+        $aux->enddate = $data["Data"]["enddate"];
+        $aux->area = $data["Data"]["area"];
+        $aux->idperiod = $data["Data"]["idperiod"];
+        $aux->period = $data["Data"]["period"];
+        $aux->cost = $data["Data"]["cost"];
+        // $aux->guarantee = $data["Data"]["guarantee"];
+        $aux->observation = $data["Data"]["observation"];
+        //$aux->state = 1;
         if ($aux->save()) {
             $temp = ContractItem::whereRaw("idcontract='".$id."'")->delete();
-             foreach ($data["biz_contractitem"] as $f) {
+             foreach ($data["Data"]["biz_contractitem"] as $f) {
                  if( $f["iditem"]!="" ) {
                     $caux = new ContractItem();
                     $caux->idcontract = $id;

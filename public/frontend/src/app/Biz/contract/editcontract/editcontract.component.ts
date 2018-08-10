@@ -139,7 +139,11 @@ export class EditcontractComponent implements OnInit {
   }
   edit_contract(data, frm) {
     data.idclient = this.id_client.idclient;
-    this.contract.edit_contract(data.idcontract , data).subscribe(
+    const aux = {
+      Data: data,
+      paymentform: this.list_paymentform
+    };
+    this.contract.edit_contract(data.idcontract , aux).subscribe(
       (response) => {
         if (response.success !== undefined) {
           $('#editcontract').modal('hide');
