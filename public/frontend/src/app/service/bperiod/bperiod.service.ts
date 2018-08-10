@@ -16,4 +16,5 @@ export class BperiodService {
   get(): Observable<any> {
     return this.http.get(this.url_api.get_url_api() + 'api/period/get');
   }
+
 }

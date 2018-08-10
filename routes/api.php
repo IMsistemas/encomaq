@@ -112,6 +112,7 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('Contract/getPFByContract/{id}', 'Biz\CotractController@getPFByContract');
     Route::get('Contract/exportarpdfid/{data}', 'Biz\CotractController@exportarpdfid');
     Route::get('Contract/exportarpdf/{data}', 'Biz\CotractController@exportarpdf');
     Route::get('Contract/getContractActive', 'Biz\CotractController@getContractActive');

@@ -122,8 +122,10 @@ export class AddcontractComponent implements OnInit {
   add_contract(data, frm) {
     const aux = {
       Data: data,
+      paymentform: this.list_paymentform,
       list: this.list_itemcont
     };
+
     this.contract.add_contract(aux).subscribe(
       (response) => {
         this.id_client = { idclient: '' };

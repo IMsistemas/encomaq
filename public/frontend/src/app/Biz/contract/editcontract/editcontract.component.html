@@ -184,7 +184,7 @@
             </div>
 
             <div class="row">
-              <div class="col-md-12 col-sm-12">
+              <!--<div class="col-md-12 col-sm-12">
                 <div class="form-group">
                   <label for="exampleFormControlInput1">GARANTÍA ENTREGADA
                     <span class="required">(*)</span>
@@ -199,7 +199,23 @@
                 <div *ngIf="guarantee.errors?.pattern">
                   <small id="" class="form-text text-danger text-right">La garantía es incorrecta debe ser un numero entero o decimal</small>
                 </div>
-              </div>
+              </div>-->
+
+              <div class="col-12 table-responsive" *ngIf="list_paymentforms()">
+                  <label for="exampleFormControlInput1">GARANTÍA ENTREGADA</label>
+                  <table class="table table-striped table-hover">                    
+                    <tbody>
+
+                      <tr *ngFor="let ident of list_paymentform let i = index">
+                        <td>{{ident.paymentformname}}</td>
+                        <td><input type="text" class="form-control" pattern="^[0-9]+([.][0-9]+)?$" name="{{i}}valor" [(ngModel)]="ident.valor"></td>
+                      </tr>
+              
+                    </tbody>
+                  </table>
+              
+                </div>
+
             </div>
 
             <div class="row">

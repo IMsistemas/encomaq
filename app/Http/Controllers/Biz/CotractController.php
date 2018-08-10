@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Biz;
 
+use App\Models\Biz\ContractPaymentForm;
+use App\Models\Biz\PaymentForm;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -37,6 +39,12 @@ class CotractController extends Controller
         return Contract::where('state', 1)->orderBy('nocontract', 'asc')->get();
     }
 
+    public function getPFByContract($id) {
+        return PaymentForm::with(['biz_contract_paymentform' => function($query) use ($id) {
+            $query->where('idcontract', $id);
+        } ])->get();
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -62,7 +70,7 @@ class CotractController extends Controller
          $aux->idperiod = $data["Data"]["idperiod"];
          $aux->period = $data["Data"]["period"];
          $aux->cost = $data["Data"]["cost"];
-         $aux->guarantee = $data["Data"]["guarantee"];
+         //$aux->guarantee = $data["Data"]["guarantee"];
          $aux->observation = $data["Data"]["observation"];
          $aux->state = 1;
          if ($aux->save()) {
@@ -76,6 +84,18 @@ class CotractController extends Controller
                     $caux->save();
                  }
              }
+
+             foreach ($data["paymentform"] as $f) {
+                 $caux = new ContractPaymentForm();
+                 $caux->idcontract = $aux->idcontract;
+                 $caux->idpaymentform = $f["idpaymentform"];
+                 $caux->cost = $f["valor"];
+
+                 if ($caux->save() == false) {
+                     return response()->json(['error' => false ]);
+                 }
+             }
+
             return response()->json(['success' => $aux ]);
          } else {
              return response()->json(['error' => $aux]);
@@ -124,7 +144,7 @@ class CotractController extends Controller
         $aux->idperiod = $data["idperiod"];
         $aux->period = $data["period"];
         $aux->cost = $data["cost"];
-        $aux->guarantee = $data["guarantee"];
+        // $aux->guarantee = $data["guarantee"];
         $aux->observation = $data["observation"];
         $aux->state = 1;
         if ($aux->save()) {
@@ -139,6 +159,19 @@ class CotractController extends Controller
                     $caux->save();
                  }
              }
+
+            ContractPaymentForm::where('idcontract', $id)->delete();
+            foreach ($data["paymentform"] as $f) {
+                $caux = new ContractPaymentForm();
+                $caux->idcontract = $id;
+                $caux->idpaymentform = $f["idpaymentform"];
+                $caux->cost = $f["valor"];
+
+                if ($caux->save() == false) {
+                    return response()->json(['error' => false ]);
+                }
+            }
+
             return response()->json(['success' => $aux ]);
          } else {
              return response()->json(['error' => $aux]);
