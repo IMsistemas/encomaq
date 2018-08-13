@@ -79,6 +79,9 @@ import { BplaceService } from './service/bplace/bplace.service';
 import { CreatePlaceComponent } from './Biz/place/create-place/create-place.component';
 import { EditPlaceComponent } from './Biz/place/edit-place/edit-place.component';
 import { ListPlaceComponent } from './Biz/place/list-place/list-place.component';
+import { PaymentformComponent } from './Biz/paymentform/paymentform.component';
+import { CreatePaymentformComponent } from './Biz/paymentform/create-paymentform/create-paymentform.component';
+import { EditPaymentformComponent } from './Biz/paymentform/edit-paymentform/edit-paymentform.component';
 
 @NgModule({
   declarations: [
@@ -139,6 +142,9 @@ import { ListPlaceComponent } from './Biz/place/list-place/list-place.component'
     CreatePlaceComponent,
     EditPlaceComponent,
     ListPlaceComponent,
+    PaymentformComponent,
+    CreatePaymentformComponent,
+    EditPaymentformComponent,
   ],
   imports: [
     BrowserModule,
