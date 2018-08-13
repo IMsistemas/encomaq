@@ -37,7 +37,7 @@ class ReferralGuideController extends Controller
             $where .= " AND  biz_client.idclient=".$filter->client." ";
         }
 
-        return Referralguide::with('biz_contract.biz_client.biz_Project', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem.biz_item')
+        return Referralguide::with('biz_contract.biz_client.biz_Project', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem.biz_item', 'biz_referralguide_place.biz_place_start', 'biz_referralguide_place.biz_place_end')
                                 ->selectRaw("biz_referralguide.* ")
                                 ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")
                                 ->join("biz_client", "biz_client.idclient", "=", "biz_contract.idclient" )

@@ -117,8 +117,13 @@
           <td>{{item.datetimereferral}}</td>
           <td>{{item.sequential}}</td>
           <td>{{item.nom_transferreason.transferreasonname}}</td>
-          <td>{{item.startingpoint}}</td>
-          <td>{{item.arrivalpoint}}</td>
+
+          <td *ngIf="item.biz_referralguide_place.length == 0">{{item.startingpoint}}</td>
+          <td *ngIf="item.biz_referralguide_place.length == 0">{{item.arrivalpoint}}</td>
+
+          <td *ngIf="item.biz_referralguide_place.length > 0">{{item.biz_referralguide_place[0].biz_place_start.placename}}</td>
+          <td *ngIf="item.biz_referralguide_place.length > 0">{{item.biz_referralguide_place[0].biz_place_end.placename}}</td>
+
           <td>{{item.biz_carrier.carriername}}</td>
 
           <td>{{ ((item.state == 1)? 'ACTIVO':'INACTIVO') }}</td>

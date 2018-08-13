@@ -15,6 +15,11 @@ class Referralguide extends Model
         return $this->hasMany('App\Models\Biz\Referralguideitem','idreferralguide');
     }
 
+    public function biz_referralguide_place()
+    {
+        return $this->hasMany('App\Models\Biz\ReferralGuidePlace','idreferralguide');
+    }
+
     public function biz_contract()
     {
         return $this->belongsTo('App\Models\Biz\Contract', 'idcontract');

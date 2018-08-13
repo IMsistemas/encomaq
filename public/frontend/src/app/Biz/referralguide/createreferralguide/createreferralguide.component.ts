@@ -171,8 +171,6 @@ export class CreatereferralguideComponent implements OnInit {
       list: this.list_itemcont
     };
 
-    console.log(aux);
-
     this.referra.create(aux).subscribe(
       (response) => {
         console.log(response);
