@@ -45,7 +45,7 @@ class PlaceController extends Controller
         $object = new Place();
 
         $object->placename = $request->input('placename');
-        $object->status = 1;
+        $object->state = 1;
 
         if ($object->save()) {
             return response()->json(['success' => true]);
@@ -88,7 +88,7 @@ class PlaceController extends Controller
         $object = Place::find($id);
 
         $object->placename = $request->input('placename');
-        $object->status = 1;
+        $object->state = 1;
 
         if ($object->save()) {
             return response()->json(['success' => true]);
@@ -110,19 +110,19 @@ class PlaceController extends Controller
         )->count();
 
         if ($object_relations == 0) {
-            $object_relations = ReferralGuidePlace::whereRaw(
+
+            ReferralGuidePlace::whereRaw(
                 'idplace_start = ' . $id . ' OR idplace_end = ' . $id
             )->delete();
 
-            if ($object_relations) {
-                $object_place = Place::find($id);
+            $object_place = Place::find($id);
 
-                if ($object_place->delete()) {
-                    return response()->json(['success' => true]);
-                } else {
-                    return response()->json(['success' => false]);
-                }
+            if ($object_place->delete()) {
+                return response()->json(['success' => true]);
+            } else {
+                return response()->json(['success' => false]);
             }
+
         } else {
             return response()->json(['success' => false, 'relations' => true]);
         }
