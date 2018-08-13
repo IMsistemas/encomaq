@@ -74,6 +74,11 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('place/get', 'Biz\PlaceController@get');
+    Route::resource('place', 'Biz\PlaceController');
+});
+
+Route::group(['middleware' => 'cors'], function(){
     Route::get('WareHouse/state/{id}', 'Biz\WareHouseController@statewarehouse');
     Route::resource('WareHouse', 'Biz\WareHouseController');
 });

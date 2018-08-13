@@ -74,6 +74,11 @@ import { LiquidationComponent } from './Biz/liquidation/liquidation.component';
 import { AddliquidationComponent } from './Biz/liquidation/addliquidation/addliquidation.component';
 import { EditliquidationComponent } from './Biz/liquidation/editliquidation/editliquidation.component';
 import { LiquidationService } from './service/bliquidation/liquidation.service';
+import { PlaceComponent } from './Biz/place/place.component';
+import { BplaceService } from './service/bplace/bplace.service';
+import { CreatePlaceComponent } from './Biz/place/create-place/create-place.component';
+import { EditPlaceComponent } from './Biz/place/edit-place/edit-place.component';
+import { ListPlaceComponent } from './Biz/place/list-place/list-place.component';
 
 @NgModule({
   declarations: [
@@ -130,6 +135,10 @@ import { LiquidationService } from './service/bliquidation/liquidation.service';
     LiquidationComponent,
     AddliquidationComponent,
     EditliquidationComponent,
+    PlaceComponent,
+    CreatePlaceComponent,
+    EditPlaceComponent,
+    ListPlaceComponent,
   ],
   imports: [
     BrowserModule,
@@ -141,7 +150,7 @@ import { LiquidationService } from './service/bliquidation/liquidation.service';
     NomidentifytyService, RoleService, ItemcategoryService, LoginService,
     ReasontransferService, UnittypeService, UserService, WarehouseService,
     BcompanyService, ItemService, ConfigemailService, ClienteService,
-    ProjectService, CarrierService, ContractService, ReferralguideService, LiquidationService
+    ProjectService, CarrierService, ContractService, ReferralguideService, LiquidationService, BplaceService
   ],
   bootstrap: [AppComponent]
 })

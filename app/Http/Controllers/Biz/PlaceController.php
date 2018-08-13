@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Biz;
 
+use App\Models\Biz\Place;
+use App\Models\Biz\ReferralGuidePlace;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -35,7 +37,16 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $object = new Place();
+
+        $object->placename = $request->input('placename');
+        $object->status = 1;
+
+        if ($object->save()) {
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false]);
+        }
     }
 
     /**
@@ -69,7 +80,16 @@ class PlaceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $object = Place::find($id);
+
+        $object->placename = $request->input('placename');
+        $object->status = 1;
+
+        if ($object->save()) {
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false]);
+        }
     }
 
     /**
@@ -80,6 +100,26 @@ class PlaceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $object_relations = ReferralGuidePlace::whereRaw(
+            'idplace_start = ' . $id . ' OR idplace_end = ' . $id
+        )->count();
+
+        if ($object_relations == 0) {
+            $object_relations = ReferralGuidePlace::whereRaw(
+                'idplace_start = ' . $id . ' OR idplace_end = ' . $id
+            )->delete();
+
+            if ($object_relations) {
+                $object_place = Place::find($id);
+
+                if ($object_place->delete()) {
+                    return response()->json(['success' => true]);
+                } else {
+                    return response()->json(['success' => false]);
+                }
+            }
+        } else {
+            return response()->json(['success' => false, 'relations' => true]);
+        }
     }
 }
