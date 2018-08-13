@@ -148,7 +148,14 @@
                     <label for="exampleFormControlInput1">Punto de Partida
                       <span class="required">(*)</span>
                     </label>
-                    <input type="text" class="form-control" id="startingpoint" name="startingpoint" ngModel #startingpoint="ngModel" required>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="startingpoint" name="startingpoint" ngModel #startingpoint="ngModel" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-default" type="button" (click)="searchPlace()"  >
+                              <i class="fas fa-search"></i>
+                            </button>
+                          </div>
+                    </div>                    
                   </div>
 
                   <div *ngIf="startingpoint.errors?.required && startingpoint.touched">
@@ -167,7 +174,15 @@
                     <label for="exampleFormControlInput1">Punto de Llegada
                       <span class="required">(*)</span>
                     </label>
-                    <input type="text" class="form-control" id="arrivalpoint" name="arrivalpoint" ngModel #arrivalpoint="ngModel" required>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="arrivalpoint" name="arrivalpoint" ngModel #arrivalpoint="ngModel" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-default" type="button" (click)="searchPlace()"  >
+                              <i class="fas fa-search"></i>
+                            </button>
+                          </div>
+                    </div>
+                    
                   </div>
 
                   <div *ngIf="arrivalpoint.errors?.required && arrivalpoint.touched">

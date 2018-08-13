@@ -19,6 +19,11 @@ class PlaceController extends Controller
         //
     }
 
+    public function get()
+    {
+        return Place::orderBy('idplace', 'desc')->get();
+    }
+
     /**
      * Show the form for creating a new resource.
      *

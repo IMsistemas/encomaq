@@ -132,6 +132,9 @@ export class CreatereferralguideComponent implements OnInit {
   searchCarrier() {
     $('.listcarrier').modal('show');
   }
+  searchPlace() {
+    $('#listPlaceShow').modal('show');
+  }
   addrwo() {
     console.log(this.list_itemcont);
     const o = {
