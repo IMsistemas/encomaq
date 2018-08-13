@@ -156,7 +156,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
 
-        <app-createreferralguide [idcontract_s]="idcontract_select" [carrier_select]="objectcarrier_select" [item_select]="globalitem_select"  (update_component_father)="updateList($event,'create')"></app-createreferralguide>
+        <app-createreferralguide [idcontract_s]="idcontract_select" [carrier_select]="objectcarrier_select" [item_select]="globalitem_select" [place_select_start]="objectplace_select_start" [place_select_end]="objectplace_select_end"  (update_component_father)="updateList($event,'create')" (field_selected)="fieldPlaceSelected($event)"></app-createreferralguide>
 
       </div>
     </div>
@@ -320,6 +320,6 @@
 
   <app-listcarrier (carrier_s)="carrier_select($event)" ></app-listcarrier>
 
-  <app-list-place (place_s)="place_select($event)" ></app-list-place>
+  <app-list-place [fieldSelected]="fieldSelectedPlace" (place_s)="place_select($event)" ></app-list-place>
 
 </div>

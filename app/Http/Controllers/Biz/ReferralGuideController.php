@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Biz;
 
 use App\Models\Biz\Referralguide;
 use App\Models\Biz\Referralguideitem;
+use App\Models\Biz\ReferralGuidePlace;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -86,6 +87,17 @@ class ReferralGuideController extends Controller
         $aux->arrivalpoint = $data["Data"]["arrivalpoint"];
         $aux->state = 1;
          if ($aux->save()) {
+
+             $place = new ReferralGuidePlace();
+
+             $place->idreferralguide = $aux->idreferralguide;
+             $place->idplace_start = $data["Data"]["idplace_start"];
+             $place->idplace_end = $data["Data"]["idplace_end"];
+
+             if ($place->save() == false) {
+                 return response()->json(['error' => $aux]);
+             }
+
              foreach ($data["list"] as $f) {
                  if( $f["iditem"]!="" ) {
                     $caux = new Referralguideitem();

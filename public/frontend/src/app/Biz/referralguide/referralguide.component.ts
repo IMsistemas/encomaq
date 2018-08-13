@@ -37,8 +37,10 @@ export class ReferralguideComponent implements OnInit {
   /*variables para paginar*/
   idcontract_select: any;
   globalitem_select: any;
+  fieldSelectedPlace: any;
   objectcarrier_select: any;
-  objectplace_select: any;
+  objectplace_select_start: any;
+  objectplace_select_end: any;
 
   constructor(private referralguide: ReferralguideService) { }
 
@@ -115,7 +117,17 @@ export class ReferralguideComponent implements OnInit {
   }
 
   place_select(n): void {
-      this.objectplace_select = n;
+    console.log(n);
+      if (this.fieldSelectedPlace === 1) {
+        this.objectplace_select_start = n[0];
+      } else {
+        this.objectplace_select_end = n[0];
+      }
+  }
+
+  fieldPlaceSelected(n) {
+    console.log(n);
+    this.fieldSelectedPlace = n;
   }
 
   updateList(event, type) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BplaceService } from './../../../service/bplace/bplace.service';
 
@@ -16,6 +16,7 @@ export class ListPlaceComponent implements OnInit {
   place_selected: any;
   message_success: any;
   message_error: any;
+  @Input() fieldSelected = 0;
   @Output() place_s = new EventEmitter<any>();
 
   constructor(private place: BplaceService) { }
@@ -29,8 +30,8 @@ export class ListPlaceComponent implements OnInit {
   }
 
   select_place(data) {
-    this.place_s.emit(data);
-    $('.listcarrier').modal('hide');
+    this.place_s.emit([data, this.fieldSelected]);
+    $('#listPlaceShow').modal('hide');
     // console.log(this.place_s);
   }
 

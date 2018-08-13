@@ -149,9 +149,10 @@
                       <span class="required">(*)</span>
                     </label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="startingpoint" name="startingpoint" ngModel #startingpoint="ngModel" required>
+                        <input type="hidden" id="idplace_start" name="idplace_start" [(ngModel)]="place_select_start.idplace" #idplace_start="ngModel">
+                        <input type="text" class="form-control" id="startingpoint" name="startingpoint" [(ngModel)]="place_select_start.placename" readonly  #startingpoint="ngModel" required>
                         <div class="input-group-append">
-                            <button class="btn btn-default" type="button" (click)="searchPlace()"  >
+                            <button class="btn btn-default" type="button" (click)="searchPlace(1)"  >
                               <i class="fas fa-search"></i>
                             </button>
                           </div>
@@ -175,9 +176,10 @@
                       <span class="required">(*)</span>
                     </label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="arrivalpoint" name="arrivalpoint" ngModel #arrivalpoint="ngModel" required>
+                        <input type="hidden" id="idplace_end" name="idplace_end" [(ngModel)]="place_select_end.idplace" #idplace_end="ngModel">
+                        <input type="text" class="form-control" id="arrivalpoint" name="arrivalpoint" [(ngModel)]="place_select_end.placename" readonly #arrivalpoint="ngModel" required>
                         <div class="input-group-append">
-                            <button class="btn btn-default" type="button" (click)="searchPlace()"  >
+                            <button class="btn btn-default" type="button" (click)="searchPlace(2)"  >
                               <i class="fas fa-search"></i>
                             </button>
                           </div>

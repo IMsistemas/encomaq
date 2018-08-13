@@ -18,6 +18,8 @@ declare var $: any;
 export class CreatereferralguideComponent implements OnInit {
 
   @Output() update_component_father = new EventEmitter<boolean>();
+  @Output() field_selected = new EventEmitter<boolean>();
+
   lis_client = [];
   lis_item = [];
   list_itemcont = [];
@@ -25,9 +27,13 @@ export class CreatereferralguideComponent implements OnInit {
   listContract = [];
   list_carrier = [];
 
+  fieldPlace = 0;
+
   @Input() idcontract_s: any; //
   @Input() item_select: any;
   @Input() carrier_select: any;
+  @Input() place_select_start: any;
+  @Input() place_select_end: any;
 
   constructor(
     private contract: ContractService,
@@ -41,6 +47,8 @@ export class CreatereferralguideComponent implements OnInit {
 
     this.idcontract_s = { idcontract: '', biz_client: { businessname: '' }, nocontract: ''};
     this.carrier_select = { idcarrier: '', carriername: '', identify: '', licenseplate: '' };
+    this.place_select_start = { idplace: '', placename: ''};
+    this.place_select_end = { idplace: '', placename: ''};
 
     this.loadInitJQuery();
     this.getContractActive();
@@ -132,7 +140,9 @@ export class CreatereferralguideComponent implements OnInit {
   searchCarrier() {
     $('.listcarrier').modal('show');
   }
-  searchPlace() {
+  searchPlace(n) {
+    this.field_selected.emit(n);
+    // this.fieldPlace = n;
     $('#listPlaceShow').modal('show');
   }
   addrwo() {
@@ -160,6 +170,9 @@ export class CreatereferralguideComponent implements OnInit {
       Data: data,
       list: this.list_itemcont
     };
+
+    console.log(aux);
+
     this.referra.create(aux).subscribe(
       (response) => {
         console.log(response);
