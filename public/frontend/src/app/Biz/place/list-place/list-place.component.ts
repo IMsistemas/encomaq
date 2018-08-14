@@ -14,8 +14,8 @@ export class ListPlaceComponent implements OnInit {
 
   listPlace: Observable<any>;
   place_selected: any;
-  message_success: any;
-  message_error: any;
+  message_successList: any;
+  message_errorList: any;
   @Input() fieldSelected = 0;
   @Output() place_s = new EventEmitter<any>();
 
@@ -29,41 +29,45 @@ export class ListPlaceComponent implements OnInit {
     this.listPlace = this.place.get();
   }
 
+  create() {
+    $('#mdlCreate').modal('show');
+  }
+
   select_place(data) {
     this.place_s.emit([data, this.fieldSelected]);
     $('#listPlaceShow').modal('hide');
     // console.log(this.place_s);
   }
 
-  updateListPlace(event, type) {
+  updateListPlaceList(event, type) {
     if (event === true) {
 
       if (type === 'create') {
 
-        this.message_success = 'Se ha creado satisfactoriamente el Lugar';
+        this.message_successList = 'Se ha creado satisfactoriamente el Lugar';
 
       } else {
 
-        this.message_success = 'Se ha editado satisfactoriamente el Lugar seleccionado';
+        this.message_successList = 'Se ha editado satisfactoriamente el Lugar seleccionado';
 
       }
 
-      $('#mdlMessageSuccess').modal('show');
+      $('#mdlMessageSuccessList').modal('show');
 
 
     } else {
 
       if (type === 'create') {
 
-        this.message_error = 'Ha ocurrido un error al intentar agregar un Lugar o el mismo ya existe en el sistema...';
+        this.message_errorList = 'Ha ocurrido un error al intentar agregar un Lugar o el mismo ya existe en el sistema...';
 
       } else {
 
-        this.message_error = 'Ha ocurrido un error al intentar editar el Lugar seleccionado o el mismo nombre ya existe en el sistema';
+        this.message_errorList = 'Ha ocurrido un error al intentar editar el Lugar seleccionado o el mismo nombre ya existe en el sistema';
 
       }
 
-      $('#mdlMessageError').modal('show');
+      $('#mdlMessageErrorList').modal('show');
 
     }
 

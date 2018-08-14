@@ -33,6 +33,15 @@
                     
           </div> -->
           <div class="row">
+            <div class="col-12 text-right">
+  
+                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Agregar" (click)="create()">
+                    Agregar <i class="fas fa-plus-square fa-lg"></i>
+                </button>
+
+            </div>
+          </div>
+          <div class="row" style="margin-top: 5px;">
             <div class="col-sm-12 table-responsive">
                   <table class="table table-striped table-hover table-bordered">
                     <thead class="thead-dark">
@@ -70,5 +79,57 @@
       </div>
 
     </div>
+  </div>
+</div>
+
+<div class="modal" id="mdlCreate" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <app-create-place (update_component_father)="updateListPlaceList($event, 'create')" ></app-create-place>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="mdlMessageSuccessList" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header bg-success">
+              <h5 class="modal-title">Información</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              {{message_successList}}
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                  Cerrar <i class="fa fa-ban" aria-hidden="true"></i>
+              </button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="mdlMessageErrorList" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header bg-danger">
+              <h5 class="modal-title">Información</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              {{message_errorList}}
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                  Cerrar <i class="fa fa-ban" aria-hidden="true"></i>
+              </button>
+          </div>
+      </div>
   </div>
 </div>
