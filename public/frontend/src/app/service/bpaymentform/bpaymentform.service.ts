@@ -16,6 +16,10 @@ export class BpaymentformService {
     return this.http.get(this.url_api.get_url_api() + 'api/paymentform/get');
   }
 
+  getList(): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/paymentform/getList');
+  }
+
   create(data: any): Observable<any> {
     return this.http.post(this.url_api.get_url_api() + 'api/paymentform', data);
   }

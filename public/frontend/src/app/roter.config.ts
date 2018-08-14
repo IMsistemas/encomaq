@@ -18,6 +18,7 @@ import { ContractComponent } from './Biz/contract/contract.component';
 import { ReferralguideComponent } from './Biz/referralguide/referralguide.component';
 import { LiquidationComponent } from './Biz/liquidation/liquidation.component';
 import { PlaceComponent } from './Biz/place/place.component';
+import { PaymentformComponent } from './Biz/paymentform/paymentform.component';
 
 export const RouterConfig: Route[] = [
     { path: 'identiytype', component: NomIdentifytypeComponent},
@@ -38,6 +39,7 @@ export const RouterConfig: Route[] = [
     { path: 'referralguide', component: ReferralguideComponent },
     { path: 'liquidation', component: LiquidationComponent },
     { path: 'place', component: PlaceComponent },
+    { path: 'paymentform', component: PaymentformComponent },
 ];
 
 

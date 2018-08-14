@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Configuration;
 
+use App\Models\Biz\ContractPaymentForm;
 use App\Models\Biz\PaymentForm;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -23,6 +24,11 @@ class PaymentFormController extends Controller
         return PaymentForm::where('state', 1)->get();
     }
 
+    public function getList()
+    {
+        return PaymentForm::orderBy('paymentformname', 'asc')->get();
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -41,7 +47,16 @@ class PaymentFormController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $object = new PaymentForm();
+
+        $object->paymentformname = $request->input('paymentformname');
+        $object->state = 1;
+
+        if ($object->save()) {
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false]);
+        }
     }
 
     /**
@@ -75,7 +90,15 @@ class PaymentFormController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $object = PaymentForm::find($id);
+
+        $object->paymentformname = $request->input('paymentformname');
+
+        if ($object->save()) {
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false]);
+        }
     }
 
     /**
@@ -86,6 +109,22 @@ class PaymentFormController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $object_relations = ContractPaymentForm::where('idpaymentform', $id)->count();
+
+        if ($object_relations == 0) {
+
+            ContractPaymentForm::where('idpaymentform', $id)->delete();
+
+            $object_paymentform = PaymentForm::find($id);
+
+            if ($object_paymentform->delete()) {
+                return response()->json(['success' => true]);
+            } else {
+                return response()->json(['success' => false]);
+            }
+
+        } else {
+            return response()->json(['success' => false, 'relations' => true]);
+        }
     }
 }

@@ -88,7 +88,6 @@ class PlaceController extends Controller
         $object = Place::find($id);
 
         $object->placename = $request->input('placename');
-        $object->state = 1;
 
         if ($object->save()) {
             return response()->json(['success' => true]);
