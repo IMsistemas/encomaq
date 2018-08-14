@@ -17,17 +17,23 @@ export class UpdatereferralguideComponent implements OnInit {
 
   @Output() update_component_father = new EventEmitter<boolean>();
   @Output() refresh_component_father = new EventEmitter<boolean>();
+  @Output() field_selected = new EventEmitter<boolean>();
   @Input() tem_edit: any;
   lis_client = [];
   lis_item = [];
   list_itemcont = [];
+  fieldPlace = 0;
   @Input() idcontract_s: any; //
   @Input() item_select: any;
   @Input() carrier_select: any;
+  @Input() place_select_start: any;
+  @Input() place_select_end: any;
   listTransferReason = [];
   constructor(private transferreason: ReasontransferService, private item: ItemService, private referra: ReferralguideService) { }
 
   ngOnInit() {
+    this.place_select_start = { idplace: '', placename: ''};
+    this.place_select_end = { idplace: '', placename: ''};
     this.getTransferActive();
     this.list_items();
   }
@@ -69,6 +75,11 @@ export class UpdatereferralguideComponent implements OnInit {
   searchCarrier() {
     $('.listcarrier').modal('show');
   }
+  searchPlace(n) {
+    this.field_selected.emit(n);
+    // this.fieldPlace = n;
+    $('#listPlaceShow').modal('show');
+  }
   addrwo() {
     const o = {
       iditem: '',
@@ -84,6 +95,28 @@ export class UpdatereferralguideComponent implements OnInit {
   edit (data: any) {
     data.idcarrier = this.carrier_select.idcarrier;
     data.idcontract = this.idcontract_s.idcontract;
+
+    if (data.biz_referralguide_place.length !== 0) {
+      data.biz_referralguide_place[0].biz_place_start.idplace = this.place_select_start.idplace;
+      data.biz_referralguide_place[0].biz_place_start.placename = this.place_select_start.placename;
+      data.biz_referralguide_place[0].biz_place_end.idplace = this.place_select_end.idplace;
+      data.biz_referralguide_place[0].biz_place_end.placename = this.place_select_end.placename;
+    } else {
+      const a = {
+        biz_place_start: {
+          idplace: this.place_select_start.idplace,
+          placename: this.place_select_start.placename
+        },
+        biz_place_end: {
+          idplace: this.place_select_end.idplace,
+          placename: this.place_select_end.placename
+        }
+      };
+      data.biz_referralguide_place.push(a);
+    }
+
+    console.log(data);
+
     this.referra.update(data.idreferralguide, data).subscribe(
       (response) => {
         if (response.success !== undefined) {

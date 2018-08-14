@@ -157,6 +157,17 @@ class ReferralGuideController extends Controller
         $aux->arrivalpoint = $data["arrivalpoint"];
         $aux->state = 1;
          if ($aux->save()) {
+
+             ReferralGuidePlace::where('idreferralguide', $id)->delete();
+             $place = new ReferralGuidePlace();
+             $place->idreferralguide = $aux->idreferralguide;
+             $place->idplace_start = $data["biz_referralguide_place"][0]['biz_place_start']["idplace"];
+             $place->idplace_end = $data["biz_referralguide_place"][0]['biz_place_end']["idplace"];
+
+             if ($place->save() == false) {
+                 return response()->json(['error' => $aux]);
+             }
+
              $temp = Referralguideitem::whereRaw("idreferralguide='".$id."'")->delete();
 
              foreach ($data["biz__referralguideitem"] as $f) {

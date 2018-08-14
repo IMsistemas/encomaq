@@ -171,7 +171,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
 
-        <app-updatereferralguide [idcontract_s]="idcontract_select" [carrier_select]="objectcarrier_select" [item_select]="globalitem_select"  [tem_edit]="info_tem_edit"  (update_component_father)="updateList($event,'edit')" (refresh_component_father)="refresfather($event)" ></app-updatereferralguide>
+        <app-updatereferralguide [idcontract_s]="idcontract_select" [carrier_select]="objectcarrier_select" [item_select]="globalitem_select"  [tem_edit]="info_tem_edit" [place_select_start]="objectplace_select_start" [place_select_end]="objectplace_select_end"  (update_component_father)="updateList($event,'create')" (field_selected)="fieldPlaceSelected($event)" (update_component_father)="updateList($event,'edit')" (refresh_component_father)="refresfather($event)" ></app-updatereferralguide>
 
       </div>
     </div>

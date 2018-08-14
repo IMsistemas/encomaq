@@ -91,6 +91,16 @@ export class ReferralguideComponent implements OnInit {
     this.info_tem_edit = item;
     this.idcontract_select = item.biz_contract;
     this.objectcarrier_select = item.biz_carrier;
+    if (item.biz_referralguide_place.length !== 0) {
+      this.objectplace_select_start = {
+        idplace: item.biz_referralguide_place[0].biz_place_start.idplace,
+        placename: item.biz_referralguide_place[0].biz_place_start.placename
+      };
+      this.objectplace_select_end = {
+        idplace: item.biz_referralguide_place[0].biz_place_end.idplace,
+        placename: item.biz_referralguide_place[0].biz_place_end.placename
+      };
+    }
     $('#updatereferralguide').modal('show');
   }
 
