@@ -207,7 +207,7 @@ class CotractController extends Controller
     public function contractfiltro(Request $request) 
     {
         $filtro = json_decode($request->get('filter'));
-        $data = Contract::with("biz_client","biz_contractitem.biz_item", 'biz_period')
+        $data = Contract::with("biz_client","biz_contractitem.biz_item", 'biz_period', 'biz_contractpaymentform.biz_paymentform')
                         ->selectRaw("biz_contract.*")
                         ->join("biz_client","biz_client.idclient","=","biz_contract.idclient")
                         ->whereRaw("biz_contract.state='".$filtro->state."' AND ( biz_contract.nocontract LIKE '%".$filtro->Buscar."%' OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%') )")

@@ -301,7 +301,7 @@
         <div class="modal-body"  style="overflow-y: scroll; height: 70vh;"  *ngIf="info_datacontract">
           <div class="row">
             <div class="col-sm-12 col-md-12">
-              <h5>Datos Generales Del Arrendatario</h5>
+              <h5>Datos Generales del Arrendatario</h5>
             </div>
 
             <div class="col-sm-12 col-md-12">
@@ -334,10 +334,10 @@
 
 
                 <tr>
-                  <th>Garantía entregada</th>
-                  <td>{{info_datacontract.guarantee}}</td>
-                  <th>Costo de alquiler </th>
-                  <td>{{info_datacontract.cost}}</td>
+                  <th>Recibos</th>
+                  <td>{{info_datacontract.receipt}}</td>
+                  <th>Facturas </th>
+                  <td>{{info_datacontract.invoice}}</td>
                 </tr>
                 <tr>
                   <th>Observaciones</th>
@@ -348,12 +348,28 @@
               </table>
             </div>
 
+            <div class="col-sm-12 col-md-12">
+              <table class="table table-bordered">
+                <tr>
+                  <th>Costo de alquiler</th>
+                  <td>{{info_datacontract.cost}}</td>
+                </tr>
+                <tr>
+                  <th colspan="2" style="text-align: center;">GARANTIA</th>
+                </tr>
+                <tr *ngFor="let itemInfo of info_datacontract.biz_contractpaymentform">
+                  <th>{{itemInfo.biz_paymentform.paymentformname}}</th>
+                  <td>{{itemInfo.cost}}</td>
+                </tr>
+              </table>
+            </div>
+
 
           </div>
 
           <div class="row">
             <div class="col-sm-12 col-md-12">
-              <h5>Objetos del contrato</h5>
+              <h5>Objetos del Contrato</h5>
             </div>
 
             <div class="col-sm-12 col-md-12">

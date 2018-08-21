@@ -27,4 +27,9 @@ class Contract extends Model
     {
         return $this->belongsTo('App\Models\Biz\Period',"idperiod");
     }
+
+    public function biz_contractpaymentform()
+    {
+        return $this->hasMany('App\Models\Biz\ContractPaymentForm',"idcontract");
+    }
 }
