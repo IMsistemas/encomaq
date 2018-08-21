@@ -9,7 +9,7 @@
 
   <div class="modal-body" style="overflow-y: scroll; height: 70vh;">
 
-    <div class="row"> 
+    <div class="row">
       <div class="col-md-3 col-sm-12 ">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home"
@@ -40,7 +40,7 @@
                         {{cli.businessname}}
                       </option>
                     </select>
-              
+
                     <div class="input-group-append">
                       <button class="btn btn-default" type="button" (click)="search_client()"  >
                         <i class="fas fa-search"></i>
@@ -48,7 +48,7 @@
                     </div>
                   </div>
                 </div>
-              
+
                 <div *ngIf="idclient.errors?.required && idclient.touched">
                   <small id="" class="form-text text-danger text-right">El cliente es requerido</small>
                 </div>
@@ -63,7 +63,7 @@
                   </label>
                   <input type="text" class="form-control" id="identify" name="identify"  [(ngModel)]="id_client.identify" readonly #identify="ngModel" required>
                 </div>
-            
+
                 <div *ngIf="identify.errors?.required && identify.touched">
                   <small id="" class="form-text text-danger text-right">La identificación es requerida</small>
                 </div>
@@ -75,13 +75,13 @@
                   </label>
                   <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="id_client.phone" readonly #phone="ngModel" required>
                 </div>
-              
+
                 <div *ngIf="phone.errors?.required && phone.touched">
                   <small id="" class="form-text text-danger text-right">El teléfono es requerido</small>
                 </div>
               </div>
-              
-            </div>        
+
+            </div>
 
             <div class="row">
               <div class="col-md-12 col-sm-12">
@@ -91,7 +91,7 @@
                   </label>
                   <input type="text" class="form-control" id="address" name="address" [(ngModel)]="id_client.address" readonly #address="ngModel" required>
                 </div>
-            
+
                 <div *ngIf="address.errors?.required && address.touched">
                   <small id="" class="form-text text-danger text-right">La dirección es requerida</small>
                 </div>
@@ -106,7 +106,7 @@
                   </label>
                   <input type="date" class="form-control" id="startdate" name="startdate" ngModel #startdate="ngModel" required>
                 </div>
-            
+
                 <div *ngIf="startdate.errors?.required && startdate.touched">
                   <small id="" class="form-text text-danger text-right">La fecha de inicio es requerida</small>
                 </div>
@@ -119,7 +119,7 @@
                   </label>
                   <input type="date" class="form-control" id="enddate" name="enddate" ngModel #enddate="ngModel" required>
                 </div>
-              
+
                 <div *ngIf="enddate.errors?.required && enddate.touched">
                   <small id="" class="form-text text-danger text-right">La fecha de fin es requerida</small>
                 </div>
@@ -148,12 +148,12 @@
                       </select>
                     </div>
                   </div>
-                
+
                   <div *ngIf="idperiod.errors?.required && idperiod.touched">
                     <small id="" class="form-text text-danger text-right">El Periodo es requerido</small>
                   </div>
                 </div>
-            
+
               <div class="col-md-6 col-sm-12">
                 <div class="form-group">
                   <label for="exampleFormControlInput1">CANTIDAD
@@ -161,7 +161,7 @@
                   </label>
                   <input type="text" class="form-control"  pattern="^[0-9]+([0-9]+)?$" id="period" name="period" ngModel #period="ngModel" required>
                 </div>
-            
+
                 <div *ngIf="period.errors?.required && period.touched">
                   <small id="" class="form-text text-danger text-right">La Cantidad es requerido </small>
                 </div>
@@ -180,7 +180,7 @@
                   </label>
                   <input type="text" class="form-control"  pattern="^[0-9]+([.][0-9]+)?$"  id="guarantee" name="guarantee" ngModel #guarantee="ngModel" required>
                 </div>
-            
+
                 <div *ngIf="guarantee.errors?.required && guarantee.touched">
                   <small id="" class="form-text text-danger text-right">La garantía es requerida </small>
                 </div>
@@ -192,17 +192,17 @@
 
               <div class="col-12 table-responsive">
                   <label for="exampleFormControlInput1">GARANTÍA ENTREGADA</label>
-                  <table class="table table-striped table-hover">                    
+                  <table class="table table-striped table-hover">
                     <tbody>
 
                       <tr *ngFor="let ident of list_paymentform let i = index">
                         <td>{{ident.paymentformname}}</td>
                         <td><input type="text" class="form-control" pattern="^[0-9]+([.][0-9]+)?$" name="{{i}}valor" [(ngModel)]="ident.valor"></td>
                       </tr>
-              
+
                     </tbody>
                   </table>
-              
+
                 </div>
 
             </div>
@@ -215,12 +215,29 @@
                   </label>
                   <input type="text" class="form-control" pattern="^[0-9]+([.][0-9]+)?$"  id="cost" name="cost" ngModel #cost="ngModel" required>
                 </div>
-            
+
                 <div *ngIf="cost.errors?.required && cost.touched">
                   <small id="" class="form-text text-danger text-right">El costo es requerido </small>
                 </div>
                 <div *ngIf="cost.errors?.pattern">
                   <small id="" class="form-text text-danger text-right">El costo es incorrecto debe ser un numero entero o decimal</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="receipt">RECIBOS
+                  </label>
+                  <input type="text" class="form-control" id="receipt" name="receipt" ngModel #receipt="ngModel">
+                </div>
+              </div>
+              <div class="col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="invoice">FACTURAS
+                  </label>
+                  <input type="text" class="form-control" id="invoice" name="invoice" ngModel #invoice="ngModel">
                 </div>
               </div>
             </div>
@@ -245,11 +262,11 @@
                 <table class="table table-bordered table-condensed ">
                   <thead class="btn-dark">
                     <tr>
-                      <th style="width: 2%;">N</th>
+                      <th style="width: 3%;">N</th>
                       <th>DESCRIPCIÓN</th>
-                      <th style="width: 30% !important;" >CANT.</th>
+                      <th style="width: 15% !important;" >CANT.</th>
                       <th>OBSERVACIONES</th>
-                      <th></th>
+                      <th style="width: 3%;"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -290,8 +307,8 @@
                   </label>
                   <textarea cols="100" rows="5"  class="form-control" id="observation" name="observation" ngModel #observation="ngModel" ></textarea>
                 </div>
-            
-                
+
+
               </div>
             </div>
           </div>
