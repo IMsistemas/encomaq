@@ -300,6 +300,16 @@
         </div>
         <div class="modal-body"  style="overflow-y: scroll; height: 70vh;"  *ngIf="info_datacontract">
           <div class="row">
+
+              <div class="col-sm-12 col-md-12" *ngIf="caducidad_info == true">
+                  <table class="table table-bordered">
+                      <tr>
+                        <th>ESTADO DEL CONTRATO</th>
+                        <td>CADUCADO</td>
+                      </tr>
+                    </table>
+              </div>
+
             <div class="col-sm-12 col-md-12">
               <h5>Datos Generales del Arrendatario</h5>
             </div>

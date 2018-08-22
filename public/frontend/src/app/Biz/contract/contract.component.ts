@@ -31,6 +31,7 @@ export class ContractComponent implements OnInit {
   idcliente_select: any;
   globalitem_select: any;
   info_datacontract: any;
+  caducidad_info = false;
   constructor(private contract: ContractService) { }
 
   ngOnInit() {
@@ -198,6 +199,26 @@ export class ContractComponent implements OnInit {
   view_info(data: any) {
     console.log(data);
     this.info_datacontract = data;
+    this.caducidad_info = this.calculateDay(this.info_datacontract.enddate);
     $('#info_datacontract').modal('show');
+  }
+
+  calculateDay(enddate: string): boolean {
+
+    const Fecha: any = new Date();
+
+    const fechaInicial: string = Fecha.getDate() + '-' + (Fecha.getMonth() + 1) + '-' + Fecha.getFullYear();
+    const fechaFinal: string = enddate;
+    const inicial: Array<string> = fechaInicial.split('-');
+    const final: Array<string> = fechaFinal.split('-');
+
+    const dateStart: any = new Date(parseInt(inicial[2], 0), ( parseInt(inicial[1], 0) - 1 ), parseInt(inicial[0], 0));
+
+    const dateEnd: any = new Date(parseInt(final[0], 0), (parseInt(final[1], 0) - 1), parseInt(final[2], 0));
+
+    const result = ( ( ( dateEnd - dateStart ) / 86400 ) / 1000 );
+
+    return (result >= 0) ? false : true;
+
   }
 }
