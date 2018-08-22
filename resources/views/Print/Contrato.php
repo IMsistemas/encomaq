@@ -158,19 +158,50 @@
             <td ><?php echo $data[0]["enddate"]; ?></td>
         </tr>
         <tr>
-            <th>Área</th>
+            <th>Área (m<sup>2</sup>)</th>
             <td><?php echo $data[0]["area"]; ?></td>
 
             <th>Periodo de alquiler</th>
             <td><?php echo $data[0]["period"]; ?></td>
 
         </tr>
+
+
+        <tr>
+            <th>Recibos</th>
+            <td><?php echo $data[0]["receipt"]; ?></td>
+            <th>Facturas </th>
+            <td><?php echo $data[0]["invoice"]; ?></td>
+        </tr>
+        <tr>
+            <th>Observaciones</th>
+            <td colspan="3">
+                <?php echo $data[0]["observation"]; ?>
+            </td>
+        </tr>
+    </table>
+
+    <br/>
+
+    <table class="table table-bordered">
         <tr>
             <th>Costo de alquiler</th>
-            <td ><?php echo $data[0]["cost"]; ?></td>
-            <th>Obsercación</th>
-            <td ><?php echo $data[0]["observation"]; ?></td>
+            <td><?php echo $data[0]["cost"]; ?></td>
         </tr>
+        <tr>
+            <th colspan="2" style="text-align: center;">GARANTIA</th>
+        </tr>
+
+        <?php
+
+        foreach ($data[0]["biz_contractpaymentform"] as $c) {
+            echo "<tr>";
+            echo "<td>".$c["biz_paymentform"]["paymentformname"]."</td>";
+            echo "<td>".$c["cost"]."</td>";
+            echo "</tr>";
+        }
+        ?>
+
     </table>
     
     <br/>

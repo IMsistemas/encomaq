@@ -1,6 +1,9 @@
 import { Component, OnChanges, Output, EventEmitter, SimpleChanges, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ReferralguideService } from '../../service/referralguide/referralguide.service';
+import { ListcarrierComponent } from '../carrier/listcarrier/listcarrier.component';
+import { CarrierService } from '../../service/carrier/carrier.service';
+
 declare var jquery: any;
 declare var $: any;
 
@@ -42,7 +45,10 @@ export class ReferralguideComponent implements OnInit {
   objectplace_select_start: any;
   objectplace_select_end: any;
 
-  constructor(private referralguide: ReferralguideService) { }
+  listcarrier: any;
+  constructor(private referralguide: ReferralguideService, private carriers: CarrierService) {
+    this.listcarrier = new ListcarrierComponent(carriers);
+   }
 
   ngOnInit() {
     this.loadInitJQuery();
@@ -88,6 +94,7 @@ export class ReferralguideComponent implements OnInit {
 
   editSelected(item: any) {
     console.log(item);
+    this.listcarrier.get_list_carrier();
     this.info_tem_edit = item;
     this.idcontract_select = item.biz_contract;
     this.objectcarrier_select = item.biz_carrier;
@@ -141,6 +148,9 @@ export class ReferralguideComponent implements OnInit {
   }
 
   updateList(event, type) {
+
+    this.listcarrier.get_list_carrier();
+
     if (event === true) {
 
       if (type === 'create') {

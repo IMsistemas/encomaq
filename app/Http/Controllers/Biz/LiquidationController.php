@@ -162,7 +162,11 @@ class LiquidationController extends Controller
     public function liquidationfiltro(Request $request) 
     {
         $filtro = json_decode($request->get('filter'));
-        $data = Liquidation::with("biz_liquidationproject.biz_project","biz_referralguideliquidation.biz_referralguide.biz_contract.biz_client","biz_referralguideliquidation.biz_referralguide.biz_Referralguideitem.biz_item")
+        $data = Liquidation::with("biz_liquidationproject.biz_project",
+                                            "biz_referralguideliquidation.biz_referralguide.biz_contract.biz_client",
+                                            "biz_referralguideliquidation.biz_referralguide.biz_Referralguideitem.biz_item",
+                                            "biz_referralguideliquidation.biz_referralguide.nom_transferreason"
+                        )
                         ->whereRaw("biz_liquidation.state='".$filtro->state."' AND ( biz_liquidation.number LIKE '%".$filtro->Buscar."%'  )")
                         ->orderBy("".$filtro->column, "".$filtro->order);
 

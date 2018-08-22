@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { CarrierService } from '../../../service/carrier/carrier.service';
+import { Observer } from 'rxjs';
 
 declare var jquery: any;
 declare var $: any;
@@ -12,7 +13,8 @@ declare var $: any;
 })
 export class ListcarrierComponent implements OnInit {
 
-  listCarrier: Observable<any>;
+  listCarrier = [];
+  listCarrier2: Observable<any>;
   descripcion: any = '';
   /*variables para paginar*/
   state = '1';
@@ -35,6 +37,7 @@ export class ListcarrierComponent implements OnInit {
   }
 
   get_list_carrier() {
+    console.log('AAAAAAAAAAA');
     // this.listCarrier = this.carrier.get();
     const o = {
       Buscar: this.descripcion,
@@ -46,6 +49,7 @@ export class ListcarrierComponent implements OnInit {
     this.carrier.filtro_carrier(this.page, o).subscribe(
       (response) => {
         this.listCarrier = response.data;
+        console.log(this.listCarrier);
         this.from = response.from;
         this.total = response.total;
         this.loading = false;

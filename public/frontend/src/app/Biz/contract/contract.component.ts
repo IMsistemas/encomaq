@@ -179,6 +179,13 @@ export class ContractComponent implements OnInit {
     $('#print').modal('show');
     $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
   }
+  pdfInfoContract() {
+    const accion = this.contract.contractexportarpdf(this.info_datacontract.idcontract);
+    console.log(accion);
+    $('#printtitle').html('Contrato');
+    $('#print').modal('show');
+    $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
+  }
   excel() {
     $('#list_contract').table2excel({
       exclude: '.noExl',

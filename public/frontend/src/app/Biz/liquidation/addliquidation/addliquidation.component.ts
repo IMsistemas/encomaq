@@ -132,11 +132,12 @@ export class AddliquidationComponent implements OnInit {
   }
   select_guia(data: any) {
     this.close_listguias();
-    if (this.list_guias.length == 0) {
+    if (this.list_guias.length === 0) {
+      console.log(data);
       this.list_guias.push(data);
     } else {
       const resultado = this.list_guias.find(guia => guia.idreferralguide === data.idreferralguide );
-      if (resultado != undefined) {
+      if (resultado !== undefined) {
         $('#infoerrors').modal('show');
         this.mensage = 'La guía de remisión seleccionada ya esta asignada a la liquidación';
       } else {

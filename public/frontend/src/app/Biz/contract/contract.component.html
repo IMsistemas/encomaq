@@ -326,7 +326,7 @@
                 </tr>
 
                 <tr>
-                  <th>Área</th>
+                  <th>Área (m<sup>2</sup>)</th>
                   <td>{{info_datacontract.area}}</td>
                   <th>Período de alquiler </th>
                   <td>{{info_datacontract.period}} ({{info_datacontract.biz_period.periodname}})</td>
@@ -394,6 +394,8 @@
           </div>
         </div>
         <div class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="pdfInfoContract()">
+                <i class="fas fa-file-pdf"></i> PDF </button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancelar</button>
         </div>
       </div>

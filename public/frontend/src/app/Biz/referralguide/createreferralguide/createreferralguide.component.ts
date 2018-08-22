@@ -171,8 +171,12 @@ export class CreatereferralguideComponent implements OnInit {
       list: this.list_itemcont
     };
 
+    console.log(data);
+    /*console.log(this.carrier_select);*/
+
     this.referra.create(aux).subscribe(
       (response) => {
+        frm.reset();
         console.log(response);
         if (response.success !== undefined) {
           $('#createreferralguide').modal('hide');

@@ -28,6 +28,7 @@ export class UpdatereferralguideComponent implements OnInit {
   @Input() carrier_select: any;
   @Input() place_select_start: any;
   @Input() place_select_end: any;
+
   listTransferReason = [];
   constructor(private transferreason: ReasontransferService, private item: ItemService, private referra: ReferralguideService) { }
 
