@@ -44,7 +44,7 @@ export class ReferralguideComponent implements OnInit {
   objectcarrier_select: any;
   objectplace_select_start: any;
   objectplace_select_end: any;
-
+  info: any;
   listcarrier: any;
   constructor(private referralguide: ReferralguideService, private carriers: CarrierService) {
     this.listcarrier = new ListcarrierComponent(carriers);
@@ -272,5 +272,11 @@ export class ReferralguideComponent implements OnInit {
     $('#printtitle').html('Lista de guía de remisión');
     $('#print').modal('show');
     $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
+  }
+
+  view_info(data: any) {
+    console.log(data);
+    this.info = data;
+    $('#info').modal('show');
   }
 }
