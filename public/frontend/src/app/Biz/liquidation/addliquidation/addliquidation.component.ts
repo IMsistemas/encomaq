@@ -89,13 +89,19 @@ export class AddliquidationComponent implements OnInit {
 
   getList() {
 
+    console.log($('#dateinit').val());
+    console.log($('#dateend').val());
+
+
     const o = {
       search: this.descripcion,
       state: this.state,
       column: this.column,
       order: this.order,
       num_page: this.num_page,
-      client: this.client_guiar
+      client: this.client_guiar, 
+      dateinit: $('#dateinit').val(),
+      dateend: $('#dateend').val()
     };
 
     this.referralguide.get(this.page, o).subscribe(

@@ -30,11 +30,17 @@ class ReferralGuideController extends Controller
 
         $where = " biz_referralguide.state ='" . $filter->state."' ";
         $where .= " AND (sequential LIKE '%" . $filter->search . "%' OR purchaseproof LIKE '%" . $filter->search . "%'  ";
-        $where .= " OR biz_contract.nocontract LIKE '%" . $filter->search . "%'   ";
+        $where .= " OR biz_contract.nocontract LIKE '%" . $filter->search . "%' ";
         $where .= " OR biz_client.businessname LIKE '%" . $filter->search . "%'  ) ";
-        
+
+
+
         if (isset($filter->client)) {
             $where .= " AND  biz_client.idclient=".$filter->client." ";
+        }
+
+        if ($filter->dateinit != '' && $filter->dateend != '') {
+            $where .= " AND  biz_referralguide.datetimereferral BETWEEN '" . $filter->dateinit . "' AND '" . $filter->dateend . "' ";
         }
 
         return Referralguide::with('biz_contract.biz_client.biz_Project', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem.biz_item', 'biz_referralguide_place.biz_place_start', 'biz_referralguide_place.biz_place_end')

@@ -99,7 +99,9 @@ export class EditliquidationComponent implements OnInit {
       column: this.column,
       order: this.order,
       num_page: this.num_page,
-      client: this.client_guiar
+      client: this.client_guiar,
+      dateinit: $('#dateinit').val(),
+      dateend: $('#dateend').val()
     };
 
     this.referralguide.get(this.page, o).subscribe(
