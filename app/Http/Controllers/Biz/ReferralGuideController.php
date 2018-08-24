@@ -39,8 +39,10 @@ class ReferralGuideController extends Controller
             $where .= " AND  biz_client.idclient=".$filter->client." ";
         }
 
-        if ($filter->dateinit != '' && $filter->dateend != '') {
-            $where .= " AND  biz_referralguide.datetimereferral BETWEEN '" . $filter->dateinit . "' AND '" . $filter->dateend . "' ";
+        if (isset($filter->dateinit) == true && isset($filter->dateend) == true) {
+            if ($filter->dateinit != '' && $filter->dateend != '') {
+                $where .= " AND  biz_referralguide.datetimereferral BETWEEN '" . $filter->dateinit . "' AND '" . $filter->dateend . "' ";
+            }
         }
 
         return Referralguide::with('biz_contract.biz_client.biz_Project', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem.biz_item', 'biz_referralguide_place.biz_place_start', 'biz_referralguide_place.biz_place_end')
