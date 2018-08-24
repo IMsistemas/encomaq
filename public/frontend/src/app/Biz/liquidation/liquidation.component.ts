@@ -26,6 +26,7 @@ export class LiquidationComponent implements OnInit {
   limit = 0;
   from = 0;
   /*variables para paginar*/
+  idcliente_select: any;
   constructor(private liquidation: LiquidationService) { }
 
   ngOnInit() {
@@ -160,5 +161,9 @@ export class LiquidationComponent implements OnInit {
     $('#printtitle').html('Lista de Liquidaciones');
     $('#print').modal('show');
     $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
+  }
+
+  idclient_select(n): void {
+    this.idcliente_select = n;
   }
 }

@@ -36,9 +36,22 @@
                   <label for="exampleFormControlInput1">Cliente 
                     <span class="required">(*)</span>
                   </label>
-                  <select class="form-control" id="idcliente" name="idcliente" ngModel #idcliente="ngModel" (change)="projects_client(idcliente.viewModel)" required>
-                    <option *ngFor="let c of list_client" value="{{c.idclient}}">{{c.businessname}}</option>
-                  </select>
+                  
+
+                  <div class="input-group">
+
+                      <select class="form-control" id="idcliente" name="idcliente" [(ngModel)]="id_client.idclient" readonly #idcliente="ngModel" (change)="projects_client(idcliente.viewModel)" required>
+                          <option *ngFor="let c of list_client" value="{{c.idclient}}">{{c.businessname}}</option>
+                        </select>
+  
+                      <div class="input-group-append">
+                        <button class="btn btn-default" type="button" (click)="search_client()"  >
+                          <i class="fas fa-search"></i>
+                        </button>
+                      </div>
+                      
+                    </div>
+
                 </div>
               </div>
             </div>

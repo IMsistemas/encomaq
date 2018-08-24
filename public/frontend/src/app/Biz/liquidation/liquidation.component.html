@@ -200,7 +200,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content" >
 
-        <app-addliquidation  (update_component_father)="update_list($event,'create')"></app-addliquidation>
+        <app-addliquidation [id_client]="idcliente_select" (update_component_father)="update_list($event,'create')"></app-addliquidation>
 
       </div>
     </div>
@@ -287,3 +287,5 @@
   </div>
 
 </div>
+
+<app-listclient (idcliente)="idclient_select($event)"></app-listclient>

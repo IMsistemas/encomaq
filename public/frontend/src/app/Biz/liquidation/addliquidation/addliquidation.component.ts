@@ -40,7 +40,9 @@ export class AddliquidationComponent implements OnInit {
   list_project = [];
   client_guiar: any;
   constructor(private referralguide: ReferralguideService, private liquidation: LiquidationService, private project: ProjectService ) { }
+  @Input() id_client: any; //
   ngOnInit() {
+    this.id_client = { idclient: '' };
     this.getListclient_referralguide();
   }
 
@@ -206,5 +208,9 @@ export class AddliquidationComponent implements OnInit {
         frm.reset();
         this.update_component_father.emit(false);
       });
+  }
+
+  search_client() {
+    $('.listclient').modal('show');
   }
 }
