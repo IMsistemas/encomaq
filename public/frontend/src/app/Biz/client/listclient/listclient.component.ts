@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { ClienteService } from '../../../service/bclient/cliente.service';
+import { ReferralguideService } from '../../../service/referralguide/referralguide.service';
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -21,21 +22,26 @@ export class ListclientComponent implements OnInit {
   descripcion = '';
   ididentifytype = '';
   @Input() cliente: any;
+  @Input() type: any;
   @Output() idcliente = new EventEmitter<any>();
-  constructor(private client: ClienteService) { }
+  constructor(private client: ClienteService, private referralguide: ReferralguideService) { }
 
   ngOnInit() {
     this.get_list_client();
   }
   get_list_client() {
+
+    console.log(this.type);
     const o = {
       Buscar: this.descripcion,
       ididentifytype: this.ididentifytype,
       state: '1',
       column: 'businessname',
       order: 'ASC',
-      num_page: 5
+      num_page: 5,
+      type: this.type
     };
+
     this.client.filtro_client(this.page, o).subscribe(
       (response) => {
         this.list_client = response.data;

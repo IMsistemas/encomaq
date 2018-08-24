@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Biz;
 
+use App\Models\Biz\Referralguide;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -145,14 +146,32 @@ class ClienteController extends Controller
     public function clientfiltro(Request $request) 
     {
         $filtro = json_decode($request->get('filter'));
-        $sql = "";
-        if ($filtro->ididentifytype != "") {
-            $sql .= " AND ididentifytype =".$filtro->ididentifytype." ";
+
+        if ($filtro->type == 1) {
+
+            $where = " biz_referralguide.state ='1' AND (biz_client.businessname  LIKE '%".$filtro->Buscar."%' OR biz_client.identify  LIKE '%".$filtro->Buscar."%')";
+            return Referralguide::selectRaw("biz_client.* ")
+                ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")
+                ->join("biz_client", "biz_client.idclient", "=", "biz_contract.idclient" )
+                ->whereRaw($where)
+                ->orderBy("biz_client.businessname", "ASC")
+                ->groupBy("biz_client.idclient")
+                ->paginate($filtro->num_page);
+
+        } else {
+
+            $sql = "";
+            if ($filtro->ididentifytype != "") {
+                $sql .= " AND ididentifytype =".$filtro->ididentifytype." ";
+            }
+            $data = Client::with("nom_identifytype")
+                ->whereRaw("(businessname  LIKE '%".$filtro->Buscar."%' OR identify  LIKE '%".$filtro->Buscar."%')  AND state='".$filtro->state."'".$sql)
+                ->orderBy("".$filtro->column, "".$filtro->order);
+            return  $data->paginate($filtro->num_page);
+
         }
-        $data = Client::with("nom_identifytype")
-                        ->whereRaw("(businessname  LIKE '%".$filtro->Buscar."%' OR identify  LIKE '%".$filtro->Buscar."%')  AND state='".$filtro->state."'".$sql)
-                        ->orderBy("".$filtro->column, "".$filtro->order);
-        return  $data->paginate($filtro->num_page);
+
+
     }
     private function existclient($aux, $id)
     {
