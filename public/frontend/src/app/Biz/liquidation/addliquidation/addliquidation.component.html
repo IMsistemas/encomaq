@@ -63,8 +63,12 @@
                   <label for="exampleFormControlInput1">Proyectos
                     <span class="required">(*)</span>
                   </label>
-                  <select class="form-control" id="projects" multiple  name="projects" ngModel #projects="ngModel" required>
+                  <!--<select class="form-control" id="projects" multiple  name="projects" ngModel #projects="ngModel" required>
                     <option *ngFor="let c of list_project" value="{{c.idproject}}">{{c.projectname}}</option>
+                  </select>-->
+
+                  <select class="form-control" id="projects" multiple  name="projects" ngModel #projects="ngModel" required>
+                    <option *ngFor="let c of id_client.biz_contract.biz_client.biz__project" value="{{c.idproject}}">{{c.projectname}}</option>
                   </select>
                 </div>
               </div>

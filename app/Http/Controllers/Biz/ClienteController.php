@@ -150,7 +150,7 @@ class ClienteController extends Controller
         if ($filtro->type == 1) {
 
             $where = " biz_referralguide.state ='1' AND (biz_client.businessname  LIKE '%".$filtro->Buscar."%' OR biz_client.identify  LIKE '%".$filtro->Buscar."%')";
-            return Referralguide::selectRaw("biz_client.* ")
+            return Referralguide::with('biz_contract.biz_client.biz_Project')->selectRaw("biz_client.*,  biz_contract.*")
                 ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")
                 ->join("biz_client", "biz_client.idclient", "=", "biz_contract.idclient" )
                 ->whereRaw($where)
