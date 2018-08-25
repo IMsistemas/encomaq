@@ -91,10 +91,6 @@ export class AddliquidationComponent implements OnInit {
 
   getList() {
 
-    console.log($('#dateinit').val());
-    console.log($('#dateend').val());
-
-
     const o = {
       search: this.descripcion,
       state: this.state,

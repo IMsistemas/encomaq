@@ -35,9 +35,21 @@
                   <label for="exampleFormControlInput1">Cliente 
                     <span class="required">(*)</span>
                   </label>
-                  <select class="form-control" id="idcliente" name="idcliente" [(ngModel)]="tem_edit.biz_liquidationproject[0].biz_project.idclient"  #idcliente="ngModel" (change)="projects_client(idcliente.viewModel)" required>
-                    <option *ngFor="let c of list_client" value="{{c.idclient}}">{{c.businessname}}</option>
-                  </select>
+                  
+                  <div class="input-group">
+
+                    <select class="form-control" id="idcliente" name="idcliente" [(ngModel)]="(id_client.idclient === null) ? tem_edit.biz_liquidationproject[0].biz_project.idclient: id_client.idclient "  #idcliente="ngModel" (change)="projects_client(idcliente.viewModel)" required>
+                      <option *ngFor="let c of list_client" value="{{c.idclient}}">{{c.businessname}}</option>
+                    </select>
+
+                    <div class="input-group-append">
+                      <button class="btn btn-default" type="button" (click)="search_client()"  >
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                    
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -52,6 +64,10 @@
                   <select class="form-control" id="projects" multiple name="projects" [(ngModel)]="temp_project" #projects="ngModel" required>
                     <option *ngFor="let c of list_project" value="{{c.idproject}}">{{c.projectname}}</option>
                   </select>
+
+                  <!--<select class="form-control" id="projects" multiple  name="projects" [(ngModel)]="temp_project" #projects="ngModel" required>
+                    <option *ngFor="let c of id_client.biz_contract.biz_client.biz__project" value="{{c.idproject}}">{{c.projectname}}</option>
+                  </select>-->
                 </div>
               </div>
             </div>
@@ -213,8 +229,8 @@
     </div>
 
 
-    <div class="row" style="display: none;">
-      <table id="exlliquidation">
+   <!-- <div class="row" style="display: none;" *ngIf="tem_edit" >
+      <table id="exlliquidation" >
         <tr>
           <th>Fecha de Inicio</th>
           <td>{{tem_edit.dateinit}}</td>
@@ -228,7 +244,7 @@
 
         <tr>
           <th>Cliente</th>
-          <td colspan="3">{{tem_edit.biz_referralguideliquidation[0].biz_referralguide.biz_contract.biz_client.businessname}}</td>
+          <td colspan="3" *ngIf="tem_edit.biz_referralguideliquidation">{{tem_edit.biz_referralguideliquidation[0].biz_referralguide.biz_contract.biz_client.businessname}}</td>
         </tr>
         <tr>
           <th>Proyectos</th>
@@ -306,7 +322,7 @@
           </tr>
         </table>
       </div>
-    </div>
+    </div> -->
 
 
   </div>

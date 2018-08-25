@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { NgForm } from '@angular/forms';
 import { ReferralguideService } from '../../../service/referralguide/referralguide.service';
@@ -11,7 +11,7 @@ declare var $: any;
   templateUrl: './editliquidation.component.html',
   styleUrls: ['./editliquidation.component.css']
 })
-export class EditliquidationComponent implements OnInit {
+export class EditliquidationComponent implements OnInit, OnChanges {
   @Input() tem_edit: any;
   @Output() update_component_father = new EventEmitter<boolean>();
   @Output() refresh_component_father = new EventEmitter<boolean>();
@@ -42,9 +42,27 @@ export class EditliquidationComponent implements OnInit {
   client_guiar: any;
   guiarm: any;
   constructor(private referralguide: ReferralguideService, private liquidation: LiquidationService, private project: ProjectService) { }
-
+  @Input() id_client = { idclient: null, biz_contract: {biz_client: {biz__project: []}} }; //
   ngOnInit() {
+    this.id_client = { idclient: null, biz_contract: {biz_client: {biz__project: []}} };
     this.getListclient_referralguide();
+    this.tem_edit = {biz_liquidationproject: [{biz_project: {idclient: ''} }] };
+  }
+  ngOnChanges () {
+    if (this.tem_edit) {
+      this.projects_client(this.tem_edit.biz_liquidationproject[0].biz_project.idclient);
+    }
+
+    if (this.id_client !== undefined) {
+
+      if (this.id_client.idclient !== null) {
+        this.tem_edit.biz_liquidationproject[0].biz_project.idclient = this.id_client.idclient;
+        this.projects_client(this.id_client.idclient);
+        this.tem_edit.biz_referralguideliquidation = [];
+        this.calcula();
+      }
+
+    }
   }
   addliuidation(data: any) {
     if (data.idcliente != '') {
@@ -191,6 +209,9 @@ export class EditliquidationComponent implements OnInit {
     data.subtotal = this.subtotal;
     data.iva = this.iva;
     data.total = this.totalprecio;
+
+    data.biz_liquidationproject[0].biz_project.idclient = datos.idcliente;
+
     const o = {
       Data: data,
       list: datos
@@ -246,5 +267,9 @@ export class EditliquidationComponent implements OnInit {
       exclude: '.noExl',
       filename: 'Guía de remisión'
     });
+  }
+
+  search_client() {
+    $('.listclient').modal('show');
   }
 }
