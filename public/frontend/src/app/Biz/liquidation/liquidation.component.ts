@@ -30,6 +30,8 @@ export class LiquidationComponent implements OnInit {
   constructor(private liquidation: LiquidationService) { }
 
   ngOnInit() {
+    $('.auxeditidcliente').prop('disabled' , true);
+    $('.auxaddidcliente').prop('disabled' , true);
     this.get_list_liquidation();
   }
   new_liquidation() {

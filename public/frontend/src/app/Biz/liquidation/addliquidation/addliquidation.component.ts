@@ -42,6 +42,7 @@ export class AddliquidationComponent implements OnInit {
   constructor(private referralguide: ReferralguideService, private liquidation: LiquidationService, private project: ProjectService ) { }
   @Input() id_client: any; //
   ngOnInit() {
+    $('.auxaddidcliente').prop('disabled' , true);
     this.id_client = { idclient: '', biz_contract: {biz_client: {biz__project: []}} };
     this.getListclient_referralguide();
   }

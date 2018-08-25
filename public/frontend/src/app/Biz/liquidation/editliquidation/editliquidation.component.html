@@ -13,9 +13,9 @@
     <div class="row">
       <div class="col-md-3 col-sm-12 ">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a class="nav-link active" id="v-pills-home-tab" (click)="calcula(); projects_client(tem_edit.biz_liquidationproject[0].biz_project.idclient)" data-toggle="pill" href="#v-pills-home3" role="tab" aria-controls="v-pills-home"
+          <a class="nav-link active" id="v-pills-home-tab" (click)="calcula();" data-toggle="pill" href="#v-pills-home3" role="tab" aria-controls="v-pills-home"
             aria-selected="true">LIQUIDACIÓN</a>
-          <a class="nav-link" id="v-pills-profile-tab" (click)="calcula(); projects_client(tem_edit.biz_liquidationproject[0].biz_project.idclient)" data-toggle="pill" href="#v-pills-profile3" role="tab" aria-controls="v-pills-profile"
+          <a class="nav-link" id="v-pills-profile-tab" (click)="calcula();" data-toggle="pill" href="#v-pills-profile3" role="tab" aria-controls="v-pills-profile"
             aria-selected="false">GUÍAS REMISIÓN</a>
 
         </div>
@@ -38,7 +38,7 @@
                   
                   <div class="input-group">
 
-                    <select class="form-control" id="idcliente" name="idcliente" [(ngModel)]="(id_client.idclient === null) ? tem_edit.biz_liquidationproject[0].biz_project.idclient: id_client.idclient "  #idcliente="ngModel" (change)="projects_client(idcliente.viewModel)" required>
+                    <select class="form-control auxeditidcliente" id="idcliente" name="idcliente" [(ngModel)]="(id_client.idclient === null) ? tem_edit.biz_liquidationproject[0].biz_project.idclient : id_client.idclient "  #idcliente="ngModel" readonly required>
                       <option *ngFor="let c of list_client" value="{{c.idclient}}">{{c.businessname}}</option>
                     </select>
 

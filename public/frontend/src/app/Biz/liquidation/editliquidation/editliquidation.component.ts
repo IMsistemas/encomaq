@@ -44,11 +44,16 @@ export class EditliquidationComponent implements OnInit, OnChanges {
   constructor(private referralguide: ReferralguideService, private liquidation: LiquidationService, private project: ProjectService) { }
   @Input() id_client = { idclient: null, biz_contract: {biz_client: {biz__project: []}} }; //
   ngOnInit() {
+    $('.auxeditidcliente').prop('disabled' , true);
     this.id_client = { idclient: null, biz_contract: {biz_client: {biz__project: []}} };
     this.getListclient_referralguide();
     this.tem_edit = {biz_liquidationproject: [{biz_project: {idclient: ''} }] };
   }
   ngOnChanges () {
+    $('.auxeditidcliente').prop('disabled' , true);
+    console.log(this.tem_edit);
+    console.log(this.id_client);
+
     if (this.tem_edit) {
       this.projects_client(this.tem_edit.biz_liquidationproject[0].biz_project.idclient);
     }
@@ -90,6 +95,7 @@ export class EditliquidationComponent implements OnInit, OnChanges {
       });
   }
   getListclient_referralguide() {
+    this.list_client = [];
     this.list_client.push({ idclient: '', businessname: '--Seleccione--' });
     this.referralguide.listclient_referralguide().subscribe(
       (response) => {
@@ -195,9 +201,9 @@ export class EditliquidationComponent implements OnInit, OnChanges {
       }
     }
     if (this.subtotal != 0) {
-      this.iva = ((this.subtotal * this.porcentaje) / 100);
+      this.iva = ((this.subtotal * this.porcentaje) / 100).toFixed(2);
     }
-    this.totalprecio = this.subtotal + this.iva;
+    this.totalprecio = (this.subtotal + this.iva).toFixed(2);
   }
   removerow(data) {
     const posicion = this.tem_edit.biz_referralguideliquidation.indexOf(data);
@@ -209,16 +215,19 @@ export class EditliquidationComponent implements OnInit, OnChanges {
     data.subtotal = this.subtotal;
     data.iva = this.iva;
     data.total = this.totalprecio;
-
+    console.log(data);
+    console.log(datos);
     data.biz_liquidationproject[0].biz_project.idclient = datos.idcliente;
 
     const o = {
       Data: data,
       list: datos
     };
+
     this.liquidation.edit_liquidation(data.idliquidation, o).subscribe(
       (response) => {
         if (response.success !== undefined) {
+          this.id_client = { idclient: null, biz_contract: {biz_client: {biz__project: []}} };
           $('#editliquidation').modal('hide');
           frm.reset();
           this.update_component_father.emit(true);
@@ -226,6 +235,9 @@ export class EditliquidationComponent implements OnInit, OnChanges {
           frm.reset();
           this.update_component_father.emit(false);
         }
+        this.getListclient_referralguide();
+        this.tem_edit.biz_liquidationproject[0].biz_project.idclient = String(datos.idcliente);
+
       },
       (error) => {
         console.log('POST call in error", respons', error);

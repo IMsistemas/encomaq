@@ -40,7 +40,7 @@
 
                   <div class="input-group">
 
-                      <select class="form-control" id="idcliente" name="idcliente" [(ngModel)]="id_client.idclient" readonly #idcliente="ngModel" (change)="projects_client(idcliente.viewModel)" required>
+                      <select class="form-control auxaddidcliente" id="idcliente" name="idcliente" [(ngModel)]="id_client.idclient" readonly #idcliente="ngModel" (change)="projects_client(idcliente.viewModel)" required>
                           <option *ngFor="let c of list_client" value="{{c.idclient}}">{{c.businessname}}</option>
                         </select>
   
