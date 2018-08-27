@@ -204,7 +204,7 @@ export class ContractComponent implements OnInit {
   }
 
   calculateDay(enddate: string): boolean {
-
+    console.log(enddate);
     const Fecha: any = new Date();
 
     const fechaInicial: string = Fecha.getDate() + '-' + (Fecha.getMonth() + 1) + '-' + Fecha.getFullYear();
