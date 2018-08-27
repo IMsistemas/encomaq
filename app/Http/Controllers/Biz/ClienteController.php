@@ -147,7 +147,7 @@ class ClienteController extends Controller
     {
         $filtro = json_decode($request->get('filter'));
 
-        if ($filtro->type == 1) {
+        if (isset($filtro->type) && $filtro->type == 1) {
 
             $where = " biz_referralguide.state ='1' AND (biz_client.businessname  LIKE '%".$filtro->Buscar."%' OR biz_client.identify  LIKE '%".$filtro->Buscar."%')";
             return Referralguide::with('biz_contract.biz_client.biz_Project')->selectRaw("biz_client.*,  biz_contract.*")
