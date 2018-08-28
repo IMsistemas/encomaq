@@ -15,6 +15,7 @@ declare var $: any;
 export class AddclientComponent implements OnInit {
   @Output() update_component_father = new EventEmitter<boolean>();
   lis_tipoident = [];
+  identifylength = 0;
   constructor(private client: ClienteService, private tipo: NomidentifytyService) { }
 
   ngOnInit() {
@@ -27,7 +28,8 @@ export class AddclientComponent implements OnInit {
         for (const idt of response) {
           const o = {
             ididentifytype: idt.ididentifytype,
-            identifytypename: idt.identifytypename
+            identifytypename: idt.identifytypename,
+            identifylength: idt.identifylength
           };
           this.lis_tipoident.push(o);
         }
@@ -35,6 +37,22 @@ export class AddclientComponent implements OnInit {
       (error) => {
         console.log('POST call in error", respons', error);
       });
+  }
+  changeIdentify(form) {
+    if (form.ididentifytype !== '') {
+      for (const idt of this.lis_tipoident) {
+
+        if (parseInt(form.ididentifytype, 0) === parseInt(idt.ididentifytype, 0)) {
+          if (idt.identifylength !== null && idt.identifylength !== undefined && idt.identifylength !== '') {
+            this.identifylength = idt.identifylength;
+          } else {
+            this.identifylength = 1000;
+          }
+          $('#identify').val('');
+        }
+
+      }
+    }
   }
   add_client(data) {
     this.client.add_client(data).subscribe(

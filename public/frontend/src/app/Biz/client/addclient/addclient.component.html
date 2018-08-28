@@ -15,7 +15,7 @@
           <label for="exampleFormControlInput1">Tipo Identificación
             <span class="required">(*)</span>
           </label>
-          <select class="form-control" id="ididentifytype" name="ididentifytype" ngModel #ididentifytype="ngModel" required>
+          <select class="form-control" id="ididentifytype" name="ididentifytype" ngModel #ididentifytype="ngModel" (change)="changeIdentify(frmclient.value)" required>
             <option *ngFor="let idtip of lis_tipoident" [ngValue]="idtip.ididentifytype">
               {{idtip.identifytypename}}
             </option>
@@ -32,7 +32,7 @@
           <label for="exampleFormControlInput1">Identificación
             <span class="required">(*)</span>
           </label>
-          <input type="text" class="form-control" maxlength="13" id="identify" name="identify" ngModel #identify="ngModel" required>
+          <input type="text" class="form-control" maxlength="{{identifylength}}" id="identify" name="identify" ngModel #identify="ngModel" required>
         </div>
       
         <div *ngIf="identify.errors?.required && identify.touched">

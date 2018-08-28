@@ -10,6 +10,7 @@ declare var $: any;
 })
 export class EditclientComponent implements OnInit {
   lis_tipoident = [];
+  identifylength = 0;
   @Input() tem_edit: any;
   @Output() update_component_father = new EventEmitter<boolean>();
   @Output() refresh_component_father = new EventEmitter<boolean>();
@@ -25,7 +26,8 @@ export class EditclientComponent implements OnInit {
         for (const idt of response) {
           const o = {
             ididentifytype: idt.ididentifytype,
-            identifytypename: idt.identifytypename
+            identifytypename: idt.identifytypename,
+            identifylength: idt.identifylength
           };
           this.lis_tipoident.push(o);
         }
@@ -33,6 +35,22 @@ export class EditclientComponent implements OnInit {
       (error) => {
         console.log('POST call in error", respons', error);
       });
+  }
+  changeIdentify(form) {
+    if (form.ididentifytype !== '') {
+      for (const idt of this.lis_tipoident) {
+
+        if (parseInt(form.ididentifytype, 0) === parseInt(idt.ididentifytype, 0)) {
+          if (idt.identifylength !== null && idt.identifylength !== undefined && idt.identifylength !== '') {
+            this.identifylength = idt.identifylength;
+          } else {
+            this.identifylength = 1000;
+          }
+          form.identify = '';
+        }
+
+      }
+    }
   }
   modify_client(data: any) {
     this.client.edit_client(data.idclient, data).subscribe(
