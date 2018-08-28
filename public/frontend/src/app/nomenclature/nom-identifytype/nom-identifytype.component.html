@@ -33,6 +33,7 @@
         <tr>
           <th style="width: 8%;">NO</th>
           <th>TIPO IDENTIFICACIÓN</th>
+          <th>LONGITUD</th>
           <th style="width: 12%;">ESTADO</th>
           <th style="width: 5%;"></th>
         </tr>
@@ -41,6 +42,7 @@
         <tr *ngFor="let ident of list_identifytype | async;  let i = index " [ngClass]= "{'text-danger':ident.state == 0 } ">
           <td>{{i+1}}</td>
           <td>{{ident.identifytypename}}</td>
+          <td>{{ident.identifylength}}</td>
           <td >{{ ((ident.state == 1)? 'ACTIVO':'INACTIVO') }}</td>
           <td>
             <div class="dropdown">

@@ -49,6 +49,7 @@ class IdentifyController extends Controller
         if ($this->existtypeidentify($data["identifytypename"], null) == false) {
             $ident = new IndetifyType();
             $ident->identifytypename = $data["identifytypename"];
+            $ident->identifylength = $data["identifylength"];
             $ident->state = 1;
             if($ident->save()){
                 return response()->json(['success' => $ident ]);
@@ -95,6 +96,7 @@ class IdentifyController extends Controller
         if ($this->existtypeidentify($data["identifytypename"], $id) == false) {
             $ident= IndetifyType::find($id);
             $ident->identifytypename = $data["identifytypename"];
+            $ident->identifylength = $data["identifylength"];
             if($ident->save()){
                 return response()->json(['success' => $ident ]);
             }else{
