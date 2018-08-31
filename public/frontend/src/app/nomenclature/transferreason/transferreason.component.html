@@ -33,6 +33,7 @@
         <tr>
           <th style="width: 8%;">NO</th>
           <th>MOTIVO TRASLADO</th>
+          <th>TIPO</th>
           <th style="width: 12%;">ESTADO</th>
           <th style="width: 5%;"></th>
         </tr>
@@ -41,6 +42,7 @@
         <tr *ngFor="let ident of list_transferreason | async;  let i = index " [ngClass]= "{'text-danger':ident.state == 0 } ">
           <td>{{i+1}}</td>
           <td>{{ident.transferreasonname}}</td>
+          <td>{{ident.biz_typetransferreason.nametypetransferreason}}</td>
           <td>{{ ((ident.state == 1)? 'ACTIVO':'INACTIVO') }}</td>
           <td>
             <div class="dropdown">
@@ -130,7 +132,7 @@
     </div>
   </div>
 
-  
+
 
 
 <div class="modal fade" id="mdl_cancelactivate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -183,22 +185,22 @@
           </div>
         </div>
         <div class="modal-footer">
-  
+
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
             Cancelar
             <i class="fas fa-ban"></i>
           </button>
-  
+
           <button type="button" class="btn btn-danger" (click)="ok_delete();">
             Aceptar
             <i class="fas fa-trash-alt"></i>
           </button>
-  
+
         </div>
       </div>
     </div>
   </div>
-  
+
 </div>
 
 

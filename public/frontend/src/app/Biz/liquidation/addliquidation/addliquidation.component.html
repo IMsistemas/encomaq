@@ -16,13 +16,13 @@
             aria-selected="true">LIQUIDACIÓN</a>
           <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile"
             aria-selected="false">GUÍAS REMISIÓN</a>
-         
+
         </div>
       </div>
       <div class="col-md-9 col-sm-12 ">
         <div class="tab-content" id="v-pills-tabContent">
           <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-            
+
             <div class="row">
               <div class="col-md-12 col-sm-12">
                 <strong>DATOS GENERALES DE LA LIQUIDACIÓN</strong>
@@ -33,23 +33,23 @@
 
               <div class="col-md-12 col-sm-12">
                 <div class="form-group">
-                  <label for="exampleFormControlInput1">Cliente 
+                  <label for="exampleFormControlInput1">Cliente
                     <span class="required">(*)</span>
                   </label>
-                  
+
 
                   <div class="input-group">
 
                       <select class="form-control auxaddidcliente" id="idcliente" name="idcliente" [(ngModel)]="id_client.idclient" readonly #idcliente="ngModel" (change)="projects_client(idcliente.viewModel)" required>
                           <option *ngFor="let c of list_client" value="{{c.idclient}}">{{c.businessname}}</option>
                         </select>
-  
+
                       <div class="input-group-append">
                         <button class="btn btn-default" type="button" (click)="search_client()"  >
                           <i class="fas fa-search"></i>
                         </button>
                       </div>
-                      
+
                     </div>
 
                 </div>
@@ -57,7 +57,7 @@
             </div>
 
             <div class="row">
-            
+
               <div class="col-md-12 col-sm-12">
                 <div class="form-group">
                   <label for="exampleFormControlInput1">Proyectos
@@ -72,7 +72,7 @@
                   </select>
                 </div>
               </div>
-            </div>      
+            </div>
 
             <div class="row">
               <div class="col-md-6 col-sm-12">
@@ -111,7 +111,7 @@
                   </label>
                   <textarea cols="100" rows="5" class="form-control" id="observation" name="observation" ngModel  #observation="ngModel"
                     ></textarea>
-                </div>                
+                </div>
               </div>
             </div>
 
@@ -119,7 +119,7 @@
           </div>
 
           <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-            
+
 
           <div class="row">
             <div class="col-md-12 col-sm-12">
@@ -148,11 +148,11 @@
                         </button>
                       </th>
                       <th colspan="2">
-                        
+
                       </th>
                     </tr>
                     <tr>
-                      <th>N. Contrato</th> 
+                      <th>N. Contrato</th>
                       <th>{{item.biz_contract.nocontract}}</th>
 
                       <th>Cliente</th>
@@ -162,7 +162,7 @@
                     <tr>
                       <th>P. Partida</th>
                       <th>{{item.startingpoint}}</th>
-                    
+
                       <th>P. Llegada</th>
                       <th>{{item.arrivalpoint}}</th>
                     </tr>
@@ -218,7 +218,7 @@
             </div>
 
           </div>
-       
+
         </div>
       </div>
     </div>
@@ -267,10 +267,10 @@
             </div>
           </div>
         </div>
-        
+
         <div class="row">
           <div class="col-12 table-responsive">
-          
+
             <table  class="table table-striped table-hover table-bordered" id="list_guiaremision">
               <thead class="thead-dark">
                 <tr>
@@ -290,7 +290,7 @@
                   <td>{{item.biz_contract.biz_client.businessname}}</td>
                   <td>{{item.nom_transferreason.transferreasonname}}</td>
                   <td>{{item.biz_carrier.carriername}}</td>
-          
+
                   <td>{{ ((item.state == 1)? 'ACTIVO':'INACTIVO') }}</td>
                   <td class="noExl">
                     <button type="button" class="btn btn-success" (click)="select_guia(item)">
@@ -298,13 +298,13 @@
                     </button>
                   </td>
                 </tr>
-          
+
               </tbody>
             </table>
-          
+
           </div>
         </div>
-        
+
         <div class="col-12 ">
           <app-pagination class="right_paginate" (goPage)="goToPage($event)" (goNext)="onNext()" (goPrev)="onPrev()" [pagesToShow]="3"
             [page]="page" [perPage]="3" [count]="total">

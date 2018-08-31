@@ -18,7 +18,10 @@ class TransferReasonController extends Controller
     public function index()
     {
         //$data = TransferReason::whereRaw("state=1")->get();
-        $data = TransferReason::all();
+        //$data = TransferReason::all();
+        //return  Response::json($data,200);
+        $data = TransferReason::with('biz_typetransferreason')
+            ->orderBy('transferreasonname', 'asc')->get();
         return  Response::json($data,200);
     }
 

@@ -16,4 +16,9 @@ class TransferReason extends Model
     {
         return $this->hasMany('App\Models\Biz\Referralguide',"idtransferreason");
     }
+
+    public function biz_typetransferreason()
+    {
+        return $this->belongsTo('App\Models\Nomenclature\TypeTransferReason',"idtypetransferreason");
+    }
 }
