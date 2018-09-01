@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Configuration;
 
+use App\Models\Nomenclature\TypeTransferReason;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -30,6 +31,13 @@ class TransferReasonController extends Controller
         return TransferReason::where('state', 1)->orderBy('transferreasonname', 'asc')->get();
     }
 
+    public function getTypeTransferReason()
+    {
+        return TypeTransferReason::where('state', 1)
+                ->orderBy('nametypetransferreason', 'asc')
+                ->get();
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -52,6 +60,7 @@ class TransferReasonController extends Controller
         if ($this->existtransfer($data["transferreasonname"], null) ==  false ) {
             $transfer = new TransferReason();
             $transfer->transferreasonname = $data["transferreasonname"];
+            $transfer->idtypetransferreason = $data["idtypetransferreason"];
             $transfer->state = 1;
             if($transfer->save()){
                 return response()->json(['success' => $transfer ]);
@@ -98,6 +107,7 @@ class TransferReasonController extends Controller
         if ($this->existtransfer($data["transferreasonname"], $id) ==  false ) {
             $transfer= TransferReason::find($id);
             $transfer->transferreasonname = $data["transferreasonname"];
+            $transfer->idtypetransferreason = $data["idtypetransferreason"];
             if($transfer->save()){
                 return response()->json(['success' => $transfer ]);
             }else{

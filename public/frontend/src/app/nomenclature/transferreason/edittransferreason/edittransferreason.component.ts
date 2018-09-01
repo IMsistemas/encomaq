@@ -8,12 +8,33 @@ declare var $: any;
   styleUrls: ['./edittransferreason.component.css']
 })
 export class EdittransferreasonComponent implements OnInit {
+  listTypeTransferReason = [];
   @Input() tem_edit: any;
   @Output() update_component_father = new EventEmitter<boolean>();
   @Output() refresh_component_father = new EventEmitter<boolean>();
   constructor(private transfer: ReasontransferService) { }
 
   ngOnInit() {
+    this.getTypeTransferReason();
+  }
+  getTypeTransferReason() {
+    this.transfer.getTypeTransferReason().subscribe(
+      (response) => {
+        this.listTypeTransferReason = [];
+        for (let e of response) {
+          let obj: Object = {
+            idtypetransferreason: e.idtypetransferreason,
+            nametypetransferreason: e.nametypetransferreason
+          };
+          this.listTypeTransferReason.push(obj);
+        }
+
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+        $('#mdlCreate').modal('hide');
+        this.update_component_father.emit(false);
+      });
   }
   edit_transferreason(data: any) {
     this.transfer.edit_transferreason(data.idtransferreason, data).subscribe(

@@ -41,6 +41,7 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('Transferreason/getTypeTransferReason', 'Configuration\TransferReasonController@getTypeTransferReason');
     Route::get('Transferreason/getTransferActive', 'Configuration\TransferReasonController@getTransferActive');
     Route::get('Transferreason/delete/{id}', 'Configuration\TransferReasonController@deletetransseferreason');
     Route::resource('Transferreason', 'Configuration\TransferReasonController');
