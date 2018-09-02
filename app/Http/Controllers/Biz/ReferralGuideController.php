@@ -87,6 +87,7 @@ class ReferralGuideController extends Controller
 
         $aux = new Referralguide();
         $aux->idcontract = $data["Data"]["idcontract"];
+        $aux->idproject = $data["Data"]["idproject"];
         $aux->idtransferreason = $data["Data"]["idtransferreason"];
         $aux->idcarrier = $data["Data"]["idcarrier"];
         $aux->datetimereferral = $data["Data"]["datetimereferral"];
@@ -155,8 +156,9 @@ class ReferralGuideController extends Controller
     {
         $data = $request->all();
         
-        $aux =  Referralguide::find($id);;
+        $aux =  Referralguide::find($id);
         $aux->idcontract = $data["idcontract"];
+        // $aux->idproject = $data["idproject"];
         $aux->idtransferreason = $data["idtransferreason"];
         $aux->idcarrier = $data["idcarrier"];
         $aux->datetimereferral = $data["datetimereferral"];

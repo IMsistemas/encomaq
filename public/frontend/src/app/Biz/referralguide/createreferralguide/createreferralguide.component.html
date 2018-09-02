@@ -39,7 +39,7 @@
 
               <div class="row">
 
-                <div class="col-sm-6 col-12">
+                <div class="col-sm-4 col-12">
 
                     <div class="form-group ">
                       <label for="exampleFormControlInput1">Contrato
@@ -68,7 +68,7 @@
 
                 </div>
 
-                <div class="col-sm-6 col-12">
+                <div class="col-sm-8 col-12">
 
                   <div class="form-group">
                     <label for="exampleFormControlInput1">Cliente
@@ -79,6 +79,19 @@
 
                 </div>
 
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Proyectos
+                      <span class="required">(*)</span>
+                    </label>
+                    <select class="form-control" id="idproject" name="idproject" ngModel #idproject="ngModel" required>
+                      <option *ngFor="let c of idcontract_s.biz_client.biz_project" value="{{c.idproject}}">{{c.projectname}}</option>
+                    </select>
+                  </div>
+                </div>
               </div>
 
               <div class="row">

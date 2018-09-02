@@ -26,6 +26,7 @@ export class CreatereferralguideComponent implements OnInit {
   listTransferReason = [];
   listContract = [];
   list_carrier = [];
+  list_projects = [];
 
   fieldPlace = 0;
 

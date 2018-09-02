@@ -122,6 +122,7 @@ export class ReferralguideComponent implements OnInit {
   }
 
   contract_select(n): void {
+    console.log(n);
     this.idcontract_select = n;
   }
 
