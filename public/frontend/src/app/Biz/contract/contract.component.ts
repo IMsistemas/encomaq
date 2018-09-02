@@ -32,6 +32,7 @@ export class ContractComponent implements OnInit {
   globalitem_select: any;
   info_datacontract: any;
   caducidad_info = false;
+  nocontract_last = '';
   constructor(private contract: ContractService) { }
 
   ngOnInit() {
@@ -79,7 +80,16 @@ export class ContractComponent implements OnInit {
   new_contract() {
     this.idcliente_select = { idclient: '' };
     this.globalitem_select = { iditem: ''};
-    $('#addcontract').modal('show');
+    this.contract.getLastNoContract().subscribe(
+      (response) => {
+        console.log(response);
+        this.nocontract_last = response.nocontract;
+        $('#addcontract').modal('show');
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+
   }
   update_list(evento, type) {
     if (evento === true) {
@@ -204,7 +214,7 @@ export class ContractComponent implements OnInit {
   }
 
   calculateDay(enddate: string): boolean {
-    console.log(enddate);
+    // console.log(enddate);
     const Fecha: any = new Date();
 
     const fechaInicial: string = Fecha.getDate() + '-' + (Fecha.getMonth() + 1) + '-' + Fecha.getFullYear();

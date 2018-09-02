@@ -30,7 +30,8 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-12 col-sm-12">
+
+              <div class="col-md-8 col-sm-12">
                 <div class="form-group ">
                   <label for="exampleFormControlInput1">Cliente
                     <span class="required">(*)</span>
@@ -56,6 +57,22 @@
                   <small id="" class="form-text text-danger text-right">El cliente es requerido</small>
                 </div>
               </div>
+
+
+              <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">No. Contrato
+                    <span class="required">(*)</span>
+                  </label>
+                  <input type="text" class="form-control" id="nocontract" name="nocontract" [(ngModel)]="tem_edit.nocontract" #nocontract="ngModel"
+                    required>
+                </div>
+
+                <div *ngIf="nocontract.errors?.required && nocontract.touched">
+                  <small id="" class="form-text text-danger text-right">El Número de Contrato es requerida</small>
+                </div>
+              </div>
+
             </div>
 
             <div class="row">

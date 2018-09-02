@@ -19,6 +19,7 @@ export class AddcontractComponent implements OnInit {
   list_itemcont = [];
   list_period = [];
   list_paymentform = [];
+  @Input() nocontract_last: any;
   @Input() id_client: any; //
   @Input() item_select: any;
   constructor(private contract: ContractService, private client: ClienteService,
@@ -27,6 +28,7 @@ export class AddcontractComponent implements OnInit {
   ngOnInit() {
     this.id_client = { idclient: '' };
     this.item_select = { iditem: ''};
+    // this.getLastNoContract();
     this.list_clients();
     this.list_periods();
     this.list_paymentforms();
@@ -100,6 +102,16 @@ export class AddcontractComponent implements OnInit {
         console.log('POST call in error", respons', error);
       });
   }
+  /* getLastNoContract() {
+    this.contract.getLastNoContract().subscribe(
+      (response) => {
+        console.log(response);
+        this.nocontract_last = response.nocontract;
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+  } */
   search_client() {
     $('.listclient').modal('show');
   }

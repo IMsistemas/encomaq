@@ -45,6 +45,36 @@ class CotractController extends Controller
         } ])->get();
     }
 
+    public function getLastNoContract()
+    {
+        $fila = Contract::all();
+        $last = $fila->last();
+        $num_contract = 0;
+        if(  isset($last->nocontract) ) {
+            $num_contract = $last->nocontract;
+        }
+        return response()->json(['nocontract' => str_pad((((int) $num_contract) + 1 ),9,"0", STR_PAD_LEFT ) ]);
+    }
+
+    private function verifyNoContract($nocontract)
+    {
+        $search = str_pad((((int) $nocontract) ),9,'0', STR_PAD_LEFT );
+
+        $result = Contract::where('nocontract', $search)->count();
+
+        if ($result == 0) {
+            return $search;
+        } else {
+            $fila = Contract::all();
+            $last = $fila->last();
+            $num_contract = 0;
+            if(  isset($last->nocontract) ) {
+                $num_contract = $last->nocontract;
+            }
+            return str_pad((((int) $num_contract) + 1 ),9,'0', STR_PAD_LEFT );
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -59,11 +89,11 @@ class CotractController extends Controller
 
          $aux = new Contract();
          $aux->idclient = $data["Data"]["idclient"];
-         $num_contract = 0;
+         /*$num_contract = 0;
          if(  isset($last->nocontract) ) {
              $num_contract = $last->nocontract;
-         }
-         $aux->nocontract = str_pad((((int) $num_contract) + 1 ),9,"0", STR_PAD_LEFT );;
+         }*/
+         $aux->nocontract = $this->verifyNoContract($data["Data"]["nocontract"]);
          $aux->startdate = $data["Data"]["startdate"];
          $aux->enddate = $data["Data"]["enddate"];
          $aux->area = $data["Data"]["area"];
