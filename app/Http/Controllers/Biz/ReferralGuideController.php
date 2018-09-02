@@ -45,6 +45,18 @@ class ReferralGuideController extends Controller
             }
         }
 
+        if (isset($filter->idprojects) == true && count($filter->idprojects) > 0) {
+            $where .= ' AND ';
+            for ($i = 0; $i < count($filter->idprojects); $i++) {
+                if ($i == 0) {
+                    $where .= '( biz_referralguide.idproject = ' . $filter->idprojects[$i];
+                } else {
+                    $where .= ' OR biz_referralguide.idproject = ' . $filter->idprojects[$i];
+                }
+            }
+            $where .= ') ';
+        }
+
         return Referralguide::with('biz_contract.biz_client.biz_Project', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem.biz_item', 'biz_referralguide_place.biz_place_start', 'biz_referralguide_place.biz_place_end')
                                 ->selectRaw("biz_referralguide.* ")
                                 ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")

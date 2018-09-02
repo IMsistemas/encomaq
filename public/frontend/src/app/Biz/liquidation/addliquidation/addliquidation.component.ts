@@ -50,13 +50,13 @@ export class AddliquidationComponent implements OnInit {
   addliuidation(data: any) {
     if (data.idcliente != '') {
       this.client_guiar = data.idcliente;
-      this.getList();
-      $('#addrwo').modal('show');
+      this.getList(data);
+      // $('#addrwo').modal('show');
     } else {
       $('#infoerrors').modal('show');
       this.mensage = 'Seleccione un cliente para agregar una guía de remisión';
     }
-    console.log(data);
+    // console.log(data);
   }
 
   getListclient_referralguide() {
@@ -90,7 +90,7 @@ export class AddliquidationComponent implements OnInit {
     });
   }
 
-  getList() {
+  getList(data) {
 
     const o = {
       search: this.descripcion,
@@ -100,9 +100,10 @@ export class AddliquidationComponent implements OnInit {
       num_page: this.num_page,
       client: this.client_guiar,
       dateinit: $('#dateinit').val(),
-      dateend: $('#dateend').val()
+      dateend: $('#dateend').val(),
+      idprojects: data.projects
     };
-
+    console.log(o);
     this.referralguide.get(this.page, o).subscribe(
       (response) => {
         this.listReferralGuide = response.data;

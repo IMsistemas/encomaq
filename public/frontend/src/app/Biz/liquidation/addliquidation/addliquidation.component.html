@@ -67,7 +67,7 @@
                     <option *ngFor="let c of list_project" value="{{c.idproject}}">{{c.projectname}}</option>
                   </select>-->
 
-                  <select class="form-control" id="projects" multiple  name="projects" ngModel #projects="ngModel" required>
+                  <select class="form-control" id="projects" multiple  name="projects" ngModel #projects="ngModel" (change)="addliuidation(frmcontract.value)" required>
                     <option *ngFor="let c of id_client.biz_contract.biz_client.biz__project" value="{{c.idproject}}">{{c.projectname}}</option>
                   </select>
                 </div>
@@ -80,7 +80,7 @@
                   <label for="exampleFormControlInput1">Fecha de inicio
                     <span class="required">(*)</span>
                   </label>
-                  <input type="date" class="form-control" id="dateinit" name="dateinit" ngModel  #dateinit="ngModel" required>
+                  <input type="date" class="form-control" id="dateinit" name="dateinit" ngModel  #dateinit="ngModel" (change)="addliuidation(frmcontract.value)" required>
                 </div>
 
                 <div *ngIf="dateinit.errors?.required && dateinit.touched">
@@ -92,7 +92,7 @@
                   <label for="exampleFormControlInput1">Fecha de fin
                     <span class="required">(*)</span>
                   </label>
-                  <input type="date" class="form-control" id="dateend" name="dateend" ngModel  #dateend="ngModel" required>
+                  <input type="date" class="form-control" id="dateend" name="dateend" ngModel  #dateend="ngModel" (change)="addliuidation(frmcontract.value)" required>
                 </div>
 
                 <div *ngIf="dateend.errors?.required && dateend.touched">
