@@ -56,11 +56,17 @@ class CotractController extends Controller
         return response()->json(['nocontract' => str_pad((((int) $num_contract) + 1 ),9,"0", STR_PAD_LEFT ) ]);
     }
 
-    private function verifyNoContract($nocontract)
+    private function verifyNoContract($nocontract, $id = 0)
     {
         $search = str_pad((((int) $nocontract) ),9,'0', STR_PAD_LEFT );
 
-        $result = Contract::where('nocontract', $search)->count();
+        if ($id === 0) {
+
+            $result = Contract::where('nocontract', $search)->count();
+
+        } else {
+            $result = Contract::where('nocontract', $search)->where('idcontract', '!=', $id)->count();
+        }
 
         if ($result == 0) {
             return $search;
@@ -73,6 +79,7 @@ class CotractController extends Controller
             }
             return str_pad((((int) $num_contract) + 1 ),9,'0', STR_PAD_LEFT );
         }
+
     }
 
     /**
@@ -170,6 +177,7 @@ class CotractController extends Controller
         $data = $request->all();
         $aux =  Contract::find($id);
         $aux->idclient = $data["Data"]["idclient"];
+        $aux->nocontract = $this->verifyNoContract($data["Data"]["nocontract"], $id);
         $aux->startdate = $data["Data"]["startdate"];
         $aux->enddate = $data["Data"]["enddate"];
         $aux->area = $data["Data"]["area"];

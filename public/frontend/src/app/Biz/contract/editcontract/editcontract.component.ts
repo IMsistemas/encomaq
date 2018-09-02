@@ -110,6 +110,7 @@ export class EditcontractComponent implements OnInit {
             }
 
             this.list_paymentform.push(o);
+            console.log(this.list_paymentform);
           }
 
           // return true;
