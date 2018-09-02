@@ -106,10 +106,12 @@ export class AddliquidationComponent implements OnInit {
     console.log(o);
     this.referralguide.get(this.page, o).subscribe(
       (response) => {
-        this.listReferralGuide = response.data;
+        this.list_guias = response.data;
+        this.calcula();
+        /* this.listReferralGuide = response.data;
         this.from = response.from;
         this.total = response.total;
-        this.loading = false;
+        this.loading = false; */
       },
       (error) => {
         console.log(error);
