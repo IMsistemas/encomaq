@@ -38,6 +38,10 @@ export class AddliquidationComponent implements OnInit {
   totalprecio: any;
   list_client = [];
   list_project = [];
+  entrega = [];
+  entrega_head_item = [];
+  retiro = [];
+  retiro_head_item = [];
   client_guiar: any;
   constructor(private referralguide: ReferralguideService, private liquidation: LiquidationService, private project: ProjectService ) { }
   @Input() id_client: any; //
@@ -89,7 +93,90 @@ export class AddliquidationComponent implements OnInit {
         console.log('POST call in error", respons', error);
     });
   }
+  orderReferralGuide(result) {
+    this.entrega = [];
+    this.entrega_head_item = [];
+    const temp_entrega = [];
+    this.retiro = [];
+    this.retiro_head_item = [];
+    const temp_retiro = [];
 
+    for (const e of result) {
+
+      const object = {
+        idreferralguide: e.idreferralguide,
+        items: []
+      };
+
+      for (const i of e.biz__referralguideitem) {
+        const ii = {
+          iditem: i.iditem,
+          quantify: i.quantify,
+          price: i.biz_item.price
+        };
+        object.items.push(ii);
+
+        if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 1) {
+
+          const pos = this.entrega_head_item.map(function(a) {
+            return parseInt(a.iditem, 0);
+          }).indexOf(parseInt(i.iditem, 0));
+
+          if (pos < 0) {
+            const oo = {
+              iditem: i.iditem,
+              name: i.biz_item.itemname
+            };
+            this.entrega_head_item.push(oo);
+          }
+
+        } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 2) {
+          const pos = this.entrega_head_item.map(function(a) {
+            return parseInt(a.iditem, 0);
+          }).indexOf(parseInt(i.iditem, 0));
+
+          if (pos < 0) {
+            const oo = {
+              iditem: i.iditem,
+              name: i.biz_item.itemname
+            };
+            this.retiro_head_item.push(oo);
+          }
+        } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 3) {
+
+        }
+
+      }
+
+      if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 1) {
+        this.entrega.push(object);
+      } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 2) {
+        this.retiro.push(object);
+      } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 3) {
+
+      }
+    }
+
+    for (const x of this.entrega_head_item) {
+
+      for (const z of this.entrega) {
+        const pos = z.items.map(function(a) {
+          return parseInt(a.iditem, 0);
+        }).indexOf(parseInt(x.iditem, 0));
+        if (pos >= 0) {
+          temp_entrega.push(z.items[pos]);
+        } else {
+          temp_entrega.push({
+            iditem: '',
+            quantify: '',
+            price: 0
+          });
+        }
+      }
+
+    }
+
+  }
   getList(data) {
 
     const o = {
@@ -106,8 +193,13 @@ export class AddliquidationComponent implements OnInit {
     console.log(o);
     this.referralguide.get(this.page, o).subscribe(
       (response) => {
-        this.list_guias = response.data;
-        this.calcula();
+
+        this.orderReferralGuide(response.data);
+
+        // this.list_guias = response.data;
+
+        // this.calcula();
+
         /* this.listReferralGuide = response.data;
         this.from = response.from;
         this.total = response.total;
@@ -118,7 +210,8 @@ export class AddliquidationComponent implements OnInit {
       });
 
   }
-  goToPage(n: number): void {
+
+  /* goToPage(n: number): void {
     this.page = n;
     this.getList();
   }
@@ -131,7 +224,7 @@ export class AddliquidationComponent implements OnInit {
   onPrev(): void {
     this.page--;
     this.getList();
-  }
+  } */
   close_listguias() {
     $('#addrwo').modal('hide');
   }

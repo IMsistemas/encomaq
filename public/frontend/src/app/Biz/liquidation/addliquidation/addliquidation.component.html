@@ -191,6 +191,28 @@
               </div>
             </div>
 
+            <div class="row">
+              <div class="col-12">
+                <table style="font-size: 11px;" class="table table-bordered table-striped table-condensed">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th class="text-left">FECHA</th>
+                      <th>NO.</th>
+                      <th *ngFor="let nameItem of entrega_head_item">
+                        {{nameItem.name}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody >
+                    <tr *ngFor="let listguide of entrega">
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
 
             <div class="row">
               <div class="col-6 col-sm-6"></div>
