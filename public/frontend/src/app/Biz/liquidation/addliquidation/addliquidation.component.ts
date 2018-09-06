@@ -52,7 +52,7 @@ export class AddliquidationComponent implements OnInit {
   }
 
   addliuidation(data: any) {
-    if (data.idcliente != '') {
+    if (data.idcliente !== '') {
       this.client_guiar = data.idcliente;
       this.getList(data);
       // $('#addrwo').modal('show');
@@ -211,20 +211,20 @@ export class AddliquidationComponent implements OnInit {
 
   }
 
-  /* goToPage(n: number): void {
-    this.page = n;
-    this.getList();
+  goToPage(n: number): void {
+    /*this.page = n;
+    this.getList();*/
   }
 
   onNext(): void {
-    this.page++;
-    this.getList();
+    /*this.page++;
+    this.getList();*/
   }
 
   onPrev(): void {
-    this.page--;
-    this.getList();
-  } */
+    /*this.page--;
+    this.getList();*/
+  }
   close_listguias() {
     $('#addrwo').modal('hide');
   }
@@ -262,7 +262,7 @@ export class AddliquidationComponent implements OnInit {
         this.subtotal   += ( parseFloat(e.biz_item.price) * e.quantify );
       }
     }
-    if (this.subtotal != 0) {
+    if (this.subtotal !== 0) {
       this.iva = (( this.subtotal * this.porcentaje) / 100);
     }
     this.totalprecio =  this.subtotal +  this.iva;
