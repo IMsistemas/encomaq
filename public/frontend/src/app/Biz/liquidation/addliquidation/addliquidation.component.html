@@ -193,7 +193,7 @@
 
             <div class="row">
               <div class="col-12">
-                <table style="font-size: 11px;" class="table table-bordered table-striped table-condensed">
+                <table style="font-size: 12px;" class="table table-bordered table-striped table-condensed">
                   <thead class="thead-dark">
                     <tr>
                       <th class="text-left">FECHA</th>
@@ -205,9 +205,9 @@
                   </thead>
                   <tbody >
                     <tr *ngFor="let listguide of entrega">
+                      <td>{{listguide.datetimereferral}}</td>
                       <td></td>
-                      <td></td>
-                      <td></td>
+                      <td *ngFor="let listItem of listguide.items">{{listItem.quantify}}</td>
                     </tr>
                   </tbody>
                 </table>

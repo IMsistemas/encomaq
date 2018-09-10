@@ -92,7 +92,7 @@
 
   <div class="col-12 table-responsive">
 
-    <table class="table table-striped table-hover table-bordered" id="list_guiaremision">
+    <table class="table table-striped table-hover table-bordered" id="list_guiaremision" style="font-size: 12px;">
       <thead class="thead-dark">
         <tr>
           <th style="width: 3%;">NO</th>
@@ -331,7 +331,7 @@
           </button>
         </div>
         <div class="modal-body"  style="overflow-y: scroll; height: 70vh;"  *ngIf="info">
-          
+
           <div class="row">
 
             <div class="col-sm-12 col-md-12">
@@ -357,13 +357,13 @@
                 <tr>
                   <th>PUNTO DE LLEGADA</th>
                   <td colspan="3">{{info.biz_referralguide_place[0].biz_place_end.placename}}</td>
-                </tr>                
-                
+                </tr>
+
               </table>
             </div>
 
             <div class="col-sm-12 col-md-12">
-              <table class="table table-bordered"> 
+              <table class="table table-bordered">
                 <thead class="btn-dark">
                   <th>N.</th>
                   <th>ITEM</th>
@@ -377,15 +377,15 @@
                     <td>{{itemProd.quantify}}</td>
                     <td>{{itemProd.observation}}</td>
                   </tr>
-                </tbody>               
-                
+                </tbody>
+
               </table>
             </div>
 
 
           </div>
 
-          
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancelar</button>

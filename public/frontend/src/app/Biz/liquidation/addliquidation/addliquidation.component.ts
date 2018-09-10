@@ -40,6 +40,7 @@ export class AddliquidationComponent implements OnInit {
   list_project = [];
   entrega = [];
   entrega_head_item = [];
+  // temp_entrega = [];
   retiro = [];
   retiro_head_item = [];
   client_guiar: any;
@@ -96,7 +97,6 @@ export class AddliquidationComponent implements OnInit {
   orderReferralGuide(result) {
     this.entrega = [];
     this.entrega_head_item = [];
-    const temp_entrega = [];
     this.retiro = [];
     this.retiro_head_item = [];
     const temp_retiro = [];
@@ -105,6 +105,7 @@ export class AddliquidationComponent implements OnInit {
 
       const object = {
         idreferralguide: e.idreferralguide,
+        datetimereferral: e.datetimereferral,
         items: []
       };
 
@@ -157,7 +158,67 @@ export class AddliquidationComponent implements OnInit {
       }
     }
 
-    for (const x of this.entrega_head_item) {
+    this.entrega_head_item.sort(function (a, b) {
+      if (a.iditem > b.iditem) {
+        return 1;
+      }
+      if (a.iditem < b.iditem) {
+        return -1;
+      }
+      return 0;
+    });
+
+    for (const z of this.entrega) {
+      z.items.sort(function (a, b) {
+        if (a.iditem > b.iditem) {
+          return 1;
+        }
+        if (a.iditem < b.iditem) {
+          return -1;
+        }
+        return 0;
+      });
+    }
+
+    console.log(this.entrega);
+
+    
+
+    /*for (const x of this.entrega) {
+
+      const a_t = [];
+
+      for (const y of x.items) {
+
+        for (const z of this.entrega_head_item) {          
+
+          if (parseInt(y.iditem, 0) === parseInt(z.iditem, 0)) {
+
+            a_t.push(y);       
+
+          } else {
+
+            const ii = {
+              iditem: 0,
+              quantify: 0,
+              price: 0.00
+            };
+
+            a_t.push(ii);
+            
+          }
+
+        }
+
+      }
+
+      x.items = a_t;
+
+    }*/
+
+    
+
+    /*for (const x of this.entrega_head_item) {
 
       for (const z of this.entrega) {
         const pos = z.items.map(function(a) {
@@ -174,7 +235,7 @@ export class AddliquidationComponent implements OnInit {
         }
       }
 
-    }
+    }*/
 
   }
   getList(data) {
