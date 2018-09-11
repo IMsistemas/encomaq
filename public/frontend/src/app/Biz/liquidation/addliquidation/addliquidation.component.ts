@@ -44,6 +44,9 @@ export class AddliquidationComponent implements OnInit {
   retiro = [];
   retiro_head_item = [];
   retiro_foot_item = [];
+  enObra = [];
+  enObra_head_item = [];
+  enObra_foot_item = [];
   client_guiar: any;
   constructor(private referralguide: ReferralguideService, private liquidation: LiquidationService, private project: ProjectService ) { }
   @Input() id_client: any; //
@@ -95,6 +98,7 @@ export class AddliquidationComponent implements OnInit {
         console.log('POST call in error", respons', error);
     });
   }
+
   orderReferralGuide(result) {
     this.entrega = [];
     this.entrega_head_item = [];
@@ -103,6 +107,10 @@ export class AddliquidationComponent implements OnInit {
     this.retiro = [];
     this.retiro_head_item = [];
     this.retiro_foot_item = [];
+
+    this.enObra = [];
+    this.enObra_head_item = [];
+    this.enObra_foot_item = [];
 
     for (const e of result) {
 
@@ -237,15 +245,7 @@ export class AddliquidationComponent implements OnInit {
 
     // -----------------------PARTE DE RESUMEN DE RETIRO--------------------------------------------------------------
 
-    this.retiro_head_item.sort(function (a, b) {
-      if (a.iditem > b.iditem) {
-        return 1;
-      }
-      if (a.iditem < b.iditem) {
-        return -1;
-      }
-      return 0;
-    });
+    this.retiro_head_item = this.entrega_head_item;
 
     for (const z of this.retiro) {
       z.items.sort(function (a, b) {
@@ -305,6 +305,14 @@ export class AddliquidationComponent implements OnInit {
         this.retiro_foot_item[j].price = this.retiro[i].items[j].price;
         this.retiro_foot_item[j].quantify += this.retiro[i].items[j].quantify;
       }
+    }
+
+    // -----------------------PARTE DE RESUMEN DE EN OBRA--------------------------------------------------------------
+
+    this.enObra_head_item = this.entrega_head_item;
+
+    for (let i = 0; i < this.enObra_head_item.length; i++) {
+      this.enObra.push(this.entrega_foot_item[i].quantify - this.retiro_foot_item[i].quantify);
     }
 
 
