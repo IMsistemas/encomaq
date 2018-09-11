@@ -216,7 +216,7 @@
                       <td *ngFor="let listItem of listguide.items">{{listItem.quantify}}</td>
                     </tr>
                   </tbody>
-                  <tfoot class="tfoot-dark">
+                  <tfoot class="bg-info" style="font-weight: bold;">
                     <tr>
                       <td colspan="2">TOTAL</td>
                       <td *ngFor="let listItem of entrega_foot_item">{{listItem.quantify}}</td>
@@ -252,7 +252,7 @@
                       <td *ngFor="let listItem of listguide.items">{{listItem.quantify}}</td>
                     </tr>
                   </tbody>
-                  <tfoot class="tfoot-dark">
+                  <tfoot class="bg-info" style="font-weight: bold;">
                     <tr>
                       <td colspan="2">TOTAL</td>
                       <td *ngFor="let listItem of retiro_foot_item">{{listItem.quantify}}</td>
@@ -324,14 +324,14 @@
                           </tr>
                         </tbody>
                         <tfoot>
-                          <tr style="font-weight: bold;">
+                          <tr class="bg-info" style="font-weight: bold;">
                               <td>CANTIDAD TOTAL</td>
                               <td class="text-right">{{listProduct.totalquantify}}</td>
                               <td></td>
                               <td></td>
                               <td class="text-right"></td>
                               <td class="text-right">SUBTOTAL</td>
-                              <td class="text-right">{{(listProduct.totalprice).toFixed(2)}}</td>
+                              <td class="text-right">{{formatMoney('$', listProduct.totalprice)}}</td>
                           </tr>
                         </tfoot>
                       </table>

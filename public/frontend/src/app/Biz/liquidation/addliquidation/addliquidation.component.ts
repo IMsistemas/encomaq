@@ -322,9 +322,6 @@ export class AddliquidationComponent implements OnInit {
   }
 
   orderProduct(frm: any) {
-    console.log(this.entrega_head_item);
-    console.log(this.entrega);
-    console.log(this.retiro);
 
     this.array_item = [];
 
@@ -337,6 +334,8 @@ export class AddliquidationComponent implements OnInit {
         totalprice: 0,
         listguide: []
       };
+
+      // -------------------------------------------------ENTREGA--------------------------------------------
 
       for (const b of this.entrega) {
         for (const c of b.items) {
@@ -354,6 +353,7 @@ export class AddliquidationComponent implements OnInit {
               quantify: parseInt(c.quantify, 0),
               total: ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) ).toFixed(2)
             };
+
             o.totalquantify += oo.quantify;
             o.totalprice += ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
             o.listguide.push(oo);
@@ -361,9 +361,37 @@ export class AddliquidationComponent implements OnInit {
         }
       }
 
+      // this.array_item.push(o);
+
+      // -------------------------------------------------RETIRO--------------------------------------------
+
+      for (const b of this.retiro) {
+        for (const c of b.items) {
+          if (parseInt(a.iditem, 0) === parseInt(c.iditem, 0)) {
+
+            const dateend: string = frm.dateend;
+            const days: number = this.calculateDay(b.datetimereferral, dateend);
+
+            const oo = {
+              idreferralguide: b.idreferralguide,
+              datetimereferral: b.datetimereferral,
+              dateend: dateend,
+              days: days,
+              price: (parseFloat(c.price) * days).toFixed(2),
+              quantify: -parseInt(c.quantify, 0),
+              total: -( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) ).toFixed(2)
+            };
+
+            o.totalquantify += oo.quantify;
+            o.totalprice -= ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
+            o.listguide.push(oo);
+          }
+        }
+      }
+
       this.array_item.push(o);
     }
-    console.log(this.array_item);
+
   }
 
   calculateDay(startdate: string, enddate: string): number {
@@ -379,9 +407,6 @@ export class AddliquidationComponent implements OnInit {
 
       const dateEnd: any = new Date(parseInt(final[0], 0), (parseInt(final[1], 0) - 1), parseInt(final[2], 0));
 
-
-      console.log( dateEnd - dateStart );
-
       return Math.floor( ( ( dateEnd - dateStart ) / 86400000 ) / 1000 );
       // const rest: any = dateEnd - dateStart;
       // return Math.floor( rest / (1000 * 60 * 60 * 24));
@@ -393,6 +418,35 @@ export class AddliquidationComponent implements OnInit {
     }
 
   }
+
+  formatMoney(currency, value, decimals) {
+
+    let n = value;
+    n = n.toString();
+    if (n === '' || n === '.') {
+        n = '0.00';
+    }
+
+    const patron = [currency, ' ', ','];
+    const longitud = patron.length;
+    for (let i = 0; i < longitud; i++) {
+        n = n.replace(patron[i], '');
+    }
+    n = n.replace(patron, '');
+
+    n = parseFloat(n);
+
+    let dec = 2;
+
+    if (decimals !== undefined) {
+        dec = decimals;
+    }
+
+    const multiplicator = Math.pow(10, dec);
+    const valor = currency + ' ' + (Math.round(n * multiplicator) / multiplicator).toFixed(dec);
+
+    return valor;
+}
 
   getList(data) {
 
