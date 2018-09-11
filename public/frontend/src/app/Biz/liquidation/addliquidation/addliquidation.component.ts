@@ -361,8 +361,6 @@ export class AddliquidationComponent implements OnInit {
         }
       }
 
-      // this.array_item.push(o);
-
       // -------------------------------------------------RETIRO--------------------------------------------
 
       for (const b of this.retiro) {
@@ -392,6 +390,17 @@ export class AddliquidationComponent implements OnInit {
       this.array_item.push(o);
     }
 
+    this.subtotal = 0;
+    this.iva = 0;
+    for (const x of this.array_item) {
+      this.subtotal += x.totalprice;
+    }
+
+    this.iva = ( this.subtotal * 12 ) / 100;
+
+    this.totalprecio = ( this.subtotal + this.iva ).toFixed(2);
+    this.subtotal = this.subtotal.toFixed(2);
+    this.iva = this.iva.toFixed(2);
   }
 
   calculateDay(startdate: string, enddate: string): number {
