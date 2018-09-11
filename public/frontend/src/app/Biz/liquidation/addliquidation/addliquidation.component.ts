@@ -40,9 +40,10 @@ export class AddliquidationComponent implements OnInit {
   list_project = [];
   entrega = [];
   entrega_head_item = [];
-  // temp_entrega = [];
+  entrega_foot_item = [];
   retiro = [];
   retiro_head_item = [];
+  retiro_foot_item = [];
   client_guiar: any;
   constructor(private referralguide: ReferralguideService, private liquidation: LiquidationService, private project: ProjectService ) { }
   @Input() id_client: any; //
@@ -68,7 +69,7 @@ export class AddliquidationComponent implements OnInit {
     this.list_client.push({ idclient: '', businessname: '--Seleccione--' });
     this.referralguide.listclient_referralguide().subscribe(
       (response) => {
-        console.log(response);
+        // console.log(response);
         for (const cat of response) {
           const o = {
             idclient: cat.idclient,
@@ -97,9 +98,11 @@ export class AddliquidationComponent implements OnInit {
   orderReferralGuide(result) {
     this.entrega = [];
     this.entrega_head_item = [];
+    this.entrega_foot_item = [];
+
     this.retiro = [];
     this.retiro_head_item = [];
-    const temp_retiro = [];
+    this.retiro_foot_item = [];
 
     for (const e of result) {
 
@@ -132,7 +135,8 @@ export class AddliquidationComponent implements OnInit {
           }
 
         } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 2) {
-          const pos = this.entrega_head_item.map(function(a) {
+
+          const pos = this.retiro_head_item.map(function(a) {
             return parseInt(a.iditem, 0);
           }).indexOf(parseInt(i.iditem, 0));
 
@@ -143,6 +147,7 @@ export class AddliquidationComponent implements OnInit {
             };
             this.retiro_head_item.push(oo);
           }
+
         } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 3) {
 
         }
@@ -157,6 +162,8 @@ export class AddliquidationComponent implements OnInit {
 
       }
     }
+
+    // -----------------------PARTE DE RESUMEN DE ENTREGA--------------------------------------------------------------
 
     this.entrega_head_item.sort(function (a, b) {
       if (a.iditem > b.iditem) {
@@ -180,62 +187,126 @@ export class AddliquidationComponent implements OnInit {
       });
     }
 
-    console.log(this.entrega);
-
-    
-
-    /*for (const x of this.entrega) {
+    for (let j = 0; j < this.entrega.length; j++) {
 
       const a_t = [];
+      for (const ii of this.entrega_head_item) {
+        a_t.push({
+          iditem: 0,
+          price: 0.00,
+          quantify: 0
+        });
+      }
 
-      for (const y of x.items) {
+      for (let k = 0; k < this.entrega[j].items.length; k++) {
 
-        for (const z of this.entrega_head_item) {          
+        for (let i = 0; i < this.entrega_head_item.length; i++) {
 
-          if (parseInt(y.iditem, 0) === parseInt(z.iditem, 0)) {
+          if (parseInt(this.entrega_head_item[i].iditem, 0) === parseInt(this.entrega[j].items[k].iditem, 0)) {
 
-            a_t.push(y);       
+            if (a_t[i].iditem !== 0) {
+              a_t[i].quantify += this.entrega[j].items[k].quantify;
+            } else {
+              a_t[i] = this.entrega[j].items[k];
+            }
 
-          } else {
-
-            const ii = {
-              iditem: 0,
-              quantify: 0,
-              price: 0.00
-            };
-
-            a_t.push(ii);
-            
           }
 
         }
 
       }
 
-      x.items = a_t;
+      this.entrega[j].items = a_t;
+    }
 
-    }*/
+    for (const ii of this.entrega_head_item) {
+      this.entrega_foot_item.push({
+        iditem: 0,
+        price: 0.00,
+        quantify: 0
+      });
+    }
 
-    
+    for (let i = 0; i < this.entrega.length; i++) {
+      for (let j = 0; j < this.entrega[i].items.length; j++) {
+        this.entrega_foot_item[j].iditem = this.entrega[i].items[j].iditem;
+        this.entrega_foot_item[j].price = this.entrega[i].items[j].price;
+        this.entrega_foot_item[j].quantify += this.entrega[i].items[j].quantify;
+      }
+    }
 
-    /*for (const x of this.entrega_head_item) {
+    // -----------------------PARTE DE RESUMEN DE RETIRO--------------------------------------------------------------
 
-      for (const z of this.entrega) {
-        const pos = z.items.map(function(a) {
-          return parseInt(a.iditem, 0);
-        }).indexOf(parseInt(x.iditem, 0));
-        if (pos >= 0) {
-          temp_entrega.push(z.items[pos]);
-        } else {
-          temp_entrega.push({
-            iditem: '',
-            quantify: '',
-            price: 0
-          });
+    this.retiro_head_item.sort(function (a, b) {
+      if (a.iditem > b.iditem) {
+        return 1;
+      }
+      if (a.iditem < b.iditem) {
+        return -1;
+      }
+      return 0;
+    });
+
+    for (const z of this.retiro) {
+      z.items.sort(function (a, b) {
+        if (a.iditem > b.iditem) {
+          return 1;
         }
+        if (a.iditem < b.iditem) {
+          return -1;
+        }
+        return 0;
+      });
+    }
+
+    for (let j = 0; j < this.retiro.length; j++) {
+
+      const a_t = [];
+      for (const ii of this.retiro_head_item) {
+        a_t.push({
+          iditem: 0,
+          price: 0.00,
+          quantify: 0
+        });
       }
 
-    }*/
+      for (let k = 0; k < this.retiro[j].items.length; k++) {
+
+        for (let i = 0; i < this.retiro_head_item.length; i++) {
+
+          if (parseInt(this.retiro_head_item[i].iditem, 0) === parseInt(this.retiro[j].items[k].iditem, 0)) {
+
+            if (a_t[i].iditem !== 0) {
+              a_t[i].quantify += this.retiro[j].items[k].quantify;
+            } else {
+              a_t[i] = this.retiro[j].items[k];
+            }
+
+          }
+
+        }
+
+      }
+
+      this.retiro[j].items = a_t;
+    }
+
+    for (const ii of this.retiro_head_item) {
+      this.retiro_foot_item.push({
+        iditem: 0,
+        price: 0.00,
+        quantify: 0
+      });
+    }
+
+    for (let i = 0; i < this.retiro.length; i++) {
+      for (let j = 0; j < this.retiro[i].items.length; j++) {
+        this.retiro_foot_item[j].iditem = this.retiro[i].items[j].iditem;
+        this.retiro_foot_item[j].price = this.retiro[i].items[j].price;
+        this.retiro_foot_item[j].quantify += this.retiro[i].items[j].quantify;
+      }
+    }
+
 
   }
   getList(data) {
@@ -251,7 +322,7 @@ export class AddliquidationComponent implements OnInit {
       dateend: $('#dateend').val(),
       idprojects: data.projects
     };
-    console.log(o);
+    // console.log(o);
     this.referralguide.get(this.page, o).subscribe(
       (response) => {
 
@@ -295,7 +366,7 @@ export class AddliquidationComponent implements OnInit {
   select_guia(data: any) {
     this.close_listguias();
     if (this.list_guias.length === 0) {
-      console.log(data);
+      // console.log(data);
       this.list_guias.push(data);
     } else {
       const resultado = this.list_guias.find(guia => guia.idreferralguide === data.idreferralguide );
@@ -312,7 +383,7 @@ export class AddliquidationComponent implements OnInit {
       }
     }
     this.calcula();
-    console.log(this.list_guias);
+    // console.log(this.list_guias);
   }
   calcula() {
     this.subtotal = 0;

@@ -192,6 +192,12 @@
             </div>
 
             <div class="row">
+              <div class="col s12">
+                <h3>ENTREGA</h3>
+              </div>
+            </div>
+
+            <div class="row">
               <div class="col-12">
                 <table style="font-size: 12px;" class="table table-bordered table-striped table-condensed">
                   <thead class="thead-dark">
@@ -210,6 +216,48 @@
                       <td *ngFor="let listItem of listguide.items">{{listItem.quantify}}</td>
                     </tr>
                   </tbody>
+                  <tfoot class="tfoot-dark">
+                    <tr>
+                      <td colspan="2">TOTAL</td>
+                      <td *ngFor="let listItem of entrega_foot_item">{{listItem.quantify}}</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col s12">
+                <h3>RETIRO</h3>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <table style="font-size: 12px;" class="table table-bordered table-striped table-condensed">
+                  <thead class="thead-dark">                    
+                    <tr>
+                      <th class="text-left">FECHA</th>
+                      <th>NO.</th>
+                      <th *ngFor="let nameItem of retiro_head_item">
+                        {{nameItem.name}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody >
+                    <tr *ngFor="let listguide of retiro">
+                      <td>{{listguide.datetimereferral}}</td>
+                      <td></td>
+                      <td *ngFor="let listItem of listguide.items">{{listItem.quantify}}</td>
+                    </tr>
+                  </tbody>
+                  <tfoot class="tfoot-dark">
+                    <tr>
+                      <td colspan="2">TOTAL</td>
+                      <td *ngFor="let listItem of retiro_foot_item">{{listItem.quantify}}</td>
+                    </tr>
+                  </tfoot>
                 </table>
               </div>
             </div>
