@@ -47,6 +47,8 @@ export class AddliquidationComponent implements OnInit {
   enObra = [];
   enObra_head_item = [];
   enObra_foot_item = [];
+  array_item = [];
+
   client_guiar: any;
   constructor(private referralguide: ReferralguideService, private liquidation: LiquidationService, private project: ProjectService ) { }
   @Input() id_client: any; //
@@ -99,7 +101,7 @@ export class AddliquidationComponent implements OnInit {
     });
   }
 
-  orderReferralGuide(result) {
+  orderReferralGuide(result, frm) {
     this.entrega = [];
     this.entrega_head_item = [];
     this.entrega_foot_item = [];
@@ -315,8 +317,83 @@ export class AddliquidationComponent implements OnInit {
       this.enObra.push(this.entrega_foot_item[i].quantify - this.retiro_foot_item[i].quantify);
     }
 
+    this.orderProduct(frm);
 
   }
+
+  orderProduct(frm: any) {
+    console.log(this.entrega_head_item);
+    console.log(this.entrega);
+    console.log(this.retiro);
+
+    this.array_item = [];
+
+    for (const a of this.entrega_head_item) {
+
+      const o = {
+        iditem: a.iditem,
+        name: a.name,
+        totalquantify: 0,
+        totalprice: 0,
+        listguide: []
+      };
+
+      for (const b of this.entrega) {
+        for (const c of b.items) {
+          if (parseInt(a.iditem, 0) === parseInt(c.iditem, 0)) {
+
+            const dateend: string = frm.dateend;
+            const days: number = this.calculateDay(b.datetimereferral, dateend);
+
+            const oo = {
+              idreferralguide: b.idreferralguide,
+              datetimereferral: b.datetimereferral,
+              dateend: dateend,
+              days: days,
+              price: (parseFloat(c.price) * days).toFixed(2),
+              quantify: parseInt(c.quantify, 0),
+              total: ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) ).toFixed(2)
+            };
+            o.totalquantify += oo.quantify;
+            o.totalprice += ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
+            o.listguide.push(oo);
+          }
+        }
+      }
+
+      this.array_item.push(o);
+    }
+    console.log(this.array_item);
+  }
+
+  calculateDay(startdate: string, enddate: string): number {
+
+    if (enddate !== '') {
+
+      const fechaInicial: string = startdate;
+      const fechaFinal: string = enddate;
+      const inicial: Array<string> = fechaInicial.split('-');
+      const final: Array<string> = fechaFinal.split('-');
+
+      const dateStart: any = new Date(parseInt(inicial[2], 0), ( parseInt(inicial[1], 0) - 1 ), parseInt(inicial[0], 0));
+
+      const dateEnd: any = new Date(parseInt(final[0], 0), (parseInt(final[1], 0) - 1), parseInt(final[2], 0));
+
+
+      console.log( dateEnd - dateStart );
+
+      return Math.floor( ( ( dateEnd - dateStart ) / 86400000 ) / 1000 );
+      // const rest: any = dateEnd - dateStart;
+      // return Math.floor( rest / (1000 * 60 * 60 * 24));
+
+    } else {
+
+      return 0;
+
+    }
+
+  }
+
   getList(data) {
 
     const o = {
@@ -334,7 +411,7 @@ export class AddliquidationComponent implements OnInit {
     this.referralguide.get(this.page, o).subscribe(
       (response) => {
 
-        this.orderReferralGuide(response.data);
+        this.orderReferralGuide(response.data, data);
 
         // this.list_guias = response.data;
 
