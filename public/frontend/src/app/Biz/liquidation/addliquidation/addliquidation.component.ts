@@ -38,6 +38,7 @@ export class AddliquidationComponent implements OnInit {
   totalprecio: any;
   list_client = [];
   list_project = [];
+
   entrega = [];
   entrega_head_item = [];
   entrega_foot_item = [];
@@ -51,7 +52,8 @@ export class AddliquidationComponent implements OnInit {
 
   client_guiar: any;
   constructor(private referralguide: ReferralguideService, private liquidation: LiquidationService, private project: ProjectService ) { }
-  @Input() id_client: any; //
+  @Input() id_client: any;
+
   ngOnInit() {
     $('.auxaddidcliente').prop('disabled' , true);
     this.id_client = { idclient: '', biz_contract: {biz_client: {biz__project: []}} };
@@ -62,12 +64,10 @@ export class AddliquidationComponent implements OnInit {
     if (data.idcliente !== '') {
       this.client_guiar = data.idcliente;
       this.getList(data);
-      // $('#addrwo').modal('show');
     } else {
       $('#infoerrors').modal('show');
       this.mensage = 'Seleccione un cliente para agregar una guía de remisión';
     }
-    // console.log(data);
   }
 
   getListclient_referralguide() {
@@ -453,7 +453,7 @@ export class AddliquidationComponent implements OnInit {
     const valor = currency + ' ' + (Math.round(n * multiplicator) / multiplicator).toFixed(dec);
 
     return valor;
-}
+  }
 
   getList(data) {
 
@@ -487,6 +487,8 @@ export class AddliquidationComponent implements OnInit {
       });
 
   }
+
+  // -----------------------------------------------------------------------------------------------
 
   goToPage(n: number): void {
     /*this.page = n;

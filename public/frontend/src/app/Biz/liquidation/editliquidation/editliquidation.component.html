@@ -13,9 +13,9 @@
     <div class="row">
       <div class="col-md-3 col-sm-12 ">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a class="nav-link active" id="v-pills-home-tab" (click)="calcula();" data-toggle="pill" href="#v-pills-home3" role="tab" aria-controls="v-pills-home"
+          <a class="nav-link active" id="v-pills-home-tab" (click)="getList(frmeditliquidatio.value);" data-toggle="pill" href="#v-pills-home3" role="tab" aria-controls="v-pills-home"
             aria-selected="true">LIQUIDACIÓN</a>
-          <a class="nav-link" id="v-pills-profile-tab" (click)="calcula();" data-toggle="pill" href="#v-pills-profile3" role="tab" aria-controls="v-pills-profile"
+          <a class="nav-link" id="v-pills-profile-tab" (click)="getList(frmeditliquidatio.value);" data-toggle="pill" href="#v-pills-profile3" role="tab" aria-controls="v-pills-profile"
             aria-selected="false">GUÍAS REMISIÓN</a>
 
         </div>
@@ -120,7 +120,7 @@
             
             
 
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-md-12 col-sm-12">
                 <label>Guías De Remisión
                   <span class="required">(*)</span>
@@ -194,8 +194,193 @@
                   </tbody>
                 </table>
               </div>
+            </div> -->
+
+            <!-- ------------------------------------------------------------------------------- -->
+
+            <div class="row">
+              <div class="col-12">
+                <h5>MATERIAL ENTREGADO EN OBRA</h5>
+              </div>
             </div>
 
+            <div class="row">
+              <div class="col-12">
+                <table style="font-size: 12px;" class="table table-bordered table-striped table-condensed">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th class="text-left" style="width: 15%;">FECHA</th>
+                      <th style="width: 5%;">NO.</th>
+                      <th *ngFor="let nameItem of entrega_head_item">
+                        {{nameItem.name}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody >
+                    <tr *ngFor="let listguide of entrega">
+                      <td>{{listguide.datetimereferral}}</td>
+                      <td></td>
+                      <td *ngFor="let listItem of listguide.items">{{listItem.quantify}}</td>
+                    </tr>
+                  </tbody>
+                  <tfoot class="bg-info" style="font-weight: bold;">
+                    <tr>
+                      <td colspan="2">TOTAL</td>
+                      <td *ngFor="let listItem of entrega_foot_item">{{listItem.quantify}}</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-12">
+                <h5>MATERIAL RETIRADO EN OBRA</h5>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <table style="font-size: 12px;" class="table table-bordered table-striped table-condensed">
+                  <thead class="thead-dark">                    
+                    <tr>
+                      <th class="text-left" style="width: 15%;">FECHA</th>
+                      <th style="width: 5%;">NO.</th>
+                      <th *ngFor="let nameItem of retiro_head_item">
+                        {{nameItem.name}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody >
+                    <tr *ngFor="let listguide of retiro">
+                      <td>{{listguide.datetimereferral}}</td>
+                      <td></td>
+                      <td *ngFor="let listItem of listguide.items">{{listItem.quantify}}</td>
+                    </tr>
+                  </tbody>
+                  <tfoot class="bg-info" style="font-weight: bold;">
+                    <tr>
+                      <td colspan="2">TOTAL</td>
+                      <td *ngFor="let listItem of retiro_foot_item">{{listItem.quantify}}</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <h5>MATERIAL SOBRANTE EN OBRA</h5>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <table style="font-size: 12px;" class="table table-bordered table-striped table-condensed">
+                  <thead class="thead-dark">                    
+                    <tr>
+                      <th colspan="2" style="width: 20%;"></th>
+                      <th *ngFor="let nameItem of enObra_head_item">
+                        {{nameItem.name}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody >
+                    <tr class="bg-info" style="font-weight: bold;">
+                      <td colspan="2">TOTAL</td>
+                      <td *ngFor="let result of enObra">{{result}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <hr>
+              </div>
+            </div>
+
+            <div class="row" *ngFor="let listProduct of array_item let i = index">
+                <div class="col-12">
+                  <h6>{{(i + 1) + '. ' + listProduct.name}}</h6>
+                </div>
+                <div class="col-12">
+                    <table style="font-size: 12px;" class="table table-bordered table-striped table-condensed">
+                        <thead class="thead-dark">                    
+                          <tr>
+                            <th>DESCRIPCION</th>
+                            <th>CANT.</th>
+                            <th>DEL</th>
+                            <th>AL</th>
+                            <th>DIAS</th>
+                            <th>P. UNITARIO</th>
+                            <th>P. TOTAL</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let row of listProduct.listguide">
+                            <td>{{listProduct.name}}</td>
+                            <td class="text-right">{{row.quantify}}</td>
+                            <td>{{row.datetimereferral}}</td>
+                            <td>{{row.dateend}}</td>
+                            <td class="text-right">{{row.days}}</td>
+                            <td class="text-right">{{row.price}}</td>
+                            <td class="text-right">{{row.total}}</td>
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                          <tr class="bg-info" style="font-weight: bold;">
+                              <td>CANTIDAD TOTAL</td>
+                              <td class="text-right">{{listProduct.totalquantify}}</td>
+                              <td></td>
+                              <td></td>
+                              <td class="text-right"></td>
+                              <td class="text-right">SUBTOTAL</td>
+                              <td class="text-right">{{formatMoney('$', listProduct.totalprice)}}</td>
+                          </tr>
+                        </tfoot>
+                      </table>
+                </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <hr>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <h5>CUADRO RESUMEN</h5>
+              </div>
+            </div>
+
+            <div class="row">
+                
+                <div class="col-12">
+                    <table style="font-size: 12px;" class="table table-bordered table-striped table-condensed">
+                        <thead class="thead-dark">                    
+                          <tr>
+                            <th>ITEM</th>
+                            <th>DESCRIPCION</th>
+                            <th>VALOR</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let listProduct of array_item let i = index">
+                            <td>{{i + 1}}</td>
+                            <td>{{listProduct.name}}</td>
+                            <td class="text-right">{{(listProduct.totalprice).toFixed(2)}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+
+            </div>
+
+            <!-- ------------------------------------------------------------------------------- -->
 
             <div class="row">
               <div class="col-6 col-sm-6"></div>
