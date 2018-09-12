@@ -112,7 +112,9 @@ class LiquidationController extends Controller
         $data = $request->all();
 
         $aux = Liquidation::find($id);
-     
+
+         $aux->number = $data["Data"]["number"];
+         $aux->billnumber = $data["Data"]["billnumber"];
          $aux->dateinit = $data["Data"]["dateinit"];
          $aux->dateend = $data["Data"]["dateend"];
          $aux->observation = $data["Data"]["observation"];

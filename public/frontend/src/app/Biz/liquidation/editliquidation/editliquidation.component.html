@@ -1,5 +1,5 @@
 <div *ngIf="tem_edit">
-<form novalidate (ngSubmit)="edit_liquidation(tem_edit, frmeditliquidatio, frmeditliquidatio.value);" #frmeditliquidatio="ngForm">
+<form novalidate (ngSubmit)="edit_liquidation(tem_edit, frmeditliquidatio, frmeditliquidatio.value);" #frmeditliquidatio="ngForm" (focus)="getList(frmeditliquidatio.value);">
 
   <div class="modal-header bg-primary">
     <h5 class="modal-title">Editar Liquidación</h5>
@@ -13,9 +13,9 @@
     <div class="row">
       <div class="col-md-3 col-sm-12 ">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a class="nav-link active" id="v-pills-home-tab" (click)="getList(frmeditliquidatio.value);" data-toggle="pill" href="#v-pills-home3" role="tab" aria-controls="v-pills-home"
+          <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" (click)="getList(frmeditliquidatio.value);" href="#v-pills-home3" role="tab" aria-controls="v-pills-home"
             aria-selected="true">LIQUIDACIÓN</a>
-          <a class="nav-link" id="v-pills-profile-tab" (click)="getList(frmeditliquidatio.value);" data-toggle="pill" href="#v-pills-profile3" role="tab" aria-controls="v-pills-profile"
+          <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" (click)="getList(frmeditliquidatio.value);" href="#v-pills-profile3" role="tab" aria-controls="v-pills-profile"
             aria-selected="false">GUÍAS REMISIÓN</a>
 
         </div>
@@ -27,6 +27,31 @@
               <div class="col-md-12 col-sm-12">
                 <strong>1. DATOS GENERALES DE LA LIQUIDACIÓN</strong>
               </div>
+            </div>
+
+            <div class="row" style="margin-top: 5%;">
+
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Número de Liquidación
+                    <span class="required">(*)</span>
+                  </label>
+                  <input type="text" class="form-control" id="number" name="number" maxlength="10"  [(ngModel)]="tem_edit.number" #number="ngModel" required>
+                </div>
+
+                <div *ngIf="number.errors?.required && number.touched">
+                  <small id="" class="form-text text-danger text-right">El Número de Liquidación es requerido</small>
+                </div>
+              </div>
+              
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Número de Factura
+                  </label>
+                  <input type="text" class="form-control" id="billnumber" maxlength="17" name="billnumber" [(ngModel)]="tem_edit.billnumber" #billnumber="ngModel">
+                </div>
+              </div>
+
             </div>
 
             <div class="row">
@@ -61,7 +86,7 @@
                   <label for="exampleFormControlInput1">Proyectos
                     <span class="required">(*)</span>
                   </label>
-                  <select class="form-control" id="projects" multiple name="projects" [(ngModel)]="temp_project" #projects="ngModel" required>
+                  <select class="form-control" id="projects" multiple name="projects" [(ngModel)]="temp_project" #projects="ngModel" (change)="getList(frmeditliquidatio.value);" required>
                     <option *ngFor="let c of list_project" value="{{c.idproject}}">{{c.projectname}}</option>
                   </select>
 
@@ -73,6 +98,7 @@
             </div>
 
             <div class="row">
+
               <div class="col-md-6 col-sm-12">
                 <div class="form-group">
                   <label for="exampleFormControlInput1">Fecha de inicio
@@ -85,6 +111,7 @@
                   <small id="" class="form-text text-danger text-right">La fecha de inicio es requerida</small>
                 </div>
               </div>
+
               <div class="col-md-6 col-sm-12">
                 <div class="form-group">
                   <label for="exampleFormControlInput1">Fecha de fin
