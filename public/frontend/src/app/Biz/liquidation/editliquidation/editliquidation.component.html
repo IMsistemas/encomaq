@@ -315,13 +315,13 @@
                     <table style="font-size: 12px;" class="table table-bordered table-striped table-condensed">
                         <thead class="thead-dark">                    
                           <tr>
-                            <th>DESCRIPCION</th>
-                            <th>CANT.</th>
-                            <th>DEL</th>
-                            <th>AL</th>
-                            <th>DIAS</th>
-                            <th>P. UNITARIO</th>
-                            <th>P. TOTAL</th>
+                            <th> <strong>DESCRIPCION</strong> </th>
+                            <th> <strong>CANT.</strong> </th>
+                            <th> <strong>DEL</strong> </th>
+                            <th> <strong>AL</strong> </th>
+                            <th> <strong>DIAS</strong> </th>
+                            <th> <strong>P. UNITARIO</strong> </th>
+                            <th> <strong>P. TOTAL</strong> </th>
                           </tr>
                         </thead>
                         <tbody>
@@ -383,9 +383,9 @@
                     <table style="font-size: 12px;" class="table table-bordered table-striped table-condensed">
                         <thead class="thead-dark">                    
                           <tr>
-                            <th>ITEM</th>
-                            <th>DESCRIPCION</th>
-                            <th>VALOR</th>
+                            <th> <strong>ITEM</strong> </th>
+                            <th> <strong>DESCRIPCION</strong> </th>
+                            <th> <strong>VALOR</strong> </th>
                           </tr>
                         </thead>
                         <tbody>
@@ -407,18 +407,26 @@
               <div class="col-6 col-sm-6 text-right">
                 <table class="table table-bordered table-striped table-condensed">
                   <tbody>
+                    <tr style="display: none;">
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                    </tr>
                     <tr>
-                      <th>SUBTOTAL</th>
+                      <th style="display: none;"></th>
+                      <th> <strong>SUBTOTAL</strong> </th>
                       <th>{{subtotal}}</th>
                     </tr>
 
                     <tr>
-                      <th>IVA 12%</th>
+                      <th style="display: none;"></th>
+                      <th> <strong>IVA 12%</strong> </th>
                       <th>{{iva}}</th>
                     </tr>
 
                     <tr>
-                      <th>TOTAL</th>
+                      <th style="display: none;"></th>
+                      <th> <strong>TOTAL</strong> </th>
                       <th>{{totalprecio}}</th>
                     </tr>
 
