@@ -101,6 +101,7 @@
         <tr>
           <th style="width: 3%;">NO</th>
           <th style="width: 8%;">LIQUIDACIÓN</th>
+          <th style="width: 12%;">NO. FACTURA</th>
           <th style="width: 8%;">FECHA I.</th>
           <th style="width: 8%;">FECHA F.</th>
           <th>OBSERVACIÓN</th>
@@ -115,12 +116,13 @@
         <tr *ngFor="let ident of list_liquidation  let i = index " [ngClass]="{'text-danger':ident.state == 0 } ">
           <td>{{i+from}}</td>
           <td>{{ident.number}}</td>
+          <td>{{ident.billnumber}}</td>
           <td>{{ident.dateinit}}</td>
           <td>{{ident.dateend}}</td>
           <td>{{ident.observation}}</td>
-          <td>{{ident.subtotal}}</td>
-          <td>{{ident.iva}}</td>
-          <td>{{ident.total}}</td>
+          <td class="text-right">{{ident.subtotal}}</td>
+          <td class="text-right">{{ident.iva}}</td>
+          <td class="text-right">{{ident.total}}</td>
           <td>{{ ((ident.state == 1)? 'ACTIVO':'INACTIVO') }}</td>
           <td class="noExl">
             <div class="dropdown">
