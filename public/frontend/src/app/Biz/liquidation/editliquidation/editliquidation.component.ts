@@ -590,13 +590,14 @@ export class EditliquidationComponent implements OnInit, OnChanges {
     data.subtotal = this.subtotal;
     data.iva = this.iva;
     data.total = this.totalprecio;
-    console.log(data);
-    console.log(datos);
+    /* console.log(data);
+    console.log(datos); */
     data.biz_liquidationproject[0].biz_project.idclient = datos.idcliente;
 
     const o = {
       Data: data,
-      list: datos
+      list: datos,
+      listGuide: this.list_guias
     };
 
     this.liquidation.edit_liquidation(data.idliquidation, o).subscribe(

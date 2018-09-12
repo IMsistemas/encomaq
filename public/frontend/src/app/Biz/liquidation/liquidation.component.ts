@@ -51,7 +51,7 @@ export class LiquidationComponent implements OnInit {
         this.from = response.from;
         this.total = response.total;
         this.loading = false;
-        console.log(this.list_liquidation);
+        // console.log(this.list_liquidation);
       },
       (error) => {
         console.log(error);

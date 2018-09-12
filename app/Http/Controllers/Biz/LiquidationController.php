@@ -61,7 +61,7 @@ class LiquidationController extends Controller
          $aux->state = 1;
          if ($aux->save()) {
              foreach ($data["list"] as $f) {
-                 $real =  new Referralguideliquidation;
+                 $real =  new Referralguideliquidation();
                  $real->idliquidation = $aux->idliquidation;
                  $real->idreferralguide = $f["idreferralguide"];
                  $real->save();
@@ -121,10 +121,18 @@ class LiquidationController extends Controller
          $aux->total = $data["Data"]["total"];
          $aux->state = 1;
          if ($aux->save()) {
-             $temp = Referralguideliquidation::whereRaw("idliquidation=".$aux->idliquidation."")->delete();
-             $temp2 = Liquidationproject::whereRaw("idliquidation=".$aux->idliquidation."")->delete();
-             foreach ($data["Data"]["biz_referralguideliquidation"] as $f) {
-                 $real =  new Referralguideliquidation;
+
+             Referralguideliquidation::whereRaw("idliquidation=".$aux->idliquidation."")->delete();
+             Liquidationproject::whereRaw("idliquidation=".$aux->idliquidation."")->delete();
+
+             /*foreach ($data["Data"]["biz_referralguideliquidation"] as $f) {
+                 $real =  new Referralguideliquidation();
+                 $real->idliquidation = $aux->idliquidation;
+                 $real->idreferralguide = $f["idreferralguide"];
+                 $real->save();
+             }*/
+             foreach ($data["listGuide"] as $f) {
+                 $real =  new Referralguideliquidation();
                  $real->idliquidation = $aux->idliquidation;
                  $real->idreferralguide = $f["idreferralguide"];
                  $real->save();
