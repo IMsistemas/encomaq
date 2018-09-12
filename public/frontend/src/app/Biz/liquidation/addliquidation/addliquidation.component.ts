@@ -349,7 +349,7 @@ export class AddliquidationComponent implements OnInit {
               datetimereferral: b.datetimereferral,
               dateend: dateend,
               days: days,
-              price: (parseFloat(c.price) * days).toFixed(2),
+              price: (parseFloat(c.price) * days).toFixed(3),
               quantify: parseInt(c.quantify, 0),
               total: ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) ).toFixed(2)
             };
@@ -375,7 +375,7 @@ export class AddliquidationComponent implements OnInit {
               datetimereferral: b.datetimereferral,
               dateend: dateend,
               days: days,
-              price: (parseFloat(c.price) * days).toFixed(2),
+              price: (parseFloat(c.price) * days).toFixed(3),
               quantify: -parseInt(c.quantify, 0),
               total: -( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) ).toFixed(2)
             };
@@ -412,13 +412,11 @@ export class AddliquidationComponent implements OnInit {
       const inicial: Array<string> = fechaInicial.split('-');
       const final: Array<string> = fechaFinal.split('-');
 
-      const dateStart: any = new Date(parseInt(inicial[2], 0), ( parseInt(inicial[1], 0) - 1 ), parseInt(inicial[0], 0));
+      const dateStart: any = new Date(parseInt(inicial[0], 0), ( parseInt(inicial[1], 0) - 1 ), parseInt(inicial[2], 0));
 
       const dateEnd: any = new Date(parseInt(final[0], 0), (parseInt(final[1], 0) - 1), parseInt(final[2], 0));
 
-      return Math.floor( ( ( dateEnd - dateStart ) / 86400000 ) / 1000 );
-      // const rest: any = dateEnd - dateStart;
-      // return Math.floor( rest / (1000 * 60 * 60 * 24));
+      return Math.floor( ( ( dateEnd - dateStart ) / 86400 ) / 1000 );
 
     } else {
 
@@ -470,13 +468,12 @@ export class AddliquidationComponent implements OnInit {
       dateend: $('#dateend').val(),
       idprojects: data.projects
     };
-    // console.log(o);
+
     this.referralguide.get(this.page, o).subscribe(
       (response) => {
 
         this.orderReferralGuide(response.data, data);
-
-        // this.list_guias = response.data;
+        this.list_guias = response.data;
 
         // this.calcula();
 
