@@ -17,6 +17,14 @@
           <i class="fas fa-plus-square fa-lg"></i>
         </button>
 
+        <button type="button" class="btn btn-info" (click)="pdf()" style="margin-left: 5px;">
+          PDF <i class="fas fa-file-pdf"></i> 
+        </button>      
+
+        <button type="button" class="btn btn-info" (click)="excel()" style="margin-left: 5px;">
+          EXCEL <i class="fas fa-file-excel"></i> 
+        </button>
+
       </div>
 
     </div>
@@ -30,59 +38,44 @@
 
     <div class="row">
 
-      <div class="col-12 col-sm-9" style="margin-top: 5px;">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Buscar Contrato" #aux [(ngModel)]="descripcion" (keyup)="page = 1;get_list_contract();">
-          <div class="input-group-prepend">
-            <label class="input-group-text">
-              <i class="fas fa-search"></i>
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-12 col-sm-3" style="margin-top: 5px;">
-        <select class="custom-select" #est [(ngModel)]="state" (change)="page = 1; get_list_contract(); ">
-          <option value="1">ACTIVO</option>
-          <option value="0">INACTIVO</option>
-        </select>
-      </div>
-
-
-
-    </div>
-
-    <div class="row">
-
-      <div class="col-12 col-sm-3" style="margin-top: 5px;">
+      <div class="col-12 col-sm-2" style="margin-top: 5px;">
         <select class="custom-select" #col [(ngModel)]="column" (change)="page = 1; get_list_contract(); ">
           <option value="biz_contract.nocontract"># CONTRATO</option>
           <option value="biz_client.businessname">CLIENTE</option>
         </select>
       </div>
 
-      <div class="col-12 col-sm-3" style="margin-top: 5px;">
+      <div class="col-12 col-sm-2" style="margin-top: 5px;">
         <select class="custom-select" #or [(ngModel)]="order" (change)="page = 1; get_list_contract(); ">
           <option value="ASC">ASCENDENTE</option>
           <option value="DESC">DESENDENTE</option>
         </select>
       </div>
 
-      <div class="col-12 col-sm-3" style="margin-top: 5px;">
-        <div class="btn-group">
-          <button type="button" class="btn btn-default" (click)="pdf()">
-            <i class="fas fa-file-pdf"></i> PDF </button>
-          <button type="button" class="btn btn-success" (click)="excel()">
-            <i class="fas fa-file-excel"></i> EXCEL </button>
-        </div>
-      </div>
-
-      <div class="col-12 col-sm-3" style="margin-top: 5px;">
+      <div class="col-12 col-sm-2" style="margin-top: 5px;">
         <div class="input-group mb-3">
           <input type="number" class="form-control" #pg [(ngModel)]="num_page" (keyup)="page = 1;get_list_contract();" (change)="page = 1; get_list_contract(); ">
           <div class="input-group-prepend">
             <label class="input-group-text">
               Pag.
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-2" style="margin-top: 5px;">
+        <select class="custom-select" #est [(ngModel)]="state" (change)="page = 1; get_list_contract(); ">
+          <option value="1">ACTIVO</option>
+          <option value="0">INACTIVO</option>
+        </select>
+      </div>
+
+      <div class="col-12 col-sm-4" style="margin-top: 5px;">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Buscar Contrato" #aux [(ngModel)]="descripcion" (keyup)="page = 1;get_list_contract();">
+          <div class="input-group-prepend">
+            <label class="input-group-text">
+              <i class="fas fa-search"></i>
             </label>
           </div>
         </div>
