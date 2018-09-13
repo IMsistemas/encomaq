@@ -218,7 +218,7 @@ class ClienteController extends Controller
         $view =  \View::make('Print.ListClient', compact('data','company'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
-        $pdf->setPaper('A4', 'portrait');
+        $pdf->setPaper('A4', 'landscape');
         return $pdf->stream("ListaDeClientes".$today.".pdf");
     }     
 }
