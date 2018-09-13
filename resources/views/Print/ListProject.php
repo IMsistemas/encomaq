@@ -142,6 +142,7 @@
             <tr>
                 <th style="width: 8%;">NO</th>
                 <th>PROYECTO</th>
+                <th>LUGAR</th>
                 <th>CLIENTE</th>
                 <th>IDENTIFICACIÓN</th>
                 <th style="width: 12%;">ESTADO</th>
@@ -152,6 +153,7 @@
                     echo "<tr>";
                     echo "<td>".$x."</td>";
                     echo "<td>".$c["projectname"]."</td>";
+                    echo "<td>".$c["place"]."</td>";
                     echo "<td>".$c["biz_client"]["businessname"]."</td>";
                     echo "<td>".$c["biz_client"]["identify"]."</td>";
                     if ($c["state"] == 1) {
