@@ -134,21 +134,22 @@
     </div>
     <div class="row text-center">
         <h3>
-            Lista De Liquidaciones
+            Lista de Liquidaciones
         </h3>
     </div>
     <table class="table table-bordered table-condensed">
         <thead>
             <tr>
-                <th style="width: 8%;">NO</th>
-                <th># LIQUIDACIÓN</th>
-                <th>FECHA I.</th>
-                <th>FECHA F.</th>
-                <th>OBSERVACIÓN</th>
-                <th>SUBTOTAL</th>
-                <th>IVA</th>
-                <th>TOTAL</th>
-                <th style="width: 12%;">ESTADO</th>
+                <th style="width: 5%;">NO</th>
+                <th style="width: 10%;"># LIQUIDACIÓN</th>
+                <th style="width: 12%;"># FACTURA</th>
+                <th style="width: 10%;">FECHA I.</th>
+                <th style="width: 10%;">FECHA F.</th>
+                <th style="width: 20%;">OBSERVACIÓN</th>
+                <th style="width: 10%;">SUBTOTAL</th>
+                <th style="width: 8%;">IVA</th>
+                <th style="width: 10%;">TOTAL</th>
+                <th style="width: 5%;">ESTADO</th>
             </tr>
             <?php
                 $x = 1;
@@ -156,6 +157,7 @@
                     echo "<tr>";
                     echo "<td>".$x."</td>";
                     echo "<td>".$c["number"]."</td>";
+                    echo "<td>".$c["billnumber"]."</td>";
                     echo "<td>".$c["dateinit"]."</td>";
                     echo "<td>".$c["dateend"]."</td>";
                     echo "<td>".$c["observation"]."</td>";

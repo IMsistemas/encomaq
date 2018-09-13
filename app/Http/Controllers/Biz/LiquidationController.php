@@ -210,7 +210,7 @@ class LiquidationController extends Controller
         $view =  \View::make('Print.ListLiquidation', compact('data','company'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
-        $pdf->setPaper('A4', 'portrait');
+        $pdf->setPaper('A4', 'landscape');
         return $pdf->stream("ListaDeLiquidaciones".$today.".pdf");
     } 
     

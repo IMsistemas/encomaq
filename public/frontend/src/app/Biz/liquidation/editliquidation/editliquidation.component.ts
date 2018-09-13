@@ -630,7 +630,8 @@ export class EditliquidationComponent implements OnInit, OnChanges {
     $('#tablefinal').html($('.excel_liq').html());
     $('#tablefinal').table2excel({
       exclude: '.noExl',
-      filename: 'Liquidacion'
+      filename: 'Liquidacion',
+      fileext: '.xls'
     });
   }
   pdf() {
