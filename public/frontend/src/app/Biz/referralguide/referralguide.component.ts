@@ -89,12 +89,16 @@ export class ReferralguideComponent implements OnInit {
   }
 
   create() {
+    this.idcontract_select  = { idcontract: '', biz_client: { businessname: '' }, nocontract: '' };
+    this.objectcarrier_select = { idcarrier: '', carriername: '', identify: '', licenseplate: '' };
+    this.objectplace_select_start = { idplace: '', placename: '' };
+    this.objectplace_select_end = { idplace: '', placename: '' };
     $('#createreferralguide').modal('show');
   }
 
   editSelected(item: any) {
     console.log(item);
-    this.listcarrier.get_list_carrier();
+    // this.listcarrier.get_list_carrier();
     this.info_tem_edit = item;
     this.idcontract_select = item.biz_contract;
     this.objectcarrier_select = item.biz_carrier;

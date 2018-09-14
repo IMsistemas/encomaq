@@ -185,8 +185,11 @@ export class CreatereferralguideComponent implements OnInit {
           this.list_itemcont = [];
           this.update_component_father.emit(true);
 
+
           this.idcontract_s = { idcontract: '', biz_client: { businessname: '' }, nocontract: '' };
           this.carrier_select = { idcarrier: '', carriername: '', identify: '', licenseplate: '' };
+          this.place_select_start = { idplace: '', placename: '' };
+          this.place_select_end = { idplace: '', placename: '' };
         } else if (response.error !== undefined) {
           $('#addclient').modal('hide');
           frm.reset();
