@@ -111,6 +111,7 @@ class CotractController extends Controller
          $aux->observation = $data["Data"]["observation"];
          $aux->receipt = $data["Data"]["receipt"];
          $aux->invoice = $data["Data"]["invoice"];
+         $aux->idcategoryitem = $data["Data"]["idcategoryitem"];
          $aux->state = 1;
          if ($aux->save()) {
              foreach ($data["list"] as $f) {
@@ -188,6 +189,7 @@ class CotractController extends Controller
         $aux->observation = $data["Data"]["observation"];
         $aux->receipt = $data["Data"]["receipt"];
         $aux->invoice = $data["Data"]["invoice"];
+        $aux->idcategoryitem = $data["Data"]["idcategoryitem"];
         //$aux->state = 1;
         if ($aux->save()) {
             $temp = ContractItem::whereRaw("idcontract='".$id."'")->delete();

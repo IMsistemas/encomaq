@@ -104,8 +104,10 @@ class ReferralGuideController extends Controller
         $aux->idcarrier = $data["Data"]["idcarrier"];
         $aux->datetimereferral = $data["Data"]["datetimereferral"];
         $aux->sequential = $data["Data"]["sequential"];
-        $aux->startingpoint = $data["Data"]["startingpoint"];
-        $aux->arrivalpoint = $data["Data"]["arrivalpoint"];
+        /*$aux->startingpoint = $data["Data"]["startingpoint"];
+        $aux->arrivalpoint = $data["Data"]["arrivalpoint"];*/
+        $aux->guidenumber = $data["Data"]["guidenumber"];
+        $aux->logisticservicecost = $data["Data"]["logisticservicecost"];
         $aux->state = 1;
          if ($aux->save()) {
 
@@ -175,9 +177,12 @@ class ReferralGuideController extends Controller
         $aux->idcarrier = $data["idcarrier"];
         $aux->datetimereferral = $data["datetimereferral"];
         $aux->sequential = $data["sequential"];
-        $aux->startingpoint = $data["startingpoint"];
-        $aux->arrivalpoint = $data["arrivalpoint"];
-        $aux->state = 1;
+        /*$aux->startingpoint = $data["startingpoint"];
+        $aux->arrivalpoint = $data["arrivalpoint"];*/
+        $aux->guidenumber = $data["Data"]["guidenumber"];
+        $aux->logisticservicecost = $data["Data"]["logisticservicecost"];
+
+        //$aux->state = 1;
          if ($aux->save()) {
 
              ReferralGuidePlace::where('idreferralguide', $id)->delete();
