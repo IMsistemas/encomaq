@@ -5,6 +5,7 @@ import { ClienteService } from '../../../service/bclient/cliente.service';
 import { ItemService } from '../../../service/bitem/item.service';
 import { BperiodService } from '../../../service/bperiod/bperiod.service';
 import { BpaymentformService } from '../../../service/bpaymentform/bpaymentform.service';
+import { ItemcategoryService } from '../../../service/ncategoryitem/itemcategory.service';
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -16,6 +17,7 @@ export class AddcontractComponent implements OnInit {
   @Output() update_component_father = new EventEmitter<boolean>();
   lis_client = [];
   lis_item = [];
+  lis_category = [];
   list_itemcont = [];
   list_period = [];
   list_paymentform = [];
@@ -23,7 +25,8 @@ export class AddcontractComponent implements OnInit {
   @Input() id_client: any; //
   @Input() item_select: any;
   constructor(private contract: ContractService, private client: ClienteService,
-                private item: ItemService, private period: BperiodService, private paymentform: BpaymentformService) { }
+                private item: ItemService, private period: BperiodService,
+                private paymentform: BpaymentformService, private category: ItemcategoryService) { }
 
   ngOnInit() {
     this.id_client = { idclient: '' };
@@ -32,8 +35,25 @@ export class AddcontractComponent implements OnInit {
     this.list_clients();
     this.list_periods();
     this.list_paymentforms();
+    this.list_category();
     this.list_items();
     $('.auxcliente').prop('disabled' , true);
+  }
+  list_category() {
+    this.lis_category.push({ idcategoryitem: '', categoryitemname: '--Seleccione--' });
+    this.category.get_categoryitem_active().subscribe(
+      (response) => {
+        for (const cat of response) {
+          const o = {
+            idcategoryitem: cat.idcategoryitem,
+            categoryitemname: cat.categoryitemname
+          };
+          this.lis_category.push(o);
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
   }
   list_clients() {
     this.lis_client.push({ idclient: '', businessname: '--Seleccione--' });

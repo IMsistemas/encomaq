@@ -6,6 +6,7 @@ import { ClienteService } from '../../../service/bclient/cliente.service';
 import { ItemService } from '../../../service/bitem/item.service';
 import { BperiodService } from '../../../service/bperiod/bperiod.service';
 import { BpaymentformService } from '../../../service/bpaymentform/bpaymentform.service';
+import { ItemcategoryService } from '../../../service/ncategoryitem/itemcategory.service';
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -16,6 +17,7 @@ declare var $: any;
 export class EditcontractComponent implements OnInit {
   lis_client = [];
   lis_item = [];
+  lis_category = [];
   list_period = [];
   list_paymentform = [];
   counter = 0;
@@ -25,16 +27,34 @@ export class EditcontractComponent implements OnInit {
   @Input() id_client: any; //
   @Input() item_select: any;
   constructor(private contract: ContractService, private client: ClienteService,
-                private item: ItemService, private period: BperiodService, private paymentform: BpaymentformService) { }
+                private item: ItemService, private period: BperiodService,
+                private paymentform: BpaymentformService, private category: ItemcategoryService) { }
 
   ngOnInit() {
     this.id_client = { idclient: '' };
     this.item_select = { iditem: '' };
     this.list_clients();
     this.list_periods();
+    this.list_category();
     // this.list_paymentforms();
     // this.counter = 0;
     this.list_items();
+  }
+  list_category() {
+    this.lis_category.push({ idcategoryitem: '', categoryitemname: '--Seleccione--' });
+    this.category.get_categoryitem_active().subscribe(
+      (response) => {
+        for (const cat of response) {
+          const o = {
+            idcategoryitem: cat.idcategoryitem,
+            categoryitemname: cat.categoryitemname
+          };
+          this.lis_category.push(o);
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
   }
   list_clients() {
     this.lis_client.push({ idclient: '', businessname: '--Seleccione--' });

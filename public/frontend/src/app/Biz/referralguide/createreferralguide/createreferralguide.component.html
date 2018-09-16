@@ -82,7 +82,16 @@
               </div>
 
               <div class="row">
-                <div class="col-12">
+
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">No. Guía Remisión</label>
+                    <input type="text" class="form-control" id="guidenumber" name="guidenumber" maxlength="17"
+                                ngModel #guidenumber="ngModel" placeholder="xxx-xxx-xxxxxxxxx">
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12">
                   <div class="form-group">
                     <label for="exampleFormControlInput1">Proyectos
                       <span class="required">(*)</span>
@@ -96,7 +105,7 @@
 
               <div class="row">
 
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-4 col-sm-12">
                   <div class="form-group">
                     <label for="exampleFormControlInput1">Fecha
                       <span class="required">(*)</span>
@@ -109,7 +118,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-4 col-sm-12">
                   <div class="form-group">
                     <label for="exampleFormControlInput1">Hora
                       <span class="required">(*)</span>
@@ -119,6 +128,14 @@
 
                   <div *ngIf="sequential.errors?.required && sequential.touched">
                     <small id="" class="form-text text-danger text-right">La Hora requerida</small>
+                  </div>
+                </div>
+
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Costo Serv. Logística</label>
+                    <input type="text" class="form-control" id="logisticservicecost" name="logisticservicecost"
+                                ngModel #logisticservicecost="ngModel">
                   </div>
                 </div>
 

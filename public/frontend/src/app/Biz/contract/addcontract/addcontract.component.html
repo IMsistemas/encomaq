@@ -270,12 +270,33 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-12 col-sm-12 text-right">
+
+              <div class="col-md-8 col-sm-12">
+                  <div class="form-group row">
+                    <label for="exampleFormControlInput1" class="col-sm-3 col-form-label">Categoría
+                      <span class="required">(*)</span>
+                    </label>
+                    <div class="col-sm-9">
+                        <select  class="form-control" id="idcategoryitem" name="idcategoryitem" ngModel #idcategoryitem="ngModel" required>
+                          <option *ngFor="let cat of lis_category" [ngValue]="cat.idcategoryitem">
+                            {{cat.categoryitemname}}
+                          </option>
+                        </select>
+                    </div>
+                  </div>
+
+                  <div *ngIf="idcategoryitem.errors?.required && idcategoryitem.touched">
+                    <small id="" class="form-text text-danger text-right">La categoría es requerida</small>
+                  </div>
+              </div>
+
+              <div class="col-md-4 col-sm-12 text-right">
                 <button type="button" class="btn btn-primary" (click)="addrwo()"> Agregar
                 <i class="fas fa-plus-square fa-lg"></i></button>
               </div>
+
             </div>
-            <div class="row">
+            <div class="row" style="margin-top: 5px;">
               <div class="col-md-12 col-sm-12 table-responsive">
                 <table class="table table-bordered table-condensed" style="font-size: 11px;">
                   <thead class="btn-dark">

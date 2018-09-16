@@ -16,7 +16,7 @@
           </label>
           <input type="file" class="form-control" id="image" lang="es" (change)="handleFileInput($event.target.files)">
         </div>
-    
+
       </div>
     </div>
 
@@ -24,7 +24,7 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="form-group">
-          <label for="exampleFormControlInput1">Categoria
+          <label for="exampleFormControlInput1">Categoría
             <span class="required">(*)</span>
           </label>
           <select  class="form-control" id="idcategoryitem" name="idcategoryitem" ngModel #idcategoryitem="ngModel" required>
@@ -33,7 +33,7 @@
             </option>
           </select>
         </div>
-    
+
         <div *ngIf="idcategoryitem.errors?.required && idcategoryitem.touched">
           <small id="" class="form-text text-danger text-right">La categoria es requerida</small>
         </div>
@@ -52,7 +52,7 @@
             </option>
           </select>
         </div>
-    
+
         <div *ngIf="idunittype.errors?.required && idunittype.touched">
           <small id="" class="form-text text-danger text-right">La unidad es requerida</small>
         </div>
@@ -98,7 +98,7 @@
           </label>
           <input type="text" class="form-control"  pattern="^[0-9]+([.][0-9]+)?$"  id="price" name="price" ngModel #price="ngModel" required>
         </div>
-    
+
         <div *ngIf="price.errors?.required && price.touched">
           <small id="" class="form-text text-danger text-right">El precio es requerido</small>
         </div>

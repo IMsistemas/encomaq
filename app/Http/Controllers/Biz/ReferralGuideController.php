@@ -29,7 +29,7 @@ class ReferralGuideController extends Controller
         $filter = json_decode($request->get('filter'));
 
         $where = " biz_referralguide.state ='" . $filter->state."' ";
-        $where .= " AND (sequential LIKE '%" . $filter->search . "%' OR purchaseproof LIKE '%" . $filter->search . "%'  ";
+        $where .= " AND (sequential LIKE '%" . $filter->search . "%' ";
         $where .= " OR biz_contract.nocontract LIKE '%" . $filter->search . "%' ";
         $where .= " OR biz_client.businessname LIKE '%" . $filter->search . "%'  ) ";
 
@@ -250,7 +250,7 @@ class ReferralGuideController extends Controller
         $filter = json_decode($paramentro);
        
         $where = " biz_referralguide.state ='" . $filter->state."' ";
-        $where .= " AND (sequential LIKE '%" . $filter->search . "%' OR purchaseproof LIKE '%" . $filter->search . "%'  ";
+        $where .= " AND (sequential LIKE '%" . $filter->search . "%' ";
         $where .= " OR biz_contract.nocontract LIKE '%" . $filter->search . "%'   ";
         $where .= " OR biz_client.businessname LIKE '%" . $filter->search . "%'  ) ";
 
