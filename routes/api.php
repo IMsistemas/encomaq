@@ -146,3 +146,10 @@ Route::group(['middleware' => 'cors'], function(){
     Route::get('Liquidation/state/{id}', 'Biz\LiquidationController@stateliquidation');
     Route::resource('Liquidation', 'Biz\LiquidationController');
 });
+
+
+Route::group(['middleware' => 'cors'], function(){
+    Route::get('ItemPrice/filtro', 'Biz\ItemPriceController@itempricefiltro');
+    Route::get('ItemPrice/state/{id}', 'Biz\ItemPriceController@stateitemprice');
+    Route::resource('ItemPrice', 'Biz\ItemPriceController');
+});

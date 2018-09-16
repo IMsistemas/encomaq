@@ -82,6 +82,7 @@ import { ListPlaceComponent } from './Biz/place/list-place/list-place.component'
 import { PaymentformComponent } from './Biz/paymentform/paymentform.component';
 import { CreatePaymentformComponent } from './Biz/paymentform/create-paymentform/create-paymentform.component';
 import { EditPaymentformComponent } from './Biz/paymentform/edit-paymentform/edit-paymentform.component';
+import { ItempriceService } from './service/bitemprice/itemprice.service';
 
 @NgModule({
   declarations: [
@@ -156,7 +157,7 @@ import { EditPaymentformComponent } from './Biz/paymentform/edit-paymentform/edi
     NomidentifytyService, RoleService, ItemcategoryService, LoginService,
     ReasontransferService, UnittypeService, UserService, WarehouseService,
     BcompanyService, ItemService, ConfigemailService, ClienteService,
-    ProjectService, CarrierService, ContractService, ReferralguideService, LiquidationService, BplaceService
+    ProjectService, CarrierService, ContractService, ReferralguideService, LiquidationService, BplaceService, ItempriceService
   ],
   bootstrap: [AppComponent]
 })
