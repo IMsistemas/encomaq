@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ReasontransferService } from '../../../service/ntranseferreason/reasontransfer.service';
 import { ItemService } from '../../../service/bitem/item.service';
 import { ReferralguideService } from '../../../service/referralguide/referralguide.service';
+import { ItempriceService } from '../../../service/bitemprice/itemprice.service';
 
 declare var jquery: any;
 declare var $: any;
@@ -30,7 +31,8 @@ export class UpdatereferralguideComponent implements OnInit {
   @Input() place_select_end: any;
 
   listTransferReason = [];
-  constructor(private transferreason: ReasontransferService, private item: ItemService, private referra: ReferralguideService) { }
+  constructor(private transferreason: ReasontransferService, private item: ItemService, private referra: ReferralguideService,
+    private itemPrice: ItempriceService ) { }
 
   ngOnInit() {
     this.place_select_start = { idplace: '', placename: ''};
@@ -84,6 +86,8 @@ export class UpdatereferralguideComponent implements OnInit {
   addrwo() {
     const o = {
       iditem: '',
+      price: 0,
+      biz_item: { biz_price: []},
       quantity: 0,
       observation: ''
     };
@@ -153,4 +157,20 @@ export class UpdatereferralguideComponent implements OnInit {
     $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
   }
 
+
+  getListPrice(item) {
+    console.log(item);
+    this.itemPrice.price_item(item.iditem).subscribe(
+      (response) => {
+        console.log(response);
+         item.biz_item.biz_price = response;
+         if ( response.length > 0 ) {
+           item.price = response[0].price;
+         }
+         console.log(item);
+      },
+      (error) => {
+
+      });
+  }
 }

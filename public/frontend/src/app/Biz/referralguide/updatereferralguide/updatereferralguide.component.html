@@ -338,6 +338,7 @@
                     <tr>
                       <th style="width: 3%;">N</th>
                       <th>DESCRIPCIÓN</th>
+                      <th>PRECIO</th>
                       <th style="width: 15% !important;" >CANT.</th>
                       <th>OBSERVACIONES</th>
                       <th style="width: 3%;"></th>
@@ -348,7 +349,7 @@
                       <td>{{i+1}}</td>
                       <td>
                         <div class="input-group">
-                          <select class="form-control" name="{{i}}iditem" [(ngModel)]="aux.iditem">
+                          <select class="form-control" name="{{i}}iditem" [(ngModel)]="aux.iditem" (change)="getListPrice(aux)" >
                             <option *ngFor="let it of lis_item" value="{{it.iditem}}">
                               {{it.itemname}}
                             </option>
@@ -358,6 +359,15 @@
                               <i class="fas fa-search"></i>
                             </button>
                           </div>-->
+                        </div>
+                      </td>
+                      <td>
+                        <div class="input-group">
+                          <select class="form-control" name="{{i}}priceItem" [(ngModel)]="aux.price">
+                            <option *ngFor="let it of aux.biz_item.biz_price" value="{{it.price}}">
+                              {{it.price}}
+                            </option>
+                          </select> 
                         </div>
                       </td>
                       <td>

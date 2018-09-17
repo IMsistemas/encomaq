@@ -6,6 +6,7 @@ import { CarrierService } from '../../../service/carrier/carrier.service';
 import { ItemService } from '../../../service/bitem/item.service';
 import { ReasontransferService } from '../../../service/ntranseferreason/reasontransfer.service';
 import { ReferralguideService } from '../../../service/referralguide/referralguide.service';
+import { ItempriceService } from '../../../service/bitemprice/itemprice.service';
 
 declare var jquery: any;
 declare var $: any;
@@ -41,7 +42,8 @@ export class CreatereferralguideComponent implements OnInit {
     private carrier: CarrierService,
     private item: ItemService,
     private transferreason: ReasontransferService,
-    private referra: ReferralguideService
+    private referra: ReferralguideService,
+    private itemPrice: ItempriceService
   ) { }
 
   ngOnInit() {
@@ -150,6 +152,8 @@ export class CreatereferralguideComponent implements OnInit {
     console.log(this.list_itemcont);
     const o = {
       iditem: '',
+      listPrice: [],
+      price: 0,
       quantity: 0,
       observation: ''
     };
@@ -201,6 +205,22 @@ export class CreatereferralguideComponent implements OnInit {
         $('#createreferralguide').modal('hide');
         frm.reset();
         this.update_component_father.emit(false);
+      });
+  }
+
+  getListPrice(item) {
+    console.log(item);
+    this.itemPrice.price_item(item.iditem).subscribe(
+      (response) => {
+        console.log(response);
+         item.listPrice = response;
+         if ( response.length > 0 ) {
+           item.price = response[0].price;
+         }
+         console.log(item);
+      },
+      (error) => {
+
       });
   }
 

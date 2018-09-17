@@ -32,4 +32,8 @@ export class ItempriceService {
     return this.http.get(this.url_api.get_url_api() + 'api/ItemPrice/filtro?page=' + page + '&filter=' + JSON.stringify(filtro));
   }
 
+  price_item(id: any): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/ItemPrice/priceForItem/' + id);
+  }
+
 }

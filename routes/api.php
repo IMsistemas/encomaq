@@ -149,6 +149,7 @@ Route::group(['middleware' => 'cors'], function(){
 
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('ItemPrice/priceForItem/{id}', 'Biz\ItemPriceController@priceForItem');
     Route::get('ItemPrice/filtro', 'Biz\ItemPriceController@itempricefiltro');
     Route::get('ItemPrice/state/{id}', 'Biz\ItemPriceController@stateitemprice');
     Route::resource('ItemPrice', 'Biz\ItemPriceController');

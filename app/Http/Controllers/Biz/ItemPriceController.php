@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Biz;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Biz\ItemPrice;
 
 class ItemPriceController extends Controller
 {
@@ -14,7 +15,7 @@ class ItemPriceController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -81,5 +82,11 @@ class ItemPriceController extends Controller
     public function destroy($id)
     {
         //
+    }
+    /**
+     * 
+     */
+    public function priceForItem ($idItem) {
+        return ItemPrice::whereRaw("iditem=".$idItem."")->get();
     }
 }

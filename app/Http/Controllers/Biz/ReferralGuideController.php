@@ -57,7 +57,7 @@ class ReferralGuideController extends Controller
             $where .= ') ';
         }
 
-        return Referralguide::with('biz_contract.biz_client.biz_Project', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem.biz_item', 'biz_referralguide_place.biz_place_start', 'biz_referralguide_place.biz_place_end')
+        return Referralguide::with('biz_contract.biz_client.biz_Project', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem.biz_item.biz_price', 'biz_referralguide_place.biz_place_start', 'biz_referralguide_place.biz_place_end')
                                 ->selectRaw("biz_referralguide.* ")
                                 ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")
                                 ->join("biz_client", "biz_client.idclient", "=", "biz_contract.idclient" )
@@ -126,6 +126,7 @@ class ReferralGuideController extends Controller
                     $caux = new Referralguideitem();
                     $caux->idreferralguide = $aux->idreferralguide;
                     $caux->iditem = $f["iditem"];
+                    $caux->price = $f["price"];
                     $caux->quantify = $f["quantity"];
                     $caux->observation = $f["observation"];
                     $caux->save();
@@ -179,8 +180,10 @@ class ReferralGuideController extends Controller
         $aux->sequential = $data["sequential"];
         /*$aux->startingpoint = $data["startingpoint"];
         $aux->arrivalpoint = $data["arrivalpoint"];*/
-        $aux->guidenumber = $data["Data"]["guidenumber"];
-        $aux->logisticservicecost = $data["Data"]["logisticservicecost"];
+        // $aux->guidenumber = $data["Data"]["guidenumber"];
+        $aux->guidenumber = $data["guidenumber"];
+        // $aux->logisticservicecost = $data["Data"]["logisticservicecost"];
+        $aux->logisticservicecost = $data["logisticservicecost"];
 
         //$aux->state = 1;
          if ($aux->save()) {
@@ -202,6 +205,7 @@ class ReferralGuideController extends Controller
                     $caux = new Referralguideitem();
                     $caux->idreferralguide = $aux->idreferralguide;
                     $caux->iditem = $f["iditem"];
+                    $caux->price = $f["price"];
                     $caux->quantify = $f["quantify"];
                     $caux->observation = $f["observation"];
                     $caux->save();

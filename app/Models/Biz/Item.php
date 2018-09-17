@@ -24,4 +24,8 @@ class Item extends Model
     {
         return $this->belongsTo('App\Models\Nomenclature\UnitType',"idunittype");
     }
+    public function biz_price()
+    {
+        return $this->hasMany('App\Models\Biz\ItemPrice',"iditem");
+    }
 }
