@@ -16,8 +16,9 @@
           alt="Responsive image" style="width:45%; " class="img-responsive">
       </div>
     </div>
+
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-12 col-md-6">
       <div class="form-group">
         <label for="exampleFormControlInput1">Foto
         </label>
@@ -25,29 +26,29 @@
       </div>
   
       </div>
+
+      <div class="col-sm-12 col-md-6">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Categoria
+              <span class="required">(*)</span>
+            </label>
+            <select class="form-control" id="idcategoryitem" name="idcategoryitem" [(ngModel)]="tem_edit.idcategoryitem" #idcategoryitem="ngModel" required>
+              <option *ngFor="let cat of lis_category "  value="{{cat.idcategoryitem}}">
+                {{cat.categoryitemname}}
+              </option>
+            </select>
+          </div>
+  
+          <div *ngIf="idcategoryitem.errors?.required && idcategoryitem.touched">
+            <small id="" class="form-text text-danger text-right">La categoria es requerida</small>
+          </div>
+        </div>
     </div>
 
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Categoria
-            <span class="required">(*)</span>
-          </label>
-          <select class="form-control" id="idcategoryitem" name="idcategoryitem" [(ngModel)]="tem_edit.idcategoryitem" #idcategoryitem="ngModel" required>
-            <option *ngFor="let cat of lis_category "  value="{{cat.idcategoryitem}}">
-              {{cat.categoryitemname}}
-            </option>
-          </select>
-        </div>
 
-        <div *ngIf="idcategoryitem.errors?.required && idcategoryitem.touched">
-          <small id="" class="form-text text-danger text-right">La categoria es requerida</small>
-        </div>
-      </div>
-    </div>
 
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-12 col-md-6">
         <div class="form-group">
           <label for="exampleFormControlInput1">Unidad
             <span class="required">(*)</span>
@@ -63,10 +64,8 @@
           <small id="" class="form-text text-danger text-right">La unidad es requerida</small>
         </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-12 col-md-6">
         <div class="form-group">
           <label for="exampleFormControlInput1">Item
             <span class="required">(*)</span>
@@ -81,40 +80,64 @@
     </div>
 
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-12 col-md-6">
         <div class="form-group">
           <label for="exampleFormControlInput1">Descripción
             <span class="required">(*)</span>
           </label>
-          <input type="text" class="form-control" id="description" name="description" [(ngModel)]="tem_edit.description" #description="ngModel" required>
+          <textarea class="form-control" id="description" name="description" [(ngModel)]="tem_edit.description" #description="ngModel" required> </textarea>
         </div>
 
         <div *ngIf="description.errors?.required && description.touched">
           <small id="" class="form-text text-danger text-right">La descripción es requerida</small>
         </div>
       </div>
+
+      <div class="col-sm-12 col-md-6">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Precio
+              </label>
+              <div class="input-group">
+                <input type="text" class="form-control"  pattern="^[0-9]+([.][0-9]+)?$"  id="price" name="price" ngModel #price="ngModel">
+                <div class="input-group-append">
+                  <button class="btn btn-success" type="button" (click)="createRow(frmedititem.value)">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+              
+            </div>           
+          </div>
+  
+          <div class="col-12 table-responsive">
+              <table class="table table-striped table-hover table-bordered" id="list_items" style="font-size: 12px;">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>PRECIO</th>
+                    <th style="width: 5px;"></th>
+                  </tr>
+                </thead>
+                  <tbody>
+                      <tr *ngFor="let ident of tem_edit.biz_itemprice">
+                        <td>
+                          {{ident.price}}
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" type="button" (click)="deleteRow(ident)">
+                              <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+        </div>
     </div>
 
 
 
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Precio
-            <span class="required">(*)</span>
-          </label>
-          <input type="text" class="form-control" id="price" pattern="^[0-9]+([.][0-9]+)?$"  name="price" [(ngModel)]="tem_edit.price" #price="ngModel"
-            required>
-        </div>
-    
-        <div *ngIf="price.errors?.required && price.touched">
-          <small id="" class="form-text text-danger text-right">El precio es requerido</small>
-        </div>
-        <div *ngIf="price.errors?.pattern">
-          <small id="" class="form-text text-danger text-right">El precio es incorrecto debe ser un numero entero o decimal</small>
-        </div>
-      </div>
-    </div>
+
 
   </div>
 

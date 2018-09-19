@@ -17,6 +17,7 @@ export class AdditemComponent implements OnInit {
   @Output() update_component_father = new EventEmitter<boolean>();
   lis_category = [];
   lis_unit = [];
+  lis_price = [];
   fileToUpload: File = null;
   constructor(private item: ItemService, private category: ItemcategoryService, private unit: UnittypeService) { }
 
@@ -59,7 +60,16 @@ export class AdditemComponent implements OnInit {
         console.log('POST call in error", respons', error);
       });
   }
+  createRow(data) {
+    this.lis_price.push(data.price);
+    data.price = '';
+  }
+  deleteRow(ident) {
+    const pos = this.lis_price.indexOf(ident);
+    this.lis_price.splice(pos, 1);
+  }
   add_item(data) {
+    data.list_price = this.lis_price;
     this.item.add_item(data, this.fileToUpload).subscribe(
       (response) => {
         if (response.success !== undefined) {

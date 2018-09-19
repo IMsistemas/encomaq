@@ -10,11 +10,14 @@ class Item extends Model
 
     protected $primaryKey = "iditem";
 
-   
 
     public function biz_Referralguideitem()
     {
         return $this->hasMany('App\Models\Biz\Referralguideitem',"iditem");
+    }
+    public function biz_itemprice()
+    {
+        return $this->hasMany('App\Models\Biz\ItemPrice',"iditem");
     }
     public function nom_category()
     {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Biz;
 
+use App\Models\Biz\ItemPrice;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -49,9 +50,23 @@ class ItemController extends Controller
                 $aux->idunittype = $data->idunittype;
                 $aux->itemname = $data->itemname;
                 $aux->description = $data->description;
-                $aux->price = $data->price;
+                // $aux->price = $data->price;
                 $aux->state = 1;
                 if($aux->save()){
+
+                    ItemPrice::where('iditem', $id)->delete();
+
+                    foreach ($data->biz_itemprice as $element) {
+                        $objectItemPrice = new ItemPrice();
+
+                        $objectItemPrice->iditem = $id;
+                        $objectItemPrice->price = $element->price;
+
+                        if ($objectItemPrice->save() == false) {
+                            return response()->json(['error' => $objectItemPrice ]);
+                        }
+                    }
+
                     if ($request->hasFile('file')) {
                         $dirupload = 'uploads/items';
                         $file = $request->file('file');
@@ -89,9 +104,21 @@ class ItemController extends Controller
                 $aux->idunittype = $data->idunittype;
                 $aux->itemname = $data->itemname;
                 $aux->description = $data->description;
-                $aux->price = $data->price;
+                // $aux->price = $data->price;
                 $aux->state = 1;
                 if($aux->save()){
+
+                    foreach ($data->list_price as $element) {
+                        $objectItemPrice = new ItemPrice();
+
+                        $objectItemPrice->iditem = $aux->iditem;
+                        $objectItemPrice->price = $element;
+
+                        if ($objectItemPrice->save() == false) {
+                            return response()->json(['error' => $objectItemPrice ]);
+                        }
+                    }
+
                     if ($request->hasFile('file')) {
                         $dirupload = 'uploads/items';
                         $file = $request->file('file');
@@ -221,7 +248,7 @@ class ItemController extends Controller
         } else if ($filtro->idunittype != "") {
             $sql .= " AND idunittype =".$filtro->idunittype." ";
         }
-        $data = Item::with("nom_category","nom_unit")
+        $data = Item::with("nom_category","nom_unit", 'biz_itemprice')
                         ->whereRaw("(itemname  LIKE '%".$filtro->Buscar."%' OR description  LIKE '%".$filtro->Buscar."%') AND state='".$filtro->state."' ".$sql)
                         ->orderBy("".$filtro->column, "".$filtro->order);
 

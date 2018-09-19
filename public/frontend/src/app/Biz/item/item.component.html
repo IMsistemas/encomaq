@@ -114,7 +114,6 @@
           <th>DESCRIPCIÓN</th>
           <th>CATEGORÍA</th>
           <th>UNIDAD</th>
-          <th>PRECIO UNIT.</th>
           <th style="width: 8%;">ESTADO</th>
           <th class="noExl" style="width: 5%;"></th>
         </tr>
@@ -130,7 +129,6 @@
           <td>{{ident.description}}</td>
           <td>{{ident.nom_category.categoryitemname}}</td>
           <td>{{ident.nom_unit.unittypename}}</td>
-          <td>{{ident.price}}</td>
           <td>{{ ((ident.state == 1)? 'ACTIVO':'INACTIVO') }}</td>
           <td class="noExl">
             <div class="dropdown">
@@ -218,7 +216,7 @@
   </div>
 
   <div class="modal" id="edititem" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
 
         <app-edititem [tem_edit]="info_tem_edit" (update_component_father)="update_list($event,'edit')" (refresh_component_father)="refresfather($event)"></app-edititem>

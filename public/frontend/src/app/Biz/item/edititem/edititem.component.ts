@@ -18,6 +18,7 @@ export class EdititemComponent implements OnInit {
   @Output() refresh_component_father = new EventEmitter<boolean>();
   lis_category = [];
   lis_unit = [];
+  lis_price = [];
   urlapi = new UrlApi();
   url_basic: String = '';
   urlimage = './assets/image/no_image_available.jpg';
@@ -62,6 +63,17 @@ export class EdititemComponent implements OnInit {
       (error) => {
         console.log('POST call in error", respons', error);
       });
+  }
+  createRow(data) {
+    const o = {
+      price: data.price
+    };
+    this.tem_edit.biz_itemprice.push(o);
+    data.price = '';
+  }
+  deleteRow(ident) {
+    const pos = this.tem_edit.biz_itemprice.indexOf(ident);
+    this.tem_edit.biz_itemprice.splice(pos, 1);
   }
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
