@@ -32,9 +32,10 @@
           <label for="exampleFormControlInput1">Identificación
             <span class="required">(*)</span>
           </label>
-          <input type="text" class="form-control" maxlength="{{identifylength}}" id="identify" name="identify" ngModel #identify="ngModel" required>
+          <input type="text" class="form-control" minlength="{{identifylength}}" maxlength="{{identifylength}}" id="identify" name="identify" ngModel
+                      #identify="ngModel" required>
         </div>
-      
+
         <div *ngIf="identify.errors?.required && identify.touched">
           <small id="" class="form-text text-danger text-right">La identificación es requerida</small>
         </div>
@@ -68,7 +69,7 @@
           <input type="text" class="form-control"  id="address" name="address" ngModel #address="ngModel"
             required>
         </div>
-    
+
         <div *ngIf="address.errors?.required && address.touched">
           <small id="" class="form-text text-danger text-right">La dirección es requerido</small>
         </div>
@@ -84,7 +85,7 @@
           <input type="text" class="form-control"   id="phone" name="phone" ngModel #phone="ngModel"
             required>
         </div>
-    
+
         <div *ngIf="phone.errors?.required && phone.touched">
           <small id="" class="form-text text-danger text-right">El teléfono es requerido</small>
         </div>
@@ -93,14 +94,14 @@
 
       <div class="col-sm-6 col-xs-12">
         <div class="form-group">
-          <label for="exampleFormControlInput1">Teléfono (2)            
+          <label for="exampleFormControlInput1">Teléfono (2)
           </label>
           <input type="text" class="form-control"   id="phone_2" name="phone_2" ngModel #phone_2="ngModel">
         </div>
       </div>
     </div>
 
-  
+
       <div class="row">
         <div class="col-sm-4 col-xs-12">
           <div class="form-group">
@@ -109,7 +110,7 @@
             </label>
             <input type="email" class="form-control" id="email" name="email" ngModel #email="ngModel" required>
           </div>
-      
+
           <div *ngIf="email.errors?.required && email.touched">
             <small id="" class="form-text text-danger text-right">El correo es requerido</small>
           </div>
@@ -140,7 +141,7 @@
             </label>
             <textarea cols="100" rows="3"  class="form-control" id="observation" name="observation" ngModel #observation="ngModel" ></textarea>
           </div>
-      
+
         </div>
       </div>
 
