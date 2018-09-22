@@ -119,6 +119,7 @@ export class AddliquidationComponent implements OnInit {
       const object = {
         idreferralguide: e.idreferralguide,
         datetimereferral: e.datetimereferral,
+        guidenumber: e.guidenumber,
         items: []
       };
 
@@ -126,7 +127,8 @@ export class AddliquidationComponent implements OnInit {
         const ii = {
           iditem: i.iditem,
           quantify: i.quantify,
-          price: i.biz_item.price
+          // price: i.biz_item.price
+          price: i.price
         };
         object.items.push(ii);
 
