@@ -463,31 +463,34 @@ export class AddliquidationComponent implements OnInit {
 
   formatMoney(currency, value, decimals) {
 
-    let n = value;
-    n = n.toString();
-    if (n === '' || n === '.') {
-        n = '0.00';
+    if (value !== undefined && value !== '') {
+      let n = value;
+      n = n.toString();
+      if (n === '' || n === '.') {
+          n = '0.00';
+      }
+
+      const patron = [currency, ' ', ','];
+      const longitud = patron.length;
+      for (let i = 0; i < longitud; i++) {
+          n = n.replace(patron[i], '');
+      }
+      n = n.replace(patron, '');
+
+      n = parseFloat(n);
+
+      let dec = 2;
+
+      if (decimals !== undefined) {
+          dec = decimals;
+      }
+
+      const multiplicator = Math.pow(10, dec);
+      const valor = currency + ' ' + (Math.round(n * multiplicator) / multiplicator).toFixed(dec);
+
+      return valor;
     }
 
-    const patron = [currency, ' ', ','];
-    const longitud = patron.length;
-    for (let i = 0; i < longitud; i++) {
-        n = n.replace(patron[i], '');
-    }
-    n = n.replace(patron, '');
-
-    n = parseFloat(n);
-
-    let dec = 2;
-
-    if (decimals !== undefined) {
-        dec = decimals;
-    }
-
-    const multiplicator = Math.pow(10, dec);
-    const valor = currency + ' ' + (Math.round(n * multiplicator) / multiplicator).toFixed(dec);
-
-    return valor;
   }
 
   getList(data) {

@@ -287,7 +287,8 @@ export class EditliquidationComponent implements OnInit, OnChanges {
       for (let j = 0; j < this.entrega[i].items.length; j++) {
         this.entrega_foot_item[j].iditem = this.entrega[i].items[j].iditem;
         this.entrega_foot_item[j].price = this.entrega[i].items[j].price;
-        this.entrega_foot_item[j].quantify += this.entrega[i].items[j].quantify;
+        // tslint:disable-next-line:max-line-length
+        this.entrega_foot_item[j].quantify = parseInt(this.entrega_foot_item[j].quantify, 0) + parseInt(this.entrega[i].items[j].quantify, 0);
       }
     }
 
@@ -351,7 +352,8 @@ export class EditliquidationComponent implements OnInit, OnChanges {
       for (let j = 0; j < this.retiro[i].items.length; j++) {
         this.retiro_foot_item[j].iditem = this.retiro[i].items[j].iditem;
         this.retiro_foot_item[j].price = this.retiro[i].items[j].price;
-        this.retiro_foot_item[j].quantify += this.retiro[i].items[j].quantify;
+        // tslint:disable-next-line:max-line-length
+        this.retiro_foot_item[j].quantify = parseInt(this.retiro_foot_item[j].quantify, 0) + parseInt(this.retiro[i].items[j].quantify, 0);
       }
     }
 
@@ -490,31 +492,34 @@ export class EditliquidationComponent implements OnInit, OnChanges {
 
   formatMoney(currency, value, decimals) {
 
-    let n = value;
-    n = n.toString();
-    if (n === '' || n === '.') {
-        n = '0.00';
+    if (value !== undefined && value !== '') {
+      let n = value;
+      n = n.toString();
+      if (n === '' || n === '.') {
+          n = '0.00';
+      }
+
+      const patron = [currency, ' ', ','];
+      const longitud = patron.length;
+      for (let i = 0; i < longitud; i++) {
+          n = n.replace(patron[i], '');
+      }
+      n = n.replace(patron, '');
+
+      n = parseFloat(n);
+
+      let dec = 2;
+
+      if (decimals !== undefined) {
+          dec = decimals;
+      }
+
+      const multiplicator = Math.pow(10, dec);
+      const valor = currency + ' ' + (Math.round(n * multiplicator) / multiplicator).toFixed(dec);
+
+      return valor;
     }
 
-    const patron = [currency, ' ', ','];
-    const longitud = patron.length;
-    for (let i = 0; i < longitud; i++) {
-        n = n.replace(patron[i], '');
-    }
-    n = n.replace(patron, '');
-
-    n = parseFloat(n);
-
-    let dec = 2;
-
-    if (decimals !== undefined) {
-        dec = decimals;
-    }
-
-    const multiplicator = Math.pow(10, dec);
-    const valor = currency + ' ' + (Math.round(n * multiplicator) / multiplicator).toFixed(dec);
-
-    return valor;
   }
 
   // ------------------------------------------------------------------------------------------------
