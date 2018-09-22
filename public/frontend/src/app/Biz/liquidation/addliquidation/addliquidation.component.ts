@@ -423,7 +423,6 @@ export class AddliquidationComponent implements OnInit {
       listguide: this.logistic
     });
 
-    console.log(this.array_item);
 
     this.subtotal = 0;
     this.iva = 0;

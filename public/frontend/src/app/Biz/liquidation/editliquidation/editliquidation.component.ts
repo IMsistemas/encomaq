@@ -51,6 +51,9 @@ export class EditliquidationComponent implements OnInit, OnChanges {
   enObra = [];
   enObra_head_item = [];
   enObra_foot_item = [];
+
+  logistic = [];
+
   array_item = [];
 
   client_guiar: any;
@@ -144,11 +147,14 @@ export class EditliquidationComponent implements OnInit, OnChanges {
     this.enObra_head_item = [];
     this.enObra_foot_item = [];
 
+    this.logistic = [];
+
     for (const e of result) {
 
       const object = {
         idreferralguide: e.idreferralguide,
         datetimereferral: e.datetimereferral,
+        guidenumber: e.guidenumber,
         items: []
       };
 
@@ -156,7 +162,8 @@ export class EditliquidationComponent implements OnInit, OnChanges {
         const ii = {
           iditem: i.iditem,
           quantify: i.quantify,
-          price: i.biz_item.price
+          // price: i.biz_item.price
+          price: i.price
         };
         object.items.push(ii);
 
@@ -201,6 +208,15 @@ export class EditliquidationComponent implements OnInit, OnChanges {
       } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 3) {
 
       }
+
+      const objectLogistic = {
+        date: e.datetimereferral,
+        travel: 1,
+        price: e.logisticservicecost,
+        description: e.nom_transferreason.transferreasonname
+      };
+
+      this.logistic.push(objectLogistic);
     }
 
     // -----------------------PARTE DE RESUMEN DE ENTREGA--------------------------------------------------------------
@@ -419,6 +435,22 @@ export class EditliquidationComponent implements OnInit, OnChanges {
 
       this.array_item.push(o);
     }
+
+    // -------------------------------------------------LOGISTICA--------------------------------------------
+
+    let total_logistic = 0;
+
+    for (const b of this.logistic) {
+      if (b.price !== null && b.price !== '') {
+        total_logistic += parseFloat(b.price);
+      }
+    }
+
+    this.array_item.push({
+      name: 'LOGISTICA',
+      totalprice: total_logistic,
+      listguide: this.logistic
+    });
 
     this.subtotal = 0;
     this.iva = 0;
