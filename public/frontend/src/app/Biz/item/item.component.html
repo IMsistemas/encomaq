@@ -332,6 +332,14 @@
                         <th>UNIDAD:</th>
                         <td>{{select_data.nom_unit.unittypename}}</td>
                       </tr>
+                      <tr>
+                        <th>PRECIO(S):</th>
+                        <td>
+                          <span *ngFor="let ident of select_data.biz_itemprice">
+                            $ {{ident.price}},
+                          </span>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>

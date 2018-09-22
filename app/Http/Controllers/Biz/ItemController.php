@@ -293,7 +293,7 @@ class ItemController extends Controller
         } else if ($filtro->idunittype != "") {
             $sql .= " AND idunittype =".$filtro->idunittype." ";
         }
-        $data = Item::with("nom_category","nom_unit")
+        $data = Item::with("nom_category","nom_unit", 'biz_itemprice')
                         ->whereRaw("(itemname  LIKE '%".$filtro->Buscar."%' OR description  LIKE '%".$filtro->Buscar."%') AND state='".$filtro->state."' ".$sql)
                         ->orderBy("itemname", "ASC")
                         ->get();
@@ -302,7 +302,7 @@ class ItemController extends Controller
         $view =  \View::make('Print.ListItem', compact('data','company','filtro'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
-        $pdf->setPaper('A4', 'portrait');
+        $pdf->setPaper('A4', 'landscape');
         return $pdf->stream("ListaDeItems".$today.".pdf");
     } 
 }

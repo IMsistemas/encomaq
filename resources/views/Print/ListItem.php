@@ -141,11 +141,12 @@
         <thead>
             <tr>
                 <th style="width: 8%;">NO</th>
-                <th  style="width: 10%;">IMAGEN</th>
+                <th style="width: 10%;">IMAGEN</th>
                 <th>ITEM</th>
                 <th>DESCRIPCIÓN</th>
                 <th>CATEGORIA</th>
                 <th>UNIDAD</th>
+                <th>LISTA PRECIO</th>
                 <th  style="width: 12%;">ESTADO</th>
             </tr>
             <?php
@@ -154,16 +155,31 @@
                     echo "<tr>";
                     echo "<td>".$x."</td>";
                     echo "<td>";
-                    if(isset($c["image"]) & $c["image"]!="") {
+
+                    if(isset($c["image"]) && $c["image"]!=""  && $c["image"]!=null) {
                         //echo "<img src='".asset($c["image"])."' style='width: 100%;' />";
+                        //echo "";
+                        echo "<img src='".public_path(). '/' . $c["image"] ."' style='width: 100px;' />";
+                        // echo public_path(). $c["image"];
+                    } else {
                         echo "";
                     }
+
                     echo "</td>";
 
                     echo "<td>".$c["itemname"]."</td>";
                     echo "<td>".$c["description"]."</td>";
                     echo "<td>".$c["nom_category"]["categoryitemname"]."</td>";
                     echo "<td>".$c["nom_unit"]["unittypename"]."</td>";
+
+                    echo "<td>";
+                    foreach ($c["biz_itemprice"] as $element) {
+
+                        echo '$ ' . $element['price'] . ', ';
+
+                    }
+                    echo "</td>";
+
                     if ($c["state"] == 1) {
                         echo "<td>ACTIVO</td>";
                     } else {

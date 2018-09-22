@@ -34,11 +34,11 @@
                         <!--<th style="width: 20%;">DIRECCIÓN</th>-->
                         <th>CORREO</th>
                         <th style="width: 12%;">ESTADO</th>
-                        <th style="width: 5%;"></th>
+                        <!--<th style="width: 5%;"></th> -->
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let ident of list_client   let i = index " [ngClass]="{'text-danger':ident.state == 0 } ">
+                      <tr *ngFor="let ident of list_client   let i = index " [ngClass]="{'text-danger':ident.state == 0 }" (click)="select_client(ident)">
                         <td>{{i+from}}</td>
                         <td>{{ident.businessname}}</td>
                         <!--<td>{{ident.nom_identifytype.identifytypename}}</td>-->
@@ -47,13 +47,13 @@
                         <!--<td>{{ident.address}}</td>-->
                         <td>{{ident.email}}</td>
                         <td>{{ ((ident.state == 1)? 'ACTIVO':'INACTIVO') }}</td>
-                        <td>
+                        <!--<td>
                           <button type="button" class="btn btn-success" (click)="select_client(ident)">
                             <i class="fas fa-check"></i>
                           </button>
-                        </td>
+                        </td> -->
                       </tr>
-                  
+
                     </tbody>
                   </table>
 

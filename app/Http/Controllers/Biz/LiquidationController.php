@@ -161,6 +161,7 @@ class LiquidationController extends Controller
     public function destroy($id)
     {
         $aux1 = Referralguideliquidation::whereRaw("idliquidation=".$id."")->delete();
+        $aux2 = Liquidationproject::whereRaw("idliquidation=".$id."")->delete();
         $aux = Liquidation::find($id); 
         if ($aux->delete()) {
             return response()->json(['success' => true ]);
