@@ -17,11 +17,11 @@
         </button>
 
         <button type="button" class="btn btn-info" (click)="pdf()" style="margin-left: 5px;">
-          PDF <i class="fas fa-file-pdf"></i> 
-        </button>      
+          PDF <i class="fas fa-file-pdf"></i>
+        </button>
 
         <button type="button" class="btn btn-info" (click)="excel()" style="margin-left: 5px;">
-          EXCEL <i class="fas fa-file-excel"></i> 
+          EXCEL <i class="fas fa-file-excel"></i>
         </button>
 
       </div>
@@ -331,18 +331,24 @@
             <div class="col-sm-12 col-md-12">
               <table class="table table-bordered">
                 <tr>
+                  <th style="width: 20%;">NUMERO</th>
+                  <td>{{info.guidenumber}}</td>
+                  <th style="width: 10%;">FECHA</th>
+                  <td>{{info.datetimereferral + ' ' + info.sequential}}</td>
+                </tr>
+                <tr>
+
                   <th>NO. CONTRATO</th>
                   <td>{{info.biz_contract.nocontract}}</td>
-                  <th>FECHA</th>
-                  <td>{{info.datetimereferral}}</td>
-                </tr>
-                <tr>
                   <th>CLIENTE</th>
-                  <td colspan="3">{{info.biz_contract.biz_client.businessname}}</td>
+                  <td>{{info.biz_contract.biz_client.businessname}}</td>
+
                 </tr>
                 <tr>
+                  <th>SERVICIO LOGISTICA</th>
+                  <td>{{info.logisticservicecost}}</td>
                   <th>MOTIVO TRASLADO</th>
-                  <td colspan="3">{{info.nom_transferreason.transferreasonname}}</td>
+                  <td>{{info.nom_transferreason.transferreasonname}}</td>
                 </tr>
                 <tr>
                   <th>PUNTO DE PARTIDA</th>
@@ -362,6 +368,7 @@
                   <th>N.</th>
                   <th>ITEM</th>
                   <th>CANTIDAD</th>
+                  <th>PRECIO</th>
                   <th>OBSERVACIONES</th>
                 </thead>
                 <tbody>
@@ -369,6 +376,7 @@
                     <td>{{i+1}}</td>
                     <th>{{itemProd.biz_item.itemname}}</th>
                     <td>{{itemProd.quantify}}</td>
+                    <td>{{itemProd.price}}</td>
                     <td>{{itemProd.observation}}</td>
                   </tr>
                 </tbody>

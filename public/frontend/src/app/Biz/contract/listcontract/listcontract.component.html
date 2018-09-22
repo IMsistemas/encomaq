@@ -29,21 +29,21 @@
                         <th style="width: 8%;">NO</th>
                         <th># CONTRATO</th>
                         <th>CLIENTE</th>
-                        <th style="width: 5%;"></th>
+                        <!--<th style="width: 5%;"></th>-->
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let ident of list_contract   let i = index " [ngClass]="{'text-danger':ident.state == 0 } ">
+                      <tr *ngFor="let ident of list_contract   let i = index " [ngClass]="{'text-danger':ident.state == 0 }"  (click)="select_contract(ident)">
                         <td>{{i+from}}</td>
                         <td>{{ident.nocontract}}</td>
                         <td>{{ident.biz_client.businessname}}</td>
-                        <td>
+                        <!--<td>
                           <button type="button" class="btn btn-success" (click)="select_contract(ident)">
                             <i class="fas fa-check"></i>
                           </button>
-                        </td>
+                        </td> -->
                       </tr>
-                  
+
                     </tbody>
                   </table>
 
