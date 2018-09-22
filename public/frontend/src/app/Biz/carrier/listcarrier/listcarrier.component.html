@@ -40,20 +40,20 @@
                           <th>NOMBRE(S) Y APELLIDOS</th>
                           <th>IDENTIFICACION</th>
                           <th>PLACA</th>
-                          <th style="width: 5%;"></th>
+                          <!--<th style="width: 5%;"></th>-->
                       </tr>
                   </thead>
                   <tbody> 
-                    <tr *ngFor="let item of listCarrier;  let i = index " [ngClass]= "{'text-danger':item.state == 0}" >
+                    <tr *ngFor="let item of listCarrier;  let i = index " [ngClass]= "{'text-danger':item.state == 0}"  (click)="select_carrier(item)">
                       <td>{{i + 1}}</td>
                       <td class="text-left">{{item.carriername}}</td>
                       <td class="text-left">{{item.identify}}</td>
                       <td class="text-left">{{item.licenseplate}}</td>
-                        <td>
+                        <!-- <td>
                           <button type="button" class="btn btn-success" (click)="select_carrier(item)">
                             <i class="fas fa-check"></i>
                           </button>
-                        </td>
+                        </td> -->
                       </tr>
 
                     </tbody>

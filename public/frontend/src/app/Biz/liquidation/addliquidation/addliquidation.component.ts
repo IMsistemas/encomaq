@@ -48,6 +48,9 @@ export class AddliquidationComponent implements OnInit {
   enObra = [];
   enObra_head_item = [];
   enObra_foot_item = [];
+
+  logistic = [];
+
   array_item = [];
 
   client_guiar: any;
@@ -114,6 +117,8 @@ export class AddliquidationComponent implements OnInit {
     this.enObra_head_item = [];
     this.enObra_foot_item = [];
 
+    this.logistic = [];
+
     for (const e of result) {
 
       const object = {
@@ -173,6 +178,15 @@ export class AddliquidationComponent implements OnInit {
       } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 3) {
 
       }
+
+      const objectLogistic = {
+        date: e.datetimereferral,
+        travel: 1,
+        price: e.logisticservicecost,
+        description: e.nom_transferreason.transferreasonname
+      };
+
+      this.logistic.push(objectLogistic);
     }
 
     // -----------------------PARTE DE RESUMEN DE ENTREGA--------------------------------------------------------------
@@ -392,6 +406,25 @@ export class AddliquidationComponent implements OnInit {
       this.array_item.push(o);
     }
 
+
+    // -------------------------------------------------LOGISTICA--------------------------------------------
+
+    let total_logistic = 0;
+
+    for (const b of this.logistic) {
+      if (b.price !== null && b.price !== '') {
+        total_logistic += parseFloat(b.price);
+      }
+    }
+
+    this.array_item.push({
+      name: 'LOGISTICA',
+      totalprice: total_logistic,
+      listguide: this.logistic
+    });
+
+    console.log(this.array_item);
+
     this.subtotal = 0;
     this.iva = 0;
     for (const x of this.array_item) {
@@ -403,6 +436,7 @@ export class AddliquidationComponent implements OnInit {
     this.totalprecio = ( this.subtotal + this.iva ).toFixed(2);
     this.subtotal = this.subtotal.toFixed(2);
     this.iva = this.iva.toFixed(2);
+
   }
 
   calculateDay(startdate: string, enddate: string): number {

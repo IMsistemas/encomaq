@@ -48,18 +48,18 @@
                       <tr>
                           <th style="width: 8%;">NO.</th>
                           <th>LUGAR</th>
-                          <th style="width: 5%;"></th>
+                          <!--<th style="width: 5%;"></th>-->
                       </tr>
                   </thead>
                   <tbody> 
-                    <tr *ngFor="let item of listPlace | async;  let i = index" [ngClass]= "{'text-danger':item.state == 0}" >
+                    <tr *ngFor="let item of listPlace | async;  let i = index" [ngClass]= "{'text-danger':item.state == 0}" (click)="select_place(item)">
                       <td>{{i + 1}}</td>
                       <td class="text-left">{{item.placename}}</td>
-                        <td>
+                        <!--<td>
                           <button type="button" class="btn btn-success" (click)="select_place(item)">
                             <i class="fas fa-check"></i>
                           </button>
-                        </td>
+                        </td>-->
                       </tr>
 
                     </tbody>
