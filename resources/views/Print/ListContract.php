@@ -134,19 +134,25 @@
     </div>
     <div class="row text-center">
         <h3>
-            Lista De Contratos
+            Lista de Contratos
         </h3>
     </div>
     <table class="table table-bordered table-condensed">
         <thead>
             <tr>
-                <th style="width: 8%;">NO</th>
-                <th># CONTRATO</th>
+                <th style="width: 5%;">NO</th>
+                <th style="width: 8%;"># CONTRATO</th>
+                <th>TIPO</th>                
+                <th style="width: 7%;">RETIRADA</th>
+                <th style="width: 8%;">ENTREGADA </th>
                 <th>CLIENTE</th>
-                <th>INICIO</th>
-                <th>FIN </th>
-                <th>OBSERVACIÓN</th>
-                <th style="width: 12%;">ESTADO</th>
+                <th>DIRECCION</th>
+                <th style="width: 1%;">F</th>
+                <th>TELEFONO</th>
+                <th>VALOR</th>
+                <th>FACT.</th>
+                <th>NO FACT.</th>
+                <th style="width: 8%;">ESTADO</th>
             </tr>
             <?php
                 $x = 1;
@@ -154,10 +160,23 @@
                     echo "<tr>";
                     echo "<td>".$x."</td>";
                     echo "<td>".$c["nocontract"]."</td>";
-                    echo "<td>".$c["biz_client"]["businessname"]."</td>";
-                    echo "<td>".$c["startdate"]."</td>";
+                    echo "<td>".$c["nom_categoryitem"]["categoryitemname"]."</td>";
                     echo "<td>".$c["enddate"]."</td>";
-                    echo "<td>".$c["observation"]."</td>";
+                    echo "<td>".$c["startdate"]."</td>"; 
+                    echo "<td>".$c["biz_client"]["businessname"]."</td>";                   
+                    echo "<td>".$c["biz_client"]['address']."</td>";
+
+                    if ($c["receipt"] != null && $c["receipt"] != '') {
+                        echo "<td>F</td>";
+                    } else {
+                        echo "<td></td>";
+                    }
+
+                    echo "<td>".$c["biz_client"]["phone"] . ', ' . $c["biz_client"]["phone_2"] ."</td>";
+                    echo "<td>".$c["cost"]."</td>";
+                    echo "<td>".$c["receipt"]."</td>";
+                    echo "<td>".$c["invoice"]."</td>";
+
                     if ($c["state"] == 1) {
                         echo "<td>ACTIVO</td>";
                     } else {

@@ -32,4 +32,9 @@ class Contract extends Model
     {
         return $this->hasMany('App\Models\Biz\ContractPaymentForm',"idcontract");
     }
+
+    public function nom_categoryitem()
+    {
+        return $this->belongsTo('App\Models\Nomenclature\CategoryItem',"idcategoryitem");
+    }
 }
