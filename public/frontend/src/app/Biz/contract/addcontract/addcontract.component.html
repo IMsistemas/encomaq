@@ -226,7 +226,7 @@
             </div>
 
             <div class="row">
-              <div class="col-md-12 col-sm-12">
+              <div class="col-xs-12 col-sm-4">
                 <div class="form-group">
                   <label for="exampleFormControlInput1">COSTO DE ALQUILER
                     <span class="required">(*)</span>
@@ -238,28 +238,31 @@
                   <small id="" class="form-text text-danger text-right">El costo es requerido </small>
                 </div>
                 <div *ngIf="cost.errors?.pattern">
-                  <small id="" class="form-text text-danger text-right">El costo es incorrecto debe ser un numero entero o decimal</small>
+                  <small id="" class="form-text text-danger text-right">El costo es incorrecto debe ser un número entero o decimal</small>
+                </div>
+              </div>
+
+              <div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label for="receipt">FACTURADO
+                  </label>
+                  <input type="text" class="form-control" id="receipt" name="receipt" ngModel #receipt="ngModel" pattern="^[0-9]+([.][0-9]+)?$">
+                </div>
+                <div *ngIf="receipt.errors?.pattern">
+                  <small id="" class="form-text text-danger text-right">Es incorrecto debe ser un número entero o decimal</small>
+                </div>
+              </div>
+              <div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label for="invoice">NO FACTURADO
+                  </label>
+                  <input type="text" class="form-control" id="invoice" name="invoice" ngModel #invoice="ngModel" pattern="^[0-9]+([.][0-9]+)?$">
+                </div>
+                <div *ngIf="invoice.errors?.pattern">
+                  <small id="" class="form-text text-danger text-right">Es incorrecto debe ser un número entero o decimal</small>
                 </div>
               </div>
             </div>
-
-            <div class="row">
-              <div class="col-sm-6 col-xs-12">
-                <div class="form-group">
-                  <label for="receipt">RECIBOS
-                  </label>
-                  <input type="text" class="form-control" id="receipt" name="receipt" ngModel #receipt="ngModel">
-                </div>
-              </div>
-              <div class="col-sm-6 col-xs-12">
-                <div class="form-group">
-                  <label for="invoice">FACTURAS
-                  </label>
-                  <input type="text" class="form-control" id="invoice" name="invoice" ngModel #invoice="ngModel">
-                </div>
-              </div>
-            </div>
-
 
           </div>
 
