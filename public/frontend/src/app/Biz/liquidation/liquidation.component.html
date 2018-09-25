@@ -97,9 +97,11 @@
           <th style="width: 12%;">NO. FACTURA</th>
           <th style="width: 8%;">FECHA I.</th>
           <th style="width: 8%;">FECHA F.</th>
+          <th>PROYECTO</th>
+          <th>CLIENTE</th>
           <th>OBSERVACIÓN</th>
           <th style="width: 8%;">SUBTOTAL</th>
-          <th style="width: 8%;">IVA</th>
+          <th style="width: 6%;">IVA</th>
           <th style="width: 8%;">TOTAL</th>
           <th style="width: 5%;">ESTADO</th>
           <th class="noExl" style="width: 5%;"></th>
@@ -112,6 +114,8 @@
           <td>{{ident.billnumber}}</td>
           <td>{{ident.dateinit}}</td>
           <td>{{ident.dateend}}</td>
+          <td>{{ident.biz_liquidationproject[0].biz_project.projectname}}</td>
+          <td>{{ident.biz_liquidationproject[0].biz_project.biz_client.businessname}}</td>
           <td>{{ident.observation}}</td>
           <td class="text-right">{{ident.subtotal}}</td>
           <td class="text-right">{{ident.iva}}</td>
