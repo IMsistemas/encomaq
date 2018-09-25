@@ -171,41 +171,46 @@ export class CreatereferralguideComponent implements OnInit {
     console.log(this.item_select);
   }
   add(data, frm) {
-    const aux = {
-      Data: data,
-      list: this.list_itemcont
-    };
 
-    console.log(data);
-    /*console.log(this.carrier_select);*/
+    if (parseInt(data.idplace_start, 0) !== parseInt(data.idplace_end, 0)) {
+      const aux = {
+        Data: data,
+        list: this.list_itemcont
+      };
 
-    this.referra.create(aux).subscribe(
-      (response) => {
-        frm.reset();
-        console.log(response);
-        if (response.success !== undefined) {
+      console.log(data);
+      /*console.log(this.carrier_select);*/
+
+      this.referra.create(aux).subscribe(
+        (response) => {
+          frm.reset();
+          console.log(response);
+          if (response.success !== undefined) {
+            $('#createreferralguide').modal('hide');
+            frm.reset();
+            this.list_itemcont = [];
+            this.update_component_father.emit(true);
+
+            this.idcontract_s = { idcontract: '', biz_client: { businessname: '' }, nocontract: '' };
+            this.carrier_select = { idcarrier: '', carriername: '', identify: '', licenseplate: '' };
+            this.place_select_start = { idplace: '', placename: '' };
+            this.place_select_end = { idplace: '', placename: '' };
+          } else if (response.error !== undefined) {
+            $('#addclient').modal('hide');
+            frm.reset();
+            this.update_component_father.emit(false);
+          }
+        },
+        (error) => {
+          console.log('POST call in error", respons', error);
           $('#createreferralguide').modal('hide');
           frm.reset();
-          this.list_itemcont = [];
-          this.update_component_father.emit(true);
-
-
-          this.idcontract_s = { idcontract: '', biz_client: { businessname: '' }, nocontract: '' };
-          this.carrier_select = { idcarrier: '', carriername: '', identify: '', licenseplate: '' };
-          this.place_select_start = { idplace: '', placename: '' };
-          this.place_select_end = { idplace: '', placename: '' };
-        } else if (response.error !== undefined) {
-          $('#addclient').modal('hide');
-          frm.reset();
           this.update_component_father.emit(false);
-        }
-      },
-      (error) => {
-        console.log('POST call in error", respons', error);
-        $('#createreferralguide').modal('hide');
-        frm.reset();
-        this.update_component_father.emit(false);
-      });
+        });
+    } else {
+      $('#mdl_equalsplace').modal('show');
+    }
+
   }
 
   getListPrice(item) {

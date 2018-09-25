@@ -122,23 +122,31 @@ export class UpdatereferralguideComponent implements OnInit {
 
     console.log(data);
 
-    this.referra.update(data.idreferralguide, data).subscribe(
-      (response) => {
-        if (response.success !== undefined) {
-          $('#updatereferralguide').modal('hide');
-          this.carrier_select.idcarriert = data.biz_carrier;
-          this.idcontract_s.idcontract = data.biz_contract;
-          this.update_component_father.emit(true);
-        } else if (response.error !== undefined) {
+    const idplace_start = data.biz_referralguide_place[0].biz_place_start.idplace;
+    const idplace_end = data.biz_referralguide_place[0].biz_place_end.idplace;
+
+    if (parseInt(idplace_start, 0) !== parseInt(idplace_end, 0)) {
+      this.referra.update(data.idreferralguide, data).subscribe(
+        (response) => {
+          if (response.success !== undefined) {
+            $('#updatereferralguide').modal('hide');
+            this.carrier_select.idcarriert = data.biz_carrier;
+            this.idcontract_s.idcontract = data.biz_contract;
+            this.update_component_father.emit(true);
+          } else if (response.error !== undefined) {
+            $('#updatereferralguide').modal('hide');
+            this.update_component_father.emit(false);
+          }
+        },
+        (error) => {
+          console.log('POST call in error", respons', error);
           $('#updatereferralguide').modal('hide');
           this.update_component_father.emit(false);
-        }
-      },
-      (error) => {
-        console.log('POST call in error", respons', error);
-        $('#updatereferralguide').modal('hide');
-        this.update_component_father.emit(false);
-      });
+        });
+    } else {
+      $('#mdl_equalsplace0').modal('show');
+    }
+
   }
   refresh() {
     this.refresh_component_father.emit(false);
