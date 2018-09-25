@@ -174,6 +174,7 @@ class LiquidationController extends Controller
     public function liquidationfiltro(Request $request) 
     {
         $filtro = json_decode($request->get('filter'));
+
         $data = Liquidation::with("biz_liquidationproject.biz_project.biz_client",
                                             "biz_referralguideliquidation.biz_referralguide.biz_contract.biz_client",
                                             "biz_referralguideliquidation.biz_referralguide.biz_Referralguideitem.biz_item",
