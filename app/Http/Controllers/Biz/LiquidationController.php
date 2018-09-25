@@ -234,33 +234,32 @@ class LiquidationController extends Controller
 
     public function createPDF (Request $request)
     {
-        
 
         $body = $request->input('body');
+        $name = $request->input('id') . '.txt';
 
-        $today=date("Y-m-d H:i:s");
-        $view =  \View::make('Print.LiquidacionFormat', compact('body'))->render();
-        $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadHTML($view);
-        $pdf->setPaper('A4', 'portrait');
+        file_put_contents(public_path() . '/uploads/temp/' . $name, $body );
 
-        return response()->json(['success' => true]);
+        return response()->json(['success' => true, 'filename' => $name]);
 
     }
 
-    public function exportPDF (Request $request)
+    public function exportPDF ($paramentro)
     {
         ini_set('max_execution_time', 300);
+        $filtro = json_decode($paramentro);
 
-        $body = $request->input('body');
+        $body = file_get_contents(public_path() . '/uploads/temp/' . $filtro->name);
 
         $today=date("Y-m-d H:i:s");
         $view =  \View::make('Print.LiquidacionFormat', compact('body'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
-        $pdf->setPaper('A4', 'portrait');
+        $pdf->setPaper('A4', 'landscape');
 
-        return response()->json(['success' => $pdf->stream("LIQUIDACION_".$today.".pdf")]);
+        unlink(public_path() . '/uploads/temp/' . $filtro->name);
+
+        return $pdf->stream("LIQUIDACION_".$today.".pdf");
 
     }
 }

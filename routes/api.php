@@ -144,7 +144,8 @@ Route::group(['middleware' => 'cors'], function(){
     Route::get('Liquidation/getLiquidationActive', 'Biz\LiquidationController@getLiquidationtActive');
     Route::get('Liquidation/filtro', 'Biz\LiquidationController@liquidationfiltro');
     Route::get('Liquidation/state/{id}', 'Biz\LiquidationController@stateliquidation');
-    Route::post('Liquidation/exportPDF', 'Biz\LiquidationController@exportPDF');
+    Route::get('Liquidation/createPDF/{data}', 'Biz\LiquidationController@exportPDF');
+    Route::post('Liquidation/exportPDF', 'Biz\LiquidationController@createPDF');
     Route::resource('Liquidation', 'Biz\LiquidationController');
 });
 

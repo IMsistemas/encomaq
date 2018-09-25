@@ -203,15 +203,20 @@ export class LiquidationComponent implements OnInit {
   exportPDF() {
 
     const oo = {
+      id: this.select_data.idliquidation,
       body: $('#only_liquidation').html()
     };
 
     this.liquidation.exportPDF(oo).subscribe(
       (response) => {
 
+        const o = {
+          name: response.filename
+        };
+        const pdf = this.liquidation.createPDF(o);
         $('#printtitle').html('Lista de Liquidaciones');
         $('#print').modal('show');
-        $('#printbody').html("<object width='100%' height='600' data='" + response.success + "'></object>");
+        $('#printbody').html("<object width='100%' height='600' data='" + pdf + "'></object>");
 
       },
       (error) => {
