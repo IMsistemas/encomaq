@@ -18,11 +18,11 @@
         </button>
 
         <button type="button" class="btn btn-info" (click)="pdf()" style="margin-left: 5px;">
-          PDF <i class="fas fa-file-pdf"></i> 
-        </button>      
+          PDF <i class="fas fa-file-pdf"></i>
+        </button>
 
         <button type="button" class="btn btn-info" (click)="excel()" style="margin-left: 5px;">
-          EXCEL <i class="fas fa-file-excel"></i> 
+          EXCEL <i class="fas fa-file-excel"></i>
         </button>
 
       </div>
@@ -51,7 +51,7 @@
           <option value="ASC">ASCENDENTE</option>
           <option value="DESC">DESENDENTE</option>
         </select>
-      </div>      
+      </div>
 
       <div class="col-12 col-sm-2" style="margin-top: 5px;">
         <div class="input-group mb-3">
@@ -124,6 +124,8 @@
                 <i class="fas fa-cogs"></i>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" (click)="load(ident)">
+                      <i class="fas fa-info"></i> Información</a>
                 <a class="dropdown-item" (click)="edit_liquidation(ident)">
                   <i class="fas fa-edit"></i> Editar</a>
                 <a class="dropdown-item" (click)="cancel_activate(ident)">
@@ -212,9 +214,6 @@
     </div>
   </div>
 
-
-
-
   <div class="modal fade" id="mdl_cancelactivate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -276,6 +275,400 @@
             <i class="fas fa-trash-alt"></i>
           </button>
 
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="mdlinfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document" style="max-width: 80% !important;">
+      <div class="modal-content">
+        <div class="modal-header bg-info">
+          <h5 class="modal-title">Información</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="overflow-y: scroll; height: 70vh;">
+          <div class="container" *ngIf="select_data" id="only_liquidation">
+
+            <div class="row">
+              <div class="col-12">
+
+                <table class="table table-bordered table-condensed">
+                  <tbody>
+
+                    <tr>
+                        <th>LIQUIDACION</th>
+                        <td>{{select_data.number}}</td>
+                        <th>FACTURA</th>
+                        <td>{{select_data.billnumber}}</td>
+                    </tr>
+
+                    <tr>
+                        <th>FECHA INICIO</th>
+                        <td>{{select_data.dateinit}}</td>
+                        <th>FECHA FIN</th>
+                        <td>{{select_data.dateend}}</td>
+                    </tr>
+
+                    <tr>
+                        <th>CLIENTE</th>
+                        <td colspan="3">{{select_data.biz_liquidationproject[0].biz_project.biz_client.businessname}}</td>
+                    </tr>
+
+                    <tr>
+                        <th>PROYECTO</th>
+                        <td colspan="3">{{select_data.biz_liquidationproject[0].biz_project.projectname}}</td>
+                    </tr>
+
+                    <tr>
+                        <th>OBSERVACION</th>
+                        <td colspan="3">{{select_data.observation}}</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                  <h5>MATERIAL ENTREGADO EN OBRA</h5>
+                </div>
+                <div class="col-12" style="display: none;">
+                    <table>
+                      <tbody>
+                          <tr>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td> <strong> MATERIAL ENTREGADO EN OBRA </strong> </td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                          </tr>
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <table style="font-size: 12px;" class="table table-bordered table-striped table-condensed">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th class="text-left" style="width: 15%;">FECHA</th>
+                        <th style="width: 20%;">NO.</th>
+                        <th *ngFor="let nameItem of entrega_head_item">
+                          {{nameItem.name}}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let listguide of entrega">
+                        <td>{{listguide.datetimereferral}}</td>
+                        <td>{{listguide.guidenumber}}</td>
+                        <td *ngFor="let listItem of listguide.items">{{listItem.quantify}}</td>
+                      </tr>
+                    </tbody>
+                    <tfoot class="bg-info" style="font-weight: bold;">
+                      <tr>
+                        <td colspan="2">TOTAL</td>
+                        <td *ngFor="let listItem of entrega_foot_item">{{listItem.quantify}}</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <h5>MATERIAL RETIRADO EN OBRA</h5>
+                </div>
+                <div class="col-12" style="display: none;">
+                    <table>
+                      <tbody>
+                          <tr>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td> <strong> MATERIAL RETIRADO EN OBRA </strong> </td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                          </tr>
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <table style="font-size: 12px;" class="table table-bordered table-striped table-condensed">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th class="text-left" style="width: 15%;">FECHA</th>
+                        <th style="width: 20%;">NO.</th>
+                        <th *ngFor="let nameItem of retiro_head_item">
+                          {{nameItem.name}}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody >
+                      <tr *ngFor="let listguide of retiro">
+                        <td>{{listguide.datetimereferral}}</td>
+                        <td>{{listguide.guidenumber}}</td>
+                        <td *ngFor="let listItem of listguide.items">{{listItem.quantify}}</td>
+                      </tr>
+                    </tbody>
+                    <tfoot class="bg-info" style="font-weight: bold;">
+                      <tr>
+                        <td colspan="2">TOTAL</td>
+                        <td *ngFor="let listItem of retiro_foot_item">{{listItem.quantify}}</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <h5>MATERIAL SOBRANTE EN OBRA</h5>
+                </div>
+                <div class="col-12" style="display: none;">
+                    <table>
+                      <tbody>
+                          <tr>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td> <strong> MATERIAL SOBRANTE EN OBRA </strong> </td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                          </tr>
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <table style="font-size: 12px;" class="table table-bordered table-striped table-condensed">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th colspan="2" style="width: 20%;"></th>
+                        <th *ngFor="let nameItem of enObra_head_item">
+                          {{nameItem.name}}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody >
+                      <tr class="bg-info" style="font-weight: bold;">
+                        <td colspan="2">TOTAL</td>
+                        <td *ngFor="let result of enObra">{{result}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <hr>
+                </div>
+              </div>
+
+              <div class="row" *ngFor="let listProduct of array_item let i = index">
+                  <div class="col-12">
+                    <h6>{{(i + 1) + '. ' + listProduct.name}}</h6>
+                  </div>
+                  <div class="col-12" style="display: none;">
+                      <table>
+                        <tbody>
+                            <tr>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td> <strong> {{(i + 1) + '. ' + listProduct.name}} </strong> </td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                            </tr>
+                        </tbody>
+                      </table>
+                  </div>
+                  <div class="col-12" *ngIf="listProduct.iditem != undefined">
+                      <table style="font-size: 12px;" class="table table-bordered table-striped table-condensed">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th> <strong>DESCRIPCION</strong> </th>
+                              <th> <strong>CANT.</strong> </th>
+                              <th> <strong>DEL</strong> </th>
+                              <th> <strong>AL</strong> </th>
+                              <th> <strong>DIAS</strong> </th>
+                              <th> <strong>P. UNITARIO</strong> </th>
+                              <th> <strong>P. TOTAL</strong> </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let row of listProduct.listguide">
+                              <td>{{listProduct.name}}</td>
+                              <td class="text-right">{{row.quantify}}</td>
+                              <td>{{row.datetimereferral}}</td>
+                              <td>{{row.dateend}}</td>
+                              <td class="text-right">{{row.days}}</td>
+                              <td class="text-right">{{row.price}}</td>
+                              <td class="text-right">{{row.total}}</td>
+                            </tr>
+                          </tbody>
+                          <tfoot>
+                            <tr class="bg-info" style="font-weight: bold;">
+                                <td>CANTIDAD TOTAL</td>
+                                <td class="text-right">{{listProduct.totalquantify}}</td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right"></td>
+                                <td class="text-right">SUBTOTAL</td>
+                                <td class="text-right">{{formatMoney('$', listProduct.totalprice)}}</td>
+                            </tr>
+                          </tfoot>
+                        </table>
+                  </div>
+
+                  <div class="col-12" *ngIf="listProduct.iditem == undefined">
+                    <table style="font-size: 12px;" class="table table-bordered table-striped table-condensed">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th>FECHA</th>
+                            <th>VIAJES</th>
+                            <th>P. UNITARIO</th>
+                            <th>P. TOTAL</th>
+                            <th>DESCRIPCION</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let row of listProduct.listguide">
+                            <td>{{row.date}}</td>
+                            <td class="text-right">{{row.travel}}</td>
+                            <td class="text-right">{{row.price}}</td>
+                            <td class="text-right">{{row.price * row.travel}}</td>
+                            <td class="text-right">{{row.description}}</td>
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                          <tr class="bg-info" style="font-weight: bold;">
+                              <td>SUBTOTAL</td>
+                              <td></td>
+                              <td></td>
+                              <td class="text-right">{{formatMoney('$', listProduct.totalprice)}}</td>
+                              <td></td>
+                          </tr>
+                        </tfoot>
+                    </table>
+                  </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <hr>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <h5>CUADRO RESUMEN</h5>
+                </div>
+                <div class="col-12" style="display: none;">
+                    <table>
+                      <tbody>
+                          <tr>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td> <strong> CUADRO RESUMEN </strong> </td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                          </tr>
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+
+              <div class="row">
+
+                  <div class="col-12">
+                      <table style="font-size: 12px;" class="table table-bordered table-striped table-condensed">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th> <strong>ITEM</strong> </th>
+                              <th> <strong>DESCRIPCION</strong> </th>
+                              <th> <strong>VALOR</strong> </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let listProduct of array_item let i = index">
+                              <td>{{i + 1}}</td>
+                              <td>{{listProduct.name}}</td>
+                              <td class="text-right">{{(listProduct.totalprice).toFixed(2)}}</td>
+                            </tr>
+                          </tbody>
+                      </table>
+                  </div>
+
+              </div>
+
+              <!-- ------------------------------------------------------------------------------- -->
+
+              <div class="row">
+                <div class="col-6 col-sm-6"></div>
+                <div class="col-6 col-sm-6 text-right">
+                  <table class="table table-bordered table-striped table-condensed">
+                    <tbody>
+                      <tr style="display: none;">
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                      </tr>
+                      <tr>
+                        <th style="display: none;"></th>
+                        <th> <strong>SUBTOTAL</strong> </th>
+                        <th>{{formatMoney('$', subtotal)}}</th>
+                      </tr>
+
+                      <tr>
+                        <th style="display: none;"></th>
+                        <th> <strong>IVA 12%</strong> </th>
+                        <th>{{formatMoney('$', iva)}}</th>
+                      </tr>
+
+                      <tr>
+                        <th style="display: none;"></th>
+                        <th> <strong>TOTAL</strong> </th>
+                        <th>{{formatMoney('$', totalprecio)}}</th>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" (click)="exportPDF()">
+            PDF <i class="fas fa-file-pdf"></i>
+          </button>
+          <button type="button" class="btn btn-info" (click)="excelByLiquidation()">
+            EXCEL <i class="fas fa-file-excel"></i>
+          </button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cerrar
+            <i class="fa fa-ban" aria-hidden="true"></i>
+          </button>
         </div>
       </div>
     </div>

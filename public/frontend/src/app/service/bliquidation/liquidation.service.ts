@@ -35,5 +35,7 @@ export class LiquidationService {
   liquidationexportarpdf(id: any): any {
     return this.url_api.get_url_api() + 'api/Liquidation/exportarpdfid/' + id;
   }
-
+  exportPDF(data: any): Observable<any> {
+    return this.http.post(this.url_api.get_url_api() + 'api/Liquidation/exportPDF', data);
+  }
 }

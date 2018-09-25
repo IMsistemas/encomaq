@@ -10,6 +10,7 @@ use App\Models\Biz\Referralguideliquidation;
 use App\Models\Biz\Liquidationproject;
 use App\Models\Biz\Company;
 
+
 class LiquidationController extends Controller
 {
     /**
@@ -173,7 +174,7 @@ class LiquidationController extends Controller
     public function liquidationfiltro(Request $request) 
     {
         $filtro = json_decode($request->get('filter'));
-        $data = Liquidation::with("biz_liquidationproject.biz_project",
+        $data = Liquidation::with("biz_liquidationproject.biz_project.biz_client",
                                             "biz_referralguideliquidation.biz_referralguide.biz_contract.biz_client",
                                             "biz_referralguideliquidation.biz_referralguide.biz_Referralguideitem.biz_item",
                                             "biz_referralguideliquidation.biz_referralguide.nom_transferreason"
@@ -230,4 +231,36 @@ class LiquidationController extends Controller
         $pdf->setPaper('A4', 'portrait');
         return $pdf->stream("ListaDeLiquidaciones".$today.".pdf");
     } 
+
+    public function createPDF (Request $request)
+    {
+        
+
+        $body = $request->input('body');
+
+        $today=date("Y-m-d H:i:s");
+        $view =  \View::make('Print.LiquidacionFormat', compact('body'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        $pdf->setPaper('A4', 'portrait');
+
+        return response()->json(['success' => true]);
+
+    }
+
+    public function exportPDF (Request $request)
+    {
+        ini_set('max_execution_time', 300);
+
+        $body = $request->input('body');
+
+        $today=date("Y-m-d H:i:s");
+        $view =  \View::make('Print.LiquidacionFormat', compact('body'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        $pdf->setPaper('A4', 'portrait');
+
+        return response()->json(['success' => $pdf->stream("LIQUIDACION_".$today.".pdf")]);
+
+    }
 }
