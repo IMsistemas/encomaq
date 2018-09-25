@@ -42,7 +42,7 @@ export class EditclientComponent implements OnInit {
 
         if (parseInt(form.ididentifytype, 0) === parseInt(idt.ididentifytype, 0)) {
           if (idt.identifylength !== null && idt.identifylength !== undefined && idt.identifylength !== '') {
-            this.identifylength = idt.identifylength;
+            this.identifylength = parseInt(idt.identifylength, 0);
           } else {
             this.identifylength = 1000;
           }
@@ -52,22 +52,37 @@ export class EditclientComponent implements OnInit {
       }
     }
   }
-  modify_client(data: any) {
-    this.client.edit_client(data.idclient, data).subscribe(
-      (response) => {
-        if (response.success !== undefined) {
-          $('#editclient').modal('hide');
-          this.update_component_father.emit(true);
-        } else if (response.error !== undefined) {
+  modify_client(data: any, frmeditclient) {
+
+    let flag = true;
+
+    if (this.identifylength !== 0 && this.identifylength !== 1000) {
+      if (String(data.identify).length !== this.identifylength) {
+        flag = false;
+      }
+    }
+
+    if (flag === true) {
+      this.client.edit_client(data.idclient, data).subscribe(
+        (response) => {
+          if (response.success !== undefined) {
+            $('#editclient').modal('hide');
+            frmeditclient.reset();
+            this.update_component_father.emit(true);
+          } else if (response.error !== undefined) {
+            $('#editclient').modal('hide');
+            this.update_component_father.emit(false);
+          }
+        },
+        (error) => {
+          console.log('POST call in error", respons', error);
           $('#editclient').modal('hide');
           this.update_component_father.emit(false);
-        }
-      },
-      (error) => {
-        console.log('POST call in error", respons', error);
-        $('#editclient').modal('hide');
-        this.update_component_father.emit(false);
-      });
+        });
+    } else {
+      $('#mdl_length1').modal('show');
+    }
+
   }
   refresh() {
     this.refresh_component_father.emit(false);

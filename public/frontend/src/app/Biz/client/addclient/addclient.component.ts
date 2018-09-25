@@ -44,7 +44,7 @@ export class AddclientComponent implements OnInit {
 
         if (parseInt(form.ididentifytype, 0) === parseInt(idt.ididentifytype, 0)) {
           if (idt.identifylength !== null && idt.identifylength !== undefined && idt.identifylength !== '') {
-            this.identifylength = idt.identifylength;
+            this.identifylength = parseInt(idt.identifylength, 0);
           } else {
             this.identifylength = 1000;
           }
@@ -54,21 +54,38 @@ export class AddclientComponent implements OnInit {
       }
     }
   }
-  add_client(data) {
-    this.client.add_client(data).subscribe(
-      (response) => {
-        if (response.success !== undefined) {
-          $('#addclient').modal('hide');
-          this.update_component_father.emit(true);
-        } else if (response.error !== undefined) {
+  add_client(data, frmclient) {
+
+    let flag = true;
+
+    if (this.identifylength !== 0 && this.identifylength !== 1000) {
+      if (String(data.identify).length !== this.identifylength) {
+        flag = false;
+      }
+    }
+
+    if (flag === true) {
+
+      this.client.add_client(data).subscribe(
+        (response) => {
+          if (response.success !== undefined) {
+            $('#addclient').modal('hide');
+            this.update_component_father.emit(true);
+            frmclient.reset();
+          } else if (response.error !== undefined) {
+            $('#addclient').modal('hide');
+            this.update_component_father.emit(false);
+          }
+        },
+        (error) => {
+          console.log('POST call in error", respons', error);
           $('#addclient').modal('hide');
           this.update_component_father.emit(false);
-        }
-      },
-      (error) => {
-        console.log('POST call in error", respons', error);
-        $('#addclient').modal('hide');
-        this.update_component_father.emit(false);
-      });
+        });
+
+    } else {
+      $('#mdl_length').modal('show');
+    }
+
   }
 }

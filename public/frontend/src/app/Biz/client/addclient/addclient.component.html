@@ -1,4 +1,4 @@
-<form novalidate (ngSubmit)="add_client(frmclient.value); frmclient.reset();" #frmclient="ngForm">
+<form novalidate (ngSubmit)="add_client(frmclient.value, frmclient);" #frmclient="ngForm">
 
   <div class="modal-header bg-primary">
     <h5 class="modal-title">Nuevo Cliente</h5>
@@ -162,3 +162,23 @@
     </button>
   </div>
 </form>
+
+<div class="modal fade" id="mdl_length" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title">Confirmación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            La Identificación ingresada no cumple con la longitud especificada: ({{identifylength}})
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

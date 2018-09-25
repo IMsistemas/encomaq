@@ -1,5 +1,5 @@
 <div *ngIf="tem_edit">
-  <form novalidate (ngSubmit)="modify_client(tem_edit); frmeditclient.reset();" #frmeditclient="ngForm">
+  <form novalidate (ngSubmit)="modify_client(tem_edit, frmeditclient);" #frmeditclient="ngForm">
   
     <div class="modal-header bg-primary">
       <h5 class="modal-title">Editar Cliente</h5>
@@ -157,4 +157,26 @@
       </button>
     </div>
   </form>
+
+
+  <div class="modal fade" id="mdl_length1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-danger">
+          <h5 class="modal-title">Confirmación</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12">
+              La Identificación ingresada no cumple con la longitud especificada: ({{identifylength}})
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
