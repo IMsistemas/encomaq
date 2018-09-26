@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Biz;
 
+use App\Models\Biz\LiquidationItemSurplus;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -72,6 +73,14 @@ class LiquidationController extends Controller
                  $lqpr->idliquidation = $aux->idliquidation;
                  $lqpr->idproject = $f;
                  $lqpr->save();
+             }
+             foreach ($data["enObraObject"] as $f) {
+                 $o =  new LiquidationItemSurplus();
+                 $o->idliquidation = $aux->idliquidation;
+                 $o->iditem = $f['iditem'];
+                 $o->quantify = $f['quantify'];
+                 $o->price = $f['price'];
+                 $o->save();
              }
              return response()->json(['success' => $aux ]);
          } else {

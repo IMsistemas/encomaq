@@ -46,6 +46,7 @@ export class AddliquidationComponent implements OnInit {
   retiro_head_item = [];
   retiro_foot_item = [];
   enObra = [];
+  enObraObject = [];
   enObra_head_item = [];
   enObra_foot_item = [];
 
@@ -114,6 +115,7 @@ export class AddliquidationComponent implements OnInit {
     this.retiro_foot_item = [];
 
     this.enObra = [];
+    this.enObraObject = [];
     this.enObra_head_item = [];
     this.enObra_foot_item = [];
 
@@ -253,11 +255,16 @@ export class AddliquidationComponent implements OnInit {
       });
     }
 
+
     for (let i = 0; i < this.entrega.length; i++) {
       for (let j = 0; j < this.entrega[i].items.length; j++) {
-        this.entrega_foot_item[j].iditem = this.entrega[i].items[j].iditem;
-        this.entrega_foot_item[j].price = this.entrega[i].items[j].price;
-        this.entrega_foot_item[j].quantify += this.entrega[i].items[j].quantify;
+
+        if (parseInt(this.entrega[i].items[j].iditem, 0) !== 0) {
+          this.entrega_foot_item[j].iditem = this.entrega[i].items[j].iditem;
+          this.entrega_foot_item[j].price = this.entrega[i].items[j].price;
+          this.entrega_foot_item[j].quantify += this.entrega[i].items[j].quantify;
+        }
+
       }
     }
 
@@ -329,10 +336,18 @@ export class AddliquidationComponent implements OnInit {
 
     this.enObra_head_item = this.entrega_head_item;
 
+
     for (let i = 0; i < this.enObra_head_item.length; i++) {
       this.enObra.push(this.entrega_foot_item[i].quantify - this.retiro_foot_item[i].quantify);
-    }
 
+      const o = {
+        iditem: this.entrega_foot_item[i].iditem,
+        quantify: this.entrega_foot_item[i].quantify - this.retiro_foot_item[i].quantify,
+        price: this.entrega_foot_item[i].price
+      };
+      this.enObraObject.push(o);
+
+    }
     this.orderProduct(frm);
 
   }
@@ -593,11 +608,13 @@ export class AddliquidationComponent implements OnInit {
   add_liquidation( data: any, frm: any) {
     const o = {
       Data: data,
+      enObraObject: this.enObraObject,
       list: this.list_guias,
       Subtotal: this.subtotal,
       Iva: this.iva,
       Total: this.totalprecio
     };
+
     this.liquidation.add_liquidation(o).subscribe(
       (response) => {
         if (response.success !== undefined) {
