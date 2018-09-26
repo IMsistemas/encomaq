@@ -57,7 +57,7 @@ class ReferralGuideController extends Controller
             $where .= ') ';
         }
 
-        return Referralguide::with('biz_contract.biz_client.biz_Project', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem.biz_item.biz_price', 'biz_referralguide_place.biz_place_start', 'biz_referralguide_place.biz_place_end')
+        return Referralguide::with('biz_contract.biz_client.biz_Project', 'biz_carrier.nom_identifytype', 'nom_transferreason', 'biz_Referralguideitem.biz_item.biz_price', 'biz_referralguide_place.biz_place_start', 'biz_referralguide_place.biz_place_end')
                                 ->selectRaw("biz_referralguide.* ")
                                 ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")
                                 ->join("biz_client", "biz_client.idclient", "=", "biz_contract.idclient" )

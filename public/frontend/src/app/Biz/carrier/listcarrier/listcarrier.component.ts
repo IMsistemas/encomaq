@@ -75,7 +75,7 @@ export class ListcarrierComponent implements OnInit {
   select_carrier(data) {
     this.carrier_s.emit(data);
     $('.listcarrier').modal('hide');
-    console.log(this.carrier_s);
+    console.log(data);
   }
 
 }
