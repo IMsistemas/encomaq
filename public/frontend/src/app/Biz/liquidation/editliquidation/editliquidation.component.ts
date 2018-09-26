@@ -49,6 +49,7 @@ export class EditliquidationComponent implements OnInit, OnChanges {
   retiro_head_item = [];
   retiro_foot_item = [];
   enObra = [];
+  enObraObject = [];
   enObra_head_item = [];
   enObra_foot_item = [];
 
@@ -144,6 +145,7 @@ export class EditliquidationComponent implements OnInit, OnChanges {
     this.retiro_foot_item = [];
 
     this.enObra = [];
+    this.enObraObject = [];
     this.enObra_head_item = [];
     this.enObra_foot_item = [];
 
@@ -285,10 +287,14 @@ export class EditliquidationComponent implements OnInit, OnChanges {
 
     for (let i = 0; i < this.entrega.length; i++) {
       for (let j = 0; j < this.entrega[i].items.length; j++) {
-        this.entrega_foot_item[j].iditem = this.entrega[i].items[j].iditem;
-        this.entrega_foot_item[j].price = this.entrega[i].items[j].price;
-        // tslint:disable-next-line:max-line-length
-        this.entrega_foot_item[j].quantify = parseInt(this.entrega_foot_item[j].quantify, 0) + parseInt(this.entrega[i].items[j].quantify, 0);
+
+        if (parseInt(this.entrega[i].items[j].iditem, 0) !== 0) {
+          this.entrega_foot_item[j].iditem = this.entrega[i].items[j].iditem;
+          this.entrega_foot_item[j].price = this.entrega[i].items[j].price;
+          // tslint:disable-next-line:max-line-length
+          this.entrega_foot_item[j].quantify = parseInt(this.entrega_foot_item[j].quantify, 0) + parseInt(this.entrega[i].items[j].quantify, 0);
+        }
+
       }
     }
 
@@ -363,6 +369,13 @@ export class EditliquidationComponent implements OnInit, OnChanges {
 
     for (let i = 0; i < this.enObra_head_item.length; i++) {
       this.enObra.push(this.entrega_foot_item[i].quantify - this.retiro_foot_item[i].quantify);
+
+      const o = {
+        iditem: this.entrega_foot_item[i].iditem,
+        quantify: this.entrega_foot_item[i].quantify - this.retiro_foot_item[i].quantify,
+        price: this.entrega_foot_item[i].price
+      };
+      this.enObraObject.push(o);
     }
 
     this.orderProduct(frm);
@@ -535,14 +548,18 @@ export class EditliquidationComponent implements OnInit, OnChanges {
       client: this.client_guiar,
       dateinit: $('#dateinit').val(),
       dateend: $('#dateend').val(),
-      idprojects: data.projects
+      idprojects: data.projects,
+      idliquidation: this.tem_edit.idliquidation
     };
 
     this.referralguide.get(this.page, o).subscribe(
       (response) => {
-        this.orderReferralGuide(response.data, data);
-        this.list_guias = response.data;
-        this.listReferralGuide = response.data;
+
+        console.log(response);
+
+        this.orderReferralGuide(response, data);
+        this.list_guias = response;
+        this.listReferralGuide = response;
         /*this.from = response.from;
         this.total = response.total;
         this.loading = false;*/
@@ -634,7 +651,8 @@ export class EditliquidationComponent implements OnInit, OnChanges {
     const o = {
       Data: data,
       list: datos,
-      listGuide: this.list_guias
+      listGuide: this.list_guias,
+      enObraObject: this.enObraObject
     };
 
     this.liquidation.edit_liquidation(data.idliquidation, o).subscribe(

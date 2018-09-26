@@ -633,14 +633,15 @@ getList(data: any) {
     client: data.biz_liquidationproject[0].biz_project.idclient,
     dateinit: data.dateinit,
     dateend: data.dateend,
-    idprojects: [data.biz_liquidationproject[0].biz_project.idproject]
+    idprojects: [data.biz_liquidationproject[0].biz_project.idproject],
+    idliquidation: this.select_data.idliquidation
   };
 
   this.referralguide.get(this.page, o).subscribe(
     (response) => {
-      this.orderReferralGuide(response.data, data);
-      this.list_guias = response.data;
-      this.listReferralGuide = response.data;
+      this.orderReferralGuide(response, data);
+      this.list_guias = response;
+      this.listReferralGuide = response;
     },
     (error) => {
       console.log(error);

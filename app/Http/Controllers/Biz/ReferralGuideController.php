@@ -28,41 +28,58 @@ class ReferralGuideController extends Controller
     {
         $filter = json_decode($request->get('filter'));
 
-        $where = " biz_referralguide.state ='" . $filter->state."' ";
-        $where .= " AND (sequential LIKE '%" . $filter->search . "%' ";
-        $where .= " OR biz_contract.nocontract LIKE '%" . $filter->search . "%' ";
-        $where .= " OR biz_client.businessname LIKE '%" . $filter->search . "%'  ) ";
+        $result = Referralguide::with('biz_contract.biz_client.biz_Project', 'biz_carrier.nom_identifytype', 'nom_transferreason', 'biz_Referralguideitem.biz_item.biz_price', 'biz_referralguide_place.biz_place_start', 'biz_referralguide_place.biz_place_end')
+            ->selectRaw("biz_referralguide.* ")
+            ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")
+            ->join("biz_client", "biz_client.idclient", "=", "biz_contract.idclient" );
 
+        if (isset($filter->idliquidation) == false) {
+            $where = " biz_referralguide.state ='" . $filter->state."' ";
+            $where .= " AND (sequential LIKE '%" . $filter->search . "%' ";
+            $where .= " OR biz_contract.nocontract LIKE '%" . $filter->search . "%' ";
+            $where .= " OR biz_client.businessname LIKE '%" . $filter->search . "%'  ) ";
 
-
-        if (isset($filter->client)) {
-            $where .= " AND  biz_client.idclient=".$filter->client." ";
-        }
-
-        if (isset($filter->dateinit) == true && isset($filter->dateend) == true) {
-            if ($filter->dateinit != '' && $filter->dateend != '') {
-                $where .= " AND  biz_referralguide.datetimereferral BETWEEN '" . $filter->dateinit . "' AND '" . $filter->dateend . "' ";
+            if (isset($filter->client)) {
+                $where .= " AND  biz_client.idclient=".$filter->client." ";
             }
-        }
 
-        if (isset($filter->idprojects) == true && count($filter->idprojects) > 0) {
-            $where .= ' AND ';
-            for ($i = 0; $i < count($filter->idprojects); $i++) {
-                if ($i == 0) {
-                    $where .= '( biz_referralguide.idproject = ' . $filter->idprojects[$i];
-                } else {
-                    $where .= ' OR biz_referralguide.idproject = ' . $filter->idprojects[$i];
+            if (isset($filter->dateinit) == true && isset($filter->dateend) == true) {
+                if ($filter->dateinit != '' && $filter->dateend != '') {
+                    $where .= " AND  biz_referralguide.datetimereferral BETWEEN '" . $filter->dateinit . "' AND '" . $filter->dateend . "' ";
                 }
             }
-            $where .= ') ';
+
+            if (isset($filter->idprojects) == true && count($filter->idprojects) > 0) {
+                $where .= ' AND ';
+                for ($i = 0; $i < count($filter->idprojects); $i++) {
+                    if ($i == 0) {
+                        $where .= '( biz_referralguide.idproject = ' . $filter->idprojects[$i];
+                    } else {
+                        $where .= ' OR biz_referralguide.idproject = ' . $filter->idprojects[$i];
+                    }
+                }
+                $where .= ') ';
+            }
+
+            $result = $result->whereRaw($where)->orderBy($filter->column, $filter->order)
+                                ->paginate($filter->num_page);
+
+        } else {
+            $where = 'biz_referralguide_liquidation.idliquidation = ' . $filter->idliquidation;
+
+            $result = $result->join("biz_referralguide_liquidation", "biz_referralguide_liquidation.idreferralguide", "=", "biz_referralguide.idreferralguide" )
+                                ->whereRaw($where)
+                                ->get();
         }
 
-        return Referralguide::with('biz_contract.biz_client.biz_Project', 'biz_carrier.nom_identifytype', 'nom_transferreason', 'biz_Referralguideitem.biz_item.biz_price', 'biz_referralguide_place.biz_place_start', 'biz_referralguide_place.biz_place_end')
+        return $result;
+
+        /*return Referralguide::with('biz_contract.biz_client.biz_Project', 'biz_carrier.nom_identifytype', 'nom_transferreason', 'biz_Referralguideitem.biz_item.biz_price', 'biz_referralguide_place.biz_place_start', 'biz_referralguide_place.biz_place_end')
                                 ->selectRaw("biz_referralguide.* ")
                                 ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")
                                 ->join("biz_client", "biz_client.idclient", "=", "biz_contract.idclient" )
                                 ->whereRaw($where)->orderBy($filter->column, $filter->order)
-                                ->paginate($filter->num_page);
+                                ->paginate($filter->num_page);*/
     }
 
     public function listclient_referralguide()

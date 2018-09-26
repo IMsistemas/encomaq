@@ -136,6 +136,7 @@ class LiquidationController extends Controller
 
              Referralguideliquidation::whereRaw("idliquidation=".$aux->idliquidation."")->delete();
              Liquidationproject::whereRaw("idliquidation=".$aux->idliquidation."")->delete();
+             LiquidationItemSurplus::whereRaw("idliquidation=".$aux->idliquidation."")->delete();
 
              /*foreach ($data["Data"]["biz_referralguideliquidation"] as $f) {
                  $real =  new Referralguideliquidation();
@@ -154,6 +155,14 @@ class LiquidationController extends Controller
                  $lqpr->idliquidation = $aux->idliquidation;
                  $lqpr->idproject = $f;
                  $lqpr->save();
+             }
+             foreach ($data["enObraObject"] as $f) {
+                 $o =  new LiquidationItemSurplus();
+                 $o->idliquidation = $aux->idliquidation;
+                 $o->iditem = $f['iditem'];
+                 $o->quantify = $f['quantify'];
+                 $o->price = $f['price'];
+                 $o->save();
              }
              return response()->json(['success' => $aux ]);
          } else {
