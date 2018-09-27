@@ -29,6 +29,9 @@ export class LiquidationService {
   filtro_liquidation(page: any, filtro: any): Observable<any> {
     return this.http.get(this.url_api.get_url_api() + 'api/Liquidation/filtro?page=' + page + '&filter=' + JSON.stringify(filtro));
   }
+  searchSobrante(filtro: any): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/Liquidation/searchSobrante?filter=' + JSON.stringify(filtro));
+  }
   filtro_liquidationexportarpdf(data): any {
     return this.url_api.get_url_api() + 'api/Liquidation/exportarpdf/' + JSON.stringify(data);
   }

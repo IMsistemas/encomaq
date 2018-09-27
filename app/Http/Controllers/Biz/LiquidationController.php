@@ -189,6 +189,22 @@ class LiquidationController extends Controller
         }
     }
 
+    public function searchSobrante(Request $request)
+    {
+        $filtro = json_decode($request->get('filter'));
+        $month = (int)(explode('-', $filtro->dateinit)[1]);
+        
+        if ($month == 12) {
+            $month = 1;
+        } else {
+            $month = $month - 1;
+        }
+
+        return LiquidationItemSurplus::with('biz_item')
+                                ->join('biz_liquidation', 'biz_liquidation.idliquidation', '=', 'biz_liquidationitemsurplus.idliquidation')
+                                ->selectRaw('biz_liquidationitemsurplus.*')->whereRaw('MONTH(biz_liquidation.dateinit) = ' . $month)->get();
+    }
+
     public function liquidationfiltro(Request $request) 
     {
         $filtro = json_decode($request->get('filter'));

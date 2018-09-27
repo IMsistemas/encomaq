@@ -50,6 +50,8 @@ export class AddliquidationComponent implements OnInit {
   enObra_head_item = [];
   enObra_foot_item = [];
 
+  sobrante = [];
+
   logistic = [];
 
   array_item = [];
@@ -119,7 +121,29 @@ export class AddliquidationComponent implements OnInit {
     this.enObra_head_item = [];
     this.enObra_foot_item = [];
 
+    // this.sobrante = [];
+
     this.logistic = [];
+
+    if (this.sobrante.length > 0) {
+
+      const objectSobrante = {
+        idreferralguide: 0,
+        datetimereferral: $('#dateinit').val(),
+        guidenumber: 'COMP ANTERIOR',
+        items: this.sobrante
+      };
+
+      this.entrega.push(objectSobrante);
+
+      for (const h of this.sobrante) {
+        const oo = {
+          iditem: h.iditem,
+          name: h.biz_item.itemname
+        };
+        this.entrega_head_item.push(oo);
+      }
+    }
 
     for (const e of result) {
 
@@ -522,22 +546,39 @@ export class AddliquidationComponent implements OnInit {
       idprojects: data.projects
     };
 
-    this.referralguide.get(this.page, o).subscribe(
-      (response) => {
+    if ($('#dateinit').val() !== '') {
 
-        this.orderReferralGuide(response.data, data);
-        this.list_guias = response.data;
+      this.liquidation.searchSobrante(o).subscribe(
+        (responseSobrante) => {
 
-        // this.calcula();
+          // console.log(responseSobrante);
 
-        /* this.listReferralGuide = response.data;
-        this.from = response.from;
-        this.total = response.total;
-        this.loading = false; */
-      },
-      (error) => {
-        console.log(error);
-      });
+          this.sobrante = responseSobrante;
+
+          this.referralguide.get(this.page, o).subscribe(
+            (response) => {
+
+              this.orderReferralGuide(response.data, data);
+              this.list_guias = response.data;
+
+              // this.calcula();
+
+              /* this.listReferralGuide = response.data;
+              this.from = response.from;
+              this.total = response.total;
+              this.loading = false; */
+            },
+            (error) => {
+              console.log(error);
+            });
+
+        },
+        (error) => {
+          console.log(error);
+        });
+
+    }
+
 
   }
 

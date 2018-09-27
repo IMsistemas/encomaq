@@ -143,6 +143,7 @@ Route::group(['middleware' => 'cors'], function(){
     Route::get('Liquidation/exportarpdf/{data}', 'Biz\LiquidationController@exportarpdf');
     Route::get('Liquidation/getLiquidationActive', 'Biz\LiquidationController@getLiquidationtActive');
     Route::get('Liquidation/filtro', 'Biz\LiquidationController@liquidationfiltro');
+    Route::get('Liquidation/searchSobrante', 'Biz\LiquidationController@searchSobrante');
     Route::get('Liquidation/state/{id}', 'Biz\LiquidationController@stateliquidation');
     Route::get('Liquidation/createPDF/{data}', 'Biz\LiquidationController@exportPDF');
     Route::post('Liquidation/exportPDF', 'Biz\LiquidationController@createPDF');
