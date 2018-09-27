@@ -192,8 +192,18 @@ class LiquidationController extends Controller
     public function searchSobrante(Request $request)
     {
         $filtro = json_decode($request->get('filter'));
-        $month = (int)(explode('-', $filtro->dateinit)[1]);
-        
+
+        if (isset($filtro->idliquidation) == true) {
+
+            $liquidation = Liquidation::find($filtro->idliquidation);
+
+            $month = (int)(explode('-', $liquidation->dateinit)[1]);
+
+        } else {
+
+            $month = (int)(explode('-', $filtro->dateinit)[1]);
+        }
+
         if ($month == 12) {
             $month = 1;
         } else {
@@ -201,8 +211,10 @@ class LiquidationController extends Controller
         }
 
         return LiquidationItemSurplus::with('biz_item')
-                                ->join('biz_liquidation', 'biz_liquidation.idliquidation', '=', 'biz_liquidationitemsurplus.idliquidation')
-                                ->selectRaw('biz_liquidationitemsurplus.*')->whereRaw('MONTH(biz_liquidation.dateinit) = ' . $month)->get();
+            ->join('biz_liquidation', 'biz_liquidation.idliquidation', '=', 'biz_liquidationitemsurplus.idliquidation')
+            ->selectRaw('biz_liquidationitemsurplus.*')->whereRaw('MONTH(biz_liquidation.dateinit) = ' . $month)->get();
+
+
     }
 
     public function liquidationfiltro(Request $request) 

@@ -47,6 +47,8 @@ export class LiquidationComponent implements OnInit {
   enObra_head_item = [];
   enObra_foot_item = [];
 
+  sobrante = [];
+
   logistic = [];
 
   array_item = [];
@@ -115,6 +117,7 @@ export class LiquidationComponent implements OnInit {
   }
   edit_liquidation(data: any) {
     this.info_tem_edit = data;
+    $('#v-pills-tab a[href="#v-pills-home3"]').tab('show');
     $('#editliquidation').modal('show');
   }
   load(data: any) {
@@ -245,6 +248,26 @@ orderReferralGuide(result, frm) {
   this.enObra_foot_item = [];
 
   this.logistic = [];
+
+  if (this.sobrante.length > 0) {
+
+    const objectSobrante = {
+      idreferralguide: 0,
+      datetimereferral: this.select_data.dateinit,
+      guidenumber: 'COMP ANTERIOR',
+      items: this.sobrante
+    };
+
+    this.entrega.push(objectSobrante);
+
+    for (const h of this.sobrante) {
+      const oo = {
+        iditem: h.iditem,
+        name: h.biz_item.itemname
+      };
+      this.entrega_head_item.push(oo);
+    }
+  }
 
   for (const e of result) {
 
@@ -637,11 +660,24 @@ getList(data: any) {
     idliquidation: this.select_data.idliquidation
   };
 
-  this.referralguide.get(this.page, o).subscribe(
-    (response) => {
-      this.orderReferralGuide(response, data);
-      this.list_guias = response;
-      this.listReferralGuide = response;
+  this.liquidation.searchSobrante(o).subscribe(
+    (responseSobrante) => {
+
+      // console.log(responseSobrante);
+
+      this.sobrante = responseSobrante;
+
+      this.referralguide.get(this.page, o).subscribe(
+        (response) => {
+
+          this.orderReferralGuide(response, data);
+          this.list_guias = response;
+          this.listReferralGuide = response;
+        },
+        (error) => {
+          console.log(error);
+        });
+
     },
     (error) => {
       console.log(error);

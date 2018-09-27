@@ -53,6 +53,8 @@ export class EditliquidationComponent implements OnInit, OnChanges {
   enObra_head_item = [];
   enObra_foot_item = [];
 
+  sobrante = [];
+
   logistic = [];
 
   array_item = [];
@@ -150,6 +152,26 @@ export class EditliquidationComponent implements OnInit, OnChanges {
     this.enObra_foot_item = [];
 
     this.logistic = [];
+
+    if (this.sobrante.length > 0) {
+
+      const objectSobrante = {
+        idreferralguide: 0,
+        datetimereferral: this.tem_edit.dateinit,
+        guidenumber: 'COMP ANTERIOR',
+        items: this.sobrante
+      };
+
+      this.entrega.push(objectSobrante);
+
+      for (const h of this.sobrante) {
+        const oo = {
+          iditem: h.iditem,
+          name: h.biz_item.itemname
+        };
+        this.entrega_head_item.push(oo);
+      }
+    }
 
     for (const e of result) {
 
@@ -552,17 +574,28 @@ export class EditliquidationComponent implements OnInit, OnChanges {
       idliquidation: this.tem_edit.idliquidation
     };
 
-    this.referralguide.get(this.page, o).subscribe(
-      (response) => {
+    this.liquidation.searchSobrante(o).subscribe(
+      (responseSobrante) => {
 
-        console.log(response);
+        // console.log(responseSobrante);
 
-        this.orderReferralGuide(response, data);
-        this.list_guias = response;
-        this.listReferralGuide = response;
-        /*this.from = response.from;
-        this.total = response.total;
-        this.loading = false;*/
+        this.sobrante = responseSobrante;
+
+        this.referralguide.get(this.page, o).subscribe(
+          (response) => {
+
+            this.orderReferralGuide(response, data);
+            this.list_guias = response;
+            this.listReferralGuide = response;
+
+            /*this.from = response.from;
+            this.total = response.total;
+            this.loading = false;*/
+          },
+          (error) => {
+            console.log(error);
+          });
+
       },
       (error) => {
         console.log(error);
@@ -641,11 +674,86 @@ export class EditliquidationComponent implements OnInit, OnChanges {
   }
   edit_liquidation(data: any, frm: any, datos: any) {
 
-    data.subtotal = this.subtotal;
+    const oo = {
+      search: this.descripcion,
+      state: this.state,
+      column: this.column,
+      order: this.order,
+      num_page: this.num_page,
+      client: this.client_guiar,
+      dateinit: $('#dateinit').val(),
+      dateend: $('#dateend').val(),
+      idprojects: data.projects,
+      idliquidation: this.tem_edit.idliquidation
+    };
+
+    this.liquidation.searchSobrante(oo).subscribe(
+      (responseSobrante) => {
+
+        this.sobrante = responseSobrante;
+
+        this.referralguide.get(this.page, oo).subscribe(
+          (responseGuide) => {
+
+            this.orderReferralGuide(responseGuide, data);
+            this.list_guias = responseGuide;
+            this.listReferralGuide = responseGuide;
+
+            // ----------------------------------------------------
+
+            data.subtotal = this.subtotal;
+            data.iva = this.iva;
+            data.total = this.totalprecio;
+
+            data.biz_liquidationproject[0].biz_project.idclient = datos.idcliente;
+
+            const o = {
+              Data: data,
+              list: datos,
+              listGuide: this.list_guias,
+              enObraObject: this.enObraObject
+            };
+
+            this.liquidation.edit_liquidation(data.idliquidation, o).subscribe(
+              (response) => {
+                if (response.success !== undefined) {
+                  this.id_client = { idclient: null, biz_contract: {biz_client: {biz__project: []}} };
+                  $('#editliquidation').modal('hide');
+                  frm.reset();
+                  this.update_component_father.emit(true);
+                } else if (response.error !== undefined) {
+                  frm.reset();
+                  this.update_component_father.emit(false);
+                }
+                this.getListclient_referralguide();
+                this.tem_edit.biz_liquidationproject[0].biz_project.idclient = String(datos.idcliente);
+
+              },
+              (error) => {
+                console.log('POST call in error", respons', error);
+                $('#editliquidation').modal('hide');
+                frm.reset();
+                this.update_component_father.emit(false);
+              });
+
+            // ---------------------------------------------------
+
+          },
+          (error) => {
+            console.log(error);
+          });
+
+      },
+      (error) => {
+        console.log(error);
+      });
+
+
+
+    /* data.subtotal = this.subtotal;
     data.iva = this.iva;
     data.total = this.totalprecio;
-    /* console.log(data);
-    console.log(datos); */
+
     data.biz_liquidationproject[0].biz_project.idclient = datos.idcliente;
 
     const o = {
@@ -675,7 +783,7 @@ export class EditliquidationComponent implements OnInit, OnChanges {
         $('#editliquidation').modal('hide');
         frm.reset();
         this.update_component_father.emit(false);
-      });
+      }); */
   }
   refresh() {
     this.refresh_component_father.emit(false);
