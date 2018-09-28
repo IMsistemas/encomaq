@@ -66,7 +66,8 @@
       <div class="col-12 col-sm-2" style="margin-top: 5px;">
         <select class="custom-select" #est [(ngModel)]="state" (change)="page = 1; get_list_contract(); ">
           <option value="1">ACTIVO</option>
-          <option value="0">INACTIVO</option>
+          <option value="0">ANULADO</option>
+          <option value="2">CADUCADO</option>
         </select>
       </div>
 
@@ -93,16 +94,19 @@
             <tr>
 
               <th style="width: 8%;">NO.</th>
-              <th style="width: 12%;">TIPO</th>
+              <th>CLIENTE</th>
               <th style="width: 8%;">RETIRADA</th>
               <th style="width: 8%;">ENTREGADA </th>
-              <th>CLIENTE</th>
+              <th style="width: 12%;">TIPO</th>
+              
+              
               <th>DIRECCIÓN</th>
               <th style="width: 3%;">F</th>
               <th style="width: 5%;">TELÉFONO</th>
               <th style="width: 8%;">VALOR</th>
-              <th style="width: 8%;">FACT.</th>
               <th style="width: 8%;">NO FACT.</th>
+              <th style="width: 8%;">NO. RECIBO</th>
+              
               <th style="width: 5%;">ESTADO</th>
 
               <th class="noExl" style="width: 4%;"></th>
@@ -113,17 +117,19 @@
             <tr *ngFor="let ident of list_contract  let i = index " [ngClass]="{'text-danger':ident.state == 0}">
 
               <td>{{ident.nocontract}}</td>
-              <td>{{ident.nom_categoryitem.categoryitemname}}</td>
+              <td>{{ident.biz_client.businessname}}</td>
               <td>{{ident.enddate}}</td>
               <td>{{ident.startdate}}</td>
-              <td>{{ident.biz_client.businessname}}</td>
+              <td>{{ident.nom_categoryitem.categoryitemname}}</td>
+              
+              
               <td>{{ident.biz_client.address}}</td>
               <td *ngIf="ident.receipt != ''">F</td>
               <td *ngIf="ident.receipt == ''"></td>
               <td>{{ident.biz_client.phone + ((ident.biz_client.phone_2 != null) ? ', ' + ident.biz_client.phone_2 : '')}}</td>
               <td>{{ident.cost}}</td>
-              <td>{{ident.receipt}}</td>
               <td>{{ident.invoice}}</td>
+              <td>{{ident.receipt}}</td>              
               <td>{{ ((calculateDay(ident.enddate) == false) ? 'ACTIVO' : 'CADUCADO') }}</td>
 
               <td class="noExl" >

@@ -244,22 +244,16 @@
 
               <div class="col-sm-4 col-xs-12">
                 <div class="form-group">
-                  <label for="receipt">FACTURADO
+                  <label for="receipt">NO. RECIBOS
                   </label>
-                  <input type="text" class="form-control" id="receipt" name="receipt" ngModel #receipt="ngModel" pattern="^[0-9]+([.][0-9]+)?$">
-                </div>
-                <div *ngIf="receipt.errors?.pattern">
-                  <small id="" class="form-text text-danger text-right">Es incorrecto debe ser un número entero o decimal</small>
+                  <input type="text" class="form-control" id="receipt" name="receipt" ngModel #receipt="ngModel">
                 </div>
               </div>
               <div class="col-sm-4 col-xs-12">
                 <div class="form-group">
-                  <label for="invoice">NO FACTURADO
+                  <label for="invoice">NO. FACTURAS
                   </label>
-                  <input type="text" class="form-control" id="invoice" name="invoice" ngModel #invoice="ngModel" pattern="^[0-9]+([.][0-9]+)?$">
-                </div>
-                <div *ngIf="invoice.errors?.pattern">
-                  <small id="" class="form-text text-danger text-right">Es incorrecto debe ser un número entero o decimal</small>
+                  <input type="text" class="form-control" id="invoice" name="invoice" ngModel #invoice="ngModel">
                 </div>
               </div>
             </div>
