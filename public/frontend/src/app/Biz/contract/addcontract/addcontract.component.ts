@@ -151,32 +151,49 @@ export class AddcontractComponent implements OnInit {
     $('.listitems').modal('show');
     fila.iditem = this.item_select.iditem;
   }
-  add_contract(data, frm) {
-    const aux = {
-      Data: data,
-      paymentform: this.list_paymentform,
-      list: this.list_itemcont
-    };
+  compareDate(dateinit, dateend) {
 
-    this.contract.add_contract(aux).subscribe(
-      (response) => {
-        this.id_client = { idclient: '' };
-        if (response.success !== undefined) {
+   const inicial: Array<string> = dateinit.split('-');
+   const final: Array<string> = dateend.split('-');
+
+   const dateStart: any = new Date(parseInt(inicial[0], 0), ( parseInt(inicial[1], 0) - 1 ), parseInt(inicial[2], 0));
+   const dateEnd: any = new Date(parseInt(final[0], 0), (parseInt(final[1], 0) - 1), parseInt(final[2], 0));
+
+   return (dateStart > dateEnd) ? false : true;
+
+  }
+  add_contract(data, frm) {
+
+    if (this.compareDate(data.startdate, data.enddate)) {
+      const aux = {
+        Data: data,
+        paymentform: this.list_paymentform,
+        list: this.list_itemcont
+      };
+
+      this.contract.add_contract(aux).subscribe(
+        (response) => {
+          this.id_client = { idclient: '' };
+          if (response.success !== undefined) {
+            $('#addcontract').modal('hide');
+            frm.reset();
+            this.list_itemcont = [];
+            this.update_component_father.emit(true);
+          } else if (response.error !== undefined) {
+            $('#addclient').modal('hide');
+            frm.reset();
+            this.update_component_father.emit(false);
+          }
+        },
+        (error) => {
+          console.log('POST call in error", respons', error);
           $('#addcontract').modal('hide');
           frm.reset();
-          this.list_itemcont = [];
-          this.update_component_father.emit(true);
-        } else if (response.error !== undefined) {
-          $('#addclient').modal('hide');
-          frm.reset();
           this.update_component_father.emit(false);
-        }
-      },
-      (error) => {
-        console.log('POST call in error", respons', error);
-        $('#addcontract').modal('hide');
-        frm.reset();
-        this.update_component_father.emit(false);
-      });
+        });
+    } else {
+      $('#mdlcompareDateAdd').modal('show');
+    }
+
   }
 }

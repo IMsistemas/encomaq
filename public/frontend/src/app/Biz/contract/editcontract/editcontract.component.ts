@@ -158,31 +158,48 @@ export class EditcontractComponent implements OnInit {
     const posicion = this.tem_edit.biz_contractitem.indexOf(data);
     this.tem_edit.biz_contractitem.splice(posicion, 1);
   }
+  compareDate(dateinit, dateend) {
+
+    const inicial: Array<string> = dateinit.split('-');
+    const final: Array<string> = dateend.split('-');
+
+    const dateStart: any = new Date(parseInt(inicial[0], 0), ( parseInt(inicial[1], 0) - 1 ), parseInt(inicial[2], 0));
+    const dateEnd: any = new Date(parseInt(final[0], 0), (parseInt(final[1], 0) - 1), parseInt(final[2], 0));
+
+    return (dateStart > dateEnd) ? false : true;
+
+   }
   edit_contract(data, frm) {
-    data.idclient = this.id_client.idclient;
-    const aux = {
-      Data: data,
-      paymentform: this.list_paymentform
-    };
-    this.contract.edit_contract(data.idcontract , aux).subscribe(
-      (response) => {
-        if (response.success !== undefined) {
-          $('#editcontract').modal('hide');
-          this.id_client = data.biz_client;
-          frm.reset();
-          this.update_component_father.emit(true);
-        } else if (response.error !== undefined) {
+
+    if (this.compareDate(data.startdate, data.enddate)) {
+      data.idclient = this.id_client.idclient;
+      const aux = {
+        Data: data,
+        paymentform: this.list_paymentform
+      };
+      this.contract.edit_contract(data.idcontract , aux).subscribe(
+        (response) => {
+          if (response.success !== undefined) {
+            $('#editcontract').modal('hide');
+            this.id_client = data.biz_client;
+            frm.reset();
+            this.update_component_father.emit(true);
+          } else if (response.error !== undefined) {
+            $('#editcontract').modal('hide');
+            frm.reset();
+            this.update_component_father.emit(false);
+          }
+        },
+        (error) => {
+          console.log('POST call in error", respons', error);
           $('#editcontract').modal('hide');
           frm.reset();
           this.update_component_father.emit(false);
-        }
-      },
-      (error) => {
-        console.log('POST call in error", respons', error);
-        $('#editcontract').modal('hide');
-        frm.reset();
-        this.update_component_father.emit(false);
-      });
+        });
+    } else {
+      $('#mdlcompareDateEdit').modal('show');
+    }
+
   }
   refresh() {
     this.refresh_component_father.emit(false);
