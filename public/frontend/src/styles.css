@@ -10,3 +10,7 @@
 .mouse_point {
     cursor: pointer
 }
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color:#bbdefb;
+}
