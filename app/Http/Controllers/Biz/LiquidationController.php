@@ -221,12 +221,21 @@ class LiquidationController extends Controller
     {
         $filtro = json_decode($request->get('filter'));
 
+        $sql ="";
+        if ($filtro->Buscar!='') {
+            $sql .=" OR biz_liquidation.idliquidation IN (";
+            $sql .=" SELECT biz_liquidation_project.idliquidation FROM biz_liquidation_project WHERE biz_liquidation_project.idproject IN ( ";
+            $sql .=" SELECT biz_project.idproject FROM biz_project  WHERE biz_project.idclient IN (";
+            $sql .=" SELECT biz_client.idclient FROM biz_client  WHERE  businessname LIKE '%".$filtro->Buscar."%') ";
+            $sql .=" )";
+            $sql .=")";
+        }
         $data = Liquidation::with("biz_liquidationproject.biz_project.biz_client",
                                             "biz_referralguideliquidation.biz_referralguide.biz_contract.biz_client",
                                             "biz_referralguideliquidation.biz_referralguide.biz_Referralguideitem.biz_item",
                                             "biz_referralguideliquidation.biz_referralguide.nom_transferreason"
                         )
-                        ->whereRaw("biz_liquidation.state='".$filtro->state."' AND ( biz_liquidation.number LIKE '%".$filtro->Buscar."%'  )")
+                        ->whereRaw("biz_liquidation.state='".$filtro->state."' AND ( biz_liquidation.number LIKE '%".$filtro->Buscar."%' ".$sql." )")
                         ->orderBy("".$filtro->column, "".$filtro->order);
 
         return  $data->paginate($filtro->num_page);
