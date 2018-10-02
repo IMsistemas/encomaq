@@ -338,6 +338,7 @@
                       <thead class="thead-dark">                    
                         <tr>
                           <th>FECHA</th>
+                          <th>NO. GUIA</th>
                           <th>VIAJES</th>
                           <th>P. UNITARIO</th>
                           <th>P. TOTAL</th>
@@ -347,6 +348,7 @@
                       <tbody>
                         <tr *ngFor="let row of listProduct.listguide">
                           <td>{{row.date}}</td>
+                          <td>{{row.guidenumber}}</td>
                           <td class="text-right">{{row.travel}}</td>
                           <td class="text-right">{{row.price}}</td>
                           <td class="text-right">{{row.price * row.travel}}</td>
@@ -356,6 +358,7 @@
                       <tfoot>
                         <tr class="bg-info" style="font-weight: bold;">
                             <td>SUBTOTAL</td>
+                            <td></td>
                             <td></td>
                             <td></td>                            
                             <td class="text-right">{{formatMoney('$', listProduct.totalprice)}}</td>

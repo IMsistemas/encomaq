@@ -40,4 +40,7 @@ export class ContractService {
   getPFByContract(id: any): Observable<any> {
     return this.http.get(this.url_api.get_url_api() + 'api/Contract/getPFByContract/' + id);
   }
+  resumenContract(filtro: any): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/Contract/resumenContract?filter=' + JSON.stringify(filtro));
+  }
 }

@@ -207,6 +207,7 @@ export class AddliquidationComponent implements OnInit {
 
       const objectLogistic = {
         date: e.datetimereferral,
+        guidenumber: e.guidenumber,
         travel: 1,
         price: e.logisticservicecost,
         description: e.nom_transferreason.transferreasonname

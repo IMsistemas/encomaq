@@ -11,6 +11,7 @@ declare var $: any;
 export class ContractComponent implements OnInit {
   message_info: any;
   list_contract = [];
+  listResumenContract = [];
   info_tem_edit: any;
   tem_cancel_activate: any;
   msm_cancel_activate: any;
@@ -60,6 +61,20 @@ export class ContractComponent implements OnInit {
         this.from = response.from;
         this.total = response.total;
         this.loading = false;
+      },
+      (error) => {
+        console.log(error);
+      });
+  }
+  getResumenContract() {
+    const o = {
+      dateinit: '',
+      dateend: ''
+    };
+    this.contract.resumenContract(o).subscribe(
+      (response) => {
+        this.listResumenContract = response;
+        $('#resumenContrato').modal('show');
       },
       (error) => {
         console.log(error);

@@ -255,6 +255,17 @@ class CotractController extends Controller
 
         return  $data->paginate($filtro->num_page);
     }
+
+    public function resumenContract(Request $request) 
+    {
+        $filtro = json_decode($request->get('filter'));
+        $data = Contract::with("biz_client.biz_project","biz_contractitem.biz_item", 'biz_period', 'biz_contractpaymentform.biz_paymentform', 'nom_categoryitem')
+                        ->selectRaw("biz_contract.*")
+                        ->join("biz_client","biz_client.idclient","=","biz_contract.idclient")
+                        ->orderBy('biz_contract.startdate', 'asc');
+
+        return  $data->get();
+    }
     /**
      * Remove the specified resource from storage.
      *
