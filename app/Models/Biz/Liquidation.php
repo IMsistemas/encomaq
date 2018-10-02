@@ -17,6 +17,10 @@ class Liquidation extends Model
     {
         return $this->hasMany('App\Models\Biz\Liquidationproject','idliquidation');
     }
+    public function biz_liquidationitemsurplus()
+    {
+        return $this->hasMany('App\Models\Biz\LiquidationItemSurplus','idliquidation');
+    }
 
 
 }

@@ -318,4 +318,14 @@ class LiquidationController extends Controller
         return $pdf->stream("LIQUIDACION_".$today.".pdf");
 
     }
+    
+    public function summaryLiquidatio () {
+        return Liquidation::with("biz_liquidationitemsurplus.biz_item")
+                            ->selectRaw("biz_liquidation.*")
+                            ->join("biz_liquidation_project", "biz_liquidation_project.idliquidation", "=", "biz_liquidation.idliquidation")
+                            ->join("biz_liquidationitemsurplus", "biz_liquidationitemsurplus.idliquidation", "=", "biz_liquidation.idliquidation")
+                            ->whereRaw("biz_liquidation.dateend LIKE '%2018-09%'")
+                            ->orderBy("biz_liquidation.dateend","DESC")
+                            ->get();
+    }
 }
