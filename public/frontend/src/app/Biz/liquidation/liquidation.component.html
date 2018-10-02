@@ -93,12 +93,13 @@
       <thead class="thead-dark">
         <tr>
           <th style="width: 3%;">NO</th>
+          <th>CLIENTE</th>
           <th style="width: 8%;">LIQUIDACIÓN</th>
           <th style="width: 12%;">NO. FACTURA</th>
           <th style="width: 8%;">FECHA I.</th>
           <th style="width: 8%;">FECHA F.</th>
           <th>PROYECTO</th>
-          <th>CLIENTE</th>
+
           <th>OBSERVACIÓN</th>
           <th style="width: 8%;">SUBTOTAL</th>
           <th style="width: 6%;">IVA</th>
@@ -110,12 +111,12 @@
       <tbody>
         <tr *ngFor="let ident of list_liquidation  let i = index " [ngClass]="{'text-danger':ident.state == 0 } ">
           <td>{{i+from}}</td>
+          <td>{{ident.biz_liquidationproject[0].biz_project.biz_client.businessname}}</td>
           <td>{{ident.number}}</td>
           <td>{{ident.billnumber}}</td>
           <td>{{ident.dateinit}}</td>
           <td>{{ident.dateend}}</td>
           <td>{{ident.biz_liquidationproject[0].biz_project.projectname}}</td>
-          <td>{{ident.biz_liquidationproject[0].biz_project.biz_client.businessname}}</td>
           <td>{{ident.observation}}</td>
           <td class="text-right">{{ident.subtotal}}</td>
           <td class="text-right">{{ident.iva}}</td>

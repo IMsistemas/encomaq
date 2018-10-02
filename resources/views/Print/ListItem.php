@@ -175,7 +175,7 @@
                     echo "<td>";
                     foreach ($c["biz_itemprice"] as $element) {
 
-                        echo '$ ' . $element['price'] . ', ';
+                        echo '$ ' . $element['price'] . ' | ';
 
                     }
                     echo "</td>";

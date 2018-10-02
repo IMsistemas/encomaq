@@ -92,9 +92,9 @@
       <thead class="thead-dark">
         <tr>
           <th style="width: 4%;">NO</th>
-          <th>PROYECTO</th>
-          <th>LUGAR</th>
           <th>CLIENTE</th>
+          <th>PROYECTO</th>
+          <th>LUGAR</th>          
           <th style="width: 10%;">IDENTIFICACIÓN</th>
           <th style="width: 5%;">ESTADO</th>
           <th class="noExl" style="width: 5%;"></th>
@@ -103,9 +103,9 @@
       <tbody>
         <tr *ngFor="let ident of list_project  let i = index " [ngClass]="{'text-danger':ident.state == 0 } ">
           <td>{{i+from}}</td>
-          <td>{{ident.projectname}}</td>
-          <td>{{ident.place}}</td>
           <td>{{ident.biz_client.businessname}}</td>
+          <td>{{ident.projectname}}</td>
+          <td>{{ident.place}}</td>          
           <td>{{ident.biz_client.identify}}</td>
           <td>{{ ((ident.state == 1)? 'ACTIVO':'INACTIVO') }}</td>
           <td class="noExl">
