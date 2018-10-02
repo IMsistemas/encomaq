@@ -318,9 +318,9 @@ class LiquidationController extends Controller
         return $pdf->stream("LIQUIDACION_".$today.".pdf");
 
     }
-    
+
     public function summaryLiquidatio () {
-        return Liquidation::with("biz_liquidationitemsurplus.biz_item")
+        return Liquidation::with("biz_liquidationitemsurplus.biz_item","biz_liquidationproject.biz_project.biz_client")
                             ->selectRaw("biz_liquidation.*")
                             ->join("biz_liquidation_project", "biz_liquidation_project.idliquidation", "=", "biz_liquidation.idliquidation")
                             ->join("biz_liquidationitemsurplus", "biz_liquidationitemsurplus.idliquidation", "=", "biz_liquidation.idliquidation")
