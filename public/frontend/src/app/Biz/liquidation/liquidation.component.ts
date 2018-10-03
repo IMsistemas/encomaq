@@ -53,11 +53,14 @@ export class LiquidationComponent implements OnInit {
 
   array_item = [];
 
+  listSummaryLiquidation = [];
+
   constructor(private liquidation: LiquidationService, private referralguide: ReferralguideService) { }
 
   ngOnInit() {
     $('.auxeditidcliente').prop('disabled' , true);
     $('.auxaddidcliente').prop('disabled' , true);
+    $('.modal-dialog').draggable();
     this.get_list_liquidation();
   }
   new_liquidation() {
@@ -685,5 +688,38 @@ getList(data: any) {
     });
 
 }
+
+  initLiquidationSurplus () {
+    $('#mdl_summary').modal('show');
+    this.getsummaryLiquidationSurplus();
+  }
+  getsummaryLiquidationSurplus() {
+    const f = new Date();
+    const tempMoth =  f.getMonth();
+    f.setMonth(tempMoth - 1);
+    const antMoth = (f.getMonth() + 1);
+    const antMonth =  (antMoth < 10 ) ? ('0' + antMoth) : antMoth;
+
+    const tempDate = f.getFullYear() + '-' + antMonth;
+    console.log(tempDate);
+
+    const o = {
+      Fecha: tempDate,
+    };
+    this.liquidation.getSummary(o).subscribe(
+      (response) => {
+        console.log(response);
+        this.makeSummary(response);
+      },
+      (error) => {
+        console.log(error);
+      });
+  }
+  makeSummary(data) {
+    this.listSummaryLiquidation = [];
+    const tempListItem = [];
+    for (const e of data) {
+    }
+  }
 
 }

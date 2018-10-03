@@ -44,4 +44,7 @@ export class LiquidationService {
   createPDF(data): any {
     return this.url_api.get_url_api() + 'api/Liquidation/createPDF/' + JSON.stringify(data);
   }
+  getSummary(filtro: any): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/Liquidation/getSummary/' + JSON.stringify(filtro));
+  }
 }

@@ -319,12 +319,15 @@ class LiquidationController extends Controller
 
     }
 
-    public function summaryLiquidatio () {
+    public function getSummary ($parameter) {
+        $filtro = json_decode($parameter);
+
         return Liquidation::with("biz_liquidationitemsurplus.biz_item","biz_liquidationproject.biz_project.biz_client")
                             ->selectRaw("biz_liquidation.*")
                             ->join("biz_liquidation_project", "biz_liquidation_project.idliquidation", "=", "biz_liquidation.idliquidation")
                             ->join("biz_liquidationitemsurplus", "biz_liquidationitemsurplus.idliquidation", "=", "biz_liquidation.idliquidation")
-                            ->whereRaw("biz_liquidation.dateend LIKE '%2018-09%'")
+                            ->whereRaw("biz_liquidation.dateend LIKE '%".$filtro->Fecha."%'")
+                            ->groupBy("biz_liquidation_project.idproject")
                             ->orderBy("biz_liquidation.dateend","DESC")
                             ->get();
     }

@@ -41,7 +41,7 @@ export class ContractComponent implements OnInit {
       e.preventDefault();
       $(this).tab('show');
     });
-    $('.modal').draggable();
+    $('.modal-dialog').draggable();
     $('.dropdown-toggle').dropdown();
     this.get_list_contract();
   }
