@@ -201,9 +201,9 @@ export class AddliquidationComponent implements OnInit {
         this.entrega.push(object);
       } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 2) {
         this.retiro.push(object);
-      } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 3) {
+      } /*else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 3) {
 
-      }
+      }*/
 
       const objectLogistic = {
         date: e.datetimereferral,
