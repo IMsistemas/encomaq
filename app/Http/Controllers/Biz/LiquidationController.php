@@ -10,6 +10,7 @@ use App\Models\Biz\Liquidation;
 use App\Models\Biz\Referralguideliquidation;
 use App\Models\Biz\Liquidationproject;
 use App\Models\Biz\Company;
+use App\Models\Biz\LiquidationProjectItem;
 
 
 class LiquidationController extends Controller
@@ -322,12 +323,11 @@ class LiquidationController extends Controller
     public function getSummary ($parameter) {
         $filtro = json_decode($parameter);
 
-        return Liquidation::with("biz_liquidationitemsurplus.biz_item","biz_liquidationproject.biz_project.biz_client")
-                            ->selectRaw("biz_liquidation.*")
-                            ->join("biz_liquidation_project", "biz_liquidation_project.idliquidation", "=", "biz_liquidation.idliquidation")
-                            ->join("biz_liquidationitemsurplus", "biz_liquidationitemsurplus.idliquidation", "=", "biz_liquidation.idliquidation")
-                            ->whereRaw("biz_liquidation.dateend LIKE '%".$filtro->Fecha."%'")
-                            ->groupBy("biz_liquidation_project.idproject")
+        return LiquidationProjectItem::with("biz_project.biz_client", "biz_item")
+                            //->selectRaw("biz_liquidation.*")
+                            ->join("biz_liquidation", "biz_liquidation.idliquidation","=", "biz_liquidationprojectitem.idliquidation")
+                           // ->whereRaw("biz_liquidation.dateend LIKE '%".$filtro->Fecha."%'")
+                           ->whereRaw("biz_liquidation.dateend < '2018-10-01'")
                             ->orderBy("biz_liquidation.dateend","DESC")
                             ->get();
     }

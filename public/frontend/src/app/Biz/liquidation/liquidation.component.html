@@ -702,12 +702,18 @@
             <div class="col-sm-2 col-md-12 col-lg-12">
               <table class="table table-bordered table-striped table-condensed">
                 <thead class="thead-dark">
-                  <tr>
-                    <th>1</th>
+                  <tr >
+                    <th *ngFor="let auxHe of headSummaryLiquidation ">{{auxHe.itemname}}</th>
                   </tr>
                 </thead>
                 <tbody>
-
+                  <tr  *ngFor="let auxBo of listSummaryLiquidation " >
+                    <td>{{auxBo.businessname}}</td>
+                    <td>{{auxBo.projectname}}</td>
+                    <td *ngFor="let i of auxBo.items ">
+                      {{ (i.quantity >0)? i.quantity: '' }}
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>

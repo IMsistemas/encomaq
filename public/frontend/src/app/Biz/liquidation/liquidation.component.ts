@@ -54,6 +54,7 @@ export class LiquidationComponent implements OnInit {
   array_item = [];
 
   listSummaryLiquidation = [];
+  headSummaryLiquidation = [];
 
   constructor(private liquidation: LiquidationService, private referralguide: ReferralguideService) { }
 
@@ -717,9 +718,89 @@ getList(data: any) {
   }
   makeSummary(data) {
     this.listSummaryLiquidation = [];
-    const tempListItem = [];
-    for (const e of data) {
+    this.headSummaryLiquidation = [];
+    const tempList1 = [];
+    const tempList2 = [];
+    const temHead = [];
+    // const pos = temHead.map(function (x) { return  parseInt(x.iditem , 0); }).indexOf(parseInt(i.biz_item.iditem, 0));
+    for (const i of data) {
+      if (temHead.length === 0) {
+        const o = {
+          iditem: i.iditem,
+          itemname: i.biz_item.itemname
+        };
+        temHead.push(o);
+      } else {
+        const pos = temHead.map(function (x) { return  parseInt(x.iditem , 0); }).indexOf(parseInt(i.biz_item.iditem, 0));
+        if (pos < 0) {
+          const o = {
+            iditem: i.iditem,
+            itemname: i.biz_item.itemname
+          };
+          temHead.push(o);
+        }
+      }
     }
+
+    const c1 = {
+      iditem: -1,
+      itemname: 'CLIENTE'
+    };
+    const c2 = {
+      iditem: -2,
+      itemname: 'PROYECTO'
+    };
+    this.headSummaryLiquidation.push(c1); this.headSummaryLiquidation.push(c2);
+    for (const j of temHead) {
+      this.headSummaryLiquidation.push(j);
+    }
+
+    for (const k of data) {
+      const temItem = [];
+      for (const l of temHead) {
+        const oo = {
+          iditem: l.iditem,
+          quantity: 0
+        };
+        temItem.push(oo);
+      }
+      if (tempList1.length === 0) {
+        const o = {
+          idliquidation: k.idliquidation,
+          idproject: k.idproject,
+          businessname: k.biz_project.biz_client.businessname,
+          projectname: k.biz_project.projectname,
+          items: temItem
+        };
+        tempList1.push(o);
+      } else {
+        // tslint:disable-next-line:max-line-length
+        const pos = tempList1.map(function (x) { return  (x.idliquidation + '-' + x.idproject); }).indexOf((k.idliquidation + '-' + k.idproject));
+        if (pos < 0) {
+          const o = {
+            idliquidation: k.idliquidation,
+            idproject: k.idproject,
+            businessname: k.biz_project.biz_client.businessname,
+            projectname: k.biz_project.projectname,
+            items: temItem
+          };
+          tempList1.push(o);
+        }
+      }
+    }
+
+
+    for (const m of data) {
+      // tslint:disable-next-line:max-line-length
+      const pos = tempList1.map(function (x) { return  (x.idliquidation + '-' + x.idproject); }).indexOf((m.idliquidation + '-' + m.idproject));
+      const pos2 = tempList1[pos].items.map(function (y) { return parseInt(y.iditem, 0); }).indexOf( parseInt(m.iditem, 0) );
+      tempList1[pos].items[pos2].quantity = m.quantify;
+    }
+    console.log(tempList1);
+    this.listSummaryLiquidation = tempList1;
+
+
+
   }
 
 }
