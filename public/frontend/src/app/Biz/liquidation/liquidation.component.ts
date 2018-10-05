@@ -720,7 +720,6 @@ getList(data: any) {
     this.listSummaryLiquidation = [];
     this.headSummaryLiquidation = [];
     const tempList1 = [];
-    const tempList2 = [];
     const temHead = [];
     // const pos = temHead.map(function (x) { return  parseInt(x.iditem , 0); }).indexOf(parseInt(i.biz_item.iditem, 0));
     for (const i of data) {
