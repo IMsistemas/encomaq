@@ -715,6 +715,14 @@
                     </td>
                   </tr>
                 </tbody>
+                <tfoot class="bg-info">
+                   <td colspan="2" class="text-right">
+                     SUMAN
+                   </td>
+                   <td *ngFor="let auxFo of footSummaryLiquidation ">
+                     {{auxFo.quantity}}
+                   </td>
+                </tfoot>
               </table>
             </div>
           </div>

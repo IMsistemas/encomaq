@@ -55,6 +55,7 @@ export class LiquidationComponent implements OnInit {
 
   listSummaryLiquidation = [];
   headSummaryLiquidation = [];
+  footSummaryLiquidation = [];
 
   constructor(private liquidation: LiquidationService, private referralguide: ReferralguideService) { }
 
@@ -719,6 +720,7 @@ getList(data: any) {
   makeSummary(data) {
     this.listSummaryLiquidation = [];
     this.headSummaryLiquidation = [];
+    this.footSummaryLiquidation = [];
     const tempList1 = [];
     const temHead = [];
     // const pos = temHead.map(function (x) { return  parseInt(x.iditem , 0); }).indexOf(parseInt(i.biz_item.iditem, 0));
@@ -798,7 +800,19 @@ getList(data: any) {
     console.log(tempList1);
     this.listSummaryLiquidation = tempList1;
 
+    for (const n of temHead) {
+      const oo = {
+        iditem: n.iditem,
+        quantity: 0
+      };
+      this.footSummaryLiquidation.push(oo);
+    }
 
+
+    for (const p of data) {
+      const pos3 = this.footSummaryLiquidation.map(function (z) { return parseInt(z.iditem, 0); }).indexOf( parseInt(p.iditem, 0) );
+      this.footSummaryLiquidation[pos3].quantity += p.quantify;
+    }
 
   }
 
