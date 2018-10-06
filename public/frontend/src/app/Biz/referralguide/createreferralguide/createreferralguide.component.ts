@@ -184,7 +184,7 @@ export class CreatereferralguideComponent implements OnInit {
           console.log(response);
           if (response.success !== undefined) {
             $('#createreferralguide').modal('hide');
-            // frm.reset();
+            frm.reset();
             this.list_itemcont = [];
             this.idcontract_s = { idcontract: '', biz_client: { businessname: '' }, nocontract: ''};
             this.carrier_select = { idcarrier: '', carriername: '', identify: '', licenseplate: '' };
@@ -199,7 +199,7 @@ export class CreatereferralguideComponent implements OnInit {
             this.update_component_father.emit(true);
           } else if (response.error !== undefined) {
             $('#addclient').modal('hide');
-            frm.reset();
+            // frm.reset();
             this.update_component_father.emit(false);
           }
         },

@@ -104,6 +104,23 @@ class ReferralGuideController extends Controller
         //
     }
 
+    private function searchNumber($number, $id = null)
+    {
+
+        if ($id == null) {
+
+            $count = Referralguide::where('guidenumber', $number)->count();
+
+        } else {
+
+            $count = Referralguide::where('guidenumber', $number)->where('idreferralguide', '!=', $id)->count();
+
+        }
+
+        return ($count > 0) ? true : false;
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -114,45 +131,53 @@ class ReferralGuideController extends Controller
     {
         $data = $request->all();
 
-        $aux = new Referralguide();
-        $aux->idcontract = $data["Data"]["idcontract"];
-        $aux->idproject = $data["Data"]["idproject"];
-        $aux->idtransferreason = $data["Data"]["idtransferreason"];
-        $aux->idcarrier = $data["Data"]["idcarrier"];
-        $aux->datetimereferral = $data["Data"]["datetimereferral"];
-        $aux->sequential = $data["Data"]["sequential"];
-        /*$aux->startingpoint = $data["Data"]["startingpoint"];
-        $aux->arrivalpoint = $data["Data"]["arrivalpoint"];*/
-        $aux->guidenumber = $data["Data"]["guidenumber"];
-        $aux->logisticservicecost = $data["Data"]["logisticservicecost"];
-        $aux->state = 1;
-         if ($aux->save()) {
+        if ($this->searchNumber($data["Data"]["guidenumber"]) == false) {
 
-             $place = new ReferralGuidePlace();
+            $aux = new Referralguide();
+            $aux->idcontract = $data["Data"]["idcontract"];
+            $aux->idproject = $data["Data"]["idproject"];
+            $aux->idtransferreason = $data["Data"]["idtransferreason"];
+            $aux->idcarrier = $data["Data"]["idcarrier"];
+            $aux->datetimereferral = $data["Data"]["datetimereferral"];
+            $aux->sequential = $data["Data"]["sequential"];
+            /*$aux->startingpoint = $data["Data"]["startingpoint"];
+            $aux->arrivalpoint = $data["Data"]["arrivalpoint"];*/
+            $aux->guidenumber = $data["Data"]["guidenumber"];
+            $aux->logisticservicecost = $data["Data"]["logisticservicecost"];
+            $aux->state = 1;
+            if ($aux->save()) {
 
-             $place->idreferralguide = $aux->idreferralguide;
-             $place->idplace_start = $data["Data"]["idplace_start"];
-             $place->idplace_end = $data["Data"]["idplace_end"];
+                $place = new ReferralGuidePlace();
 
-             if ($place->save() == false) {
-                 return response()->json(['error' => $aux]);
-             }
+                $place->idreferralguide = $aux->idreferralguide;
+                $place->idplace_start = $data["Data"]["idplace_start"];
+                $place->idplace_end = $data["Data"]["idplace_end"];
 
-             foreach ($data["list"] as $f) {
-                 if( $f["iditem"]!="" ) {
-                    $caux = new Referralguideitem();
-                    $caux->idreferralguide = $aux->idreferralguide;
-                    $caux->iditem = $f["iditem"];
-                    $caux->price = $f["price"];
-                    $caux->quantify = $f["quantity"];
-                    $caux->observation = $f["observation"];
-                    $caux->save();
-                 }
-             }
-            return response()->json(['success' => $aux ]);
-         } else {
-             return response()->json(['error' => $aux]);
-         }
+                if ($place->save() == false) {
+                    return response()->json(['error' => $aux]);
+                }
+
+                foreach ($data["list"] as $f) {
+                    if( $f["iditem"]!="" ) {
+                        $caux = new Referralguideitem();
+                        $caux->idreferralguide = $aux->idreferralguide;
+                        $caux->iditem = $f["iditem"];
+                        $caux->price = $f["price"];
+                        $caux->quantify = $f["quantity"];
+                        $caux->observation = $f["observation"];
+                        $caux->save();
+                    }
+                }
+                return response()->json(['success' => $aux ]);
+            } else {
+                return response()->json(['error' => $aux]);
+            }
+
+        } else {
+
+            return response()->json(['error' => 'number_exists']);
+
+        }
     }
 
     /**
@@ -187,51 +212,61 @@ class ReferralGuideController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
+
+        if ($this->searchNumber($data["guidenumber"], $id) == false) {
+
+            $aux =  Referralguide::find($id);
+            $aux->idcontract = $data["idcontract"];
+            // $aux->idproject = $data["idproject"];
+            $aux->idtransferreason = $data["idtransferreason"];
+            $aux->idcarrier = $data["idcarrier"];
+            $aux->datetimereferral = $data["datetimereferral"];
+            $aux->sequential = $data["sequential"];
+            /*$aux->startingpoint = $data["startingpoint"];
+            $aux->arrivalpoint = $data["arrivalpoint"];*/
+            // $aux->guidenumber = $data["Data"]["guidenumber"];
+            $aux->guidenumber = $data["guidenumber"];
+            // $aux->logisticservicecost = $data["Data"]["logisticservicecost"];
+            $aux->logisticservicecost = $data["logisticservicecost"];
+
+            //$aux->state = 1;
+            if ($aux->save()) {
+
+                ReferralGuidePlace::where('idreferralguide', $id)->delete();
+                $place = new ReferralGuidePlace();
+                $place->idreferralguide = $aux->idreferralguide;
+                $place->idplace_start = $data["biz_referralguide_place"][0]['biz_place_start']["idplace"];
+                $place->idplace_end = $data["biz_referralguide_place"][0]['biz_place_end']["idplace"];
+
+                if ($place->save() == false) {
+                    return response()->json(['error' => $aux]);
+                }
+
+                $temp = Referralguideitem::whereRaw("idreferralguide='".$id."'")->delete();
+
+                foreach ($data["biz__referralguideitem"] as $f) {
+                    if( $f["iditem"]!="" ) {
+                        $caux = new Referralguideitem();
+                        $caux->idreferralguide = $aux->idreferralguide;
+                        $caux->iditem = $f["iditem"];
+                        $caux->price = $f["price"];
+                        $caux->quantify = $f["quantify"];
+                        $caux->observation = $f["observation"];
+                        $caux->save();
+                    }
+                }
+                return response()->json(['success' => $aux ]);
+            } else {
+                return response()->json(['error' => $aux]);
+            }
+
+        } else {
+
+            return response()->json(['error' => 'number_exists']);
+
+        }
         
-        $aux =  Referralguide::find($id);
-        $aux->idcontract = $data["idcontract"];
-        // $aux->idproject = $data["idproject"];
-        $aux->idtransferreason = $data["idtransferreason"];
-        $aux->idcarrier = $data["idcarrier"];
-        $aux->datetimereferral = $data["datetimereferral"];
-        $aux->sequential = $data["sequential"];
-        /*$aux->startingpoint = $data["startingpoint"];
-        $aux->arrivalpoint = $data["arrivalpoint"];*/
-        // $aux->guidenumber = $data["Data"]["guidenumber"];
-        $aux->guidenumber = $data["guidenumber"];
-        // $aux->logisticservicecost = $data["Data"]["logisticservicecost"];
-        $aux->logisticservicecost = $data["logisticservicecost"];
 
-        //$aux->state = 1;
-         if ($aux->save()) {
-
-             ReferralGuidePlace::where('idreferralguide', $id)->delete();
-             $place = new ReferralGuidePlace();
-             $place->idreferralguide = $aux->idreferralguide;
-             $place->idplace_start = $data["biz_referralguide_place"][0]['biz_place_start']["idplace"];
-             $place->idplace_end = $data["biz_referralguide_place"][0]['biz_place_end']["idplace"];
-
-             if ($place->save() == false) {
-                 return response()->json(['error' => $aux]);
-             }
-
-             $temp = Referralguideitem::whereRaw("idreferralguide='".$id."'")->delete();
-
-             foreach ($data["biz__referralguideitem"] as $f) {
-                 if( $f["iditem"]!="" ) {
-                    $caux = new Referralguideitem();
-                    $caux->idreferralguide = $aux->idreferralguide;
-                    $caux->iditem = $f["iditem"];
-                    $caux->price = $f["price"];
-                    $caux->quantify = $f["quantify"];
-                    $caux->observation = $f["observation"];
-                    $caux->save();
-                 }
-             }
-            return response()->json(['success' => $aux ]);
-         } else {
-             return response()->json(['error' => $aux]);
-         }       
     }
 
 
