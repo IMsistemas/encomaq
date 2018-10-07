@@ -247,11 +247,22 @@ class CotractController extends Controller
     public function contractfiltro(Request $request) 
     {
         $filtro = json_decode($request->get('filter'));
+
         $data = Contract::with("biz_client.biz_project","biz_contractitem.biz_item", 'biz_period', 'biz_contractpaymentform.biz_paymentform', 'nom_categoryitem')
                         ->selectRaw("biz_contract.*")
-                        ->join("biz_client","biz_client.idclient","=","biz_contract.idclient")
-                        ->whereRaw("biz_contract.state='".$filtro->state."' AND ( biz_contract.nocontract LIKE '%".$filtro->Buscar."%' OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%') )")
-                        ->orderBy("".$filtro->column, "".$filtro->order);
+                        ->join("biz_client","biz_client.idclient","=","biz_contract.idclient");
+
+        if ($filtro->state != 2) {
+
+            $data = $data->whereRaw("biz_contract.state='".$filtro->state."' AND ( biz_contract.nocontract LIKE '%".$filtro->Buscar."%' OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%') )")
+                ->orderBy("".$filtro->column, "".$filtro->order);
+
+        } else {
+
+            $data = $data->whereRaw("biz_contract.enddate < '" . date('Y-m-d') . "' AND ( biz_contract.nocontract LIKE '%".$filtro->Buscar."%' OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%') )")
+                ->orderBy("".$filtro->column, "".$filtro->order);
+
+        }
 
         return  $data->paginate($filtro->num_page);
     }

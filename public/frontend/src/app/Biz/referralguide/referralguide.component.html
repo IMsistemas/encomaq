@@ -64,7 +64,7 @@
       <div class="col-12 col-sm-2" style="margin-top: 5px;">
         <select class="custom-select" #est [(ngModel)]="state" (change)="page = 1; getList();">
           <option value="1">ACTIVO</option>
-          <option value="0">INACTIVO</option>
+          <option value="0">ANULADO</option>
         </select>
       </div>
 
@@ -120,7 +120,7 @@
 
           <td>{{item.biz_carrier.carriername}}</td>
 
-          <td>{{ ((item.state == 1)? 'ACTIVO':'INACTIVO') }}</td>
+          <td>{{ ((item.state == 1)? 'ACTIVO':'ANULADO') }}</td>
           <td class="noExl" >
             <div class="dropdown">
               <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
