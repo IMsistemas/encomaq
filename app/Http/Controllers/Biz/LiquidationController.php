@@ -35,6 +35,11 @@ class LiquidationController extends Controller
         //
     }
 
+    public function getLogo()
+    {
+        return Company::all();
+    }
+
     /**
      * Store a newly created resource in storage.
      *

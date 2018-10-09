@@ -57,6 +57,8 @@ export class LiquidationComponent implements OnInit {
   headSummaryLiquidation = [];
   footSummaryLiquidation = [];
 
+  imageLogo = '';
+
   constructor(private liquidation: LiquidationService, private referralguide: ReferralguideService) { }
 
   ngOnInit() {
@@ -64,6 +66,7 @@ export class LiquidationComponent implements OnInit {
     $('.auxaddidcliente').prop('disabled' , true);
     $('.modal-dialog').draggable();
     this.get_list_liquidation();
+    this.getLogo();
   }
   new_liquidation() {
     $('#addliquidation').modal('show');
@@ -595,6 +598,19 @@ orderProduct(frm: any) {
   $('#mdlinfo').modal('show');
 }
 
+convertDatetoString(date: string): string {
+
+  const months = [
+    'ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO',
+    'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'
+  ];
+
+  const dateTransform: Array<string> = date.split('-');
+
+  return dateTransform[2] + ' DE ' + months[parseInt(dateTransform[1], 0) - 1] + ' DEL ' + dateTransform[0];
+
+}
+
 calculateDay(startdate: string, enddate: string): number {
 
   if (enddate !== '') {
@@ -647,7 +663,17 @@ formatMoney(currency, value, decimals) {
 
     return valor;
   }
+}
 
+getLogo() {
+  this.liquidation.getLogo().subscribe(
+    (response) => {
+        console.log(response);
+        this.imageLogo = response.image;
+    },
+    (error) => {
+      console.log(error);
+    });
 }
 
 // ------------------------------------------------------------------------------------------------

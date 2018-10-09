@@ -47,4 +47,7 @@ export class LiquidationService {
   getSummary(filtro: any): Observable<any> {
     return this.http.get(this.url_api.get_url_api() + 'api/Liquidation/getSummary/' + JSON.stringify(filtro));
   }
+  getLogo(): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/Liquidation/getLogo');
+  }
 }
