@@ -20,10 +20,10 @@
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
           <a class="nav-link active" id="v-pills-home-tab1" data-toggle="pill" href="#v-pills-home1" role="tab" aria-controls="v-pills-home1"
-            aria-selected="true">INFORMACION GENERAL I</a>
+            aria-selected="true">INFORMACION GENERAL</a>
 
-          <a class="nav-link" id="v-pills-messages-tab1" data-toggle="pill" href="#v-pills-messages1" role="tab" aria-controls="v-pills-messages1"
-            aria-selected="false">INFORMACION GENERAL II</a>
+          <!-- <a class="nav-link" id="v-pills-messages-tab1" data-toggle="pill" href="#v-pills-messages1" role="tab" aria-controls="v-pills-messages1"
+            aria-selected="false">INFORMACION GENERAL II</a> -->
 
           <a class="nav-link" id="v-pills-profile-tab2" data-toggle="pill" href="#v-pills-profile2" role="tab" aria-controls="v-pills-profile2"
             aria-selected="false">ITEMS</a>
@@ -86,7 +86,7 @@
 
             <div class="row">
 
-              <div class="col-md-6 col-sm-12">
+              <div class="col-md-4 col-sm-12">
                 <div class="form-group">
                   <label for="exampleFormControlInput1">No. Guía Remisión</label>
                   <input type="text" class="form-control" id="guidenumber" name="guidenumber" maxlength="17"
@@ -94,7 +94,7 @@
                 </div>
               </div>
 
-              <div class="col-md-6 col-sm-12">
+              <div class="col-md-4 col-sm-12">
                 <div class="form-group">
                   <label for="exampleFormControlInput1">Proyectos
                     <span class="required">(*)</span>
@@ -103,7 +103,25 @@
                     <option *ngFor="let c of idcontract_s.biz_client.biz__project" value="{{c.idproject}}">{{c.projectname}}</option>
                   </select>
                 </div>
+                <div *ngIf="idproject.errors?.required && idproject.touched">
+                  <small id="" class="form-text text-danger text-right">El Proyecto es requerido</small>
+                </div>
               </div>
+
+              <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Bodegas
+                    <span class="required">(*)</span>
+                  </label>
+                  <select class="form-control" id="idwarehouse" name="idwarehouse" [(ngModel)]="tem_edit.idwarehouse" #idwarehouse="ngModel" required>
+                    <option *ngFor="let c of list_warehouse" value="{{c.idwarehouse}}">{{c.warehousename}}</option>
+                  </select>
+                </div>
+                <div *ngIf="idwarehouse.errors?.required && idwarehouse.touched">
+                  <small id="" class="form-text text-danger text-right">La Bodega es requerida</small>
+                </div>
+              </div>
+
             </div>
 
             <div class="row">
@@ -137,8 +155,8 @@
 
               <div class="col-md-4 col-sm-12">
                 <div class="form-group">
-                  <label for="exampleFormControlInput1">Costo Serv. Logística</label>
-                  <input type="text" class="form-control" id="logisticservicecost" name="logisticservicecost"
+                  <label for="exampleFormControlInput1">Costo Serv. Logística ($)</label>
+                  <input type="number" class="form-control" id="logisticservicecost" name="logisticservicecost"
                                   [(ngModel)]="tem_edit.logisticservicecost" #logisticservicecost="ngModel">
                 </div>
               </div>
@@ -170,9 +188,78 @@
 
             </div>
 
+            <div class="row">
+
+              <div class="col-12">
+
+                <div class="form-group ">
+                  <label for="exampleFormControlInput1">Transportista
+                    <span class="required">(*)</span>
+                  </label>
+                  <div class="input-group">
+                    <select class="form-control" style="display: none;" id="idcarrier" name="idcarrier" [(ngModel)]="carrier_select.idcarrier"
+                      readonly #idcarrier="ngModel" required>
+                      <option *ngFor="let cli of list_carrier" value="{{cli.idcarrier}}">
+                        {{cli.carriername}}
+                      </option>
+                    </select>
+                    <input type="text" class="form-control" name="temtransportisa" readonly [(ngModel)]="carrier_select.carriername" />
+
+                    <div class="input-group-append">
+                      <button class="btn btn-default" type="button" (click)="searchCarrier()">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="idcontract.errors?.required && idcontract.touched">
+                  <small id="" class="form-text text-danger text-right">El Contrato es requerido</small>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="row">
+
+              <div class="col-sm-6 col-12">
+
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">C.I.
+                    <span class="required">(*)</span>
+                  </label>
+                  <input type="text" class="form-control" readonly id="identify" name="identify" [(ngModel)]="carrier_select.identify" #identify="ngModel"
+                    required />
+                </div>
+
+                <div *ngIf="identify.errors?.required && identify.touched">
+                  <small id="" class="form-text text-danger text-right">El C.I. es requerido</small>
+                </div>
+
+              </div>
+
+              <div class="col-sm-6 col-12">
+
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Placa Nro
+                    <span class="required">(*)</span>
+                  </label>
+                  <input type="text" class="form-control" readonly id="licenseplate" name="licenseplate" [(ngModel)]="carrier_select.licenseplate"
+                    #licenseplate="ngModel" required>
+                </div>
+
+                <div *ngIf="licenseplate.errors?.required && licenseplate.touched">
+                  <small id="" class="form-text text-danger text-right">La Placa es requerido</small>
+                </div>
+
+              </div>
+              
+            </div>
+
           </div>
 
-          <div class="tab-pane fade" id="v-pills-messages1" role="tabpanel" aria-labelledby="v-pills-messages-tab1">
+          <!--<div class="tab-pane fade" id="v-pills-messages1" role="tabpanel" aria-labelledby="v-pills-messages-tab1">
 
             <div class="row">
 
@@ -193,12 +280,6 @@
                   </div>
                 </div>
 
-                <!-- <div class="form-group">
-                  <label for="exampleFormControlInput1">Punto de Partida
-                    <span class="required">(*)</span>
-                  </label>
-                  <input type="text" class="form-control" id="startingpoint" name="startingpoint" [(ngModel)]="tem_edit.startingpoint" #startingpoint="ngModel" required>
-                </div> -->
 
                 <div *ngIf="startingpoint.errors?.required && startingpoint.touched">
                   <small id="" class="form-text text-danger text-right">El Punto de Partida es requerido</small>
@@ -227,13 +308,7 @@
                   </div>
 
                 </div>
-
-                <!-- <div class="form-group">
-                  <label for="exampleFormControlInput1">Punto de Llegada
-                    <span class="required">(*)</span>
-                  </label>
-                  <input type="text" class="form-control" id="arrivalpoint" name="arrivalpoint" [(ngModel)]="tem_edit.arrivalpoint" #arrivalpoint="ngModel" required>
-                </div> -->
+>
 
                 <div *ngIf="arrivalpoint.errors?.required && arrivalpoint.touched">
                   <small id="" class="form-text text-danger text-right">El Punto de Llegada es requerido</small>
@@ -312,11 +387,9 @@
 
               </div>
 
-
-
             </div>
 
-          </div>
+          </div> -->
 
           <div class="tab-pane fade" id="v-pills-profile2" role="tabpanel" aria-labelledby="v-pills-profile-tab2">
 

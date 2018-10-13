@@ -5,6 +5,7 @@ import { ReasontransferService } from '../../../service/ntranseferreason/reasont
 import { ItemService } from '../../../service/bitem/item.service';
 import { ReferralguideService } from '../../../service/referralguide/referralguide.service';
 import { ItempriceService } from '../../../service/bitemprice/itemprice.service';
+import { WarehouseService } from '../../../service/bwarehouse/warehouse.service';
 
 declare var jquery: any;
 declare var $: any;
@@ -23,6 +24,7 @@ export class UpdatereferralguideComponent implements OnInit {
   lis_client = [];
   lis_item = [];
   list_itemcont = [];
+  list_warehouse = [];
   fieldPlace = 0;
   @Input() idcontract_s: any; //
   @Input() item_select: any;
@@ -32,14 +34,33 @@ export class UpdatereferralguideComponent implements OnInit {
 
   listTransferReason = [];
   constructor(private transferreason: ReasontransferService, private item: ItemService, private referra: ReferralguideService,
-    private itemPrice: ItempriceService ) { }
+    private itemPrice: ItempriceService, private warehouse: WarehouseService ) { }
 
   ngOnInit() {
     this.place_select_start = { idplace: '', placename: ''};
     this.place_select_end = { idplace: '', placename: ''};
     this.getTransferActive();
+    this.getWareHouseActive();
     this.list_items();
   }
+
+  getWareHouseActive() {
+    this.list_warehouse.push({ idwarehouse: '', warehousename: '--Seleccione--' });
+    this.warehouse.get_warehouse_active().subscribe(
+      (response) => {
+        for (const cat of response) {
+          const o = {
+            idwarehouse: cat.idwarehouse,
+            warehousename: cat.warehousename
+          };
+          this.list_warehouse.push(o);
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+  }
+
   getTransferActive() {
     this.listTransferReason.push({ idtransferreason: '', transferreasonname: '--Seleccione--' });
     this.transferreason.getTransferActive().subscribe(

@@ -138,16 +138,18 @@ class ReferralGuideController extends Controller
             $aux->idproject = $data["Data"]["idproject"];
             $aux->idtransferreason = $data["Data"]["idtransferreason"];
             $aux->idcarrier = $data["Data"]["idcarrier"];
+
+            $aux->idwarehouse = $data["Data"]["idwarehouse"];
+
             $aux->datetimereferral = $data["Data"]["datetimereferral"];
             $aux->sequential = $data["Data"]["sequential"];
-            /*$aux->startingpoint = $data["Data"]["startingpoint"];
-            $aux->arrivalpoint = $data["Data"]["arrivalpoint"];*/
+
             $aux->guidenumber = $data["Data"]["guidenumber"];
             $aux->logisticservicecost = $data["Data"]["logisticservicecost"];
             $aux->state = 1;
             if ($aux->save()) {
 
-                $place = new ReferralGuidePlace();
+                /* $place = new ReferralGuidePlace();
 
                 $place->idreferralguide = $aux->idreferralguide;
                 $place->idplace_start = $data["Data"]["idplace_start"];
@@ -155,7 +157,7 @@ class ReferralGuideController extends Controller
 
                 if ($place->save() == false) {
                     return response()->json(['error' => $aux]);
-                }
+                } */
 
                 foreach ($data["list"] as $f) {
                     if( $f["iditem"]!="" ) {
@@ -220,6 +222,9 @@ class ReferralGuideController extends Controller
             // $aux->idproject = $data["idproject"];
             $aux->idtransferreason = $data["idtransferreason"];
             $aux->idcarrier = $data["idcarrier"];
+
+            $aux->idwarehouse = $data["idwarehouse"];
+
             $aux->datetimereferral = $data["datetimereferral"];
             $aux->sequential = $data["sequential"];
             /*$aux->startingpoint = $data["startingpoint"];
@@ -232,7 +237,7 @@ class ReferralGuideController extends Controller
             //$aux->state = 1;
             if ($aux->save()) {
 
-                ReferralGuidePlace::where('idreferralguide', $id)->delete();
+                /* ReferralGuidePlace::where('idreferralguide', $id)->delete();
                 $place = new ReferralGuidePlace();
                 $place->idreferralguide = $aux->idreferralguide;
                 $place->idplace_start = $data["biz_referralguide_place"][0]['biz_place_start']["idplace"];
@@ -240,7 +245,7 @@ class ReferralGuideController extends Controller
 
                 if ($place->save() == false) {
                     return response()->json(['error' => $aux]);
-                }
+                } */
 
                 $temp = Referralguideitem::whereRaw("idreferralguide='".$id."'")->delete();
 
