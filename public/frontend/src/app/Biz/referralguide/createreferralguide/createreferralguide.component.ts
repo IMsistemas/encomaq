@@ -7,6 +7,7 @@ import { ItemService } from '../../../service/bitem/item.service';
 import { ReasontransferService } from '../../../service/ntranseferreason/reasontransfer.service';
 import { ReferralguideService } from '../../../service/referralguide/referralguide.service';
 import { ItempriceService } from '../../../service/bitemprice/itemprice.service';
+import { WarehouseService } from '../../../service/bwarehouse/warehouse.service';
 
 declare var jquery: any;
 declare var $: any;
@@ -28,6 +29,7 @@ export class CreatereferralguideComponent implements OnInit {
   listContract = [];
   list_carrier = [];
   list_projects = [];
+  list_warehouse = [];
 
   fieldPlace = 0;
 
@@ -43,7 +45,8 @@ export class CreatereferralguideComponent implements OnInit {
     private item: ItemService,
     private transferreason: ReasontransferService,
     private referra: ReferralguideService,
-    private itemPrice: ItempriceService
+    private itemPrice: ItempriceService,
+    private warehouse: WarehouseService
   ) { }
 
   ngOnInit() {
@@ -57,6 +60,7 @@ export class CreatereferralguideComponent implements OnInit {
     this.getContractActive();
     this.getTransferActive();
     this.getCarrierActive();
+    this.getWareHouseActive();
     this.list_items();
   }
 
@@ -68,6 +72,23 @@ export class CreatereferralguideComponent implements OnInit {
     $('.modal').draggable();
     $('.dropdown-toggle').dropdown();
     $('.modal-dialog').draggable();
+  }
+
+  getWareHouseActive() {
+    this.list_warehouse.push({ idwarehouse: '', warehousename: '--Seleccione--' });
+    this.warehouse.get_warehouse_active().subscribe(
+      (response) => {
+        for (const cat of response) {
+          const o = {
+            idwarehouse: cat.idwarehouse,
+            warehousename: cat.warehousename
+          };
+          this.list_warehouse.push(o);
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
   }
 
   getTransferActive() {

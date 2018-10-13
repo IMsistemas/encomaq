@@ -19,10 +19,10 @@
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
           <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home"
-            aria-selected="true">INFORMACION GENERAL I</a>
+            aria-selected="true">INFORMACION GENERAL </a>
 
-          <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages"
-            aria-selected="false">INFORMACION GENERAL II</a>
+          <!-- <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages"
+            aria-selected="false">INFORMACION GENERAL II</a> -->
 
           <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile"
             aria-selected="false">ITEMS</a>
@@ -83,15 +83,15 @@
 
               <div class="row">
 
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-4 col-sm-12">
                   <div class="form-group">
                     <label for="exampleFormControlInput1">No. Guía Remisión</label>
                     <input type="text" class="form-control" id="guidenumber" name="guidenumber" maxlength="17"
-                    [(ngModel)]="frmreferralguide.guidenumber"      #guidenumber="ngModel" placeholder="xxx-xxx-xxxxxxxxx">
+                    ngModel #guidenumber="ngModel" placeholder="xxx-xxx-xxxxxxxxx">
                   </div>
                 </div>
 
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-4 col-sm-12">
                   <div class="form-group">
                     <label for="exampleFormControlInput1">Proyectos
                       <span class="required">(*)</span>
@@ -101,6 +101,21 @@
                     </select>
                   </div>
                 </div>
+
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Bodegas
+                      <span class="required">(*)</span>
+                    </label>
+                    <select class="form-control" id="idwarehouse" name="idwarehouse" ngModel #idwarehouse="ngModel" required>
+                      <option *ngFor="let c of list_warehouse" value="{{c.idwarehouse}}">{{c.warehousename}}</option>
+                    </select>
+                  </div>
+                  <div *ngIf="idwarehouse.errors?.required && idwarehouse.touched">
+                    <small id="" class="form-text text-danger text-right">La Bodega es requerida</small>
+                  </div>
+                </div>
+
               </div>
 
               <div class="row">
@@ -150,7 +165,12 @@
                         <span class="required">(*)</span>
                       </label>
                       <div class="input-group">
-                        <select class="form-control" id="idtransferreason" name="idtransferreason" [(ngModel)]="frmreferralguide.idtransferreason" #idtransferreason="ngModel" required>
+                        <!--<select class="form-control" id="idtransferreason" name="idtransferreason" [(ngModel)]="frmreferralguide.idtransferreason" #idtransferreason="ngModel" required>
+                          <option *ngFor="let i of listTransferReason" value="{{i.idtransferreason}}">
+                            {{i.transferreasonname}}
+                          </option>
+                        </select> -->
+                        <select class="form-control" id="idtransferreason" name="idtransferreason" ngModel #idtransferreason="ngModel" required>
                           <option *ngFor="let i of listTransferReason" value="{{i.idtransferreason}}">
                             {{i.transferreasonname}}
                           </option>
@@ -166,9 +186,77 @@
 
               </div>
 
+              <div class="row">
+
+                <div class="col-12">
+
+                    <div class="form-group ">
+                      <label for="exampleFormControlInput1">Transportista
+                        <span class="required">(*)</span>
+                      </label>
+                      <div class="input-group">
+                        <select class="form-control" style="display: none;" id="idcarrier" name="idcarrier" [(ngModel)]="carrier_select.idcarrier" readonly  #idcarrier="ngModel" required>
+                          <option *ngFor="let cli of list_carrier" value="{{cli.idcarrier}}">
+                            {{cli.carriername}}
+                          </option>
+                        </select>
+                        <input type="text" class="form-control" name="temtransportisa" readonly [(ngModel)]="carrier_select.carriername" />
+
+                        <div class="input-group-append">
+                          <button class="btn btn-default" type="button" (click)="searchCarrier()"  >
+                            <i class="fas fa-search"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div *ngIf="idcontract.errors?.required && idcontract.touched">
+                      <small id="" class="form-text text-danger text-right">El Contrato es requerido</small>
+                    </div>
+
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                  <div class="col-sm-6 col-12">
+
+                      <div class="form-group">
+                        <label for="exampleFormControlInput1">C.I.
+                          <span class="required">(*)</span>
+                        </label>
+                        <input type="text" class="form-control" readonly id="identify" name="identify" [(ngModel)]="carrier_select.identify" #identify="ngModel" required />
+                      </div>
+
+                      <div *ngIf="identify.errors?.required && identify.touched">
+                        <small id="" class="form-text text-danger text-right">El C.I. es requerido</small>
+                      </div>
+
+                    </div>
+
+                  <div class="col-sm-6 col-12">
+
+                    <div class="form-group">
+                      <label for="exampleFormControlInput1">Placa Nro
+                        <span class="required">(*)</span>
+                      </label>
+                      <input type="text" class="form-control" readonly  id="licenseplate" name="licenseplate" [(ngModel)]="carrier_select.licenseplate" #licenseplate="ngModel" required>
+                    </div>
+
+                    <div *ngIf="licenseplate.errors?.required && licenseplate.touched">
+                      <small id="" class="form-text text-danger text-right">La Placa es requerido</small>
+                    </div>
+
+                  </div>
+
+
+
+                </div>
+
           </div>
 
-          <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+          <!--<div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
 
             <div class="row">
 
@@ -295,7 +383,7 @@
 
                 </div>
 
-          </div>
+          </div> -->
 
           <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
 

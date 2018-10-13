@@ -12,6 +12,9 @@ export class WarehouseService {
   get_warehouse(): Observable<any> {
     return this.http.get(this.url_api.get_url_api() + 'api/WareHouse');
   }
+  get_warehouse_active(): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/WareHouse/active');
+  }
   add_warehouse(data: any): Observable<any> {
     return this.http.post(this.url_api.get_url_api() + 'api/WareHouse', data);
   }

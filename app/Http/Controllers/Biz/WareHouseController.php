@@ -21,6 +21,11 @@ class WareHouseController extends Controller
         return  Response::json($data,200);
     }
 
+    public function active()
+    {
+        return Warehouse::where('state', 1)->get();
+    }
+
     /**
      * Show the form for creating a new resource.
      *
