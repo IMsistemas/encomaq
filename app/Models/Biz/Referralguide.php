@@ -34,4 +34,14 @@ class Referralguide extends Model
     {
         return $this->belongsTo('App\Models\Nomenclature\TransferReason', 'idtransferreason');
     }
+
+    public function biz_warehouse()
+    {
+        return $this->belongsTo('App\Models\Biz\Warehouse', 'idwarehouse');
+    }
+
+    public function biz_project()
+    {
+        return $this->belongsTo('App\Models\Biz\Project', 'idproject');
+    }
 }

@@ -91,9 +91,10 @@
         <tr>
           <th style="width: 3%;">NO</th>
           <th>CLIENTE</th>
-          <th style="width: 8%;">CONTRATO</th>
-          <th style="width: 8%;">FECHA</th>
-          <th style="width: 5%;">HORA</th>
+          <th style="width: 6%;">CONTRATO</th>
+          <th style="width: 10%;">NUMERO</th>
+          <th style="width: 7%;">FECHA</th>
+          <th style="width: 4%;">HORA</th>
           <th>MOTIVO</th>
           <th style="width: 12%;">P. PARTIDA</th>
           <th style="width: 12%;">P. LLEGADA</th>
@@ -107,16 +108,38 @@
           <td>{{i+from}}</td>
           <td>{{item.biz_contract.biz_client.businessname}}</td>
           <td>{{item.biz_contract.nocontract}}</td>
-
+          <td>{{item.guidenumber}}</td>
           <td>{{item.datetimereferral}}</td>
           <td>{{item.sequential}}</td>
           <td>{{item.nom_transferreason.transferreasonname}}</td>
 
-          <td *ngIf="item.biz_referralguide_place.length == 0">{{item.startingpoint}}</td>
-          <td *ngIf="item.biz_referralguide_place.length == 0">{{item.arrivalpoint}}</td>
+          <!--<td *ngIf="item.biz_referralguide_place.length == 0">{{item.startingpoint}}</td>
+          <td *ngIf="item.biz_referralguide_place.length == 0">{{item.arrivalpoint}}</td> -->
 
-          <td *ngIf="item.biz_referralguide_place.length > 0">{{item.biz_referralguide_place[0].biz_place_start.placename}}</td>
-          <td *ngIf="item.biz_referralguide_place.length > 0">{{item.biz_referralguide_place[0].biz_place_end.placename}}</td>
+          <!--<td *ngIf="item.biz_referralguide_place.length > 0">{{item.biz_referralguide_place[0].biz_place_start.placename}}</td>
+          <td *ngIf="item.biz_referralguide_place.length > 0">{{item.biz_referralguide_place[0].biz_place_end.placename}}</td> -->
+
+          <td>
+
+            <span *ngIf="item.nom_transferreason.idtypetransferreason != 2">
+                {{item.biz_warehouse.address}}
+            </span>
+            <span *ngIf="item.nom_transferreason.idtypetransferreason == 2">
+                {{item.biz_project.place}}
+            </span>
+            
+          </td>
+          <td>
+            
+              <span *ngIf="item.nom_transferreason.idtypetransferreason != 2">
+                  {{item.biz_project.place}}
+                  
+              </span>
+              <span *ngIf="item.nom_transferreason.idtypetransferreason == 2">
+                  {{item.biz_warehouse.address}}
+              </span>
+
+          </td>
 
           <td>{{item.biz_carrier.carriername}}</td>
 
@@ -352,11 +375,25 @@
                 </tr>
                 <tr>
                   <th>PUNTO DE PARTIDA</th>
-                  <td colspan="3">{{info.biz_referralguide_place[0].biz_place_start.placename}}</td>
+                  <td colspan="3">
+                      <span *ngIf="info.nom_transferreason.idtypetransferreason != 2">
+                          {{info.biz_warehouse.address}}
+                      </span>
+                      <span *ngIf="info.nom_transferreason.idtypetransferreason == 2">
+                          {{info.biz_project.place}}
+                      </span>
+                  </td>
                 </tr>
                 <tr>
                   <th>PUNTO DE LLEGADA</th>
-                  <td colspan="3">{{info.biz_referralguide_place[0].biz_place_end.placename}}</td>
+                  <td colspan="3">
+                      <span *ngIf="info.nom_transferreason.idtypetransferreason == 2">
+                          {{info.biz_warehouse.address}}
+                      </span>
+                      <span *ngIf="info.nom_transferreason.idtypetransferreason != 2">
+                          {{info.biz_project.place}}
+                      </span>
+                  </td>
                 </tr>
 
               </table>
