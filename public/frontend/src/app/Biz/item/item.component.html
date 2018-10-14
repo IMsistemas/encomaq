@@ -114,7 +114,7 @@
           <th>DESCRIPCIÓN</th>
           <th>CATEGORÍA</th>
           <th>UNIDAD</th>
-          <th style="display: none;">PRECIOS</th>
+          <th>PRECIOS</th>
           <th style="width: 8%;">ESTADO</th>
           <th class="noExl" style="width: 5%;"></th>
         </tr>
@@ -130,7 +130,7 @@
           <td>{{ident.description}}</td>
           <td>{{ident.nom_category.categoryitemname}}</td>
           <td>{{ident.nom_unit.unittypename}}</td>
-          <td style="display: none;">
+          <td>
             <span *ngFor="let price of ident.biz_itemprice">
               $ {{price.price}},
             </span>

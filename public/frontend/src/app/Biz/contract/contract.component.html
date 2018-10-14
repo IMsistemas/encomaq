@@ -130,8 +130,13 @@
 
 
               <td>{{ident.biz_client.address}}</td>
-              <td *ngIf="ident.receipt != ''">F</td>
-              <td *ngIf="ident.receipt == ''"></td>
+
+              <td>
+                <span *ngIf="ident.invoice != '' && ident.invoice != null">
+                  F
+                </span>
+              </td>              
+
               <td>{{ident.biz_client.phone + ((ident.biz_client.phone_2 != null) ? ', ' + ident.biz_client.phone_2 : '')}}</td>
               <td>{{ident.cost}}</td>
               <td>{{ident.invoice}}</td>

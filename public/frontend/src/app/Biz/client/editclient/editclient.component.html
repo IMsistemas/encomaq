@@ -30,10 +30,14 @@
 
         <div class="col-12 col-sm-6">
           <div class="form-group">
-            <label for="exampleFormControlInput1">Identificación
+            <label for="exampleFormControlInput1">Identificación 
               <span class="required">(*)</span>
             </label>
-            <input type="text" class="form-control" maxlength="{{identifylength}}"  id="identify" name="identify" [(ngModel)]="tem_edit.identify" #identify="ngModel" required>
+            <input type="text" class="form-control" 
+                  
+                  maxlength="{{identifylength}}"  
+                  
+                  id="identify" name="identify" [(ngModel)]="tem_edit.identify" #identify="ngModel" required>
           </div>
   
           <div *ngIf="identify.errors?.required && identify.touched">

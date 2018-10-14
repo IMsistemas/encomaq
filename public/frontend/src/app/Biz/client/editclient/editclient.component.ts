@@ -18,6 +18,7 @@ export class EditclientComponent implements OnInit {
 
   ngOnInit() {
     this.list_identifytype();
+    console.log('a');
   }
   list_identifytype() {
     this.lis_tipoident.push({ ididentifytype: '', identifytypename: '-- Identificación --' });
