@@ -669,7 +669,7 @@ getLogo() {
   this.liquidation.getLogo().subscribe(
     (response) => {
         console.log(response);
-        this.imageLogo = response.image;
+        this.imageLogo = response;
     },
     (error) => {
       console.log(error);
