@@ -160,9 +160,17 @@
                     echo "<td>".$c["biz_contract"]["biz_client"]["businessname"]."</td>";
                     echo "<td>".$c["datetimereferral"]."</td>";
                     echo "<td>".$c["sequential"]."</td>";
+
                     echo "<td>".$c["nom_transferreason"]["transferreasonname"]."</td>";
-                    echo "<td>".$c["startingpoint"]."</td>";
-                    echo "<td>".$c["arrivalpoint"]."</td>";
+
+                    if ($c["nom_transferreason"]["idtypetransferreason"] == 1 || $c["nom_transferreason"]["idtypetransferreason"] == 3) {
+                        echo "<td>".$c["biz_warehouse"]['address']."</td>";
+                        echo "<td>".$c["biz_project"]['place']."</td>";
+                    } else {
+                        echo "<td>".$c["biz_project"]['place']."</td>";
+                        echo "<td>".$c["biz_warehouse"]['address']."</td>";                        
+                    }
+
                     echo "<td>".$c["biz_carrier"]["carriername"]."</td>";
                     if ($c["state"] == 1) {
                         echo "<td>ACTIVO</td>";

@@ -315,7 +315,7 @@ class ReferralGuideController extends Controller
         $where .= " OR biz_contract.nocontract LIKE '%" . $filter->search . "%'   ";
         $where .= " OR biz_client.businessname LIKE '%" . $filter->search . "%'  ) ";
 
-        $data = Referralguide::with('biz_contract.biz_client.biz_Project', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem')
+        $data = Referralguide::with('biz_project', 'biz_warehouse', 'biz_contract.biz_client.biz_Project', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem')
                         ->selectRaw("biz_referralguide.* ")
                         ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")
                         ->join("biz_client", "biz_client.idclient", "=", "biz_contract.idclient" )
@@ -327,7 +327,7 @@ class ReferralGuideController extends Controller
         $view =  \View::make('Print.ListGuia', compact('data','company'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
-        $pdf->setPaper('A4', 'portrait');
+        $pdf->setPaper('A4', 'landscape');
         return $pdf->stream("ListaDeGuias".$today.".pdf");
     }
     
@@ -339,7 +339,7 @@ class ReferralGuideController extends Controller
         $where .= " AND biz_referralguide.idreferralguide=".$id." ";
         
 
-        $data = Referralguide::with('biz_contract.biz_client.biz_Project', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem')
+        $data = Referralguide::with('biz_project', 'biz_warehouse', 'biz_contract.biz_client.biz_Project', 'biz_carrier', 'nom_transferreason', 'biz_Referralguideitem')
                         ->selectRaw("biz_referralguide.* ")
                         ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")
                         ->join("biz_client", "biz_client.idclient", "=", "biz_contract.idclient" )

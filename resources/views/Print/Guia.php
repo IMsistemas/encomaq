@@ -134,7 +134,8 @@
     </div>
     <div class="row text-center">
         <h3>
-            Guía De Remisión
+            Guía de Remisión <br>
+            <?php echo $data[0]["guidenumber"]; ?>
         </h3>
     </div>
     
@@ -156,11 +157,18 @@
             <td colspan="3"><?php echo $data[0]["nom_transferreason"]["transferreasonname"]; ?></td>
         </tr>
         <tr>
-            <th>Punto de partida</th>
-            <td><?php echo $data[0]["startingpoint"]; ?></td>
 
-            <th>Punto de llegada</th>
-            <td><?php echo $data[0]["arrivalpoint"]; ?></td>
+            <?php
+
+            if ($data[0]["nom_transferreason"]["idtypetransferreason"] == 1 || $data[0]["nom_transferreason"]["idtypetransferreason"] == 3) {
+                echo "<th>Punto de partida</th><td>".$data[0]["biz_warehouse"]['address']."</td>";
+                echo "<th>Punto de llegada</th><td>".$data[0]["biz_project"]['place']."</td>";
+            } else {
+                echo "<th>Punto de partida</th><td>".$data[0]["biz_project"]['place']."</td>";
+                echo "<th>Punto de llegada</th><td>".$data[0]["biz_warehouse"]['address']."</td>";                        
+            }
+
+            ?>
 
         </tr>
         <tr>

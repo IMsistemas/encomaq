@@ -37,7 +37,7 @@ export class EditclientComponent implements OnInit {
         console.log('POST call in error", respons', error);
       });
   }
-  changeIdentify(form) {
+  changeIdentify(form, clear: boolean = true) {
     if (form.ididentifytype !== '') {
       for (const idt of this.lis_tipoident) {
 
@@ -47,10 +47,15 @@ export class EditclientComponent implements OnInit {
           } else {
             this.identifylength = 1000;
           }
-          form.identify = '';
+
+          if (clear === true) {
+            form.identify = '';
+          }
+
         }
 
       }
+      // console.log(this.identifylength);
     }
   }
   modify_client(data: any, frmeditclient) {
