@@ -101,9 +101,10 @@
         <tr>
           <th style="width: 3%;">NO</th>
           <th>NOMBRE</th>
-          <!--<th>DOCUMENTO</th>-->
-          <!--<th>TELÉFONO</th>-->
           <th>IDENTIFICACIÓN</th>
+          <!--<th>DOCUMENTO</th>-->
+          <th>TELÉFONO</th>
+          
           <th style="width: 20%;">DIRECCIÓN</th>
           <th>CORREO</th>
           <th style="width: 5%;">ESTADO</th>
@@ -116,7 +117,7 @@
           <td>{{ident.businessname}}</td>
           <!--<td>{{ident.nom_identifytype.identifytypename}}</td>-->
           <td>{{ident.identify}}</td>
-          <!--<td>{{ident.phone}}</td>-->
+          <td>{{ident.phone}}</td>
           <td>{{ident.address}}</td>
           <td>{{ident.email}}</td>
           <td>{{ ((ident.state == 1)? 'ACTIVO':'INACTIVO') }}</td>
