@@ -125,6 +125,7 @@
 </style>    
 </head>
 <body>
+
     <div class="row text-center">
         <h1>
         <?php
@@ -137,6 +138,7 @@
             Contrato
         </h3>
     </div>
+
     
     <table class="table">
         <tr>
@@ -161,16 +163,16 @@
             <th>Área (m<sup>2</sup>)</th>
             <td><?php echo $data[0]["area"]; ?></td>
 
-            <th>Periodo de alquiler</th>
-            <td><?php echo $data[0]["period"]; ?></td>
+            <th>Período de alquiler</th>
+            <td><?php echo $data[0]["period"] . ' (' . $data[0]["biz_period"]["periodname"]; ?></td>
 
         </tr>
 
 
         <tr>
-            <th>Recibos</th>
+            <th>No. Recibos</th>
             <td><?php echo $data[0]["receipt"]; ?></td>
-            <th>Facturas </th>
+            <th>No. Facturas </th>
             <td><?php echo $data[0]["invoice"]; ?></td>
         </tr>
         <tr>

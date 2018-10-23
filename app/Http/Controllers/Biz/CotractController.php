@@ -320,7 +320,7 @@ class CotractController extends Controller
     public function exportarpdfid ($id) {
         ini_set('max_execution_time', 300);
        
-       $data = Contract::with("biz_client","biz_contractitem.biz_item", 'nom_categoryitem')
+       $data = Contract::with("biz_client","biz_contractitem.biz_item", 'nom_categoryitem', 'biz_period')
                         ->selectRaw("biz_contract.*")
                         ->join("biz_client","biz_client.idclient","=","biz_contract.idclient")
                         ->whereRaw("biz_contract.state='1' AND biz_contract.idcontract=".$id."")
