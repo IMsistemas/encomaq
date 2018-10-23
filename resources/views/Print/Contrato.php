@@ -127,24 +127,34 @@
 <body>
 
     <div class="row text-center">
-        <h1>
-        <?php
-            echo $company[0]["tradename"];
-        ?>
-        </h1>
+
     </div>
     <div class="row text-center">
-        <h3>
-            Contrato
-        </h3>
+
     </div>
 
+    <table class="table">
+        <tr>
+            <td style="vertical-align: center !important; border-top: 0px !important;">
+                <br>
+                <img src="<?php echo $company[0]["image"]; ?>" alt="">
+            </td>
+            <td class="text-right" style="border-top: 0px !important;">
+                <h1>
+                    <?php echo $company[0]["tradename"]; ?>
+                </h1>
+                <h3>
+                    Contrato No. <?php echo $data[0]["nocontract"]; ?>
+                </h3>
+            </td>
+        </tr>
+    </table>
     
     <table class="table">
         <tr>
-            <th>Cliente</th>
+            <th style="width: 15%;">Cliente</th>
             <td><?php echo $data[0]["biz_client"]["businessname"]; ?></td>
-            <th>C.I./ RUC</th>
+            <th style="width: 18%;">C.I./ RUC</th>
             <td><?php echo $data[0]["biz_client"]["identify"]; ?></td>
         </tr>
         <tr>
@@ -164,7 +174,7 @@
             <td><?php echo $data[0]["area"]; ?></td>
 
             <th>Período de alquiler</th>
-            <td><?php echo $data[0]["period"] . ' (' . $data[0]["biz_period"]["periodname"]; ?></td>
+            <td><?php echo $data[0]["period"] . ' (' . $data[0]["biz_period"]["periodname"] . ')'; ?></td>
 
         </tr>
 
