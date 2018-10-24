@@ -311,10 +311,12 @@ class LiquidationController extends Controller
         ini_set('max_execution_time', 300);
         $filtro = json_decode($paramentro);
 
+        $company = Company::all();
+
         $body = file_get_contents(public_path() . '/uploads/temp/' . $filtro->name);
 
         $today=date("Y-m-d H:i:s");
-        $view =  \View::make('Print.LiquidacionFormat', compact('body'))->render();
+        $view =  \View::make('Print.LiquidacionFormat', compact('body','company'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         $pdf->setPaper('A4', 'landscape');

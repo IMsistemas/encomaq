@@ -125,6 +125,23 @@
 </style>    
 </head>
 <body>
+
+    <table class="table">
+        <tr>
+            <td style="vertical-align: center !important; border-top: 0px !important;">
+                <br>
+                <img src="<?php echo $company[0]["image"]; ?>" alt="">
+            </td>
+            <td class="text-right" style="border-top: 0px !important;">
+                <h1>
+                    <?php echo $company[0]["tradename"]; ?>
+                </h1>
+                <h2>
+                    LIQUIDACION
+                </h2>
+            </td>
+        </tr>
+    </table>
     
 
     <?php
