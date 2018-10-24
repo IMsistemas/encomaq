@@ -205,7 +205,7 @@ export class CreatereferralguideComponent implements OnInit {
           console.log(response);
           if (response.success !== undefined) {
             $('#createreferralguide').modal('hide');
-            frm.reset();
+            // frm.reset();
             this.list_itemcont = [];
             this.idcontract_s = { idcontract: '', biz_client: { businessname: '' }, nocontract: ''};
             this.carrier_select = { idcarrier: '', carriername: '', identify: '', licenseplate: '' };
