@@ -129,7 +129,12 @@ class CotractController extends Controller
                  $caux = new ContractPaymentForm();
                  $caux->idcontract = $aux->idcontract;
                  $caux->idpaymentform = $f["idpaymentform"];
-                 $caux->cost = $f["valor"];
+
+                 if ($f["valor"] != null && $f["valor"] != '') {
+                    $caux->cost = $f["valor"];
+                } else {
+                    $caux->cost = 0;
+                }
 
                  if ($caux->save() == false) {
                      return response()->json(['error' => false ]);
@@ -209,7 +214,12 @@ class CotractController extends Controller
                 $caux = new ContractPaymentForm();
                 $caux->idcontract = $id;
                 $caux->idpaymentform = $f["idpaymentform"];
-                $caux->cost = $f["valor"];
+
+                if ($f["valor"] != null && $f["valor"] != '') {
+                    $caux->cost = $f["valor"];
+                } else {
+                    $caux->cost = 0;
+                }
 
                 if ($caux->save() == false) {
                     return response()->json(['error' => false ]);
@@ -248,23 +258,25 @@ class CotractController extends Controller
     {
         $filtro = json_decode($request->get('filter'));
 
+        //$sql = "biz_contract.state='".$filtro->state."' AND ";
+        $sql = "( biz_contract.nocontract LIKE '%".$filtro->Buscar."%' OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%') ) ";
+
+
         $data = Contract::with("biz_client.biz_project","biz_contractitem.biz_item", 'biz_period', 'biz_contractpaymentform.biz_paymentform', 'nom_categoryitem')
                         ->selectRaw("biz_contract.*")
                         ->join("biz_client","biz_client.idclient","=","biz_contract.idclient");
 
         if ($filtro->state != 2) {
 
-            $data = $data->whereRaw("biz_contract.state='".$filtro->state."' AND ( biz_contract.nocontract LIKE '%".$filtro->Buscar."%' OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%') )")
-                ->orderBy("".$filtro->column, "".$filtro->order);
+            $sql .= "AND biz_contract.state='".$filtro->state."' AND biz_contract.enddate >= '" . date('Y-m-d') . "'";
 
         } else {
 
-            $data = $data->whereRaw("biz_contract.enddate < '" . date('Y-m-d') . "' AND ( biz_contract.nocontract LIKE '%".$filtro->Buscar."%' OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%') )")
-                ->orderBy("".$filtro->column, "".$filtro->order);
+            $sql .= "AND biz_contract.enddate < '" . date('Y-m-d') . "'";
 
         }
 
-        return  $data->paginate($filtro->num_page);
+        return  $data->whereRaw($sql)->orderBy("".$filtro->column, "".$filtro->order)->paginate($filtro->num_page);
     }
 
     public function resumenContract(Request $request) 

@@ -120,7 +120,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let ident of list_contract  let i = index " [ngClass]="{'text-danger':ident.state == 0}">
+            <tr *ngFor="let ident of list_contract  let i = index ">
 
               <td>{{ident.nocontract}}</td>
               <td>{{ident.biz_client.businessname}}</td>
@@ -135,7 +135,7 @@
                 <span *ngIf="ident.invoice != '' && ident.invoice != null">
                   F
                 </span>
-              </td>              
+              </td>
 
               <td>{{ident.biz_client.phone + ((ident.biz_client.phone_2 != null) ? ', ' + ident.biz_client.phone_2 : '')}}</td>
               <td>{{ident.cost}}</td>

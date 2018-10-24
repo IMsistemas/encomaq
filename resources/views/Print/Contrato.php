@@ -126,13 +126,6 @@
 </head>
 <body>
 
-    <div class="row text-center">
-
-    </div>
-    <div class="row text-center">
-
-    </div>
-
     <table class="table">
         <tr>
             <td style="vertical-align: center !important; border-top: 0px !important;">
@@ -144,7 +137,7 @@
                     <?php echo $company[0]["tradename"]; ?>
                 </h1>
                 <h3>
-                    Contrato No. <?php echo $data[0]["nocontract"]; ?>
+                    CONTRATO No. <?php echo $data[0]["nocontract"]; ?>
                 </h3>
             </td>
         </tr>

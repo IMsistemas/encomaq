@@ -229,21 +229,30 @@ export class ContractComponent implements OnInit {
   }
 
   calculateDay(enddate: string): boolean {
-    // console.log(enddate);
-    const Fecha: any = new Date();
 
-    const fechaInicial: string = Fecha.getDate() + '-' + (Fecha.getMonth() + 1) + '-' + Fecha.getFullYear();
-    const fechaFinal: string = enddate;
-    const inicial: Array<string> = fechaInicial.split('-');
-    const final: Array<string> = fechaFinal.split('-');
+    if (enddate !== null) {
 
-    const dateStart: any = new Date(parseInt(inicial[2], 0), ( parseInt(inicial[1], 0) - 1 ), parseInt(inicial[0], 0));
+      const Fecha: any = new Date();
 
-    const dateEnd: any = new Date(parseInt(final[0], 0), (parseInt(final[1], 0) - 1), parseInt(final[2], 0));
+      const fechaInicial: string = Fecha.getDate() + '-' + (Fecha.getMonth() + 1) + '-' + Fecha.getFullYear();
+      const fechaFinal: string = enddate;
+      const inicial: Array<string> = fechaInicial.split('-');
+      const final: Array<string> = fechaFinal.split('-');
 
-    const result = ( ( ( dateEnd - dateStart ) / 86400 ) / 1000 );
+      const dateStart: any = new Date(parseInt(inicial[2], 0), ( parseInt(inicial[1], 0) - 1 ), parseInt(inicial[0], 0));
 
-    return (result >= 0) ? false : true;
+      const dateEnd: any = new Date(parseInt(final[0], 0), (parseInt(final[1], 0) - 1), parseInt(final[2], 0));
+
+      const result = ( ( ( dateEnd - dateStart ) / 86400 ) / 1000 );
+
+      return (result >= 0) ? false : true;
+
+    } else {
+
+      return false;
+
+    }
 
   }
+
 }
