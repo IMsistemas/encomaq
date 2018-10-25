@@ -2,6 +2,8 @@ import { Component, OnChanges, SimpleChanges, OnInit, ViewChild } from '@angular
 import { Observable } from 'rxjs/Observable';
 import { LiquidationService } from '../../service/bliquidation/liquidation.service';
 import { ReferralguideService } from '../../service/referralguide/referralguide.service';
+import { BcompanyService } from '../../service/bcompany/bcompany.service';
+
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -59,7 +61,21 @@ export class LiquidationComponent implements OnInit {
 
   imageLogo = '';
 
-  constructor(private liquidation: LiquidationService, private referralguide: ReferralguideService) { }
+  companyData = {
+
+    idcompany: 0,
+    businessname: '',
+    tradename: '',
+    identify: '',
+    phone: '',
+    address: '',
+    email: '',
+    urlweb: ''
+
+  };
+
+  constructor(private liquidation: LiquidationService, private referralguide: ReferralguideService,
+    private company: BcompanyService) { }
 
   ngOnInit() {
     $('.auxeditidcliente').prop('disabled' , true);
@@ -67,6 +83,21 @@ export class LiquidationComponent implements OnInit {
     $('.modal-dialog').draggable();
     this.get_list_liquidation();
     this.getLogo();
+    this.getCompany();
+  }
+  getCompany() {
+    this.company.get().subscribe(
+      (response) => {
+
+        if (response.length !== 0) {
+
+          this.companyData = response[0];
+
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
   }
   new_liquidation() {
     $('#addliquidation').modal('show');

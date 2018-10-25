@@ -2,6 +2,8 @@ import { Component, OnChanges, SimpleChanges, OnInit, ViewChild } from '@angular
 import { Observable } from 'rxjs/Observable';
 import { ClienteService } from '../../service/bclient/cliente.service';
 import { NomidentifytyService } from '../../service/identifytype/nomidentifyty.service';
+import { BcompanyService } from '../../service/bcompany/bcompany.service';
+
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -30,13 +32,40 @@ export class ClientComponent implements OnInit {
   num_page = 5;
   select_data: any = '';
   /*variables para paginar*/
-  constructor(private client: ClienteService, private tipo: NomidentifytyService) { }
+  companyData = {
+
+    idcompany: 0,
+    businessname: '',
+    tradename: '',
+    identify: '',
+    phone: '',
+    address: '',
+    email: '',
+    urlweb: ''
+
+  };
+  constructor(private client: ClienteService, private tipo: NomidentifytyService, private company: BcompanyService) { }
 
   ngOnInit() {
     $('.modal').draggable();
     $('.dropdown-toggle').dropdown();
     this.get_list_client();
     this.list_identifytype();
+    this.getCompany();
+  }
+  getCompany() {
+    this.company.get().subscribe(
+      (response) => {
+
+        if (response.length !== 0) {
+
+          this.companyData = response[0];
+
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
   }
   get_list_client() {
     const o = {

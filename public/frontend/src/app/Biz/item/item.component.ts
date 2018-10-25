@@ -4,6 +4,8 @@ import { ItemService } from '../../service/bitem/item.service';
 import { ItemcategoryService } from '../../service/ncategoryitem/itemcategory.service';
 import { UnittypeService } from '../../service/nunittype/unittype.service';
 import { UrlApi } from '../../service/url-api';
+import { BcompanyService } from '../../service/bcompany/bcompany.service';
+
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -37,7 +39,20 @@ export class ItemComponent implements OnInit {
   url_basic: String = '';
   urlimage = './assets/image/no_image_available.jpg';
   select_data: any = '';
-  constructor(private item: ItemService, private category: ItemcategoryService, private unit: UnittypeService) { }
+  companyData = {
+
+    idcompany: 0,
+    businessname: '',
+    tradename: '',
+    identify: '',
+    phone: '',
+    address: '',
+    email: '',
+    urlweb: ''
+
+  };
+  constructor(private item: ItemService, private category: ItemcategoryService,
+                private unit: UnittypeService, private company: BcompanyService) { }
 
   ngOnInit() {
     this.url_basic = this.url_api.get_url_api();
@@ -46,7 +61,24 @@ export class ItemComponent implements OnInit {
     this.get_list_item();
     this.list_category();
     this.list_unit();
+    this.getCompany();
   }
+
+  getCompany() {
+    this.company.get().subscribe(
+      (response) => {
+
+        if (response.length !== 0) {
+
+          this.companyData = response[0];
+
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+  }
+
   get_list_item() {
     const o = {
       Buscar: this.descripcion,

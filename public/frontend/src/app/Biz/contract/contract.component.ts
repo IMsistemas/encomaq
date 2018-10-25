@@ -1,6 +1,8 @@
 import { Component, OnChanges, SimpleChanges, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ContractService } from '../../service/bcontract/contract.service';
+import { BcompanyService } from '../../service/bcompany/bcompany.service';
+
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -34,7 +36,19 @@ export class ContractComponent implements OnInit {
   info_datacontract: any;
   caducidad_info = false;
   nocontract_last = '';
-  constructor(private contract: ContractService) { }
+  companyData = {
+
+    idcompany: 0,
+    businessname: '',
+    tradename: '',
+    identify: '',
+    phone: '',
+    address: '',
+    email: '',
+    urlweb: ''
+
+  };
+  constructor(private contract: ContractService, private company: BcompanyService) { }
 
   ngOnInit() {
     $('#myTab a').on('click', function (e) {
@@ -44,6 +58,21 @@ export class ContractComponent implements OnInit {
     $('.modal-dialog').draggable();
     $('.dropdown-toggle').dropdown();
     this.get_list_contract();
+    this.getCompany();
+  }
+  getCompany() {
+    this.company.get().subscribe(
+      (response) => {
+
+        if (response.length !== 0) {
+
+          this.companyData = response[0];
+
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
   }
   get_list_contract() {
     const o = {

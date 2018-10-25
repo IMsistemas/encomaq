@@ -24,6 +24,7 @@ export class EdititemComponent implements OnInit {
   urlimage = './assets/image/no_image_available.jpg';
   auxcategory = false;
   fileToUpload: File = null;
+  posDeletePrice = null;
   constructor(private item: ItemService, private category: ItemcategoryService, private unit: UnittypeService) { }
 
   ngOnInit() {
@@ -71,9 +72,15 @@ export class EdititemComponent implements OnInit {
     this.tem_edit.biz_itemprice.push(o);
     data.price = '';
   }
-  deleteRow(ident) {
-    const pos = this.tem_edit.biz_itemprice.indexOf(ident);
-    this.tem_edit.biz_itemprice.splice(pos, 1);
+  confirmDeletePrice(ident) {
+    this.posDeletePrice = this.tem_edit.biz_itemprice.indexOf(ident);
+    $('#mdl_deletePriceItem').modal('show');
+  }
+  deleteRowPrice() {
+    if (this.posDeletePrice !== null) {
+      this.tem_edit.biz_itemprice.splice(this.posDeletePrice, 1);
+      $('#mdl_deletePriceItem').modal('hide');
+    }
   }
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);

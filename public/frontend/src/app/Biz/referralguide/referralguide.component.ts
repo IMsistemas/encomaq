@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { ReferralguideService } from '../../service/referralguide/referralguide.service';
 import { ListcarrierComponent } from '../carrier/listcarrier/listcarrier.component';
 import { CarrierService } from '../../service/carrier/carrier.service';
+import { BcompanyService } from '../../service/bcompany/bcompany.service';
 
 declare var jquery: any;
 declare var $: any;
@@ -46,13 +47,41 @@ export class ReferralguideComponent implements OnInit {
   objectplace_select_end: any;
   info: any;
   listcarrier: any;
-  constructor(private referralguide: ReferralguideService, private carriers: CarrierService) {
+  companyData = {
+
+    idcompany: 0,
+    businessname: '',
+    tradename: '',
+    identify: '',
+    phone: '',
+    address: '',
+    email: '',
+    urlweb: ''
+
+  };
+  constructor(private referralguide: ReferralguideService, private carriers: CarrierService, private company: BcompanyService) {
     this.listcarrier = new ListcarrierComponent(carriers);
    }
 
   ngOnInit() {
     this.loadInitJQuery();
     this.getList();
+    this.getCompany();
+  }
+
+  getCompany() {
+    this.company.get().subscribe(
+      (response) => {
+
+        if (response.length !== 0) {
+
+          this.companyData = response[0];
+
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
   }
 
   loadInitJQuery() {
