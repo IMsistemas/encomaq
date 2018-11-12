@@ -16,6 +16,9 @@ export class ItempriceService {
   get_itemprice(): Observable<any> {
     return this.http.get(this.url_api.get_url_api() + 'api/ItemPrice');
   }
+  getItemPriceByID(id: any): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/ItemPrice/' + id);
+  }
   add_itemprice(data: any): Observable<any> {
     return this.http.post(this.url_api.get_url_api() + 'api/ItemPrice', data);
   }

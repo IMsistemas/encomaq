@@ -5,6 +5,7 @@ import { ItemService } from '../../../service/bitem/item.service';
 import { ItemcategoryService } from '../../../service/ncategoryitem/itemcategory.service';
 import { UnittypeService } from '../../../service/nunittype/unittype.service';
 import { UrlApi } from '../../../service/url-api';
+import { ItempriceService } from '../../../service/bitemprice/itemprice.service';
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -25,7 +26,12 @@ export class EdititemComponent implements OnInit {
   auxcategory = false;
   fileToUpload: File = null;
   posDeletePrice = null;
-  constructor(private item: ItemService, private category: ItemcategoryService, private unit: UnittypeService) { }
+
+  itempriceSave = null;
+  message_info_itemprice = '';
+
+  constructor(private item: ItemService, private category: ItemcategoryService,
+                private unit: UnittypeService, private itemprice: ItempriceService) { }
 
   ngOnInit() {
     this.url_basic = this.urlapi.get_url_api();
@@ -81,6 +87,44 @@ export class EdititemComponent implements OnInit {
       this.tem_edit.biz_itemprice.splice(this.posDeletePrice, 1);
       $('#mdl_deletePriceItem').modal('hide');
     }
+  }
+  confirmSavePrice(item) {
+    this.itemprice.getItemPriceByID(item.iditemprice).subscribe(
+      (response) => {
+
+        this.itempriceSave = item;
+
+        if (response.success === true) {
+          this.savePrice();
+        } else {
+          $('#mdl_confirmSaveItem').modal('show');
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+  }
+  savePrice() {
+    this.itemprice.edit_itemprice(this.itempriceSave.iditemprice, this.itempriceSave).subscribe(
+      (response) => {
+
+        $('#mdl_confirmSaveItem').modal('hide');
+
+        if (response.success === true) {
+          this.message_info_itemprice = 'Se ha actualizado el precio correctamente, asi como su dependencia.';
+          $('#mdlMessageSuccessItemPrice').modal('show');
+        } else {
+          this.message_info_itemprice = 'Ha ocurrido un error al intentar editar el precio.';
+          $('#mdlMessageErrorItemPrice').modal('show');
+        }
+
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+  }
+  closeConfirmPrice() {
+    $('#mdl_confirmSaveItem').modal('hide');
   }
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);

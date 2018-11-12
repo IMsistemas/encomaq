@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Biz;
 
+use App\Models\Biz\LiquidationItemSurplus;
+use App\Models\Biz\Referralguideitem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Biz\ItemPrice;
@@ -16,6 +18,18 @@ class ItemPriceController extends Controller
     public function index()
     {
         
+    }
+
+    public function getItemPriceByID($id)
+    {
+        $objectReferralGuideItem = Referralguideitem::where('iditemprice', $id)->get();
+        $objectLiquidationItem = LiquidationItemSurplus::where('iditemprice', $id)->get();
+
+        if (count($objectReferralGuideItem) > 0 && count($objectLiquidationItem) > 0) {
+            return ['success' => true];
+        } else {
+            return ['success' => false];
+        }
     }
 
     /**
@@ -70,7 +84,36 @@ class ItemPriceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $object = ItemPrice::find($id);
+
+        $object->price = $request->input('price');
+
+        if ($object->save()) {
+
+            $objectReferralGuideItem = Referralguideitem::where('iditemprice', $id)->get();
+            foreach ($objectReferralGuideItem as $item) {
+                $object = Referralguideitem::find($item->idreferralguideitem);
+                $object->price = $request->input('price');
+                if ($object->save() == false) {
+                    return response()->json(['success' => false ]);
+                }
+            }
+
+            $objectLiquidationItem = LiquidationItemSurplus::where('iditemprice', $id)->get();
+            foreach ($objectLiquidationItem as $item) {
+                $object = LiquidationItemSurplus::find($item->idliquidationitemsurplus);
+                $object->price = $request->input('price');
+                if ($object->save() == false) {
+                    return response()->json(['success' => false ]);
+                }
+            }
+
+            return response()->json(['success' => true ]);
+
+        } else {
+            return response()->json(['success' => false ]);
+        }
+
     }
 
     /**
