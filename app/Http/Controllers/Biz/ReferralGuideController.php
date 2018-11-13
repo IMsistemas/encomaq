@@ -100,9 +100,9 @@ class ReferralGuideController extends Controller
 
         if ($guidenumber != null) {
 
-            $number = explode($guidenumber, '-');
+            $number = explode('-', $guidenumber);
 
-            $secuencial = ((int) $number[2] ) + 1;
+            $secuencial = ( ( int ) $number[2] ) + 1;
 
             $secuencial = str_pad($secuencial, 9, '0', STR_PAD_LEFT);
 
