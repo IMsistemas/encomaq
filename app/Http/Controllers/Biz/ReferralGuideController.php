@@ -94,6 +94,27 @@ class ReferralGuideController extends Controller
                                 ->get();
     }
 
+    public function getGuideNumber()
+    {
+        $guidenumber = Referralguide::max('guidenumber');
+
+        if ($guidenumber != null) {
+
+            $number = explode($guidenumber, '-');
+
+            $secuencial = ((int) $number[2] ) + 1;
+
+            $secuencial = str_pad($secuencial, 9, '0', STR_PAD_LEFT);
+
+        } else {
+
+            $secuencial = str_pad(1, 9, '0', STR_PAD_LEFT);
+
+        }
+
+        return ['secuencial' => $secuencial];
+    }
+
     /**
      * Show the form for creating a new resource.
      *

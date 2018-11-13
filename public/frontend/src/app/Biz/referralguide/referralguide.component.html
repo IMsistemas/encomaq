@@ -134,21 +134,21 @@
           <td>
 
             <span *ngIf="item.nom_transferreason.idtypetransferreason != 2">
-                {{item.biz_warehouse.address}}
+                {{item.biz_warehouse.warehousename}}
             </span>
             <span *ngIf="item.nom_transferreason.idtypetransferreason == 2">
-                {{item.biz_project.place}}
+                {{item.biz_project.projectname}}
             </span>
             
           </td>
           <td>
             
               <span *ngIf="item.nom_transferreason.idtypetransferreason != 2">
-                  {{item.biz_project.place}}
+                  {{item.biz_project.projectname}}
                   
               </span>
               <span *ngIf="item.nom_transferreason.idtypetransferreason == 2">
-                  {{item.biz_warehouse.address}}
+                  {{item.biz_warehouse.warehousename}}
               </span>
 
           </td>
@@ -389,10 +389,10 @@
                   <th>PUNTO DE PARTIDA</th>
                   <td colspan="3">
                       <span *ngIf="info.nom_transferreason.idtypetransferreason != 2">
-                          {{info.biz_warehouse.address}}
+                          {{info.biz_warehouse.warehousename}}
                       </span>
                       <span *ngIf="info.nom_transferreason.idtypetransferreason == 2">
-                          {{info.biz_project.place}}
+                          {{info.biz_project.projectname}}
                       </span>
                   </td>
                 </tr>
@@ -400,10 +400,10 @@
                   <th>PUNTO DE LLEGADA</th>
                   <td colspan="3">
                       <span *ngIf="info.nom_transferreason.idtypetransferreason == 2">
-                          {{info.biz_warehouse.address}}
+                          {{info.biz_warehouse.warehousename}}
                       </span>
                       <span *ngIf="info.nom_transferreason.idtypetransferreason != 2">
-                          {{info.biz_project.place}}
+                          {{info.biz_project.projectname}}
                       </span>
                   </td>
                 </tr>

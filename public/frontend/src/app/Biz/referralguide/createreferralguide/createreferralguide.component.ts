@@ -33,6 +33,10 @@ export class CreatereferralguideComponent implements OnInit {
 
   fieldPlace = 0;
 
+  establec = '001';
+  ptoventa = '001';
+  secuencial = '000000000';
+
   @Input() idcontract_s: any; //
   @Input() item_select: any;
   @Input() carrier_select: any;
@@ -55,6 +59,8 @@ export class CreatereferralguideComponent implements OnInit {
     this.carrier_select = { idcarrier: '', carriername: '', identify: '', licenseplate: '' };
     this.place_select_start = { idplace: '', placename: ''};
     this.place_select_end = { idplace: '', placename: ''};
+
+    this.getGuideNumber();
 
     this.loadInitJQuery();
     this.getContractActive();
@@ -136,6 +142,17 @@ export class CreatereferralguideComponent implements OnInit {
           };
           this.list_carrier.push(o);
         }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+  }
+
+  getGuideNumber() {
+    this.referra.getGuideNumber().subscribe(
+      (response) => {
+        console.log(response);
+        this.secuencial = response.secuencial;
       },
       (error) => {
         console.log('POST call in error", respons', error);

@@ -86,8 +86,20 @@
                 <div class="col-md-4 col-sm-12">
                   <div class="form-group">
                     <label for="exampleFormControlInput1">No. Guía Remisión</label>
-                    <input type="text" class="form-control" id="guidenumber" name="guidenumber" maxlength="17"
-                    ngModel #guidenumber="ngModel" placeholder="xxx-xxx-xxxxxxxxx">
+                    
+                    <div class="input-group">
+
+                      <input type="text" class="form-control" name="establec" maxlength="3" style="width: 25%;"
+                      [(ngModel)]="establec" placeholder="xxx">
+  
+                      <input type="text" class="form-control" name="ptoventa" maxlength="3" style="width: 25%;"
+                      [(ngModel)]="ptoventa" placeholder="xxx">
+  
+                      <input type="text" class="form-control" name="secuencial" maxlength="9" style="width: 50%;"
+                      [(ngModel)]="secuencial" placeholder="xxxxxxxxx">
+
+                    </div>                    
+                    
                   </div>
                 </div>
 

@@ -170,11 +170,11 @@
                     echo "<td>".$c["nom_transferreason"]["transferreasonname"]."</td>";
 
                     if ($c["nom_transferreason"]["idtypetransferreason"] == 1 || $c["nom_transferreason"]["idtypetransferreason"] == 3) {
-                        echo "<td>".$c["biz_warehouse"]['address']."</td>";
-                        echo "<td>".$c["biz_project"]['place']."</td>";
+                        echo "<td>".$c["biz_warehouse"]['warehousename']."</td>";
+                        echo "<td>".$c["biz_project"]['projectname']."</td>";
                     } else {
-                        echo "<td>".$c["biz_project"]['place']."</td>";
-                        echo "<td>".$c["biz_warehouse"]['address']."</td>";                        
+                        echo "<td>".$c["biz_project"]['projectname']."</td>";
+                        echo "<td>".$c["biz_warehouse"]['warehousename']."</td>";
                     }
 
                     echo "<td>".$c["biz_carrier"]["carriername"]."</td>";

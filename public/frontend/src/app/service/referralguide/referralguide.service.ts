@@ -41,4 +41,8 @@ export class ReferralguideService {
   referraexportarpdf(id: any): any {
     return this.url_api.get_url_api() + 'api/referralguide/exportarpdfid/' + id;
   }
+
+  getGuideNumber(): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/referralguide/getGuideNumber');
+  }
 }

@@ -165,11 +165,11 @@
             <?php
 
             if ($data[0]["nom_transferreason"]["idtypetransferreason"] == 1 || $data[0]["nom_transferreason"]["idtypetransferreason"] == 3) {
-                echo "<th>Punto de partida</th><td>".$data[0]["biz_warehouse"]['address']."</td>";
-                echo "<th>Punto de llegada</th><td>".$data[0]["biz_project"]['place']."</td>";
+                echo "<th>Punto de partida</th><td>".$data[0]["biz_warehouse"]['warehousename']."</td>";
+                echo "<th>Punto de llegada</th><td>".$data[0]["biz_project"]['projectname']."</td>";
             } else {
-                echo "<th>Punto de partida</th><td>".$data[0]["biz_project"]['place']."</td>";
-                echo "<th>Punto de llegada</th><td>".$data[0]["biz_warehouse"]['address']."</td>";                        
+                echo "<th>Punto de partida</th><td>".$data[0]["biz_project"]['projectname']."</td>";
+                echo "<th>Punto de llegada</th><td>".$data[0]["biz_warehouse"]['warehousename']."</td>";
             }
 
             ?>
