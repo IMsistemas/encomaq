@@ -152,7 +152,14 @@ class ReferralGuideController extends Controller
     {
         $data = $request->all();
 
-        if ($this->searchNumber($data["Data"]["guidenumber"]) == false) {
+        $estab = str_pad($data["Data"]["establec"], 3, '0', STR_PAD_LEFT);
+        $ptoventa = str_pad($data["Data"]["ptoventa"], 3, '0', STR_PAD_LEFT);
+        $secuencial = str_pad($data["Data"]["secuencial"], 9, '0', STR_PAD_LEFT);
+
+        $guidenumber = $estab . '-' . $ptoventa . '-' . $secuencial;
+
+        //if ($this->searchNumber($data["Data"]["guidenumber"]) == false) {
+        if ($this->searchNumber($guidenumber) == false) {
 
             $aux = new Referralguide();
             $aux->idcontract = $data["Data"]["idcontract"];
@@ -165,7 +172,9 @@ class ReferralGuideController extends Controller
             $aux->datetimereferral = $data["Data"]["datetimereferral"];
             $aux->sequential = $data["Data"]["sequential"];
 
-            $aux->guidenumber = $data["Data"]["guidenumber"];
+            // $aux->guidenumber = $data["Data"]["guidenumber"];
+            $aux->guidenumber = $guidenumber;
+
             $aux->logisticservicecost = $data["Data"]["logisticservicecost"];
             $aux->state = 1;
             if ($aux->save()) {
