@@ -4,6 +4,7 @@ import { ReferralguideService } from '../../service/referralguide/referralguide.
 import { ListcarrierComponent } from '../carrier/listcarrier/listcarrier.component';
 import { CarrierService } from '../../service/carrier/carrier.service';
 import { BcompanyService } from '../../service/bcompany/bcompany.service';
+import { ReasontransferService } from '../../service/ntranseferreason/reasontransfer.service';
 
 declare var jquery: any;
 declare var $: any;
@@ -59,12 +60,18 @@ export class ReferralguideComponent implements OnInit {
     urlweb: ''
 
   };
-  constructor(private referralguide: ReferralguideService, private carriers: CarrierService, private company: BcompanyService) {
+  listTransferReason = [];
+  idtransferreason: any = '';
+  constructor(
+    private referralguide: ReferralguideService,
+    private carriers: CarrierService,
+    private company: BcompanyService, private transferreason: ReasontransferService) {
     this.listcarrier = new ListcarrierComponent(carriers);
    }
 
   ngOnInit() {
     this.loadInitJQuery();
+    this.getTransferActive();
     this.getList();
     this.getCompany();
   }
@@ -94,9 +101,27 @@ export class ReferralguideComponent implements OnInit {
     $('.modal-dialog').draggable();
   }
 
+  getTransferActive() {
+    this.listTransferReason.push({ idtransferreason: '', transferreasonname: '--Seleccione Motivo de Traslado--' });
+    this.transferreason.getTransferActive().subscribe(
+      (response) => {
+        for (const cat of response) {
+          const o = {
+            idtransferreason: cat.idtransferreason,
+            transferreasonname: cat.transferreasonname
+          };
+          this.listTransferReason.push(o);
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+  }
+
   getList() {
 
     const o = {
+      idtransferreason: this.idtransferreason,
       search: this.descripcion,
       state: this.state,
       column: this.column,
@@ -126,7 +151,7 @@ export class ReferralguideComponent implements OnInit {
   }
 
   editSelected(item: any) {
-    console.log(item);
+    // console.log(item);
     // this.listcarrier.get_list_carrier();
     this.info_tem_edit = item;
     this.idcontract_select = item.biz_contract;

@@ -43,6 +43,10 @@ class ReferralGuideController extends Controller
                 $where .= " AND  biz_client.idclient=".$filter->client." ";
             }
 
+            if (isset($filter->idtransferreason) && $filter->idtransferreason != '') {
+                $where .= " AND  biz_referralguide.idtransferreason=".$filter->idtransferreason." ";
+            }
+
             if (isset($filter->dateinit) == true && isset($filter->dateend) == true) {
                 if ($filter->dateinit != '' && $filter->dateend != '') {
                     $where .= " AND  biz_referralguide.datetimereferral BETWEEN '" . $filter->dateinit . "' AND '" . $filter->dateend . "' ";
