@@ -146,16 +146,17 @@
     <table class="table table-bordered table-condensed">
         <thead>
             <tr>
-                <th style="width: 8%;">NO</th>
-                <th># CONTRATO</th>
+                <th style="width: 5%;">NO</th>
+                <th style="width: 8%;"># CONTRATO</th>
                 <th>CLIENTE</th>
-                <th>FECHA</th>
-                <th>HORA</th>
+                <th>NO. GUIA</th>
+                <th style="width: 7%;">FECHA</th>
+                <th style="width: 5%;">HORA</th>
                 <th>MOTIVO</th>
                 <th>P. PARTIDA</th>
                 <th>P. LLEGADA</th>
                 <th>TRANSPORTISTA</th>
-                <th style="width: 12%;">ESTADO</th>
+                <th style="width: 6%;">ESTADO</th>
             </tr>
             <?php
                 $x = 1;
@@ -164,6 +165,7 @@
                     echo "<td>".$x."</td>";
                     echo "<td>".$c["biz_contract"]["nocontract"]."</td>";
                     echo "<td>".$c["biz_contract"]["biz_client"]["businessname"]."</td>";
+                    echo "<td>".$c["guidenumber"]."</td>";
                     echo "<td>".$c["datetimereferral"]."</td>";
                     echo "<td>".$c["sequential"]."</td>";
 

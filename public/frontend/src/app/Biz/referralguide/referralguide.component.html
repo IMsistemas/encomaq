@@ -16,25 +16,29 @@
           Agregar <i class="fas fa-plus-square fa-lg"></i>
         </button> -->
 
-        
-
-        <button type="button" class="btn btn-info" (click)="pdf()" style="margin-left: 5px;">
-          PDF <i class="fas fa-file-pdf"></i>
-        </button>
-
-        <button type="button" class="btn btn-info" (click)="excel()" style="margin-left: 5px;">
-          EXCEL <i class="fas fa-file-excel"></i>
-        </button>
-
-        <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Agregar
+        <div class="btn-group" role="group" aria-label="Basic example">
+          
+          <button type="button" class="btn btn-info" (click)="pdf()">
+            PDF <i class="fas fa-file-pdf"></i>
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" data-toggle="tooltip" data-placement="bottom" title="Agregar" (click)="create()">Agregar</a>
-            <a class="dropdown-item" data-toggle="tooltip" data-placement="bottom" title="Agregar" (click)="create()">Agregar Anulada</a>
+  
+          <button type="button" class="btn btn-info" (click)="excel()">
+            EXCEL <i class="fas fa-file-excel"></i>
+          </button>
+  
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Agregar <i class="fas fa-plus-square fa-lg"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" data-toggle="tooltip" data-placement="bottom" title="Agregar" (click)="create()">Agregar</a>
+              <a class="dropdown-item" data-toggle="tooltip" data-placement="bottom" title="Agregar" (click)="create()">Agregar Anulada</a>
+            </div>
           </div>
+
         </div>
+
+        
 
       </div>
 
