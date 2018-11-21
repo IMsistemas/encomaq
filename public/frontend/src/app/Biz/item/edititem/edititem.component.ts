@@ -79,8 +79,29 @@ export class EdititemComponent implements OnInit {
     data.price = '';
   }
   confirmDeletePrice(ident) {
-    this.posDeletePrice = this.tem_edit.biz_itemprice.indexOf(ident);
-    $('#mdl_deletePriceItem').modal('show');
+
+    console.log(ident);
+
+    if (ident.iditemprice !== undefined) {
+      this.itemprice.getItemPriceByID(ident.iditemprice).subscribe(
+        (response) => {
+
+          if (response.success === true) {
+            this.posDeletePrice = this.tem_edit.biz_itemprice.indexOf(ident);
+            $('#mdl_deletePriceItem').modal('show');
+          } else {
+            $('#mdlMessageInfoItemPrice').modal('show');
+          }
+
+        },
+        (error) => {
+          console.log('POST call in error", respons', error);
+        });
+    } else {
+      this.posDeletePrice = this.tem_edit.biz_itemprice.indexOf(ident);
+      $('#mdl_deletePriceItem').modal('show');
+    }
+
   }
   deleteRowPrice() {
     if (this.posDeletePrice !== null) {

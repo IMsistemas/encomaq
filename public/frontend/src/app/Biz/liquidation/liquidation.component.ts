@@ -360,14 +360,6 @@ orderReferralGuide(result, frm) {
 
     }
 
-    if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 1) {
-      this.entrega.push(object);
-    } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 2) {
-      this.retiro.push(object);
-    } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 3) {
-
-    }
-
     const objectLogistic = {
       date: e.datetimereferral,
       guidenumber: e.guidenumber,
@@ -376,7 +368,16 @@ orderReferralGuide(result, frm) {
       description: e.nom_transferreason.transferreasonname
     };
 
-    this.logistic.push(objectLogistic);
+    if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 1) {
+      this.entrega.push(object);
+      this.logistic.push(objectLogistic);
+    } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 2) {
+      this.retiro.push(object);
+      this.logistic.push(objectLogistic);
+    } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 3) {
+
+    }
+
   }
 
   // -----------------------PARTE DE RESUMEN DE ENTREGA--------------------------------------------------------------

@@ -197,14 +197,6 @@ export class AddliquidationComponent implements OnInit {
 
       }
 
-      if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 1) {
-        this.entrega.push(object);
-      } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 2) {
-        this.retiro.push(object);
-      } /*else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 3) {
-
-      }*/
-
       const objectLogistic = {
         date: e.datetimereferral,
         guidenumber: e.guidenumber,
@@ -213,7 +205,16 @@ export class AddliquidationComponent implements OnInit {
         description: e.nom_transferreason.transferreasonname
       };
 
-      this.logistic.push(objectLogistic);
+      if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 1) {
+        this.entrega.push(object);
+        this.logistic.push(objectLogistic);
+      } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 2) {
+        this.retiro.push(object);
+        this.logistic.push(objectLogistic);
+      } /*else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 3) {
+
+      }*/
+
     }
 
     // -----------------------PARTE DE RESUMEN DE ENTREGA--------------------------------------------------------------

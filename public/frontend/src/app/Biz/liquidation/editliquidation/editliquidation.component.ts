@@ -225,14 +225,6 @@ export class EditliquidationComponent implements OnInit, OnChanges {
 
       }
 
-      if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 1) {
-        this.entrega.push(object);
-      } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 2) {
-        this.retiro.push(object);
-      } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 3) {
-
-      }
-
       const objectLogistic = {
         date: e.datetimereferral,
         guidenumber: e.guidenumber,
@@ -241,7 +233,16 @@ export class EditliquidationComponent implements OnInit, OnChanges {
         description: e.nom_transferreason.transferreasonname
       };
 
-      this.logistic.push(objectLogistic);
+      if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 1) {
+        this.entrega.push(object);
+        this.logistic.push(objectLogistic);
+      } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 2) {
+        this.retiro.push(object);
+        this.logistic.push(objectLogistic);
+      } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 3) {
+
+      }
+
     }
 
     // -----------------------PARTE DE RESUMEN DE ENTREGA--------------------------------------------------------------
@@ -626,7 +627,7 @@ export class EditliquidationComponent implements OnInit, OnChanges {
   select_guia(data: any) {
     // biz_referralguide.biz__referralguideitem
     this.close_listguias();
-    if (this.tem_edit.biz_referralguideliquidation.length == 0) {
+    if (this.tem_edit.biz_referralguideliquidation.length === 0) {
       const aux = {
         idliquidation: this.tem_edit.idliquidation,
         idreferralguide: data.idreferralguide,
@@ -635,7 +636,7 @@ export class EditliquidationComponent implements OnInit, OnChanges {
       this.tem_edit.biz_referralguideliquidation.push(aux);
     } else {
       const resultado = this.tem_edit.biz_referralguideliquidation.find(guia => guia.idreferralguide === data.idreferralguide);
-      if (resultado != undefined) {
+      if (resultado !== undefined) {
         $('#temperrorsliquidation').modal('show');
         this.mensage = 'La guía de remisión seleccionada ya esta asignada a la liquidación';
       } else {
