@@ -133,7 +133,10 @@
           <td>{{ident.billnumber}}</td>
           <td>{{ident.dateinit}}</td>
           <td>{{ident.dateend}}</td>
-          <td>{{ident.biz_liquidationproject[0].biz_project.projectname}}</td>
+          <td>
+            <span *ngFor="let project of ident.biz_liquidationproject">{{project.biz_project.projectname}}, </span>
+            <!--{{ident.biz_liquidationproject[0].biz_project.projectname}} -->
+          </td>
           <td>{{ident.observation}}</td>
           <td class="text-right">{{ident.subtotal}}</td>
           <td class="text-right">{{ident.iva}}</td>

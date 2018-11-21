@@ -632,14 +632,20 @@ orderProduct(frm: any) {
 
 convertDatetoString(date: string): string {
 
-  const months = [
-    'ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO',
-    'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'
-  ];
+console.log(date);
 
-  const dateTransform: Array<string> = date.split('-');
+  if (date !== undefined && date !== '' && date !== null) {
+    const months = [
+      'ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO',
+      'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'
+    ];
 
-  return dateTransform[2] + ' DE ' + months[parseInt(dateTransform[1], 0) - 1] + ' DEL ' + dateTransform[0];
+    const dateTransform: Array<string> = date.split('-');
+
+    return dateTransform[2] + ' DE ' + months[parseInt(dateTransform[1], 0) - 1] + ' DEL ' + dateTransform[0];
+  } else {
+    return '';
+  }
 
 }
 

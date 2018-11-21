@@ -288,7 +288,8 @@ export class AddliquidationComponent implements OnInit {
         if (parseInt(this.entrega[i].items[j].iditem, 0) !== 0) {
           this.entrega_foot_item[j].iditem = this.entrega[i].items[j].iditem;
           this.entrega_foot_item[j].price = this.entrega[i].items[j].price;
-          this.entrega_foot_item[j].quantify += this.entrega[i].items[j].quantify;
+          // tslint:disable-next-line:max-line-length
+          this.entrega_foot_item[j].quantify = parseInt(this.entrega_foot_item[j].quantify, 0) + parseInt(this.entrega[i].items[j].quantify, 0);
         }
 
       }
@@ -354,7 +355,7 @@ export class AddliquidationComponent implements OnInit {
       for (let j = 0; j < this.retiro[i].items.length; j++) {
         this.retiro_foot_item[j].iditem = this.retiro[i].items[j].iditem;
         this.retiro_foot_item[j].price = this.retiro[i].items[j].price;
-        this.retiro_foot_item[j].quantify += this.retiro[i].items[j].quantify;
+        this.retiro_foot_item[j].quantify = parseInt(this.retiro_foot_item[j].quantify, 0) + parseInt(this.retiro[i].items[j].quantify, 0);
       }
     }
 
