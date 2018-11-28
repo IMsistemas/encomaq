@@ -86,7 +86,7 @@ export class EdititemComponent implements OnInit {
       this.itemprice.getItemPriceByID(ident.iditemprice).subscribe(
         (response) => {
 
-          if (response.success === true) {
+          if (response.success === false) {
             this.posDeletePrice = this.tem_edit.biz_itemprice.indexOf(ident);
             $('#mdl_deletePriceItem').modal('show');
           } else {
@@ -115,7 +115,7 @@ export class EdititemComponent implements OnInit {
 
         this.itempriceSave = item;
 
-        if (response.success === true) {
+        if (response.success === false) {
           this.savePrice();
         } else {
           $('#mdl_confirmSaveItem').modal('show');
