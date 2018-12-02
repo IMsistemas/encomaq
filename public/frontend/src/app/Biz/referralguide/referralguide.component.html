@@ -32,7 +32,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" data-toggle="tooltip" data-placement="bottom" title="Agregar" (click)="create()">Agregar</a>
-              <a class="dropdown-item" data-toggle="tooltip" data-placement="bottom" title="Agregar" (click)="create()">Agregar Anulada</a>
+              <a class="dropdown-item" data-toggle="tooltip" data-placement="bottom" title="Agregar" (click)="createReferralNull()">Agregar Anulada</a>
             </div>
           </div>
 
@@ -215,6 +215,15 @@
     </app-pagination>
   </div>
 
+  <div class="modal" id="mdlCreateReferralNull" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <app-createreferralguidenull (update_component_father)="updateList($event, 'create')" ></app-createreferralguidenull>
+
+      </div>
+    </div>
+  </div>
 
   <div class="modal" id="createreferralguide"  tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document" style="max-width: 90% !important;">

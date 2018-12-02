@@ -45,4 +45,8 @@ export class ReferralguideService {
   getGuideNumber(): Observable<any> {
     return this.http.get(this.url_api.get_url_api() + 'api/referralguide/getGuideNumber');
   }
+
+  createReferralGuideNull(data: any): Observable<any> {
+    return this.http.post(this.url_api.get_url_api() + 'api/referralguide/storeReferralGuideNull', data);
+  }
 }

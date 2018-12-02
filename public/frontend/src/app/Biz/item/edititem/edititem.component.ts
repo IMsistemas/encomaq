@@ -147,6 +147,9 @@ export class EdititemComponent implements OnInit {
   closeConfirmPrice() {
     $('#mdl_confirmSaveItem').modal('hide');
   }
+  closeConfirmDeletePrice() {
+    $('#mdl_deletePriceItem').modal('hide');
+  }
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
   }

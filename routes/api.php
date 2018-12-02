@@ -138,6 +138,9 @@ Route::group(['middleware' => 'cors'], function(){
     Route::get('referralguide/get', 'Biz\ReferralGuideController@get');
     Route::get('referralguide/updateState/{id}', 'Biz\ReferralGuideController@updateState');
     Route::get('referralguide/getGuideNumber', 'Biz\ReferralGuideController@getGuideNumber');
+
+    Route::post('referralguide/storeReferralGuideNull', 'Biz\ReferralGuideController@storeReferralGuideNull');
+
     Route::resource('referralguide', 'Biz\ReferralGuideController');
 });
 

@@ -196,4 +196,7 @@ export class AddcontractComponent implements OnInit {
     }
 
   }
+  closeModalVerifyFecha() {
+    $('#mdlcompareDateAdd').modal('hide');
+  }
 }

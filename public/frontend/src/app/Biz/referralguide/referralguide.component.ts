@@ -142,6 +142,10 @@ export class ReferralguideComponent implements OnInit {
 
   }
 
+  createReferralNull() {
+    $('#mdlCreateReferralNull').modal('show');
+  }
+
   create() {
     this.idcontract_select  = { idcontract: '', biz_client: { businessname: '' }, nocontract: '' };
     this.objectcarrier_select = { idcarrier: '', carriername: '', identify: '', licenseplate: '' };

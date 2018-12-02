@@ -83,6 +83,7 @@ import { PaymentformComponent } from './Biz/paymentform/paymentform.component';
 import { CreatePaymentformComponent } from './Biz/paymentform/create-paymentform/create-paymentform.component';
 import { EditPaymentformComponent } from './Biz/paymentform/edit-paymentform/edit-paymentform.component';
 import { ItempriceService } from './service/bitemprice/itemprice.service';
+import { CreatereferralguidenullComponent } from './Biz/referralguide/createreferralguidenull/createreferralguidenull.component';
 
 @NgModule({
   declarations: [
@@ -146,6 +147,7 @@ import { ItempriceService } from './service/bitemprice/itemprice.service';
     PaymentformComponent,
     CreatePaymentformComponent,
     EditPaymentformComponent,
+    CreatereferralguidenullComponent,
   ],
   imports: [
     BrowserModule,

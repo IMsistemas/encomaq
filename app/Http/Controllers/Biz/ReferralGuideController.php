@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Biz;
 
 use App\Models\Biz\Referralguide;
 use App\Models\Biz\Referralguideitem;
+use App\Models\Biz\ReferralGuideNull;
 use App\Models\Biz\ReferralGuidePlace;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -136,13 +137,17 @@ class ReferralGuideController extends Controller
 
             $count = Referralguide::where('guidenumber', $number)->count();
 
+            $countNull = ReferralGuideNull::where('guidenumber', $number)->count();
+
         } else {
 
             $count = Referralguide::where('guidenumber', $number)->where('idreferralguide', '!=', $id)->count();
 
+            $countNull = ReferralGuideNull::where('guidenumber', $number)->where('idreferralguide_null', '!=', $id)->count();
+
         }
 
-        return ($count > 0) ? true : false;
+        return ($count > 0 || $countNull > 0) ? true : false;
 
     }
 
@@ -207,6 +212,35 @@ class ReferralGuideController extends Controller
                 return response()->json(['success' => $aux ]);
             } else {
                 return response()->json(['error' => $aux]);
+            }
+
+        } else {
+
+            return response()->json(['error' => 'number_exists']);
+
+        }
+    }
+
+    public function storeReferralGuideNull(Request $request)
+    {
+        $data = $request->all();
+
+        $estab = str_pad($request->input('establec_null'), 3, '0', STR_PAD_LEFT);
+        $ptoventa = str_pad($request->input('ptoventa_null'), 3, '0', STR_PAD_LEFT);
+        $secuencial = str_pad($request->input('secuencial_null'), 9, '0', STR_PAD_LEFT);
+
+        $guidenumber = $estab . '-' . $ptoventa . '-' . $secuencial;
+
+        if ($this->searchNumber($guidenumber) == false) {
+
+            $aux = new ReferralGuideNull();
+
+            $aux->guidenumber = $guidenumber;
+
+            if ($aux->save()) {
+                return response()->json(['success' => true ]);
+            } else {
+                return response()->json(['error' => false]);
             }
 
         } else {

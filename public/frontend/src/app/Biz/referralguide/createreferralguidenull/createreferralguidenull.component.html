@@ -1,0 +1,53 @@
+<form novalidate (ngSubmit)="add(frmreferralguide_null.value, frmreferralguide_null);" #frmreferralguide_null="ngForm">
+
+  <div class="modal-header bg-primary">
+
+    <h5 class="modal-title">Nueva Guía de Remisión Anulada</h5>
+
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+  </div>
+
+  <div class="modal-body">
+
+    <div class="row">
+
+      <div class="col-12">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">No. Guía Remisión</label>
+          
+          <div class="input-group">
+
+            <input type="text" class="form-control" name="establec_null" maxlength="3" style="width: 25%;"
+            [(ngModel)]="establec" placeholder="xxx">
+
+            <input type="text" class="form-control" name="ptoventa_null" maxlength="3" style="width: 25%;"
+            [(ngModel)]="ptoventa" placeholder="xxx">
+
+            <input type="text" class="form-control" name="secuencial_null" maxlength="9" style="width: 50%;"
+            [(ngModel)]="secuencial" placeholder="xxxxxxxxx">
+
+          </div>                    
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+      Cancelar
+      <i class="fas fa-ban"></i>
+    </button>
+
+    <button type="submit" class="btn btn-success" [disabled]="frmreferralguide_null.invalid">
+      Guardar
+      <i class="fas fa-save"></i>
+    </button>
+  </div>
+</form>
+
+

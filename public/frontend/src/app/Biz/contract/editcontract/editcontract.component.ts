@@ -217,5 +217,8 @@ export class EditcontractComponent implements OnInit {
     $('#print').modal('show');
     $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
   }
+  closeModalVerifyFecha() {
+    $('#mdlcompareDateEdit').modal('hide');
+  }
 
 }
