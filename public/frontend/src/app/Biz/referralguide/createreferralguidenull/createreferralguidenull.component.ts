@@ -30,6 +30,9 @@ export class CreatereferralguidenullComponent implements OnInit {
 
           $('#mdlCreateReferralNull').modal('hide');
           frm.reset();
+          this.establec = '001';
+          this.ptoventa = '001';
+          this.secuencial = '000000000';
           this.update_component_father.emit(true);
 
         } else if (response.error !== undefined) {
