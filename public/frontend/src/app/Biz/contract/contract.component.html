@@ -481,6 +481,18 @@
         <div class="modal-body table-responsive" style="overflow-y: scroll; height: 70vh;">
           <table class="table table-striped table-hover table-bordered" id="listResumenContrato" style="font-size: 12px;">
             <thead class="thead-dark">
+
+              <tr style="display: none;">
+                <th colspan="12"></th>
+              </tr>
+              <tr style="display: none;">
+                <th colspan="6">{{companyData.businessname.toUpperCase()}}</th>
+                <th colspan="6">RESUMEN DE CONTRATOS</th>
+              </tr>
+              <tr style="display: none;">
+                <th colspan="12"></th>
+              </tr>
+
               <tr>
 
                 <th style="width: 8%;">NO.</th>
@@ -508,8 +520,12 @@
                 <td>{{ident.biz_client.businessname}}</td>
 
                 <td>{{ident.biz_client.address}}</td>
-                <td *ngIf="ident.receipt != ''">F</td>
-                <td *ngIf="ident.receipt == ''"></td>
+
+                <td>
+                  <span *ngIf="ident.invoice != '' && ident.invoice != null">
+                    F
+                  </span>
+                </td>
 
                 <td>{{ident.biz_client.phone + ((ident.biz_client.phone_2 != null) ? ', ' + ident.biz_client.phone_2 : '')}}</td>
                 <td>{{ident.cost}}</td>
@@ -528,8 +544,12 @@
           </table>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default">
-                <i class="fas fa-file-pdf"></i> PDF </button>
+            <button type="button" class="btn btn-info">
+                <i class="fas fa-file-pdf"></i> PDF 
+            </button>
+            <button type="button" class="btn btn-info" (click)="excelResumen()">
+                <i class="fas fa-file-excel"></i> EXCEL 
+            </button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancelar</button>
         </div>
       </div>
