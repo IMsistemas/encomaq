@@ -1,0 +1,52 @@
+
+<form novalidate  (ngSubmit)="create(frm_create.value); frm_create.reset();" #frm_create="ngForm">
+
+    <div class="modal-header bg-primary">
+      <h5 class="modal-title">Nueva Forma de Pago</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  
+    <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+            
+              <div class="row">
+                <div class="col-sm-12">
+  
+                  <div class="form-group">
+                    <label for="paymentformname">Forma de Pago <span class="required">(*)</span> </label>
+                    <input type="text" class="form-control" id="paymentformname" name="paymentformname" ngModel #paymentformname="ngModel"
+                      required>
+                  </div>
+  
+                  <span *ngIf="paymentformname.errors?.required && paymentformname.touched">                  
+                    <small id="emailHelp" class="form-text text-danger text-right">La Forma de Pago es requerida</small>
+                  </span>
+  
+                </div>
+              </div>
+            
+          </div>
+        </div>
+    </div>
+  
+    <div class="modal-footer">
+  
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cancelar <i class="fas fa-ban"></i>
+        </button>
+  
+        <button type="submit" class="btn btn-success" [disabled]="frm_create.invalid">
+          Guardar
+          <i class="fas fa-save"></i>
+        </button>
+  
+    </div>
+  
+  </form>
+  
+  
+  
+  

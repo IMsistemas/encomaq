@@ -1,0 +1,85 @@
+<div *ngIf="tem_edit">
+<form novalidate (ngSubmit)="modify_project(tem_edit); frmprojectedit.reset();" #frmprojectedit="ngForm">
+
+  <div class="modal-header bg-primary">
+    <h5 class="modal-title">Editar Proyecto</h5>
+    <button type="button" class="close" data-dismiss="modal" (click)="refresh()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    
+
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Cliente
+            <span class="required">(*)</span>
+          </label>
+          <div class="input-group">
+          <select class="form-control"  id="idclient" name="idclient" [(ngModel)]="id_client.idclient" #idclient="ngModel" required>
+            <option *ngFor="let cli of lis_client" value="{{cli.idclient}}">
+              {{cli.businessname}}
+            </option>
+          </select>
+          <div class="input-group-append">
+            <button class="btn btn-default" type="button" (click)="search_client()">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+          </div>
+        </div>
+
+        <div *ngIf="idclient.errors?.required && idclient.touched">
+          <small id="" class="form-text text-danger text-right">El cliente es requerido</small>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Proyecto
+            <span class="required">(*)</span>
+          </label>
+          <input type="text" class="form-control" maxlength="150" id="projectname" name="projectname" [(ngModel)]="tem_edit.projectname" #projectname="ngModel" required>
+        </div>
+
+        <div *ngIf="projectname.errors?.required && projectname.touched">
+          <small id="" class="form-text text-danger text-right">El proyecto es requerido</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Lugar
+          </label>
+          <textarea cols="100" rows="5"  class="form-control" id="place" name="place" [(ngModel)]="tem_edit.place" #place="ngModel" ></textarea>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="refresh()" data-dismiss="modal">
+      Cancelar
+      <i class="fas fa-ban"></i>
+    </button>
+
+    <button type="submit" class="btn btn-success" [disabled]="frmprojectedit.invalid">
+      Guardar
+      <i class="fas fa-save"></i>
+    </button>
+  </div>
+</form>
+</div>
