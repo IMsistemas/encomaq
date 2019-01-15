@@ -186,10 +186,19 @@ export class CreatereferralguideComponent implements OnInit {
     // this.fieldPlace = n;
     $('#listPlaceShow').modal('show');
   }
+  getIDItemPrice(item) {
+    const price = item.price;
+    item.listPrice.forEach(function(e) {
+      if (parseFloat(price) === parseFloat(e.price)) {
+        item.iditemprice = e.iditemprice;
+      }
+    });
+  }
   addrwo() {
     console.log(this.list_itemcont);
     const o = {
       iditem: '',
+      iditemprice: 0,
       listPrice: [],
       price: 0,
       quantity: 0,
@@ -216,8 +225,8 @@ export class CreatereferralguideComponent implements OnInit {
         list: this.list_itemcont
       };
 
-      console.log(data);
-      this.referra.create(aux).subscribe(
+      console.log(aux);
+      /*this.referra.create(aux).subscribe(
         (response) => {
           console.log(response);
           if (response.success !== undefined) {
@@ -246,7 +255,7 @@ export class CreatereferralguideComponent implements OnInit {
           $('#createreferralguide').modal('hide');
           frm.reset();
           this.update_component_father.emit(false);
-        });
+        });*/
     } else {
       $('#mdl_equalsplace').modal('show');
     }
@@ -261,6 +270,7 @@ export class CreatereferralguideComponent implements OnInit {
          item.listPrice = response;
          if ( response.length > 0 ) {
            item.price = response[0].price;
+           item.iditemprice = response[0].iditemprice;
          }
          console.log(item);
       },
