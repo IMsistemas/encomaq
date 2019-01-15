@@ -322,6 +322,7 @@ class ReferralGuideController extends Controller
                     if( $f["iditem"]!="" ) {
                         $caux = new Referralguideitem();
                         $caux->idreferralguide = $aux->idreferralguide;
+                        $caux->iditemprice = $f["iditemprice"];
                         $caux->iditem = $f["iditem"];
                         $caux->price = $f["price"];
                         $caux->quantify = $f["quantify"];

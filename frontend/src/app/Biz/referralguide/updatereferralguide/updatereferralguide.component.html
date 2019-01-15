@@ -436,7 +436,7 @@
                       </td>
                       <td>
                         <div class="input-group">
-                          <select class="form-control" name="{{i}}priceItem" [(ngModel)]="aux.price">
+                          <select class="form-control" name="{{i}}priceItem" [(ngModel)]="aux.price" (change)="getIDItemPrice(aux)">
                             <option *ngFor="let it of aux.biz_item.biz_price" value="{{it.price}}">
                               {{it.price}}
                             </option>

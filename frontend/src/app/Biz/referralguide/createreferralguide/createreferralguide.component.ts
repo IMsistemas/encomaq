@@ -226,7 +226,7 @@ export class CreatereferralguideComponent implements OnInit {
       };
 
       console.log(aux);
-      /*this.referra.create(aux).subscribe(
+      this.referra.create(aux).subscribe(
         (response) => {
           console.log(response);
           if (response.success !== undefined) {
@@ -255,7 +255,7 @@ export class CreatereferralguideComponent implements OnInit {
           $('#createreferralguide').modal('hide');
           frm.reset();
           this.update_component_father.emit(false);
-        });*/
+        });
     } else {
       $('#mdl_equalsplace').modal('show');
     }

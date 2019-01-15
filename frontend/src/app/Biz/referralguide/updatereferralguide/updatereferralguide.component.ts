@@ -104,9 +104,18 @@ export class UpdatereferralguideComponent implements OnInit {
     // this.fieldPlace = n;
     $('#listPlaceShow').modal('show');
   }
+  getIDItemPrice(item) {
+    const price = item.price;
+    item.listPrice.forEach(function(e) {
+      if (parseFloat(price) === parseFloat(e.price)) {
+        item.iditemprice = e.iditemprice;
+      }
+    });
+  }
   addrwo() {
     const o = {
       iditem: '',
+      iditemprice: 0,
       price: 0,
       biz_item: { biz_price: []},
       quantity: 0,
@@ -195,6 +204,7 @@ export class UpdatereferralguideComponent implements OnInit {
          item.biz_item.biz_price = response;
          if ( response.length > 0 ) {
            item.price = response[0].price;
+           item.iditemprice = response[0].iditemprice;
          }
          console.log(item);
       },
