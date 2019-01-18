@@ -159,7 +159,8 @@ export class AddliquidationComponent implements OnInit {
           iditem: i.iditem,
           quantify: i.quantify,
           // price: i.biz_item.price
-          price: i.price
+          price: i.price,
+          iditemprice: i.iditemprice
         };
         object.items.push(ii);
 
@@ -248,7 +249,8 @@ export class AddliquidationComponent implements OnInit {
         a_t.push({
           iditem: 0,
           price: 0.00,
-          quantify: 0
+          quantify: 0,
+          iditemprice: null
         });
       }
 
@@ -277,7 +279,8 @@ export class AddliquidationComponent implements OnInit {
       this.entrega_foot_item.push({
         iditem: 0,
         price: 0.00,
-        quantify: 0
+        quantify: 0,
+        iditemprice: null
       });
     }
 
@@ -288,6 +291,7 @@ export class AddliquidationComponent implements OnInit {
         if (parseInt(this.entrega[i].items[j].iditem, 0) !== 0) {
           this.entrega_foot_item[j].iditem = this.entrega[i].items[j].iditem;
           this.entrega_foot_item[j].price = this.entrega[i].items[j].price;
+          this.entrega_foot_item[j].iditemprice = this.entrega[i].items[j].iditemprice;
           // tslint:disable-next-line:max-line-length
           this.entrega_foot_item[j].quantify = parseInt(this.entrega_foot_item[j].quantify, 0) + parseInt(this.entrega[i].items[j].quantify, 0);
         }
@@ -318,7 +322,8 @@ export class AddliquidationComponent implements OnInit {
         a_t.push({
           iditem: 0,
           price: 0.00,
-          quantify: 0
+          quantify: 0,
+          iditemprice: null
         });
       }
 
@@ -347,7 +352,8 @@ export class AddliquidationComponent implements OnInit {
       this.retiro_foot_item.push({
         iditem: 0,
         price: 0.00,
-        quantify: 0
+        quantify: 0,
+        iditemprice: null
       });
     }
 
@@ -355,6 +361,7 @@ export class AddliquidationComponent implements OnInit {
       for (let j = 0; j < this.retiro[i].items.length; j++) {
         this.retiro_foot_item[j].iditem = this.retiro[i].items[j].iditem;
         this.retiro_foot_item[j].price = this.retiro[i].items[j].price;
+        this.retiro_foot_item[j].iditemprice = this.retiro[i].items[j].iditemprice;
         this.retiro_foot_item[j].quantify = parseInt(this.retiro_foot_item[j].quantify, 0) + parseInt(this.retiro[i].items[j].quantify, 0);
       }
     }
@@ -370,7 +377,8 @@ export class AddliquidationComponent implements OnInit {
       const o = {
         iditem: this.entrega_foot_item[i].iditem,
         quantify: this.entrega_foot_item[i].quantify - this.retiro_foot_item[i].quantify,
-        price: this.entrega_foot_item[i].price
+        price: this.entrega_foot_item[i].price,
+        iditemprice: this.entrega_foot_item[i].iditemprice
       };
       this.enObraObject.push(o);
 
