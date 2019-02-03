@@ -156,8 +156,8 @@
                 <th style="width: 1%;">F</th>
                 <th>TELEFONO</th>
                 <th>VALOR</th>
-                <th>FACT.</th>
-                <th>NO FACT.</th>
+                <th>NO. RECIBO</th>
+                <th>NO. FACT.</th>
                 <th style="width: 8%;">ESTADO</th>
             </tr>
             <?php

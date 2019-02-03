@@ -504,7 +504,7 @@
                 <th style="width: 3%;">F</th>
                 <th style="width: 5%;">TELÉFONO</th>
                 <th style="width: 8%;">COSTO</th>
-                <th style="width: 8%;">NO FACTURADO.</th>
+                <th style="width: 8%;">NO. FACTURA</th>
                 <th style="width: 8%;">FACTURADO</th>
 
               </tr>
@@ -531,12 +531,13 @@
                 <td>{{ident.cost}}</td>
 
                 <td>
-                  <span *ngIf="ident.receipt != ''"></span>
-                  <span *ngIf="ident.receipt == ''">{{ident.cost}}</span>
+                    <span *ngIf="ident.invoice != '' && ident.invoice != null">
+                      {{ident.invoice}}
+                    </span>
                 </td>
                 <td>
-                  <span *ngIf="ident.receipt != ''">{{ident.cost}}</span>
-                  <span *ngIf="ident.receipt == ''"></span>
+                  <span *ngIf="ident.invoice != ''">{{ident.cost}}</span>
+                  <span *ngIf="ident.invoice == ''"></span>
                 </td>
               </tr>
 

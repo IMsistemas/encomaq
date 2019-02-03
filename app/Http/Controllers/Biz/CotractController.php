@@ -316,7 +316,8 @@ class CotractController extends Controller
        $data = Contract::with("biz_client","biz_contractitem", 'nom_categoryitem')
                         ->selectRaw("biz_contract.*")
                         ->join("biz_client","biz_client.idclient","=","biz_contract.idclient")
-                        ->whereRaw("biz_contract.state='".$filtro->state."' AND ( biz_contract.nocontract LIKE '%".$filtro->Buscar."%' OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%') )")
+                        // ->whereRaw("biz_contract.state='".$filtro->state."' AND ( biz_contract.nocontract LIKE '%".$filtro->Buscar."%' OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%') )")
+                        ->whereRaw("( biz_contract.nocontract LIKE '%".$filtro->Buscar."%' OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%') )")
                         ->orderBy("".$filtro->column, "".$filtro->order)
                         ->get();
 
