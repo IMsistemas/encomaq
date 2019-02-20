@@ -266,7 +266,8 @@ class LiquidationController extends Controller
         ini_set('max_execution_time', 300);
         $filtro = json_decode($paramentro);
        
-       $data = Liquidation::with("biz_referralguideliquidation.biz_referralguide.biz_contract.biz_client","biz_referralguideliquidation.biz_referralguide.biz_Referralguideitem.biz_item")
+       $data = Liquidation::with("biz_referralguideliquidation.biz_referralguide.biz_contract.biz_client",
+                                            "biz_referralguideliquidation.biz_referralguide.biz_Referralguideitem.biz_item")
                         ->whereRaw("biz_liquidation.state='".$filtro->state."' AND ( biz_liquidation.number LIKE '%".$filtro->Buscar."%'  )")
                         ->orderBy("".$filtro->column, "".$filtro->order)
                         ->get();

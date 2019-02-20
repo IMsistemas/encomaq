@@ -145,6 +145,7 @@
         <thead>
             <tr>
                 <th style="width: 5%;">NO</th>
+                <th style="width: 10%;">CLIENTE</th>
                 <th style="width: 10%;"># LIQUIDACIÓN</th>
                 <th style="width: 12%;"># FACTURA</th>
                 <th style="width: 10%;">FECHA I.</th>
@@ -157,9 +158,12 @@
             </tr>
             <?php
                 $x = 1;
+
                 foreach ($data as $c) {
+
                     echo "<tr>";
                     echo "<td>".$x."</td>";
+                    echo "<td>".$c["biz_referralguideliquidation"][0]["biz_referralguide"]["biz_contract"]["biz_client"]["businessname"]."</td>";
                     echo "<td>".$c["number"]."</td>";
                     echo "<td>".$c["billnumber"]."</td>";
                     echo "<td>".$c["dateinit"]."</td>";
