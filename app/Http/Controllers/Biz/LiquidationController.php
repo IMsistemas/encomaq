@@ -244,6 +244,10 @@ class LiquidationController extends Controller
             $sql .=" )";
             $sql .=")";
         }
+        if ($filtro->idproject != '') {
+            $sql .= " AND biz_liquidation.idliquidation IN ( ";
+            $sql .= "SELECT biz_liquidation_project.idliquidation FROM biz_liquidation_project WHERE biz_liquidation_project.idproject = " . $filtro->idproject . " )";
+        }
         $data = Liquidation::with("biz_liquidationproject.biz_project.biz_client",
                                             "biz_referralguideliquidation.biz_referralguide.biz_contract.biz_client",
                                             "biz_referralguideliquidation.biz_referralguide.biz_Referralguideitem.biz_item",
