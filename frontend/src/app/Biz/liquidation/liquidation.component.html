@@ -398,7 +398,9 @@
                       <tr *ngFor="let listguide of entrega">
                         <td>{{listguide.datetimereferral}}</td>
                         <td>{{listguide.guidenumber}}</td>
-                        <td *ngFor="let listItem of listguide.items">{{listItem.quantify}}</td>
+                        <td *ngFor="let listItem of listguide.items">
+                          <span *ngIf="listItem.quantify != 0">{{listItem.quantify}}</span>
+                        </td>
                       </tr>
                     </tbody>
                     <tfoot class="bg-info" style="font-weight: bold;">
@@ -448,7 +450,9 @@
                       <tr *ngFor="let listguide of retiro">
                         <td>{{listguide.datetimereferral}}</td>
                         <td>{{listguide.guidenumber}}</td>
-                        <td *ngFor="let listItem of listguide.items">{{listItem.quantify}}</td>
+                        <td *ngFor="let listItem of listguide.items">
+                          <span *ngIf="listItem.quantify != 0">{{listItem.quantify}}</span>
+                        </td>
                       </tr>
                     </tbody>
                     <tfoot class="bg-info" style="font-weight: bold;">
