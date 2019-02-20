@@ -50,4 +50,7 @@ export class LiquidationService {
   getLogo(): Observable<any> {
     return this.http.get(this.url_api.get_url_api() + 'api/Liquidation/getLogo');
   }
+  getProjects(): Observable<any> {
+    return this.http.get(this.url_api.get_url_api() + 'api/Liquidation/getProjects');
+  }
 }

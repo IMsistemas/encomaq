@@ -145,6 +145,7 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('Liquidation/getProjects', 'Biz\LiquidationController@getProjects');
     Route::get('Liquidation/getSummary/{data}', 'Biz\LiquidationController@getSummary');
     Route::get('Liquidation/exportarpdfid/{data}', 'Biz\LiquidationController@exportarpdfid');
     Route::get('Liquidation/exportarpdf/{data}', 'Biz\LiquidationController@exportarpdf');

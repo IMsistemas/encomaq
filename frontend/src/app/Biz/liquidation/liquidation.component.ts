@@ -14,10 +14,12 @@ declare var $: any;
 export class LiquidationComponent implements OnInit {
   message_info: any;
   list_liquidation = [];
+  list_projects = [];
   info_tem_edit: any;
   tem_cancel_activate: any;
   msm_cancel_activate: any;
   /*variables para paginar*/
+  idproject = '';
   descripcion: any = '';
   state = '1';
   column = 'number';
@@ -82,6 +84,7 @@ export class LiquidationComponent implements OnInit {
     $('.auxaddidcliente').prop('disabled' , true);
     $('.modal-dialog').draggable();
     this.get_list_liquidation();
+    this.getProjects();
     this.getLogo();
     this.getCompany();
   }
@@ -99,6 +102,22 @@ export class LiquidationComponent implements OnInit {
         console.log('POST call in error", respons', error);
       });
   }
+  getProjects() {
+    this.list_projects.push({ idproject: '', projectname: '--Seleccione Proyecto--' });
+    this.liquidation.getProjects().subscribe(
+      (response) => {
+        for (const u of response) {
+          const o = {
+            idproject: u.idproject,
+            projectname: u.projectname
+          };
+          this.list_projects.push(o);
+        }
+      },
+      (error) => {
+        console.log('POST call in error", respons', error);
+      });
+  }
   new_liquidation() {
     $('#addliquidation').modal('show');
   }
@@ -108,7 +127,8 @@ export class LiquidationComponent implements OnInit {
       state: this.state,
       column: this.column,
       order: this.order,
-      num_page: this.num_page
+      num_page: this.num_page,
+      idproject: this.idproject
     };
     this.liquidation.filtro_liquidation(this.page, o).subscribe(
       (response) => {

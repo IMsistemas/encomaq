@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Biz;
 
 use App\Models\Biz\LiquidationItemSurplus;
+use App\Models\Biz\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -38,6 +39,11 @@ class LiquidationController extends Controller
     public function getLogo()
     {
         return Company::all();
+    }
+
+    public function getProjects()
+    {
+        return Project::where('state', 1)->orderBy('projectname', 'asc')->get();
     }
 
     /**
