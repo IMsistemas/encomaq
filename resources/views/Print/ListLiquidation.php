@@ -146,14 +146,15 @@
             <tr>
                 <th style="width: 5%;">NO</th>
                 <th style="width: 10%;">CLIENTE</th>
-                <th style="width: 10%;"># LIQUIDACIÓN</th>
-                <th style="width: 12%;"># FACTURA</th>
-                <th style="width: 10%;">FECHA I.</th>
-                <th style="width: 10%;">FECHA F.</th>
-                <th style="width: 20%;">OBSERVACIÓN</th>
-                <th style="width: 10%;">SUBTOTAL</th>
-                <th style="width: 8%;">IVA</th>
-                <th style="width: 10%;">TOTAL</th>
+                <th style="width: 8%;"># LIQ.</th>
+                <th style="width: 8%;"># FACTURA</th>
+                <th style="width: 8%;">FECHA I.</th>
+                <th style="width: 8%;">FECHA F.</th>
+                <th>PROYECTO(S)</th>
+                <th style="width: 10%;">OBSERVACIÓN</th>
+                <th style="width: 8%;">SUBTOTAL</th>
+                <th style="width: 6%;">IVA</th>
+                <th style="width: 8%;">TOTAL</th>
                 <th style="width: 5%;">ESTADO</th>
             </tr>
             <?php
@@ -168,6 +169,15 @@
                     echo "<td>".$c["billnumber"]."</td>";
                     echo "<td>".$c["dateinit"]."</td>";
                     echo "<td>".$c["dateend"]."</td>";
+
+                    echo "<td>";
+
+                    foreach ($c["biz_liquidationproject"] as $p) {
+                        echo $p['biz_project']['projectname'] . ', ';
+                    }
+
+                    echo "</td>";
+
                     echo "<td>".$c["observation"]."</td>";
                     echo "<td>".$c["subtotal"]."</td>";
                     echo "<td>".$c["iva"]."</td>";
