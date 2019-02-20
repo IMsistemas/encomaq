@@ -29,7 +29,7 @@ export class ReferralguideComponent implements OnInit {
   idcategory: any = '';
   idunittype: any = '';
   state = '1';
-  column = 'biz_contract.nocontract';
+  column = 'biz_referralguide.guidenumber';
   search: any = '';
   order = 'ASC';
   num_page = 5;

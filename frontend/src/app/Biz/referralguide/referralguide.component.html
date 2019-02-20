@@ -54,6 +54,7 @@
 
       <div class="col-12 col-sm-2" style="margin-top: 5px;">
         <select class="custom-select" #col [(ngModel)]="column" (change)="page = 1; getList();">
+          <option value="biz_referralguide.guidenumber"># GUIA R.</option>
           <option value="biz_contract.nocontract"># CONTRATO</option>
           <option value="biz_client.businessname">CLIENTE</option>
         </select>
@@ -62,7 +63,7 @@
       <div class="col-12 col-sm-2" style="margin-top: 5px;">
         <select class="custom-select" #or [(ngModel)]="order" (change)="page = 1; getList();">
           <option value="ASC">ASCENDENTE</option>
-          <option value="DESC">DESENDENTE</option>
+          <option value="DESC">DESCENDENTE</option>
         </select>
       </div>
 
