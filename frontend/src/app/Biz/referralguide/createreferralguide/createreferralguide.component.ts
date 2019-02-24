@@ -33,6 +33,8 @@ export class CreatereferralguideComponent implements OnInit {
 
   fieldPlace = 0;
 
+  s_estado = 1;
+
   establec = '001';
   ptoventa = '001';
   secuencial = '000000000';
@@ -59,6 +61,8 @@ export class CreatereferralguideComponent implements OnInit {
     this.carrier_select = { idcarrier: '', carriername: '', identify: '', licenseplate: '' };
     this.place_select_start = { idplace: '', placename: ''};
     this.place_select_end = { idplace: '', placename: ''};
+
+    this.s_estado = 1;
 
     this.getGuideNumber();
 

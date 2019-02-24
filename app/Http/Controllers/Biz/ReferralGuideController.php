@@ -171,21 +171,46 @@ class ReferralGuideController extends Controller
         if ($this->searchNumber($guidenumber) == false) {
 
             $aux = new Referralguide();
-            $aux->idcontract = $data["Data"]["idcontract"];
-            $aux->idproject = $data["Data"]["idproject"];
-            $aux->idtransferreason = $data["Data"]["idtransferreason"];
-            $aux->idcarrier = $data["Data"]["idcarrier"];
 
-            $aux->idwarehouse = $data["Data"]["idwarehouse"];
+            if ($data["Data"]["idcontract"] != '') {
+                $aux->idcontract = $data["Data"]["idcontract"];
+            }
 
-            $aux->datetimereferral = $data["Data"]["datetimereferral"];
+            if ($data["Data"]["idproject"] != '') {
+                $aux->idproject = $data["Data"]["idproject"];
+            }
+
+            if ($data["Data"]["idtransferreason"] != '') {
+                $aux->idtransferreason = $data["Data"]["idtransferreason"];
+            }
+
+            if ($data["Data"]["idcarrier"] != '') {
+                $aux->idcarrier = $data["Data"]["idcarrier"];
+            }
+
+            if ($data["Data"]["idwarehouse"] != '') {
+                $aux->idwarehouse = $data["Data"]["idwarehouse"];
+            }
+
+            if ($data["Data"]["datetimereferral"] != '') {
+                $aux->datetimereferral = $data["Data"]["datetimereferral"];
+            }
+
+            if ($data["Data"]["logisticservicecost"] != '') {
+                $aux->logisticservicecost = $data["Data"]["logisticservicecost"];
+            }
+
+            if ($data["Data"]["s_estado"] != '') {
+                $aux->state = $data["Data"]["s_estado"];
+            } else {
+                $aux->state = 1;
+            }
+
             $aux->sequential = $data["Data"]["sequential"];
-
-            // $aux->guidenumber = $data["Data"]["guidenumber"];
             $aux->guidenumber = $guidenumber;
 
-            $aux->logisticservicecost = $data["Data"]["logisticservicecost"];
-            $aux->state = 1;
+
+
             if ($aux->save()) {
 
                 /* $place = new ReferralGuidePlace();
@@ -198,19 +223,24 @@ class ReferralGuideController extends Controller
                     return response()->json(['error' => $aux]);
                 } */
 
-                foreach ($data["list"] as $f) {
-                    if( $f["iditem"]!="" ) {
-                        $caux = new Referralguideitem();
-                        $caux->idreferralguide = $aux->idreferralguide;
-                        $caux->iditemprice = $f["iditemprice"];
-                        $caux->iditem = $f["iditem"];
-                        $caux->price = $f["price"];
-                        $caux->quantify = $f["quantity"];
-                        $caux->observation = $f["observation"];
-                        $caux->save();
+                if (count($data["list"]) > 0) {
+                    foreach ($data["list"] as $f) {
+                        if( $f["iditem"]!="" ) {
+                            $caux = new Referralguideitem();
+                            $caux->idreferralguide = $aux->idreferralguide;
+                            $caux->iditemprice = $f["iditemprice"];
+                            $caux->iditem = $f["iditem"];
+                            $caux->price = $f["price"];
+                            $caux->quantify = $f["quantity"];
+                            $caux->observation = $f["observation"];
+                            $caux->save();
+                        }
                     }
                 }
+
+
                 return response()->json(['success' => $aux ]);
+
             } else {
                 return response()->json(['error' => $aux]);
             }
