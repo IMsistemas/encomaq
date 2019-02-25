@@ -12,33 +12,17 @@
 
       <div class="col-6 text-right">
 
-        <!-- <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Agregar" (click)="create()">
+        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Agregar" (click)="create()">
           Agregar <i class="fas fa-plus-square fa-lg"></i>
-        </button> -->
+        </button>
 
-        <div class="btn-group" role="group" aria-label="Basic example">
-          
-          <button type="button" class="btn btn-info" (click)="pdf()">
-            PDF <i class="fas fa-file-pdf"></i>
-          </button>
-  
-          <button type="button" class="btn btn-info" (click)="excel()">
-            EXCEL <i class="fas fa-file-excel"></i>
-          </button>
-  
-          <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Agregar <i class="fas fa-plus-square fa-lg"></i>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" data-toggle="tooltip" data-placement="bottom" title="Agregar" (click)="create()">Agregar</a>
-              <a class="dropdown-item" data-toggle="tooltip" data-placement="bottom" title="Agregar" (click)="createReferralNull()">Agregar Anulada</a>
-            </div>
-          </div>
+        <button type="button" class="btn btn-info" (click)="pdf()" style="margin-left: 5px;">
+          PDF <i class="fas fa-file-pdf"></i>
+        </button>
 
-        </div>
-
-        
+        <button type="button" class="btn btn-info" (click)="excel()" style="margin-left: 5px;">
+          EXCEL <i class="fas fa-file-excel"></i>
+        </button>        
 
       </div>
 
@@ -152,7 +136,13 @@
           <td>{{item.guidenumber}}</td>
           <td>{{item.datetimereferral}}</td>
           <td>{{item.sequential}}</td>
-          <td>{{item.nom_transferreason.transferreasonname}}</td>
+          <td>
+
+              <span *ngIf="item.nom_transferreason !== null">
+                  {{item.nom_transferreason.transferreasonname}}
+              </span>
+
+          </td>
 
           <!--<td *ngIf="item.biz_referralguide_place.length == 0">{{item.startingpoint}}</td>
           <td *ngIf="item.biz_referralguide_place.length == 0">{{item.arrivalpoint}}</td> -->
@@ -162,27 +152,47 @@
 
           <td>
 
-            <span *ngIf="item.nom_transferreason.idtypetransferreason != 2">
-                {{item.biz_warehouse.warehousename}}
+            <span *ngIf="item.nom_transferreason !== null">
+
+                <span *ngIf="item.nom_transferreason.idtypetransferreason != 2">
+                    {{item.biz_warehouse.warehousename}}
+                </span>
+                <span *ngIf="item.nom_transferreason.idtypetransferreason == 2">
+                    {{item.biz_project.projectname}}
+                </span>
+
             </span>
-            <span *ngIf="item.nom_transferreason.idtypetransferreason == 2">
-                {{item.biz_project.projectname}}
-            </span>
+
+            
             
           </td>
           <td>
             
-              <span *ngIf="item.nom_transferreason.idtypetransferreason != 2">
-                  {{item.biz_project.projectname}}
-                  
+              <span *ngIf="item.nom_transferreason !== null">
+
+                  <span *ngIf="item.nom_transferreason.idtypetransferreason != 2">
+                      {{item.biz_project.projectname}}
+                      
+                  </span>
+                  <span *ngIf="item.nom_transferreason.idtypetransferreason == 2">
+                      {{item.biz_warehouse.warehousename}}
+                  </span>
+  
               </span>
-              <span *ngIf="item.nom_transferreason.idtypetransferreason == 2">
-                  {{item.biz_warehouse.warehousename}}
-              </span>
+
+              
 
           </td>
 
-          <td>{{item.biz_carrier.carriername}}</td>
+          <td>
+
+              <span *ngIf="item.biz_carrier !== null">
+
+                  {{item.biz_carrier.carriername}}
+  
+              </span>
+            
+          </td>
 
           <td>{{ ((item.state == 1)? 'ACTIVO':'ANULADO') }}</td>
           <td class="noExl" >
@@ -245,8 +255,6 @@
       </div>
     </div>
   </div>
-
-
 
   <div class="modal fade" id="mdlConfirmSetState" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -407,7 +415,14 @@
                   <th style="width: 20%;">NUMERO</th>
                   <td>{{info.guidenumber}}</td>
                   <th style="width: 10%;">FECHA</th>
-                  <td>{{info.datetimereferral + ' ' + info.sequential}}</td>
+                  <td>
+                    <span *ngIf="info.datetimereferral !== null">
+                        {{info.datetimereferral + ' '}}
+                    </span>
+                    <span *ngIf="info.sequential !== null">
+                        {{info.sequential}}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
 
@@ -421,28 +436,49 @@
                   <th>SERVICIO LOGISTICA</th>
                   <td>{{info.logisticservicecost}}</td>
                   <th>MOTIVO TRASLADO</th>
-                  <td>{{info.nom_transferreason.transferreasonname}}</td>
+                  <td>
+
+                      <span *ngIf="info.nom_transferreason !== null">
+
+                          {{info.nom_transferreason.transferreasonname}}
+          
+                      </span>
+                    
+                  </td>
                 </tr>
                 <tr>
                   <th>PUNTO DE PARTIDA</th>
                   <td colspan="3">
-                      <span *ngIf="info.nom_transferreason.idtypetransferreason != 2">
-                          {{info.biz_warehouse.warehousename}}
+
+                      <span *ngIf="info.nom_transferreason !== null">
+
+                          <span *ngIf="info.nom_transferreason.idtypetransferreason != 2">
+                              {{info.biz_warehouse.warehousename}}
+                          </span>
+                          <span *ngIf="info.nom_transferreason.idtypetransferreason == 2">
+                              {{info.biz_project.projectname}}
+                          </span>
+          
                       </span>
-                      <span *ngIf="info.nom_transferreason.idtypetransferreason == 2">
-                          {{info.biz_project.projectname}}
-                      </span>
+                      
                   </td>
                 </tr>
                 <tr>
                   <th>PUNTO DE LLEGADA</th>
                   <td colspan="3">
-                      <span *ngIf="info.nom_transferreason.idtypetransferreason == 2">
-                          {{info.biz_warehouse.warehousename}}
+
+                      <span *ngIf="info.nom_transferreason !== null">
+
+                          <span *ngIf="info.nom_transferreason.idtypetransferreason == 2">
+                              {{info.biz_warehouse.warehousename}}
+                          </span>
+                          <span *ngIf="info.nom_transferreason.idtypetransferreason != 2">
+                              {{info.biz_project.projectname}}
+                          </span>
+          
                       </span>
-                      <span *ngIf="info.nom_transferreason.idtypetransferreason != 2">
-                          {{info.biz_project.projectname}}
-                      </span>
+
+                      
                   </td>
                 </tr>
 

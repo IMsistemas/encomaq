@@ -131,6 +131,7 @@ export class ReferralguideComponent implements OnInit {
 
     this.referralguide.get(this.page, o).subscribe(
       (response) => {
+        console.log(response.data);
         this.listReferralGuide = response.data;
         this.from = response.from;
         this.total = response.total;
