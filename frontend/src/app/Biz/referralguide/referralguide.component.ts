@@ -131,7 +131,7 @@ export class ReferralguideComponent implements OnInit {
 
     this.referralguide.get(this.page, o).subscribe(
       (response) => {
-        console.log(response.data);
+        // console.log(response.data);
         this.listReferralGuide = response.data;
         this.from = response.from;
         this.total = response.total;
@@ -160,7 +160,25 @@ export class ReferralguideComponent implements OnInit {
     // this.listcarrier.get_list_carrier();
     this.info_tem_edit = item;
     this.idcontract_select = item.biz_contract;
-    this.objectcarrier_select = item.biz_carrier;
+
+    if (item.biz_carrier !== null) {
+      this.objectcarrier_select = item.biz_carrier;
+    } else {
+      this.objectcarrier_select = { idcarrier: '', carriername: '', identify: '', licenseplate: '' };
+    }
+
+    if (item.idproject === null) {
+      this.info_tem_edit.idproject = '';
+    }
+
+    if (item.idwarehouse === null) {
+      this.info_tem_edit.idwarehouse = '';
+    }
+
+    if (item.idtransferreason === null) {
+      this.info_tem_edit.idtransferreason = '';
+    }
+
     if (item.biz_referralguide_place.length !== 0) {
       this.objectplace_select_start = {
         idplace: item.biz_referralguide_place[0].biz_place_start.idplace,
@@ -185,7 +203,7 @@ export class ReferralguideComponent implements OnInit {
   }
 
   contract_select(n): void {
-    console.log(n);
+    // console.log(n);
     this.idcontract_select = n;
   }
 
@@ -198,7 +216,7 @@ export class ReferralguideComponent implements OnInit {
   }
 
   place_select(n): void {
-    console.log(n);
+    // console.log(n);
       if (this.fieldSelectedPlace === 1) {
         this.objectplace_select_start = n[0];
       } else {
@@ -207,7 +225,7 @@ export class ReferralguideComponent implements OnInit {
   }
 
   fieldPlaceSelected(n) {
-    console.log(n);
+    // console.log(n);
     this.fieldSelectedPlace = n;
   }
 
@@ -339,7 +357,7 @@ export class ReferralguideComponent implements OnInit {
   }
 
   view_info(data: any) {
-    console.log(data);
+    // console.log(data);
     this.info = data;
     $('#info').modal('show');
   }

@@ -155,7 +155,7 @@ export class CreatereferralguideComponent implements OnInit {
   getGuideNumber() {
     this.referra.getGuideNumber().subscribe(
       (response) => {
-        console.log(response);
+        // console.log(response);
         this.secuencial = response.secuencial;
       },
       (error) => {
@@ -199,7 +199,7 @@ export class CreatereferralguideComponent implements OnInit {
     });
   }
   addrwo() {
-    console.log(this.list_itemcont);
+    // console.log(this.list_itemcont);
     const o = {
       iditem: '',
       iditemprice: 0,
@@ -209,7 +209,7 @@ export class CreatereferralguideComponent implements OnInit {
       observation: ''
     };
     this.list_itemcont.push(o);
-    console.log(this.list_itemcont);
+    // console.log(this.list_itemcont);
   }
   removerow(data) {
     const posicion = this.list_itemcont.indexOf(data);
@@ -218,8 +218,8 @@ export class CreatereferralguideComponent implements OnInit {
   search_item(fila) {
     $('.listitems').modal('show');
     fila.iditem = this.item_select.iditem;
-    console.log(fila);
-    console.log(this.item_select);
+    // console.log(fila);
+    // console.log(this.item_select);
   }
   add(data, frm) {
 
@@ -229,10 +229,10 @@ export class CreatereferralguideComponent implements OnInit {
         list: this.list_itemcont
       };
 
-      console.log(aux);
+      // console.log(aux);
       this.referra.create(aux).subscribe(
         (response) => {
-          console.log(response);
+          // console.log(response);
           if (response.success !== undefined) {
             $('#createreferralguide').modal('hide');
             // frm.reset();
@@ -267,16 +267,16 @@ export class CreatereferralguideComponent implements OnInit {
   }
 
   getListPrice(item) {
-    console.log(item);
+    // console.log(item);
     this.itemPrice.price_item(item.iditem).subscribe(
       (response) => {
-        console.log(response);
+        // console.log(response);
          item.listPrice = response;
          if ( response.length > 0 ) {
            item.price = response[0].price;
            item.iditemprice = response[0].iditemprice;
          }
-         console.log(item);
+         // console.log(item);
       },
       (error) => {
 

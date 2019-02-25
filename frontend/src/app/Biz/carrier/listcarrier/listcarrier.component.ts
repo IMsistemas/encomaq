@@ -37,7 +37,7 @@ export class ListcarrierComponent implements OnInit {
   }
 
   get_list_carrier() {
-    console.log('AAAAAAAAAAA');
+    // console.log('AAAAAAAAAAA');
     // this.listCarrier = this.carrier.get();
     const o = {
       Buscar: this.descripcion,
@@ -49,7 +49,7 @@ export class ListcarrierComponent implements OnInit {
     this.carrier.filtro_carrier(this.page, o).subscribe(
       (response) => {
         this.listCarrier = response.data;
-        console.log(this.listCarrier);
+        // console.log(this.listCarrier);
         this.from = response.from;
         this.total = response.total;
         this.loading = false;
