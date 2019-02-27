@@ -374,4 +374,49 @@
       </div>
     </div>
 
+    <div class="col-12 table-responsive" style="display: none;">
+
+      <table class="table table-striped table-hover table-bordered" id="list_all_items" style="font-size: 12px;">
+        <thead class="thead-dark">
+          
+          <tr style="display: none;">
+            <th colspan="7"></th>
+          </tr>
+          <tr style="display: none;">
+            <th colspan="4">{{companyData.businessname.toUpperCase()}}</th>
+            <th colspan="3">LISTADO DE ITEMS</th>
+          </tr>
+          <tr style="display: none;">
+            <th colspan="7"></th>
+          </tr>
+          
+          <tr>
+            <th style="width: 8%;">NO</th>
+            <th>ITEM</th>
+            <th>DESCRIPCIÓN</th>
+            <th>CATEGORÍA</th>
+            <th>UNIDAD</th>
+            <th>PRECIOS</th>
+            <th style="width: 8%;">ESTADO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ident of list_all_item  let i = index ">
+            <td>{{i+from}}</td>
+            <td>{{ident.itemname}}</td>
+            <td>{{ident.description}}</td>
+            <td>{{ident.nom_category.categoryitemname}}</td>
+            <td>{{ident.nom_unit.unittypename}}</td>
+            <td>
+              <span *ngFor="let price of ident.biz_itemprice">
+                $ {{price.price}},
+              </span>
+            </td>
+            <td>{{ ((ident.state == 1)? 'ACTIVO':'INACTIVO') }}</td>
+          </tr>  
+        </tbody>
+      </table>
+  
+    </div>
+
 </div>

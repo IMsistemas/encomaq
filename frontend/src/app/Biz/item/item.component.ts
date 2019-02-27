@@ -16,6 +16,7 @@ declare var $: any;
 export class ItemComponent implements OnInit {
   message_info: any;
   list_item = [];
+  list_all_item = [];
   info_tem_edit: any;
   tem_cancel_activate: any;
   msm_cancel_activate: any;
@@ -240,10 +241,33 @@ export class ItemComponent implements OnInit {
     $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
   }
   excel() {
-    $('#list_items').table2excel({
-      exclude: '.noExl',
-      filename: 'Lista de items'
-    });
+
+    const o = {
+      Buscar: this.descripcion,
+      idcategoryitem: this.idcategory,
+      idunittype: this.idunittype,
+      state: this.state,
+      column: this.column,
+      order: this.order,
+      num_page: '1000000000'
+    };
+    this.item.filtro_item(this.page, o).subscribe(
+      (response) => {
+        this.list_all_item = response.data;
+        this.from = response.from;
+        this.total = response.total;
+        this.loading = false;
+        console.log(this.list_all_item);
+        setTimeout(function() {
+          $('#list_all_items').table2excel({
+            exclude: '.noExl',
+            filename: 'Lista de Items'
+          }); }, 4000);
+      },
+      (error) => {
+        console.log(error);
+      });
+
   }
   refresfather(data: any) {
     this.get_list_item();
