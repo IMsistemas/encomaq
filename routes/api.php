@@ -98,7 +98,7 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
-    Route::get('Client/exportarpdf/{data}', 'Biz\ClienteController@exportarpdf');
+    Route::get('Client/exportarpdf/{filter}', 'Biz\ClienteController@exportarpdf');
     Route::get('Client/filtro', 'Biz\ClienteController@clientfiltro');
     Route::get('Client/state/{id}', 'Biz\ClienteController@stateclient');
     Route::resource('Client', 'Biz\ClienteController');

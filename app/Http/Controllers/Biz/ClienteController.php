@@ -202,13 +202,18 @@ class ClienteController extends Controller
             return response()->json(['error' => $aux ]);
         }
     }
-    public function exportarpdf ($data) {
+    public function exportarpdf ($filter) {
         ini_set('max_execution_time', 300);
-        $filtro = json_decode($data);
+        $filtro = json_decode($filter);
         $sql = "";
-        if ($filtro->ididentifytype != "") {
-            $sql .= " AND ididentifytype =".$filtro->ididentifytype." ";
+
+        if (isset($filtro->ididentifytype)){
+            if ($filtro->ididentifytype != "") {
+                $sql .= " AND ididentifytype =".$filtro->ididentifytype." ";
+            }
         }
+
+
         $data = Client::with("nom_identifytype")
                         // ->whereRaw("(businessname  LIKE '%".$filtro->Buscar."%' OR identify  LIKE '%".$filtro->Buscar."%')  AND state='".$filtro->state."'".$sql)
                         ->whereRaw("(businessname  LIKE '%".$filtro->Buscar."%' OR identify  LIKE '%".$filtro->Buscar."%') " . $sql)

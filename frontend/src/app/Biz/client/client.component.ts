@@ -14,6 +14,7 @@ declare var $: any;
 export class ClientComponent implements OnInit {
   message_info: any;
   list_client = [];
+  list_all_client = [];
   info_tem_edit: any;
   tem_cancel_activate: any;
   msm_cancel_activate: any;
@@ -203,18 +204,42 @@ export class ClientComponent implements OnInit {
       state: this.state,
       column: this.column,
       order: this.order,
-      num_page: this.num_page
+      // num_page: this.num_page
     };
     const accion = this.client.filtro_clientexportarpdf(o);
-    $('#printtitle').html('Lista de clientes');
+    console.log(accion);
+    $('#printtitle').html('Lista de Clientes');
     $('#print').modal('show');
     $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
   }
   excel () {
-    $('#list_clientes').table2excel({
-      exclude: '.noExl',
-      filename: 'Lista de clientes'
-    });
+
+    const o = {
+      Buscar: this.descripcion,
+      ididentifytype: this.ididentifytype,
+      state: this.state,
+      column: this.column,
+      order: this.order,
+      num_page: '1000000000'
+    };
+    this.client.filtro_client(this.page, o).subscribe(
+      (response) => {
+        this.list_all_client = response.data;
+        this.from = response.from;
+        this.total = response.total;
+        this.loading = false;
+        console.log(this.list_all_client);
+
+        setTimeout(function() {
+          $('#list_all_clientes').table2excel({
+          exclude: '.noExl',
+          filename: 'Lista de Clientes'
+        }); }, 3000);
+
+      },
+      (error) => {
+        console.log(error);
+      });
   }
   refresfather(data: any) {
     this.get_list_client();
