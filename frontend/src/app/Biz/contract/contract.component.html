@@ -473,7 +473,7 @@
     <div class="modal-dialog modal-lg" role="document" style="max-width: 90% !important;">
       <div class="modal-content">
         <div class="modal-header bg-info">
-          <h5 class="modal-title">Resumen</h5>
+          <h5 class="modal-title">RESUMEN DE CONTRATOS</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -506,6 +506,7 @@
                 <th style="width: 8%;">COSTO</th>
                 <th style="width: 8%;">NO. FACTURA</th>
                 <th style="width: 8%;">FACTURADO</th>
+                <th style="width: 8%;">ESTADO</th>
 
               </tr>
             </thead>
@@ -539,6 +540,13 @@
                   <span *ngIf="ident.invoice != ''">{{ident.cost}}</span>
                   <span *ngIf="ident.invoice == ''"></span>
                 </td>
+
+                <td *ngIf="calculateDay(ident.enddate) == false">
+                  <span *ngIf="ident.state == 1">ACTIVO</span>
+                  <span *ngIf="ident.state == 0">ANULADO</span>
+                </td>
+                <td *ngIf="calculateDay(ident.enddate) == true">CADUCADO</td>
+
               </tr>
 
             </tbody>
