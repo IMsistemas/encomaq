@@ -248,9 +248,15 @@ class ItemController extends Controller
         } else if ($filtro->idunittype != "") {
             $sql .= " AND idunittype =".$filtro->idunittype." ";
         }
-        $data = Item::with("nom_category","nom_unit", 'biz_itemprice')
-                        ->whereRaw("(itemname  LIKE '%".$filtro->Buscar."%' OR description  LIKE '%".$filtro->Buscar."%') AND state='".$filtro->state."' ".$sql)
-                        ->orderBy("".$filtro->column, "".$filtro->order);
+
+        if ($filtro->state != null) {
+            $data = Item::with("nom_category","nom_unit", 'biz_itemprice')
+                ->whereRaw("(itemname  LIKE '%".$filtro->Buscar."%' OR description  LIKE '%".$filtro->Buscar."%') AND state='".$filtro->state."' ".$sql)
+                ->orderBy("".$filtro->column, "".$filtro->order);
+        } else {
+            $data = Item::with("nom_category","nom_unit", 'biz_itemprice')
+                ->orderBy("".$filtro->column, "".$filtro->order);
+        }
 
         return  $data->paginate($filtro->num_page);
     }

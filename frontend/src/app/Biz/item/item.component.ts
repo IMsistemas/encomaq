@@ -246,7 +246,7 @@ export class ItemComponent implements OnInit {
       Buscar: this.descripcion,
       idcategoryitem: this.idcategory,
       idunittype: this.idunittype,
-      state: this.state,
+      state: null,
       column: this.column,
       order: this.order,
       num_page: '1000000000'
