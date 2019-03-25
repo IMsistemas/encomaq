@@ -217,7 +217,7 @@ export class ClientComponent implements OnInit {
     const o = {
       Buscar: this.descripcion,
       ididentifytype: this.ididentifytype,
-      state: this.state,
+      state: null,
       column: this.column,
       order: this.order,
       num_page: '1000000000'

@@ -129,11 +129,20 @@ class ProjectController extends Controller
         /*if ($filtro->Buscar != "") {
             $sql .= " OR idclient IN (SELECT biz_client.idclient FROM biz_client WHERE (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%'))";
         }*/
-        $data = Project::with("biz_client")
-                        ->selectRaw("biz_project.*")
-                        ->join("biz_client", "biz_client.idclient", "=", "biz_project.idclient")
-                        ->whereRaw(" biz_project.state='".$filtro->state."' AND  ( biz_project.projectname  LIKE '%".$filtro->Buscar."%'  OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%'))  ")
-                        ->orderBy("".$filtro->column, "".$filtro->order);
+
+        if ($filtro->state != null) {
+            $data = Project::with("biz_client")
+                ->selectRaw("biz_project.*")
+                ->join("biz_client", "biz_client.idclient", "=", "biz_project.idclient")
+                ->whereRaw(" biz_project.state='".$filtro->state."' AND  ( biz_project.projectname  LIKE '%".$filtro->Buscar."%'  OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%'))  ")
+                ->orderBy("".$filtro->column, "".$filtro->order);
+        } else {
+            $data = Project::with("biz_client")
+                ->selectRaw("biz_project.*")
+                ->join("biz_client", "biz_client.idclient", "=", "biz_project.idclient")
+                ->orderBy("".$filtro->column, "".$filtro->order);
+        }
+
         return  $data->paginate($filtro->num_page);
     }
 

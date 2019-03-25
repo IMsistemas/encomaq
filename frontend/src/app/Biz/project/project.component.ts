@@ -20,6 +20,7 @@ export class ProjectComponent implements OnInit {
   /*variables para paginar*/
   message_info: any;
   list_project = [];
+  list_all_project = [];
   info_tem_edit: any;
   tem_cancel_activate: any;
   msm_cancel_activate: any;
@@ -196,10 +197,33 @@ export class ProjectComponent implements OnInit {
     $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
   }
   excel() {
-    $('#list_project').table2excel({
-      exclude: '.noExl',
-      filename: 'Lista de proyectos'
-    });
+
+    const o = {
+      Buscar: this.descripcion,
+      state: null,
+      column: this.column,
+      order: this.order,
+      num_page: '1000000000'
+    };
+    this.project.filtro_project(this.page, o).subscribe(
+      (response) => {
+        this.list_all_project = response.data;
+        this.from = response.from;
+        this.total = response.total;
+        this.loading = false;
+        console.log(this.list_all_project);
+
+        setTimeout(function() {
+          $('#list_all_projects').table2excel({
+            exclude: '.noExl',
+            filename: 'Lista de proyectos'
+          }); }, 3000);
+
+      },
+      (error) => {
+        console.log(error);
+      });
+
   }
   refresfather(data: any) {
     this.get_list_project();
