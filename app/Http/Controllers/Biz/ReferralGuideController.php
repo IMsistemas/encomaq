@@ -452,8 +452,8 @@ class ReferralGuideController extends Controller
         ini_set('max_execution_time', 300);
         $filter = json_decode($paramentro);
        
-        $where = " biz_referralguide.state ='" . $filter->state."' ";
-        $where .= " AND (sequential LIKE '%" . $filter->search . "%' ";
+        // $where = " biz_referralguide.state ='" . $filter->state."' ";
+        $where = " (sequential LIKE '%" . $filter->search . "%' ";
         $where .= " OR biz_contract.nocontract LIKE '%" . $filter->search . "%'   ";
         $where .= " OR biz_client.businessname LIKE '%" . $filter->search . "%'  ) ";
 
