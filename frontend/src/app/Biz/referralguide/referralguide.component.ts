@@ -351,9 +351,9 @@ export class ReferralguideComponent implements OnInit {
       (response) => {
         // console.log(response.data);
         this.listAllReferralGuide = response.data;
-        this.from = response.from;
+        /*this.from = response.from;
         this.total = response.total;
-        this.loading = false;
+        this.loading = false;*/
 
         setTimeout(function() {
           $('#list_all_guiaremision').table2excel({

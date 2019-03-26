@@ -551,7 +551,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of listReferralGuide  let i = index" [ngClass]="{'text-danger':item.state == 0 } ">
+        <tr *ngFor="let item of listAllReferralGuide  let i = index">
           <td>{{i+from}}</td>
           <td>{{item.biz_contract.biz_client.businessname}}</td>
           <td>{{item.biz_contract.nocontract}}</td>
