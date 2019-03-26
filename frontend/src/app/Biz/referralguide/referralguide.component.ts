@@ -18,6 +18,7 @@ export class ReferralguideComponent implements OnInit {
   @Output() update_component_father = new EventEmitter<boolean>();
 
   listReferralGuide: Observable<any>;
+  listAllReferralGuide: Observable<any>;
   message_success: any;
   message_info: any;
   message_error: any;
@@ -336,10 +337,37 @@ export class ReferralguideComponent implements OnInit {
       });
   }
   excel() {
-    $('#list_guiaremision').table2excel({
-      exclude: '.noExl',
-      filename: 'Lista de guía de remisión'
-    });
+
+    const o = {
+      idtransferreason: this.idtransferreason,
+      search: this.descripcion,
+      state: null,
+      column: this.column,
+      order: this.order,
+      num_page: this.num_page
+    };
+
+    this.referralguide.get(this.page, o).subscribe(
+      (response) => {
+        // console.log(response.data);
+        this.listAllReferralGuide = response.data;
+        this.from = response.from;
+        this.total = response.total;
+        this.loading = false;
+
+        setTimeout(function() {
+          $('#list_all_guiaremision').table2excel({
+            exclude: '.noExl',
+            filename: 'Lista de Guía de Remisión'
+          });
+        }, 3000);
+
+      },
+      (error) => {
+        console.log(error);
+      });
+
+
   }
   pdf() {
     const o = {
