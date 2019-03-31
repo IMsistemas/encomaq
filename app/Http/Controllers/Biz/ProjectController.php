@@ -190,7 +190,7 @@ class ProjectController extends Controller
        $data = Project::with("biz_client")
                         ->selectRaw("biz_project.*")
                         ->join("biz_client", "biz_client.idclient", "=", "biz_project.idclient")
-                        ->whereRaw(" biz_project.state='".$filtro->state."' AND  ( biz_project.projectname  LIKE '%".$filtro->Buscar."%'  OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%'))  ")
+                        ->whereRaw(" ( biz_project.projectname  LIKE '%".$filtro->Buscar."%'  OR (biz_client.businessname LIKE '%".$filtro->Buscar."%' OR biz_client.identify LIKE '%".$filtro->Buscar."%'))  ")
                         ->orderBy("".$filtro->column, "".$filtro->order)
                         ->get();
 
