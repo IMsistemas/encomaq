@@ -300,7 +300,7 @@ class ItemController extends Controller
             $sql .= " AND idunittype =".$filtro->idunittype." ";
         }
         $data = Item::with("nom_category","nom_unit", 'biz_itemprice')
-                        ->whereRaw("(itemname  LIKE '%".$filtro->Buscar."%' OR description  LIKE '%".$filtro->Buscar."%') AND state='".$filtro->state."' ".$sql)
+                        ->whereRaw("(itemname  LIKE '%".$filtro->Buscar."%' OR description  LIKE '%".$filtro->Buscar."%') ".$sql)
                         ->orderBy("itemname", "ASC")
                         ->get();
         $company = Company::all();
