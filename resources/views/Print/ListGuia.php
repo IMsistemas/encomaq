@@ -145,10 +145,10 @@
 
     <table class="table table-bordered table-condensed">
         <thead>
-            <tr>
+            <tr style="background-color: gray;">
                 <th style="width: 5%;">NO</th>
-                <th style="width: 8%;"># CONTRATO</th>
-                <th>CLIENTE</th>
+                <!--<th style="width: 8%;"># CONTRATO</th>
+                <th>CLIENTE</th>-->
                 <th>NO. GUIA</th>
                 <th style="width: 7%;">FECHA</th>
                 <th style="width: 5%;">HORA</th>
@@ -163,8 +163,8 @@
                 foreach ($data as $c) {
                     echo "<tr>";
                     echo "<td>".$x."</td>";
-                    echo "<td>".$c["biz_contract"]["nocontract"]."</td>";
-                    echo "<td>".$c["biz_contract"]["biz_client"]["businessname"]."</td>";
+                    //echo "<td>".$c["biz_contract"]["nocontract"]."</td>";
+                    //echo "<td>".$c["biz_contract"]["biz_client"]["businessname"]."</td>";
                     echo "<td>".$c["guidenumber"]."</td>";
                     echo "<td>".$c["datetimereferral"]."</td>";
                     echo "<td>".$c["sequential"]."</td>";
@@ -187,6 +187,30 @@
                     }
                     echo "</tr>";
                     $x++;
+
+                    echo '<tr>';
+                    echo '<th>NO.</th>';
+                    echo '<th colspan="2">ITEM</th>';
+                    echo '<th colspan="2">CANTIDAD</th>';
+                    echo '<th colspan="2">PRECIO</th>';
+                    echo '<th colspan="2">OBSERVACION</th>';
+                    echo '</tr>';
+
+                    $y = 1;
+
+                    foreach ($c['biz_Referralguideitem'] as $item) {
+
+                        echo '<tr>';
+                        echo '<td>' . $y . '</td>';
+                        echo '<td colspan="2">' . $item['biz_item']['itemname'] . '</td>';
+                        echo '<td colspan="2">' . $item['quantify'] . '</td>';
+                        echo '<td colspan="2">' . $item['biz_itemprice']['price'] . '</td>';
+                        echo '<td colspan="2">' . $item['observation'] . '</td>';
+                        echo '</tr>';
+
+                        $y++;
+                    }
+
                 }
             ?>
         </thead>
