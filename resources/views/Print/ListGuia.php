@@ -144,76 +144,101 @@
     </table>
 
     <table class="table table-bordered table-condensed">
-        <thead>
-            <tr style="background-color: gray;">
-                <th style="width: 5%;">NO</th>
-                <!--<th style="width: 8%;"># CONTRATO</th>
-                <th>CLIENTE</th>-->
-                <th>NO. GUIA</th>
-                <th style="width: 7%;">FECHA</th>
-                <th style="width: 5%;">HORA</th>
-                <th>MOTIVO</th>
-                <th>P. PARTIDA</th>
-                <th>P. LLEGADA</th>
-                <th>TRANSPORTISTA</th>
-                <th style="width: 6%;">ESTADO</th>
-            </tr>
-            <?php
-                $x = 1;
-                foreach ($data as $c) {
-                    echo "<tr>";
-                    echo "<td>".$x."</td>";
-                    //echo "<td>".$c["biz_contract"]["nocontract"]."</td>";
-                    //echo "<td>".$c["biz_contract"]["biz_client"]["businessname"]."</td>";
-                    echo "<td>".$c["guidenumber"]."</td>";
-                    echo "<td>".$c["datetimereferral"]."</td>";
-                    echo "<td>".$c["sequential"]."</td>";
 
-                    echo "<td>".$c["nom_transferreason"]["transferreasonname"]."</td>";
+        <tbody>
 
-                    if ($c["nom_transferreason"]["idtypetransferreason"] == 1 || $c["nom_transferreason"]["idtypetransferreason"] == 3) {
-                        echo "<td>".$c["biz_warehouse"]['warehousename']."</td>";
-                        echo "<td>".$c["biz_project"]['projectname']."</td>";
-                    } else {
-                        echo "<td>".$c["biz_project"]['projectname']."</td>";
-                        echo "<td>".$c["biz_warehouse"]['warehousename']."</td>";
-                    }
+        <?php
 
-                    echo "<td>".$c["biz_carrier"]["carriername"]."</td>";
-                    if ($c["state"] == 1) {
-                        echo "<td>ACTIVO</td>";
-                    } else {
-                        echo "<td>INACTIVO</td>";
-                    }
-                    echo "</tr>";
-                    $x++;
+        $nocontract = 0;
 
-                    echo '<tr>';
-                    echo '<th>NO.</th>';
-                    echo '<th colspan="2">ITEM</th>';
-                    echo '<th colspan="2">CANTIDAD</th>';
-                    echo '<th colspan="2">PRECIO</th>';
-                    echo '<th colspan="2">OBSERVACION</th>';
-                    echo '</tr>';
+        $x = 1;
+        foreach ($data as $c) {
 
-                    $y = 1;
+            if ($nocontract != $c["biz_contract"]["nocontract"]){
 
-                    foreach ($c['biz_Referralguideitem'] as $item) {
+                echo '<tr>';
+                echo '<th colspan="9" style="text-align: center;">' . $c["biz_contract"]["nocontract"] . ' - ' . $c["biz_contract"]["biz_client"]['businessname']. '</th>';
+                echo '</tr>';
 
-                        echo '<tr>';
-                        echo '<td>' . $y . '</td>';
-                        echo '<td colspan="2">' . $item['biz_item']['itemname'] . '</td>';
-                        echo '<td colspan="2">' . $item['quantify'] . '</td>';
-                        echo '<td colspan="2">' . $item['biz_itemprice']['price'] . '</td>';
-                        echo '<td colspan="2">' . $item['observation'] . '</td>';
-                        echo '</tr>';
+                $nocontract = $c["biz_contract"]["nocontract"];
+            }
 
-                        $y++;
-                    }
+            //------------------------------------------------------------------
 
-                }
-            ?>
-        </thead>
+            echo '<tr style="background-color: gray;">';
+            echo '<th style="width: 5%;">NO</th>';
+            echo '<th>NO. GUIA</th>';
+            echo '<th style="width: 7%;">FECHA</th>';
+            echo '<th style="width: 5%;">HORA</th>';
+            echo '<th>MOTIVO</th>';
+            echo '<th>P. PARTIDA</th>';
+            echo '<th>P. LLEGADA</th>';
+            echo '<th>TRANSPORTISTA</th>';
+            echo '<th style="width: 6%;">ESTADO</th>';
+            echo '</tr>';
+
+            //------------------------------------------------------------------
+
+            echo "<tr>";
+            echo "<td>".$x."</td>";
+            //echo "<td>".$c["biz_contract"]["nocontract"]."</td>";
+            //echo "<td>".$c["biz_contract"]["biz_client"]["businessname"]."</td>";
+            echo "<td>".$c["guidenumber"]."</td>";
+            echo "<td>".$c["datetimereferral"]."</td>";
+            echo "<td>".$c["sequential"]."</td>";
+
+            echo "<td>".$c["nom_transferreason"]["transferreasonname"]."</td>";
+
+            if ($c["nom_transferreason"]["idtypetransferreason"] == 1 || $c["nom_transferreason"]["idtypetransferreason"] == 3) {
+                echo "<td>".$c["biz_warehouse"]['warehousename']."</td>";
+                echo "<td>".$c["biz_project"]['projectname']."</td>";
+            } else {
+                echo "<td>".$c["biz_project"]['projectname']."</td>";
+                echo "<td>".$c["biz_warehouse"]['warehousename']."</td>";
+            }
+
+            echo "<td>".$c["biz_carrier"]["carriername"]."</td>";
+            if ($c["state"] == 1) {
+                echo "<td>ACTIVO</td>";
+            } else {
+                echo "<td>INACTIVO</td>";
+            }
+            echo "</tr>";
+            $x++;
+
+            echo '<tr>';
+            echo '<th>NO.</th>';
+            echo '<th colspan="3">ITEM</th>';
+            echo '<th>CANTIDAD</th>';
+            echo '<th>PRECIO</th>';
+            echo '<th colspan="3">OBSERVACION</th>';
+            echo '</tr>';
+
+            $y = 1;
+
+            foreach ($c['biz_Referralguideitem'] as $item) {
+
+                echo '<tr>';
+                echo '<td>' . $y . '</td>';
+                echo '<td colspan="3">' . $item['biz_item']['itemname'] . '</td>';
+                echo '<td style="text-align: right;">' . $item['quantify'] . '</td>';
+                echo '<td style="text-align: right;">$ ' . $item['biz_itemprice']['price'] . '</td>';
+                echo '<td colspan="3">' . $item['observation'] . '</td>';
+                echo '</tr>';
+
+                $y++;
+            }
+
+            echo '<tr>';
+            echo '<td colspan="9"><br></td>';
+            echo '</tr>';
+
+        }
+
+        ?>
+
+        </tbody>
+
     </table>
 </body>
 </html>

@@ -475,7 +475,8 @@ class ReferralGuideController extends Controller
                         ->selectRaw("biz_referralguide.* ")
                         ->join("biz_contract", "biz_contract.idcontract", "=", "biz_referralguide.idcontract")
                         ->join("biz_client", "biz_client.idclient", "=", "biz_contract.idclient" )
-                        ->whereRaw($where)->orderBy($filter->column, $filter->order)
+                        // ->whereRaw($where)->orderBy($filter->column, $filter->order)
+                        ->whereRaw($where)->orderBy('idcontract', 'desc')
                         ->get();
 
         $company = Company::all();
