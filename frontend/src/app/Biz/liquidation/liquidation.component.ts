@@ -250,6 +250,12 @@ export class LiquidationComponent implements OnInit {
       filename: 'liquidacion'
     });
   }
+  kardexExcel() {
+    $('#table_kardex').table2excel({
+      exclude: '.noExl',
+      filename: 'kardex'
+    });
+  }
   pdf() {
     const o = {
       Buscar: this.descripcion,

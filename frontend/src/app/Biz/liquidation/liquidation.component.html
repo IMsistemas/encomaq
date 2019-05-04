@@ -722,16 +722,16 @@
 
 
   <div class="modal fade" id="mdl_summary" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg" role="document" style="max-width: 80% !important;">
       <div class="modal-content">
         <div class="modal-header bg-info">
-          <h5 class="modal-title">RESUMEN</h5>
+          <h5 class="modal-title">RESUMEN (KARDEX)</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <div class="row">
+          <div class="row" id="table_kardex">
             <div class="col-sm-2 col-md-12 col-lg-12">
               <table class="table table-bordered table-striped table-condensed">
                 <thead class="thead-dark">
@@ -762,7 +762,9 @@
         </div>
 
         <div class="modal-footer">
-
+          <button type="button" class="btn btn-info" (click)="kardexExcel()">
+            EXCEL <i class="fas fa-file-excel"></i>
+          </button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
             Cancelar
             <i class="fas fa-ban"></i>
