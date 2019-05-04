@@ -493,6 +493,14 @@
                 <th colspan="12"></th>
               </tr>
 
+              <tr class="thead-dark">
+                <td colspan="10"></td>
+                <td colspan="2">ENCOFRADO</td>
+                <td colspan="2">ANDAMIOS</td>
+                <td colspan="2">MAQUINARIA</td>
+                <td></td>
+              </tr>
+
               <tr>
 
                 <th style="width: 8%;">NO.</th>
@@ -505,10 +513,21 @@
                 <th style="width: 5%;">TELÉFONO</th>
                 <th style="width: 8%;">COSTO</th>
                 <th style="width: 8%;">NO. FACTURA</th>
+
+
+                <th style="width: 8%;">NO FACTURADO</th>
                 <th style="width: 8%;">FACTURADO</th>
+
+                <th style="width: 8%;">NO FACTURADO</th>
+                <th style="width: 8%;">FACTURADO</th>
+
+                <th style="width: 8%;">NO FACTURADO</th>
+                <th style="width: 8%;">FACTURADO</th>
+
                 <th style="width: 8%;">ESTADO</th>
 
               </tr>
+
             </thead>
             <tbody>
               <tr *ngFor="let ident of listResumenContract  let i = index ">
@@ -536,10 +555,47 @@
                       {{ident.invoice}}
                     </span>
                 </td>
+
+                <!--
+                  ---------------------------------------------------------------
+                -->
+
                 <td>
-                  <span *ngIf="ident.invoice != ''">{{ident.cost}}</span>
-                  <span *ngIf="ident.invoice == ''"></span>
+                  <span *ngIf="ident.nom_categoryitem.categoryitemname == 'ENCOFRADO' && ident.invoice != ''">{{ident.cost}}</span>
+                  <span *ngIf="ident.nom_categoryitem.categoryitemname == 'ENCOFRADO' && ident.invoice == ''"></span>
                 </td>
+                <td>
+                  <span *ngIf="ident.nom_categoryitem.categoryitemname == 'ENCOFRADO' && ident.invoice != ''">{{ident.cost}}</span>
+                  <span *ngIf="ident.nom_categoryitem.categoryitemname == 'ENCOFRADO' && ident.invoice == ''"></span>
+                </td>
+
+                <!--
+                  ---------------------------------------------------------------
+                -->
+
+                <td>
+                  <span *ngIf="ident.nom_categoryitem.categoryitemname == 'ANDAMIO Y CANASTILLA' && ident.invoice != ''">{{ident.cost}}</span>
+                  <span *ngIf="ident.nom_categoryitem.categoryitemname == 'ANDAMIO Y CANASTILLA' && ident.invoice == ''"></span>
+                </td>
+                <td>
+                  <span *ngIf="ident.nom_categoryitem.categoryitemname == 'ANDAMIO Y CANASTILLA' && ident.invoice != ''">{{ident.cost}}</span>
+                  <span *ngIf="ident.nom_categoryitem.categoryitemname == 'ANDAMIO Y CANASTILLA' && ident.invoice == ''"></span>
+                </td>
+
+                <!--
+                  ---------------------------------------------------------------
+                -->
+
+                <td>
+                  <span *ngIf="ident.nom_categoryitem.categoryitemname == 'MAQUINARIA' && ident.invoice != ''">{{ident.cost}}</span>
+                  <span *ngIf="ident.nom_categoryitem.categoryitemname == 'MAQUINARIA' && ident.invoice == ''"></span>
+                </td>
+                <td>
+                  <span *ngIf="ident.nom_categoryitem.categoryitemname == 'MAQUINARIA' && ident.invoice != ''">{{ident.cost}}</span>
+                  <span *ngIf="ident.nom_categoryitem.categoryitemname == 'MAQUINARIA' && ident.invoice == ''"></span>
+                </td>
+
+
 
                 <td *ngIf="calculateDay(ident.enddate) == false">
                   <span *ngIf="ident.state == 1">ACTIVO</span>
