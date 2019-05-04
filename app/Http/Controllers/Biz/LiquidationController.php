@@ -95,6 +95,22 @@ class LiquidationController extends Controller
                  $o->price = $f['price'];
                  $o->save();
              }
+
+             foreach ($data["list"] as $f) {
+
+                 foreach ($f['biz__referralguideitem'] as $item) {
+
+                     $o =  new LiquidationProjectItem();
+                     $o->idliquidation = $aux->idliquidation;
+                     $o->idproject = $f['biz_project']['idproject'];
+                     $o->iditem = $item['iditem'];
+                     $o->quantify = $item['quantify'];
+                     $o->save();
+
+                 }
+
+             }
+
              return response()->json(['success' => $aux ]);
          } else {
              return response()->json(['error' => $aux]);
@@ -150,6 +166,7 @@ class LiquidationController extends Controller
              Referralguideliquidation::whereRaw("idliquidation=".$aux->idliquidation."")->delete();
              Liquidationproject::whereRaw("idliquidation=".$aux->idliquidation."")->delete();
              LiquidationItemSurplus::whereRaw("idliquidation=".$aux->idliquidation."")->delete();
+             LiquidationProjectItem::whereRaw("idliquidation=".$aux->idliquidation."")->delete();
 
              /*foreach ($data["Data"]["biz_referralguideliquidation"] as $f) {
                  $real =  new Referralguideliquidation();
@@ -178,7 +195,24 @@ class LiquidationController extends Controller
                  $o->price = $f['price'];
                  $o->save();
              }
+
+             foreach ($data["list"] as $f) {
+
+                 foreach ($f['biz__referralguideitem'] as $item) {
+
+                     $o =  new LiquidationProjectItem();
+                     $o->idliquidation = $aux->idliquidation;
+                     $o->idproject = $f['biz_project']['idproject'];
+                     $o->iditem = $item['iditem'];
+                     $o->quantify = $item['quantify'];
+                     $o->save();
+
+                 }
+
+             }
+
              return response()->json(['success' => $aux ]);
+
          } else {
              return response()->json(['error' => $aux]);
          }

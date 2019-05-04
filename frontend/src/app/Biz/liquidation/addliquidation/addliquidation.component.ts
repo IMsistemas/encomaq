@@ -667,6 +667,8 @@ export class AddliquidationComponent implements OnInit {
       Total: this.totalprecio
     };
 
+    console.log(o);
+
     this.liquidation.add_liquidation(o).subscribe(
       (response) => {
         if (response.success !== undefined) {

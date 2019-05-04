@@ -782,7 +782,7 @@ getList(data: any) {
   getsummaryLiquidationSurplus() {
     const f = new Date();
     const tempMoth =  f.getMonth();
-    f.setMonth(tempMoth - 1);
+    // f.setMonth(tempMoth - 1);
     const antMoth = (f.getMonth() + 1);
     const antMonth =  (antMoth < 10 ) ? ('0' + antMoth) : antMoth;
 
