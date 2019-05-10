@@ -328,7 +328,7 @@ orderReferralGuide(result, frm) {
     for (const h of this.sobrante) {
       const oo = {
         iditem: h.iditem,
-        name: h.biz_item.itemname
+        name: h.biz_item.itemname + '. ' + h.biz_item.description
       };
       this.entrega_head_item.push(oo);
     }
@@ -361,7 +361,7 @@ orderReferralGuide(result, frm) {
         if (pos < 0) {
           const oo = {
             iditem: i.iditem,
-            name: i.biz_item.itemname
+            name: i.biz_item.itemname + '. ' + i.biz_item.description
           };
           this.entrega_head_item.push(oo);
         }
@@ -375,7 +375,7 @@ orderReferralGuide(result, frm) {
         if (pos < 0) {
           const oo = {
             iditem: i.iditem,
-            name: i.biz_item.itemname
+            name: i.biz_item.itemname + '. ' + i.biz_item.description
           };
           this.retiro_head_item.push(oo);
         }

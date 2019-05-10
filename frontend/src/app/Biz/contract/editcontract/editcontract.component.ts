@@ -82,7 +82,7 @@ export class EditcontractComponent implements OnInit {
         for (const cat of response) {
           const o = {
             iditem: cat.iditem,
-            itemname: cat.itemname + ' - ' + cat.description
+            itemname: cat.itemname + '. ' + cat.description
           };
           this.lis_item.push(o);
         }
