@@ -443,6 +443,7 @@
               <table class="table table-bordered table-striped table-condensed">
                 <thead class="btn-dark">
                   <th>N.</th>
+                  <th>Item</th>
                   <th>Descripción</th>
                   <th>Cant.</th>
                   <th>Observaciones</th>
@@ -451,6 +452,7 @@
                   <tr *ngFor="let item of info_datacontract.biz_contractitem let i = index">
                     <td>{{i+1}}</td>
                     <td>{{item.biz_item.itemname}}</td>
+                    <td>{{item.biz_item.description}}</td>
                     <td>{{item.quantity}}</td>
                     <td>{{item.observation}}</td>
                   </tr>
