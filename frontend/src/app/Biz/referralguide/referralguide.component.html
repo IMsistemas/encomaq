@@ -12,7 +12,8 @@
 
       <div class="col-6 text-right">
 
-        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Agregar" (click)="create()">
+        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Agregar"
+          (click)="create()">
           Agregar <i class="fas fa-plus-square fa-lg"></i>
         </button>
 
@@ -22,8 +23,11 @@
 
         <button type="button" class="btn btn-info" (click)="excel()" style="margin-left: 5px;">
           EXCEL <i class="fas fa-file-excel"></i>
-        </button>        
+        </button>
 
+        <button type="button" class="btn btn-info" (click)="initLiquidationSurplus()" style="margin-left: 5px;">
+          RESUMEN <i class="fas fa-file"></i>
+        </button>
       </div>
 
     </div>
@@ -53,7 +57,8 @@
 
       <div class="col-12 col-sm-2" style="margin-top: 5px;">
         <div class="input-group mb-3">
-          <input type="number" class="form-control" #pg [(ngModel)]="num_page" (keyup)="page = 1; getList();" (change)="page = 1; getList();">
+          <input type="number" class="form-control" #pg [(ngModel)]="num_page" (keyup)="page = 1; getList();"
+            (change)="page = 1; getList();">
           <div class="input-group-prepend">
             <label class="input-group-text">
               Pag.
@@ -71,7 +76,8 @@
 
       <div class="col-12 col-sm-4" style="margin-top: 5px;">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Buscar Guía" #aux [(ngModel)]="descripcion" (keyup)="page = 1; getList();">
+          <input type="text" class="form-control" placeholder="Buscar Guía" #aux [(ngModel)]="descripcion"
+            (keyup)="page = 1; getList();">
           <div class="input-group-prepend">
             <label class="input-group-text">
               <i class="fas fa-search"></i>
@@ -85,7 +91,8 @@
     <div class="row">
       <div class="col-12 col-sm-6">
         <div class="input-group">
-          <select class="form-control" id="idtransferreason" name="idtransferreason" [(ngModel)]="idtransferreason" (change)="page = 1; getList();">
+          <select class="form-control" id="idtransferreason" name="idtransferreason" [(ngModel)]="idtransferreason"
+            (change)="page = 1; getList();">
             <option *ngFor="let i of listTransferReason" value="{{i.idtransferreason}}">
               {{i.transferreasonname}}
             </option>
@@ -102,16 +109,16 @@
     <table class="table table-striped table-hover table-bordered" id="list_guiaremision" style="font-size: 12px;">
       <thead class="thead-dark">
 
-          <tr style="display: none;">
-              <th colspan="11"></th>
-            </tr>
-            <tr style="display: none;">
-              <th colspan="6">{{companyData.businessname.toUpperCase()}}</th>
-              <th colspan="5">LISTADO DE GUIAS DE REMISION</th>
-            </tr>
-            <tr style="display: none;">
-              <th colspan="11"></th>
-            </tr>
+        <tr style="display: none;">
+          <th colspan="11"></th>
+        </tr>
+        <tr style="display: none;">
+          <th colspan="6">{{companyData.businessname.toUpperCase()}}</th>
+          <th colspan="5">LISTADO DE GUIAS DE REMISION</th>
+        </tr>
+        <tr style="display: none;">
+          <th colspan="11"></th>
+        </tr>
 
         <tr>
           <th style="width: 3%;">NO</th>
@@ -138,9 +145,9 @@
           <td>{{item.sequential}}</td>
           <td>
 
-              <span *ngIf="item.nom_transferreason !== null">
-                  {{item.nom_transferreason.transferreasonname}}
-              </span>
+            <span *ngIf="item.nom_transferreason !== null">
+              {{item.nom_transferreason.transferreasonname}}
+            </span>
 
           </td>
 
@@ -154,51 +161,51 @@
 
             <span *ngIf="item.nom_transferreason !== null">
 
-                <span *ngIf="item.nom_transferreason.idtypetransferreason != 2">
-                    {{item.biz_warehouse.warehousename}}
-                </span>
-                <span *ngIf="item.nom_transferreason.idtypetransferreason == 2">
-                    {{item.biz_project.projectname}}
-                </span>
+              <span *ngIf="item.nom_transferreason.idtypetransferreason != 2">
+                {{item.biz_warehouse.warehousename}}
+              </span>
+              <span *ngIf="item.nom_transferreason.idtypetransferreason == 2">
+                {{item.biz_project.projectname}}
+              </span>
 
             </span>
 
-            
-            
-          </td>
-          <td>
-            
-              <span *ngIf="item.nom_transferreason !== null">
 
-                  <span *ngIf="item.nom_transferreason.idtypetransferreason != 2">
-                      {{item.biz_project.projectname}}
-                      
-                  </span>
-                  <span *ngIf="item.nom_transferreason.idtypetransferreason == 2">
-                      {{item.biz_warehouse.warehousename}}
-                  </span>
-  
-              </span>
-
-              
 
           </td>
+          <td>
+
+            <span *ngIf="item.nom_transferreason !== null">
+
+              <span *ngIf="item.nom_transferreason.idtypetransferreason != 2">
+                {{item.biz_project.projectname}}
+
+              </span>
+              <span *ngIf="item.nom_transferreason.idtypetransferreason == 2">
+                {{item.biz_warehouse.warehousename}}
+              </span>
+
+            </span>
+
+
+
+          </td>
 
           <td>
 
-              <span *ngIf="item.biz_carrier !== null">
+            <span *ngIf="item.biz_carrier !== null">
 
-                  {{item.biz_carrier.carriername}}
-  
-              </span>
-            
+              {{item.biz_carrier.carriername}}
+
+            </span>
+
           </td>
 
           <td>{{ ((item.state == 1)? 'ACTIVO':'ANULADO') }}</td>
-          <td class="noExl" >
+          <td class="noExl">
             <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-cogs"></i>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -221,116 +228,132 @@
   </div>
 
   <div class="col-12 ">
-    <app-pagination class="right_paginate" (goPage)="goToPage($event)" (goNext)="onNext()" (goPrev)="onPrev()" [pagesToShow]="3"
-      [page]="page" [perPage]="3" [count]="total">
+    <app-pagination class="right_paginate" (goPage)="goToPage($event)" (goNext)="onNext()" (goPrev)="onPrev()"
+      [pagesToShow]="3" [page]="page" [perPage]="3" [count]="total">
     </app-pagination>
   </div>
 
-  <div class="modal" id="mdlCreateReferralNull" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal" id="mdlCreateReferralNull" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
-        <app-createreferralguidenull (update_component_father)="updateList($event, 'create')" ></app-createreferralguidenull>
+        <app-createreferralguidenull (update_component_father)="updateList($event, 'create')">
+        </app-createreferralguidenull>
 
       </div>
     </div>
   </div>
 
-  <div class="modal" id="createreferralguide"  tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal" id="createreferralguide" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document" style="max-width: 90% !important;">
       <div class="modal-content">
 
-        <app-createreferralguide [idcontract_s]="idcontract_select" [carrier_select]="objectcarrier_select" [item_select]="globalitem_select" [place_select_start]="objectplace_select_start" [place_select_end]="objectplace_select_end"  (update_component_father)="updateList($event,'create')" (field_selected)="fieldPlaceSelected($event)"></app-createreferralguide>
+        <app-createreferralguide [idcontract_s]="idcontract_select" [carrier_select]="objectcarrier_select"
+          [item_select]="globalitem_select" [place_select_start]="objectplace_select_start"
+          [place_select_end]="objectplace_select_end" (update_component_father)="updateList($event,'create')"
+          (field_selected)="fieldPlaceSelected($event)"></app-createreferralguide>
 
       </div>
     </div>
   </div>
 
-  <div class="modal" id="updatereferralguide" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal" id="updatereferralguide" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document" style="max-width: 90% !important;">
       <div class="modal-content">
 
-        <app-updatereferralguide [idcontract_s]="idcontract_select" [carrier_select]="objectcarrier_select" [item_select]="globalitem_select"  [tem_edit]="info_tem_edit" [place_select_start]="objectplace_select_start" [place_select_end]="objectplace_select_end"  (update_component_father)="updateList($event,'create')" (field_selected)="fieldPlaceSelected($event)" (update_component_father)="updateList($event,'edit')" (refresh_component_father)="refresfather($event)" ></app-updatereferralguide>
+        <app-updatereferralguide [idcontract_s]="idcontract_select" [carrier_select]="objectcarrier_select"
+          [item_select]="globalitem_select" [tem_edit]="info_tem_edit" [place_select_start]="objectplace_select_start"
+          [place_select_end]="objectplace_select_end" (update_component_father)="updateList($event,'create')"
+          (field_selected)="fieldPlaceSelected($event)" (update_component_father)="updateList($event,'edit')"
+          (refresh_component_father)="refresfather($event)"></app-updatereferralguide>
 
       </div>
     </div>
   </div>
 
-  <div class="modal fade" id="mdlConfirmSetState" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="mdlConfirmSetState" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-warning">
-                <h5 class="modal-title">Confirmación</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-12">
-                        ¿Está seguro que desea cambiar el estado de la Guía de Remisión: <strong>{{referralguide_selected}}</strong>?
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    Cancelar <i class="fas fa-ban"></i>
-                </button>
-
-                <button type="button" class="btn btn-warning" (click)="setState();">
-                    Aceptar <i class="fas fa-retweet"></i>
-                </button>
-
-            </div>
+      <div class="modal-content">
+        <div class="modal-header bg-warning">
+          <h5 class="modal-title">Confirmación</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12">
+              ¿Está seguro que desea cambiar el estado de la Guía de Remisión:
+              <strong>{{referralguide_selected}}</strong>?
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cancelar <i class="fas fa-ban"></i>
+          </button>
+
+          <button type="button" class="btn btn-warning" (click)="setState();">
+            Aceptar <i class="fas fa-retweet"></i>
+          </button>
+
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="modal fade" id="mdlMessageSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-          <div class="modal-content">
-              <div class="modal-header bg-success">
-                  <h5 class="modal-title">Información</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-              <div class="modal-body">
-                  {{message_info}}
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                      Cerrar <i class="fa fa-ban" aria-hidden="true"></i>
-                  </button>
-              </div>
-          </div>
+  <div class="modal fade" id="mdlMessageSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-success">
+          <h5 class="modal-title">Información</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{message_info}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cerrar <i class="fa fa-ban" aria-hidden="true"></i>
+          </button>
+        </div>
       </div>
+    </div>
   </div>
 
-  <div class="modal fade" id="mdlMessageError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-          <div class="modal-content">
-              <div class="modal-header bg-danger">
-                  <h5 class="modal-title">Información</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-              <div class="modal-body">
-                  {{message_info}}
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                      Cerrar <i class="fa fa-ban" aria-hidden="true"></i>
-                  </button>
-              </div>
-          </div>
+  <div class="modal fade" id="mdlMessageError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-danger">
+          <h5 class="modal-title">Información</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{message_info}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cerrar <i class="fa fa-ban" aria-hidden="true"></i>
+          </button>
+        </div>
       </div>
+    </div>
   </div>
 
 
-  <div class="modal fade" id="mdl_cancelactivate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="mdl_cancelactivate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header bg-warning">
@@ -363,7 +386,8 @@
     </div>
   </div>
 
-  <div class="modal fade" id="mdl_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="mdl_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header bg-danger">
@@ -405,7 +429,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body"  style="overflow-y: scroll; height: 70vh;"  *ngIf="info">
+        <div class="modal-body" style="overflow-y: scroll; height: 70vh;" *ngIf="info">
 
           <div class="row">
 
@@ -417,11 +441,11 @@
                   <th style="width: 10%;">FECHA</th>
                   <td>
                     <span *ngIf="info.datetimereferral !== null">
-                        {{info.datetimereferral + ' '}}
+                      {{info.datetimereferral + ' '}}
                     </span>
 
                     <span *ngIf="info.sequential !== null">
-                        {{info.sequential}}
+                      {{info.sequential}}
                     </span>
 
                   </td>
@@ -440,47 +464,47 @@
                   <th>MOTIVO TRASLADO</th>
                   <td>
 
-                      <span *ngIf="info.nom_transferreason !== null">
+                    <span *ngIf="info.nom_transferreason !== null">
 
-                          {{info.nom_transferreason.transferreasonname}}
-          
-                      </span>
-                    
+                      {{info.nom_transferreason.transferreasonname}}
+
+                    </span>
+
                   </td>
                 </tr>
                 <tr>
                   <th>PUNTO DE PARTIDA</th>
                   <td colspan="3">
 
-                      <span *ngIf="info.nom_transferreason !== null">
+                    <span *ngIf="info.nom_transferreason !== null">
 
-                          <span *ngIf="info.nom_transferreason.idtypetransferreason != 2">
-                              {{info.biz_warehouse.warehousename}}
-                          </span>
-                          <span *ngIf="info.nom_transferreason.idtypetransferreason == 2">
-                              {{info.biz_project.projectname}}
-                          </span>
-          
+                      <span *ngIf="info.nom_transferreason.idtypetransferreason != 2">
+                        {{info.biz_warehouse.warehousename}}
                       </span>
-                      
+                      <span *ngIf="info.nom_transferreason.idtypetransferreason == 2">
+                        {{info.biz_project.projectname}}
+                      </span>
+
+                    </span>
+
                   </td>
                 </tr>
                 <tr>
                   <th>PUNTO DE LLEGADA</th>
                   <td colspan="3">
 
-                      <span *ngIf="info.nom_transferreason !== null">
+                    <span *ngIf="info.nom_transferreason !== null">
 
-                          <span *ngIf="info.nom_transferreason.idtypetransferreason == 2">
-                              {{info.biz_warehouse.warehousename}}
-                          </span>
-                          <span *ngIf="info.nom_transferreason.idtypetransferreason != 2">
-                              {{info.biz_project.projectname}}
-                          </span>
-          
+                      <span *ngIf="info.nom_transferreason.idtypetransferreason == 2">
+                        {{info.biz_warehouse.warehousename}}
+                      </span>
+                      <span *ngIf="info.nom_transferreason.idtypetransferreason != 2">
+                        {{info.biz_project.projectname}}
                       </span>
 
-                      
+                    </span>
+
+
                   </td>
                 </tr>
 
@@ -525,16 +549,16 @@
     <table class="table table-striped table-hover table-bordered" id="list_all_guiaremision" style="font-size: 12px;">
       <thead class="thead-dark">
 
-          <tr style="display: none;">
-              <th colspan="11"></th>
-            </tr>
-            <tr style="display: none;">
-              <th colspan="6">{{companyData.businessname.toUpperCase()}}</th>
-              <th colspan="5">LISTADO DE GUIAS DE REMISION</th>
-            </tr>
-            <tr style="display: none;">
-              <th colspan="11"></th>
-            </tr>
+        <tr style="display: none;">
+          <th colspan="11"></th>
+        </tr>
+        <tr style="display: none;">
+          <th colspan="6">{{companyData.businessname.toUpperCase()}}</th>
+          <th colspan="5">LISTADO DE GUIAS DE REMISION</th>
+        </tr>
+        <tr style="display: none;">
+          <th colspan="11"></th>
+        </tr>
 
         <tr>
           <th style="width: 3%;">NO</th>
@@ -560,9 +584,9 @@
           <td>{{item.sequential}}</td>
           <td>
 
-              <span *ngIf="item.nom_transferreason !== null">
-                  {{item.nom_transferreason.transferreasonname}}
-              </span>
+            <span *ngIf="item.nom_transferreason !== null">
+              {{item.nom_transferreason.transferreasonname}}
+            </span>
 
           </td>
 
@@ -576,44 +600,44 @@
 
             <span *ngIf="item.nom_transferreason !== null">
 
-                <span *ngIf="item.nom_transferreason.idtypetransferreason != 2">
-                    {{item.biz_warehouse.warehousename}}
-                </span>
-                <span *ngIf="item.nom_transferreason.idtypetransferreason == 2">
-                    {{item.biz_project.projectname}}
-                </span>
+              <span *ngIf="item.nom_transferreason.idtypetransferreason != 2">
+                {{item.biz_warehouse.warehousename}}
+              </span>
+              <span *ngIf="item.nom_transferreason.idtypetransferreason == 2">
+                {{item.biz_project.projectname}}
+              </span>
 
             </span>
 
-            
-            
-          </td>
-          <td>
-            
-              <span *ngIf="item.nom_transferreason !== null">
 
-                  <span *ngIf="item.nom_transferreason.idtypetransferreason != 2">
-                      {{item.biz_project.projectname}}
-                      
-                  </span>
-                  <span *ngIf="item.nom_transferreason.idtypetransferreason == 2">
-                      {{item.biz_warehouse.warehousename}}
-                  </span>
-  
-              </span>
-
-              
 
           </td>
+          <td>
+
+            <span *ngIf="item.nom_transferreason !== null">
+
+              <span *ngIf="item.nom_transferreason.idtypetransferreason != 2">
+                {{item.biz_project.projectname}}
+
+              </span>
+              <span *ngIf="item.nom_transferreason.idtypetransferreason == 2">
+                {{item.biz_warehouse.warehousename}}
+              </span>
+
+            </span>
+
+
+
+          </td>
 
           <td>
 
-              <span *ngIf="item.biz_carrier !== null">
+            <span *ngIf="item.biz_carrier !== null">
 
-                  {{item.biz_carrier.carriername}}
-  
-              </span>
-            
+              {{item.biz_carrier.carriername}}
+
+            </span>
+
           </td>
 
           <td>{{ ((item.state == 1)? 'ACTIVO':'ANULADO') }}</td>
@@ -625,10 +649,96 @@
 
   <app-listcontract (idcontract)="contract_select($event)"></app-listcontract>
 
-  <app-listitem (itemglobal)="itemglobal_select($event)" ></app-listitem>
+  <app-listitem (itemglobal)="itemglobal_select($event)"></app-listitem>
 
-  <app-listcarrier (carrier_s)="carrier_select($event)" ></app-listcarrier>
+  <app-listcarrier (carrier_s)="carrier_select($event)"></app-listcarrier>
 
-  <app-list-place [fieldSelected]="fieldSelectedPlace" (place_s)="place_select($event)" ></app-list-place>
+  <app-list-place [fieldSelected]="fieldSelectedPlace" (place_s)="place_select($event)"></app-list-place>
+
+
+
+  <div class="modal fade" id="mdl_summary" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document" style="max-width: 80% !important;">
+      <div class="modal-content">
+        <div class="modal-header bg-info">
+          <h5 class="modal-title">RESUMEN (KARDEX)</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col-sm-12 col-md-4">
+                <div class="input-group ">
+                    <input type="date" class="form-control" #pg [(ngModel)]="fechaI" />
+                  </div>
+            </div>
+
+            <div class="col-sm-12 col-md-4">
+                <div class="input-group ">
+                    <input type="date" class="form-control" #pg [(ngModel)]="fechaF" />
+                  </div>
+            </div>
+
+            <div class="col-sm-12 col-md-4">
+              <button type="button" class="btn btn-primary" (click)="getsummaryLiquidationSurplus();"> Buscar</button>
+            </div>
+          </div>
+
+          <div class="row" >
+            <div class="col-sm-2 col-md-12 col-lg-12">
+              <table class="table table-bordered table-striped table-condensed" id="table_kardex">
+                <thead class="thead-dark">
+                  <tr >
+                    <th *ngFor="let auxHe of headSummaryLiquidation ">{{auxHe.itemname}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr  *ngFor="let auxBo of listSummaryLiquidation " >
+                    <td>{{auxBo.datetimereferral}}</td>
+                    <td>{{auxBo.guidenumber}}</td>
+                    <td>{{auxBo.businessname}}</td>
+                    <td>{{auxBo.projectname}}</td>
+                    <td>{{auxBo.transferreasonname}}</td>
+                    <td *ngFor="let i of auxBo.items ">
+                      {{ (i.quantity >0)? i.quantity: '' }}
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot class="bg-info">
+                   <td colspan="5" class="text-right">
+                     SUMAN
+                   </td>
+                   <td *ngFor="let auxFo of footSummaryLiquidation ">
+                     {{auxFo.quantity}}
+                   </td>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" (click)="kardexExcel()">
+            EXCEL <i class="fas fa-file-excel"></i>
+          </button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cancelar
+            <i class="fas fa-ban"></i>
+          </button>
+          <!--
+          <button type="button" class="btn btn-danger" (click)="ok_delete();">
+            Aceptar
+            <i class="fas fa-trash-alt"></i>
+          </button>-->
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 
 </div>

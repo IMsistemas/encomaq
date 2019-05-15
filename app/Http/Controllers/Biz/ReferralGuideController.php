@@ -512,4 +512,13 @@ class ReferralGuideController extends Controller
         return $pdf->stream("GuiaRemision".$today.".pdf");
     }
 
+    
+    public function getSummary ($parameter) {
+        $filtro = json_decode($parameter);
+        return Referralguide::with('biz_project.biz_client', 'biz_Referralguideitem.biz_item','nom_transferreason')
+                            ->whereRaw("biz_referralguide.datetimereferral BETWEEN '".$filtro->fechaI."' AND '".$filtro->fechaF."' ")
+                            ->orderBy("biz_referralguide.datetimereferral","DESC")
+                            ->get();
+    }
+
 }

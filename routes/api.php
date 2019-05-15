@@ -132,6 +132,7 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::group(['middleware' => 'cors'], function(){
+    Route::get('referralguide/getSummary/{data}', 'Biz\ReferralGuideController@getSummary');
     Route::get('referralguide/exportarpdfid/{data}', 'Biz\ReferralGuideController@exportarpdfid');
     Route::get('referralguide/listclient_referralguide', 'Biz\ReferralGuideController@listclient_referralguide');
     Route::get('referralguide/exportarpdf/{data}', 'Biz\ReferralGuideController@exportarpdf');

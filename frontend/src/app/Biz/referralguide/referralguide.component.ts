@@ -63,14 +63,23 @@ export class ReferralguideComponent implements OnInit {
   };
   listTransferReason = [];
   idtransferreason: any = '';
+
+  fechaI: any = '';
+  fechaF: any = '';
+
+  listSummaryLiquidation = [];
+  headSummaryLiquidation = [];
+  footSummaryLiquidation = [];
   constructor(
     private referralguide: ReferralguideService,
     private carriers: CarrierService,
     private company: BcompanyService, private transferreason: ReasontransferService) {
     this.listcarrier = new ListcarrierComponent(carriers);
-   }
+  }
 
   ngOnInit() {
+    this.fechaI = this.startMonth(true);
+    this.fechaF = this.toDay(true);
     this.loadInitJQuery();
     this.getTransferActive();
     this.getList();
@@ -149,7 +158,7 @@ export class ReferralguideComponent implements OnInit {
   }
 
   create() {
-    this.idcontract_select  = { idcontract: '', biz_client: { businessname: '' }, nocontract: '' };
+    this.idcontract_select = { idcontract: '', biz_client: { businessname: '' }, nocontract: '' };
     this.objectcarrier_select = { idcarrier: '', carriername: '', identify: '', licenseplate: '' };
     this.objectplace_select_start = { idplace: '', placename: '' };
     this.objectplace_select_end = { idplace: '', placename: '' };
@@ -218,11 +227,11 @@ export class ReferralguideComponent implements OnInit {
 
   place_select(n): void {
     // console.log(n);
-      if (this.fieldSelectedPlace === 1) {
-        this.objectplace_select_start = n[0];
-      } else {
-        this.objectplace_select_end = n[0];
-      }
+    if (this.fieldSelectedPlace === 1) {
+      this.objectplace_select_start = n[0];
+    } else {
+      this.objectplace_select_end = n[0];
+    }
   }
 
   fieldPlaceSelected(n) {
@@ -355,7 +364,7 @@ export class ReferralguideComponent implements OnInit {
         this.total = response.total;
         this.loading = false;*/
 
-        setTimeout(function() {
+        setTimeout(function () {
           $('#list_all_guiaremision').table2excel({
             exclude: '.noExl',
             filename: 'Lista de Guía de Remisión'
@@ -388,5 +397,185 @@ export class ReferralguideComponent implements OnInit {
     // console.log(data);
     this.info = data;
     $('#info').modal('show');
+  }
+
+  initLiquidationSurplus() {
+    $('#mdl_summary').modal('show');
+    // this.getsummaryLiquidationSurplus();
+  }
+  startMonth(type: any): String {
+    const f = new Date();
+    const month = ((f.getMonth() + 1) < 10) ? '0' + (f.getMonth() + 1) : (f.getMonth() + 1);
+    const year = f.getFullYear();
+    if (type !== null) {
+      return year + '-' + month + '-01';
+    } else {
+      return '01/' + month + '/' + year;
+    }
+  }
+  toDay(type: any): String {
+    const f = new Date();
+    const day = (f.getDate() < 10) ? '0' + f.getDate() : f.getDate();
+    const month = ((f.getMonth() + 1) < 10) ? '0' + (f.getMonth() + 1) : (f.getMonth() + 1);
+    const year = f.getFullYear();
+    if (type !== null) {
+      return year + '-' + month + '-' + day;
+    } else {
+      return day + '/' + month + '/' + year;
+    }
+  }
+  getsummaryLiquidationSurplus() {
+    const o = {
+      fechaI: this.fechaI,
+      fechaF: this.fechaF
+    };
+    this.referralguide.getSummary(o).subscribe(
+      (response) => {
+        console.log(response);
+        this.makeSummary(response);
+      },
+      (error) => {
+        console.log(error);
+      });
+  }
+
+  makeSummary(data) {
+    this.listSummaryLiquidation = [];
+    this.headSummaryLiquidation = [];
+    this.footSummaryLiquidation = [];
+    const tempList1 = [];
+    const temHead = [];
+    // const pos = temHead.map(function (x) { return  parseInt(x.iditem , 0); }).indexOf(parseInt(i.biz_item.iditem, 0));
+    for (const it of data) {
+      for (const i of it.biz__referralguideitem) {
+        if (temHead.length === 0) {
+          const o = {
+            iditem: i.biz_item.iditem,
+            itemname: i.biz_item.itemname + '' + i.biz_item.description
+          };
+          temHead.push(o);
+        } else {
+          const pos = temHead.map(function (x) { return parseInt(x.iditem, 0); }).indexOf(parseInt(i.biz_item.iditem, 0));
+          if (pos < 0) {
+            const o = {
+              iditem: i.biz_item.iditem,
+              itemname: i.biz_item.itemname + '' + i.biz_item.description
+            };
+            temHead.push(o);
+          }
+        }
+      }
+    }
+
+    temHead.sort((obj1, obj2) => {
+      if (obj1.itemname > obj2.itemname) {
+        return 1;
+      }
+      if (obj1.itemname < obj2.itemname) {
+        return -1;
+      }
+      return 0;
+    });
+
+    const c0 = {
+      iditem: -3,
+      itemname: 'FECHA'
+    };
+    const c01 = {
+      iditem: -4,
+      itemname: '# GUIA'
+    };
+
+    const c1 = {
+      iditem: -1,
+      itemname: 'CLIENTE'
+    };
+    const c2 = {
+      iditem: -2,
+      itemname: 'PROYECTO'
+    };
+    const c3 = {
+      iditem: -5,
+      itemname: 'MOTIVO'
+    };
+    this.headSummaryLiquidation.push(c0); this.headSummaryLiquidation.push(c01);
+    this.headSummaryLiquidation.push(c1); this.headSummaryLiquidation.push(c2); this.headSummaryLiquidation.push(c3);
+    for (const j of temHead) {
+      this.headSummaryLiquidation.push(j);
+    }
+
+    for (const k of data) {
+      const temItem = [];
+      for (const l of temHead) {
+        const oo = {
+          iditem: l.iditem,
+          quantity: 0
+        };
+        temItem.push(oo);
+      }
+      if (tempList1.length === 0) {
+        const o = {
+          idliquidation: k.idreferralguide,
+          idproject: k.idproject,
+          datetimereferral: k.datetimereferral,
+          guidenumber: k.guidenumber,
+          transferreasonname: k.nom_transferreason.transferreasonname,
+          businessname: k.biz_project.biz_client.businessname,
+          projectname: k.biz_project.projectname,
+          items: temItem
+        };
+        tempList1.push(o);
+      } else {
+        // tslint:disable-next-line:max-line-length
+        const pos = tempList1.map(function (x) { return (x.idreferralguide + '-' + x.idproject); }).indexOf((k.idreferralguide + '-' + k.idproject));
+        if (pos < 0) {
+          const o = {
+            idliquidation: k.idreferralguide,
+            idproject: k.idproject,
+            datetimereferral: k.datetimereferral,
+            guidenumber: k.guidenumber,
+            transferreasonname: k.nom_transferreason.transferreasonname,
+            businessname: k.biz_project.biz_client.businessname,
+            projectname: k.biz_project.projectname,
+            items: temItem
+          };
+          tempList1.push(o);
+        }
+      }
+    }
+
+    for (const l of data) {
+      for (const m of l.biz__referralguideitem) {
+        // tslint:disable-next-line:max-line-length
+        const pos = tempList1.map(function (x) { return (x.idliquidation + '-' + x.idproject); }).indexOf((l.idreferralguide + '-' + l.idproject));
+        const pos2 = tempList1[pos].items.map(function (y) { return parseInt(y.iditem, 0); }).indexOf(parseInt(m.iditem, 0));
+        tempList1[pos].items[pos2].quantity = parseInt(m.quantify, 0);
+      }
+    }
+    console.log(tempList1);
+    this.listSummaryLiquidation = tempList1;
+
+    for (const n of temHead) {
+      const oo = {
+        iditem: n.iditem,
+        quantity: 0
+      };
+      this.footSummaryLiquidation.push(oo);
+    }
+
+
+    for (const e of data) {
+      for (const p of e.biz__referralguideitem) {
+        const pos3 = this.footSummaryLiquidation.map(function (z) { return parseInt(z.iditem, 0); }).indexOf(parseInt(p.iditem, 0));
+        this.footSummaryLiquidation[pos3].quantity += parseInt(p.quantify, 0);
+      }
+    }
+
+  }
+  kardexExcel() {
+    $('#table_kardex').table2excel({
+      exclude: '.noExl',
+      filename: 'kardex'
+    });
   }
 }
