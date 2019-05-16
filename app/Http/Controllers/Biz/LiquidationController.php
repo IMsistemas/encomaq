@@ -90,6 +90,7 @@ class LiquidationController extends Controller
                  $o =  new LiquidationItemSurplus();
                  $o->idliquidation = $aux->idliquidation;
                  $o->iditem = $f['iditem'];
+                 $o->idproject = $f['idproject'];
                  $o->iditemprice = $f['iditemprice'];
                  $o->quantify = $f['quantify'];
                  $o->price = $f['price'];

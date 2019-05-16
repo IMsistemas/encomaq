@@ -145,16 +145,22 @@ export class AddliquidationComponent implements OnInit {
       }
     }
 
+
+
     for (const e of result) {
+
+      // console.log(e);
 
       const object = {
         idreferralguide: e.idreferralguide,
         datetimereferral: e.datetimereferral,
         guidenumber: e.guidenumber,
+        idproject: e.idproject,
         items: []
       };
 
       for (const i of e.biz__referralguideitem) {
+
         const ii = {
           iditem: i.iditem,
           quantify: i.quantify,
@@ -162,6 +168,7 @@ export class AddliquidationComponent implements OnInit {
           price: i.price,
           iditemprice: i.iditemprice
         };
+
         object.items.push(ii);
 
         if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 1) {
@@ -172,6 +179,7 @@ export class AddliquidationComponent implements OnInit {
 
           if (pos < 0) {
             const oo = {
+              idproject: e.idproject,
               iditem: i.iditem,
               name: i.biz_item.itemname + '. ' + i.biz_item.description
             };
@@ -186,6 +194,7 @@ export class AddliquidationComponent implements OnInit {
 
           if (pos < 0) {
             const oo = {
+              idproject: e.idproject,
               iditem: i.iditem,
               name: i.biz_item.itemname + '. ' + i.biz_item.description
             };
@@ -370,12 +379,12 @@ export class AddliquidationComponent implements OnInit {
 
     this.enObra_head_item = this.entrega_head_item;
 
-
     for (let i = 0; i < this.enObra_head_item.length; i++) {
       this.enObra.push(this.entrega_foot_item[i].quantify - this.retiro_foot_item[i].quantify);
 
       const o = {
         iditem: this.entrega_foot_item[i].iditem,
+        idproject: this.enObra_head_item[i].idproject,
         quantify: this.entrega_foot_item[i].quantify - this.retiro_foot_item[i].quantify,
         price: this.entrega_foot_item[i].price,
         iditemprice: this.entrega_foot_item[i].iditemprice
@@ -385,7 +394,11 @@ export class AddliquidationComponent implements OnInit {
     }
     this.orderProduct(frm);
 
+    console.log(this.enObraObject);
+
   }
+
+  // -----------------------------------------------------------------------------------------------------------------
 
   orderProduct(frm: any) {
 
@@ -487,6 +500,8 @@ export class AddliquidationComponent implements OnInit {
     this.iva = this.iva.toFixed(2);
 
   }
+
+  // ----------------------------------------------------------------------------------------------------------
 
   calculateDay(startdate: string, enddate: string): number {
 
