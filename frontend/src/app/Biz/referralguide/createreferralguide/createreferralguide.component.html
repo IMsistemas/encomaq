@@ -31,7 +31,7 @@
               <label for="exampleFormControlInput1">ESTADO
                 <span class="required">(*)</span>
               </label>
-              <select class="form-control" id="s_estado" name="s_estado" ngModel #s_estado="ngModel">
+              <select class="form-control" id="s_estado" name="s_estado" ngModel #s_estado="ngModel" required>
                 <option value="1">ACTIVO</option>
                 <option value="0">ANULADO</option>
               </select>
@@ -62,7 +62,7 @@
                           </option>
                         </select>
 
-                        <input type="text" class="form-control"  name="temnomcontrato" readonly [(ngModel)]="idcontract_s.nocontract" />
+                        <input type="text" class="form-control"  name="temnomcontrato" readonly [(ngModel)]="idcontract_s.nocontract" required/>
 
                         <div class="input-group-append">
                           <button class="btn btn-default" type="button" (click)="searchContract()"  >
@@ -72,9 +72,9 @@
                       </div>
                     </div>
 
-                    <!-- <div *ngIf="idcontract.errors?.required && idcontract.touched">
+                     <div *ngIf="idcontract.errors?.required && idcontract.touched">
                       <small id="" class="form-text text-danger text-right">El Contrato es requerido</small>
-                    </div> -->
+                    </div> 
 
                 </div>
 
@@ -118,13 +118,13 @@
                     <label for="exampleFormControlInput1">Proyectos
                       <span class="required">(*)</span>
                     </label>
-                    <select class="form-control" id="idproject" name="idproject" ngModel #idproject="ngModel" >
+                    <select class="form-control" id="idproject" name="idproject" ngModel #idproject="ngModel"  required>
                       <option *ngFor="let c of idcontract_s.biz_client.biz_project" value="{{c.idproject}}">{{c.projectname}}</option>
                     </select>
                   </div>
-                  <!--<div *ngIf="idproject.errors?.required && idproject.touched">
+                  <div *ngIf="idproject.errors?.required && idproject.touched">
                     <small id="" class="form-text text-danger text-right">El Proyecto es requerido</small>
-                  </div>-->
+                  </div>
                 </div>
 
                 <div class="col-md-4 col-sm-12">
@@ -132,13 +132,13 @@
                     <label for="exampleFormControlInput1">Bodegas
                       <span class="required">(*)</span>
                     </label>
-                    <select class="form-control" id="idwarehouse" name="idwarehouse" ngModel #idwarehouse="ngModel" >
+                    <select class="form-control" id="idwarehouse" name="idwarehouse" ngModel #idwarehouse="ngModel" required>
                       <option *ngFor="let c of list_warehouse" value="{{c.idwarehouse}}">{{c.warehousename}}</option>
                     </select>
                   </div>
-                  <!--<div *ngIf="idwarehouse.errors?.required && idwarehouse.touched">
+                  <div *ngIf="idwarehouse.errors?.required && idwarehouse.touched">
                     <small id="" class="form-text text-danger text-right">La Bodega es requerida</small>
-                  </div>-->
+                  </div>
                 </div>
 
               </div>
@@ -150,12 +150,12 @@
                     <label for="exampleFormControlInput1">Fecha
                       <span class="required">(*)</span>
                     </label>
-                    <input type="date" class="form-control" id="datetimereferral" name="datetimereferral" ngModel  #datetimereferral="ngModel">
+                    <input type="date" class="form-control" id="datetimereferral" name="datetimereferral" ngModel  #datetimereferral="ngModel" required>
                   </div>
 
-                  <!--<div *ngIf="datetimereferral.errors?.required && datetimereferral.touched">
+                  <div *ngIf="datetimereferral.errors?.required && datetimereferral.touched">
                     <small id="" class="form-text text-danger text-right">La Fecha es requerida</small>
-                  </div>-->
+                  </div>
                 </div>
 
                 <div class="col-md-4 col-sm-12">
@@ -163,12 +163,12 @@
                     <label for="exampleFormControlInput1">Hora
                       <span class="required">(*)</span>
                     </label>
-                    <input type="time" class="form-control" id="sequential" name="sequential" ngModel #sequential="ngModel" >
+                    <input type="time" class="form-control" id="sequential" name="sequential" ngModel #sequential="ngModel" required >
                   </div>
 
-                  <!--<div *ngIf="sequential.errors?.required && sequential.touched">
+                  <div *ngIf="sequential.errors?.required && sequential.touched">
                     <small id="" class="form-text text-danger text-right">La Hora requerida</small>
-                  </div>-->
+                  </div>
                 </div>
 
                 <div class="col-md-4 col-sm-12">
@@ -195,7 +195,7 @@
                             {{i.transferreasonname}}
                           </option>
                         </select> -->
-                        <select class="form-control" id="idtransferreason" name="idtransferreason" ngModel #idtransferreason="ngModel" >
+                        <select class="form-control" id="idtransferreason" name="idtransferreason" ngModel #idtransferreason="ngModel" required>
                           <option *ngFor="let i of listTransferReason" value="{{i.idtransferreason}}">
                             {{i.transferreasonname}}
                           </option>
@@ -203,9 +203,9 @@
                       </div>
                     </div>
 
-                    <!-- <div *ngIf="idtransferreason.errors?.required && idtransferreason.touched">
+                     <div *ngIf="idtransferreason.errors?.required && idtransferreason.touched">
                       <small id="" class="form-text text-danger text-right">El Motivo Traslado es requerido</small>
-                    </div> -->
+                    </div> 
 
                 </div>
 
@@ -225,7 +225,7 @@
                             {{cli.carriername}}
                           </option>
                         </select>
-                        <input type="text" class="form-control" name="temtransportisa" readonly [(ngModel)]="carrier_select.carriername" />
+                        <input type="text" class="form-control" name="temtransportisa" readonly [(ngModel)]="carrier_select.carriername" required/>
 
                         <div class="input-group-append">
                           <button class="btn btn-default" type="button" (click)="searchCarrier()"  >
