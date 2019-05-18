@@ -901,7 +901,7 @@ getList(data: any) {
 
     for (const p of data) {
       const pos3 = this.footSummaryLiquidation.map(function (z) { return parseInt(z.iditem, 0); }).indexOf( parseInt(p.iditem, 0) );
-      this.footSummaryLiquidation[pos3].quantity += p.quantify;
+      this.footSummaryLiquidation[pos3].quantity = parseInt(this.footSummaryLiquidation[pos3].quantity) + parseInt(p.quantify);
     }
 
   }

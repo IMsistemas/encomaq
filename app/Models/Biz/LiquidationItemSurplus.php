@@ -10,6 +10,11 @@ class LiquidationItemSurplus extends Model
 
     protected $primaryKey = 'idliquidationitemsurplus';
 
+    public function biz_project()
+    {
+        return $this->belongsTo('App\Models\Biz\Project', 'idproject');
+    }
+
     public function biz_item()
     {
         return $this->belongsTo('App\Models\Biz\Item','iditem');

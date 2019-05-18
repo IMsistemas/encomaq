@@ -379,9 +379,9 @@ class LiquidationController extends Controller
     public function getSummary ($parameter) {
         $filtro = json_decode($parameter);
 
-        return LiquidationProjectItem::with("biz_project.biz_client", "biz_item")
+        return LiquidationItemSurplus::with("biz_project.biz_client", "biz_item")
                             //->selectRaw("biz_liquidation.*")
-                            ->join("biz_liquidation", "biz_liquidation.idliquidation","=", "biz_liquidationprojectitem.idliquidation")
+                            ->join("biz_liquidation", "biz_liquidation.idliquidation","=", "biz_liquidationitemsurplus.idliquidation")
                             ->whereRaw("biz_liquidation.dateend LIKE '%".$filtro->Fecha."%'")
                            //->whereRaw("biz_liquidation.dateend < '2018-10-01'")
                             ->orderBy("biz_liquidation.dateend","DESC")
