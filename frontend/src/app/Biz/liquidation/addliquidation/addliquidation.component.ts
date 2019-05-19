@@ -230,10 +230,10 @@ export class AddliquidationComponent implements OnInit {
     // -----------------------PARTE DE RESUMEN DE ENTREGA--------------------------------------------------------------
 
     this.entrega_head_item.sort(function (a, b) {
-      if (a.iditem > b.iditem) {
+      if (a.name > b.name) {
         return 1;
       }
-      if (a.iditem < b.iditem) {
+      if (a.name < b.name) {
         return -1;
       }
       return 0;
@@ -310,9 +310,19 @@ export class AddliquidationComponent implements OnInit {
 
     // -----------------------PARTE DE RESUMEN DE RETIRO--------------------------------------------------------------
 
-    this.retiro_head_item = this.entrega_head_item;
+    // this.retiro_head_item = this.entrega_head_item;
 
-    for (const z of this.retiro) {
+    this.retiro_head_item.sort(function (a, b) {
+      if (a.name > b.name) {
+        return 1;
+      }
+      if (a.name < b.name) {
+        return -1;
+      }
+      return 0;
+    });
+
+    /*for (const z of this.retiro) {
       z.items.sort(function (a, b) {
         if (a.iditem > b.iditem) {
           return 1;
@@ -322,7 +332,7 @@ export class AddliquidationComponent implements OnInit {
         }
         return 0;
       });
-    }
+    }*/
 
     for (let j = 0; j < this.retiro.length; j++) {
 
@@ -394,7 +404,7 @@ export class AddliquidationComponent implements OnInit {
     }
     this.orderProduct(frm);
 
-    console.log(this.enObraObject);
+
 
   }
 
@@ -469,6 +479,8 @@ export class AddliquidationComponent implements OnInit {
       this.array_item.push(o);
     }
 
+
+    console.log(this.retiro);
 
     // -------------------------------------------------LOGISTICA--------------------------------------------
 
