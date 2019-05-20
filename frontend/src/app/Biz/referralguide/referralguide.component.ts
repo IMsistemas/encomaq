@@ -451,7 +451,7 @@ export class ReferralguideComponent implements OnInit {
         if (temHead.length === 0) {
           const o = {
             iditem: i.biz_item.iditem,
-            itemname: i.biz_item.itemname + '' + i.biz_item.description
+            itemname: i.biz_item.itemname + '-' + i.biz_item.description
           };
           temHead.push(o);
         } else {
@@ -459,7 +459,7 @@ export class ReferralguideComponent implements OnInit {
           if (pos < 0) {
             const o = {
               iditem: i.biz_item.iditem,
-              itemname: i.biz_item.itemname + '' + i.biz_item.description
+              itemname: i.biz_item.itemname + '-' + i.biz_item.description
             };
             temHead.push(o);
           }
