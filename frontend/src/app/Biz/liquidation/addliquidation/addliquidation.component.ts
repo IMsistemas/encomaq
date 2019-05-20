@@ -472,6 +472,38 @@ export class AddliquidationComponent implements OnInit {
             o.totalquantify += oo.quantify;
             o.totalprice -= ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
             o.listguide.push(oo);
+          } else {
+
+            const iditemSearch = c.iditem;
+            let flag = false;
+
+            for (const aa of this.entrega_head_item) {
+              if (parseInt(aa.iditem, 0) === parseInt(iditemSearch, 0)) {
+                flag = true;
+              }
+            }
+
+            if (flag === false) {
+
+              const dateend: string = frm.dateend;
+              const days: number = this.calculateDay(b.datetimereferral, dateend);
+
+              const oo = {
+                idreferralguide: b.idreferralguide,
+                datetimereferral: b.datetimereferral,
+                dateend: dateend,
+                days: days,
+                price: (parseFloat(c.price) * days).toFixed(3),
+                quantify: -parseInt(c.quantify, 0),
+                total: -( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) ).toFixed(2)
+              };
+
+              o.totalquantify += oo.quantify;
+              o.totalprice -= ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
+              o.listguide.push(oo);
+
+            }
+
           }
         }
       }
