@@ -62,7 +62,7 @@
                           </option>
                         </select>
 
-                        <input type="text" class="form-control"  name="temnomcontrato" readonly [(ngModel)]="idcontract_s.nocontract" required/>
+                        <input type="text" class="form-control" id="temnomcontrato"  name="temnomcontrato" readonly [(ngModel)]="idcontract_s.nocontract" required/>
 
                         <div class="input-group-append">
                           <button class="btn btn-default" type="button" (click)="searchContract()"  >
@@ -225,7 +225,7 @@
                             {{cli.carriername}}
                           </option>
                         </select>
-                        <input type="text" class="form-control" name="temtransportisa" readonly [(ngModel)]="carrier_select.carriername" required/>
+                        <input type="text" class="form-control" id="temtransportisa" name="temtransportisa" readonly [(ngModel)]="carrier_select.carriername" required/>
 
                         <div class="input-group-append">
                           <button class="btn btn-default" type="button" (click)="searchCarrier()"  >

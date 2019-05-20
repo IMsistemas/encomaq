@@ -235,7 +235,7 @@ export class CreatereferralguideComponent implements OnInit {
           // console.log(response);
           if (response.success !== undefined) {
             $('#createreferralguide').modal('hide');
-             frm.reset();
+            // frm.reset();
             this.list_itemcont = [];
             this.idcontract_s = { idcontract: '', biz_client: { businessname: '' }, nocontract: ''};
             this.carrier_select = { idcarrier: '', carriername: '', identify: '', licenseplate: '' };
@@ -246,6 +246,22 @@ export class CreatereferralguideComponent implements OnInit {
             frm.sequential = '';
             frm.logisticservicecost = '';
             frm.idtransferreason = '';
+
+
+            $('#temnomcontrato').val('');
+            $('#client').val('');
+            $('#idproject').val('');
+            $('#idwarehouse').val('');
+            $('#datetimereferral').val('');
+            $('#sequential').val('');
+            $('#logisticservicecost').val('');
+            $('#idtransferreason').val('');
+            $('#temtransportisa').val('');
+            $('#identify').val('');
+            $('#licenseplate').val('');
+            $('#s_estado').val('');
+
+            this.getGuideNumber();
 
             this.update_component_father.emit(true);
           } else if (response.error !== undefined) {
