@@ -408,6 +408,7 @@ export class AddliquidationComponent implements OnInit {
               const o = {
                 iditem: this.entrega_foot_item[i].iditem,
                 idproject: this.enObra_head_item[i].idproject,
+                name: this.enObra_head_item[i].name,
                 quantify: rest,
                 price: this.entrega_foot_item[i].price,
                 iditemprice: this.entrega_foot_item[i].iditemprice
@@ -428,6 +429,7 @@ export class AddliquidationComponent implements OnInit {
         const o = {
           iditem: this.entrega_foot_item[i].iditem,
           idproject: this.enObra_head_item[i].idproject,
+          name: this.enObra_head_item[i].name,
           quantify: this.entrega_foot_item[i].quantify,
           price: this.entrega_foot_item[i].price,
           iditemprice: this.entrega_foot_item[i].iditemprice
@@ -441,7 +443,7 @@ export class AddliquidationComponent implements OnInit {
     }
 
     
-    
+
 
 
     console.log(this.enObra);
