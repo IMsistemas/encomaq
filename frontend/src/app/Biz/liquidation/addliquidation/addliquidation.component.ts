@@ -442,9 +442,6 @@ export class AddliquidationComponent implements OnInit {
 
     }
 
-    
-
-
 
     console.log(this.enObra);
     console.log(this.enObraObject);
@@ -474,6 +471,7 @@ export class AddliquidationComponent implements OnInit {
       // -------------------------------------------------ENTREGA--------------------------------------------
 
       for (const b of this.entrega) {
+
         for (const c of b.items) {
           if (parseInt(a.iditem, 0) === parseInt(c.iditem, 0)) {
 
@@ -495,6 +493,7 @@ export class AddliquidationComponent implements OnInit {
             o.listguide.push(oo);
           }
         }
+
       }
 
       // -------------------------------------------------RETIRO--------------------------------------------
@@ -559,7 +558,7 @@ export class AddliquidationComponent implements OnInit {
     }
 
 
-    console.log(this.retiro);
+    console.log(this.array_item);
 
     // -------------------------------------------------LOGISTICA--------------------------------------------
 
