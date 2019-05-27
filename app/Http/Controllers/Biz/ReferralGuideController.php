@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Models\Biz\Company;
-
+use App\Models\Biz\Item;
 
 
 class ReferralGuideController extends Controller
@@ -515,10 +515,13 @@ class ReferralGuideController extends Controller
     
     public function getSummary ($parameter) {
         $filtro = json_decode($parameter);
-        return Referralguide::with('biz_project.biz_client', 'biz_Referralguideitem.biz_item','nom_transferreason')
+        $auxList1 =  Referralguide::with('biz_project.biz_client', 'biz_Referralguideitem.biz_item','nom_transferreason')
                             ->whereRaw("biz_referralguide.datetimereferral BETWEEN '".$filtro->fechaI."' AND '".$filtro->fechaF."' ")
                             ->orderBy("biz_referralguide.datetimereferral","DESC")
                             ->get();
+        $auxList2 =  Item::all();
+
+        return array('data1' => $auxList1, 'data2' => $auxList2);
     }
 
 }

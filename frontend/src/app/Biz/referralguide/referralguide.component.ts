@@ -432,14 +432,148 @@ export class ReferralguideComponent implements OnInit {
     this.referralguide.getSummary(o).subscribe(
       (response) => {
         console.log(response);
-        this.makeSummary(response);
+        // this.makeSummary(response);
+        this.makeSummary(response.data1, response.data2);
       },
       (error) => {
         console.log(error);
       });
   }
 
-  makeSummary(data) {
+  makeSummary(data, item) {
+    this.listSummaryLiquidation = [];
+    this.headSummaryLiquidation = [];
+    this.footSummaryLiquidation = [];
+    const tempList1 = [];
+    const temHead = [];
+    // const pos = temHead.map(function (x) { return  parseInt(x.iditem , 0); }).indexOf(parseInt(i.biz_item.iditem, 0));
+
+      for (const i of item) {
+        if (temHead.length === 0) {
+          const o = {
+            iditem: i.iditem,
+            itemname: i.itemname + '-' + i.description
+          };
+          temHead.push(o);
+        } else {
+          const pos = temHead.map(function (x) { return parseInt(x.iditem, 0); }).indexOf(parseInt(i.iditem, 0));
+          if (pos < 0) {
+            const o = {
+              iditem: i.iditem,
+              itemname: i.itemname + '-' + i.description
+            };
+            temHead.push(o);
+          }
+        }
+      }
+
+
+    temHead.sort((obj1, obj2) => {
+      if (obj1.itemname > obj2.itemname) {
+        return 1;
+      }
+      if (obj1.itemname < obj2.itemname) {
+        return -1;
+      }
+      return 0;
+    });
+
+    const c0 = {
+      iditem: -3,
+      itemname: 'FECHA'
+    };
+    const c01 = {
+      iditem: -4,
+      itemname: '# GUIA'
+    };
+
+    const c1 = {
+      iditem: -1,
+      itemname: 'CLIENTE'
+    };
+    const c2 = {
+      iditem: -2,
+      itemname: 'PROYECTO'
+    };
+    const c3 = {
+      iditem: -5,
+      itemname: 'MOTIVO'
+    };
+    this.headSummaryLiquidation.push(c0); this.headSummaryLiquidation.push(c01);
+    this.headSummaryLiquidation.push(c1); this.headSummaryLiquidation.push(c2); this.headSummaryLiquidation.push(c3);
+    for (const j of temHead) {
+      this.headSummaryLiquidation.push(j);
+    }
+
+    for (const k of data) {
+      const temItem = [];
+      for (const l of temHead) {
+        const oo = {
+          iditem: l.iditem,
+          quantity: 0
+        };
+        temItem.push(oo);
+      }
+      if (tempList1.length === 0) {
+        const o = {
+          idliquidation: k.idreferralguide,
+          idproject: k.idproject,
+          datetimereferral: k.datetimereferral,
+          guidenumber: k.guidenumber,
+          transferreasonname: k.nom_transferreason.transferreasonname,
+          businessname: k.biz_project.biz_client.businessname,
+          projectname: k.biz_project.projectname,
+          items: temItem
+        };
+        tempList1.push(o);
+      } else {
+        // tslint:disable-next-line:max-line-length
+        const pos = tempList1.map(function (x) { return (x.idreferralguide + '-' + x.idproject); }).indexOf((k.idreferralguide + '-' + k.idproject));
+        if (pos < 0) {
+          const o = {
+            idliquidation: k.idreferralguide,
+            idproject: k.idproject,
+            datetimereferral: k.datetimereferral,
+            guidenumber: k.guidenumber,
+            transferreasonname: k.nom_transferreason.transferreasonname,
+            businessname: k.biz_project.biz_client.businessname,
+            projectname: k.biz_project.projectname,
+            items: temItem
+          };
+          tempList1.push(o);
+        }
+      }
+    }
+
+    for (const l of data) {
+      for (const m of l.biz__referralguideitem) {
+        // tslint:disable-next-line:max-line-length
+        const pos = tempList1.map(function (x) { return (x.idliquidation + '-' + x.idproject); }).indexOf((l.idreferralguide + '-' + l.idproject));
+        const pos2 = tempList1[pos].items.map(function (y) { return parseInt(y.iditem, 0); }).indexOf(parseInt(m.iditem, 0));
+        tempList1[pos].items[pos2].quantity = parseInt(m.quantify, 0);
+      }
+    }
+    console.log(tempList1);
+    this.listSummaryLiquidation = tempList1;
+
+    for (const n of temHead) {
+      const oo = {
+        iditem: n.iditem,
+        quantity: 0
+      };
+      this.footSummaryLiquidation.push(oo);
+    }
+
+
+    for (const e of data) {
+      for (const p of e.biz__referralguideitem) {
+        const pos3 = this.footSummaryLiquidation.map(function (z) { return parseInt(z.iditem, 0); }).indexOf(parseInt(p.iditem, 0));
+        this.footSummaryLiquidation[pos3].quantity += parseInt(p.quantify, 0);
+      }
+    }
+
+  }
+  makeSummaryaAnt(data) {
     this.listSummaryLiquidation = [];
     this.headSummaryLiquidation = [];
     this.footSummaryLiquidation = [];
