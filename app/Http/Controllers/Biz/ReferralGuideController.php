@@ -56,7 +56,7 @@ class ReferralGuideController extends Controller
                     }
                 }
 
-                if ($filter->isNewLiquidacion == true) {
+                if (isset($filter->isNewLiquidacion) == true && $filter->isNewLiquidacion == true) {
                     $where .= " AND biz_referralguide.idreferralguide NOT IN (SELECT biz_referralguide_liquidation.idreferralguide FROM biz_referralguide_liquidation) ";
                 }
 
