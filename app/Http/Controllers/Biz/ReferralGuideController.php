@@ -519,7 +519,8 @@ class ReferralGuideController extends Controller
                             ->whereRaw("biz_referralguide.datetimereferral BETWEEN '".$filtro->fechaI."' AND '".$filtro->fechaF."' ")
                             ->orderBy("biz_referralguide.datetimereferral","DESC")
                             ->get();
-        $auxList2 =  Item::all();
+        // $auxList2 =  Item::all();
+        $auxList2 =  Item::orderByRaw('itemname + 0 ASC')->get();
 
         return array('data1' => $auxList1, 'data2' => $auxList2);
     }

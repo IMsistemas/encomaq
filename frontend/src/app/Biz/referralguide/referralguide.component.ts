@@ -468,7 +468,7 @@ export class ReferralguideComponent implements OnInit {
       }
 
 
-    temHead.sort((obj1, obj2) => {
+    /*temHead.sort((obj1, obj2) => {
       if (obj1.itemname > obj2.itemname) {
         return 1;
       }
@@ -476,7 +476,7 @@ export class ReferralguideComponent implements OnInit {
         return -1;
       }
       return 0;
-    });
+    });*/
 
     const c0 = {
       iditem: -3,
