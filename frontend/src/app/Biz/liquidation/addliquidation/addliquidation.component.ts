@@ -659,7 +659,8 @@ export class AddliquidationComponent implements OnInit {
       client: this.client_guiar,
       dateinit: $('#dateinit').val(),
       dateend: $('#dateend').val(),
-      idprojects: data.projects
+      idprojects: data.projects,
+      isNewLiquidacion: true
     };
 
     if ($('#dateinit').val() !== '') {

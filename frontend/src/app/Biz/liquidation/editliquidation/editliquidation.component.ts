@@ -151,13 +151,15 @@ export class EditliquidationComponent implements OnInit, OnChanges {
     this.enObra_head_item = [];
     this.enObra_foot_item = [];
 
+    // this.sobrante = [];
+
     this.logistic = [];
 
     if (this.sobrante.length > 0) {
 
       const objectSobrante = {
         idreferralguide: 0,
-        datetimereferral: this.tem_edit.dateinit,
+        datetimereferral: $('#dateinit').val(),
         guidenumber: 'COMP ANTERIOR',
         items: this.sobrante
       };
@@ -173,16 +175,22 @@ export class EditliquidationComponent implements OnInit, OnChanges {
       }
     }
 
+
+
     for (const e of result) {
+
+      // console.log(e);
 
       const object = {
         idreferralguide: e.idreferralguide,
         datetimereferral: e.datetimereferral,
         guidenumber: e.guidenumber,
+        idproject: e.idproject,
         items: []
       };
 
       for (const i of e.biz__referralguideitem) {
+
         const ii = {
           iditem: i.iditem,
           quantify: i.quantify,
@@ -190,6 +198,7 @@ export class EditliquidationComponent implements OnInit, OnChanges {
           price: i.price,
           iditemprice: i.iditemprice
         };
+
         object.items.push(ii);
 
         if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 1) {
@@ -200,6 +209,7 @@ export class EditliquidationComponent implements OnInit, OnChanges {
 
           if (pos < 0) {
             const oo = {
+              idproject: e.idproject,
               iditem: i.iditem,
               name: i.biz_item.itemname + '. ' + i.biz_item.description
             };
@@ -214,6 +224,7 @@ export class EditliquidationComponent implements OnInit, OnChanges {
 
           if (pos < 0) {
             const oo = {
+              idproject: e.idproject,
               iditem: i.iditem,
               name: i.biz_item.itemname + '. ' + i.biz_item.description
             };
@@ -240,19 +251,19 @@ export class EditliquidationComponent implements OnInit, OnChanges {
       } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 2) {
         this.retiro.push(object);
         this.logistic.push(objectLogistic);
-      } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 3) {
+      } /*else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 3) {
 
-      }
+      }*/
 
     }
 
     // -----------------------PARTE DE RESUMEN DE ENTREGA--------------------------------------------------------------
 
     this.entrega_head_item.sort(function (a, b) {
-      if (a.iditem > b.iditem) {
+      if (a.name > b.name) {
         return 1;
       }
-      if (a.iditem < b.iditem) {
+      if (a.name < b.name) {
         return -1;
       }
       return 0;
@@ -312,6 +323,7 @@ export class EditliquidationComponent implements OnInit, OnChanges {
       });
     }
 
+
     for (let i = 0; i < this.entrega.length; i++) {
       for (let j = 0; j < this.entrega[i].items.length; j++) {
 
@@ -328,9 +340,19 @@ export class EditliquidationComponent implements OnInit, OnChanges {
 
     // -----------------------PARTE DE RESUMEN DE RETIRO--------------------------------------------------------------
 
-    this.retiro_head_item = this.entrega_head_item;
+    // this.retiro_head_item = this.entrega_head_item;
 
-    for (const z of this.retiro) {
+    this.retiro_head_item.sort(function (a, b) {
+      if (a.name > b.name) {
+        return 1;
+      }
+      if (a.name < b.name) {
+        return -1;
+      }
+      return 0;
+    });
+
+    /*for (const z of this.retiro) {
       z.items.sort(function (a, b) {
         if (a.iditem > b.iditem) {
           return 1;
@@ -340,7 +362,7 @@ export class EditliquidationComponent implements OnInit, OnChanges {
         }
         return 0;
       });
-    }
+    }*/
 
     for (let j = 0; j < this.retiro.length; j++) {
 
@@ -389,7 +411,6 @@ export class EditliquidationComponent implements OnInit, OnChanges {
         this.retiro_foot_item[j].iditem = this.retiro[i].items[j].iditem;
         this.retiro_foot_item[j].price = this.retiro[i].items[j].price;
         this.retiro_foot_item[j].iditemprice = this.retiro[i].items[j].iditemprice;
-        // tslint:disable-next-line:max-line-length
         this.retiro_foot_item[j].quantify = parseInt(this.retiro_foot_item[j].quantify, 0) + parseInt(this.retiro[i].items[j].quantify, 0);
       }
     }
@@ -398,21 +419,70 @@ export class EditliquidationComponent implements OnInit, OnChanges {
 
     this.enObra_head_item = this.entrega_head_item;
 
-    for (let i = 0; i < this.enObra_head_item.length; i++) {
-      this.enObra.push(this.entrega_foot_item[i].quantify - this.retiro_foot_item[i].quantify);
+    for (let i = 0; i < this.entrega_foot_item.length; i++) {
 
-      const o = {
-        iditem: this.entrega_foot_item[i].iditem,
-        quantify: this.entrega_foot_item[i].quantify - this.retiro_foot_item[i].quantify,
-        price: this.entrega_foot_item[i].price,
-        iditemprice: this.entrega_foot_item[i].iditemprice
-      };
-      this.enObraObject.push(o);
+      let flag = false;
+
+      for (let j = 0; j < this.retiro_foot_item.length; j++) {
+
+          if ( parseInt(this.retiro_foot_item[j].iditem, 0) === parseInt(this.entrega_foot_item[i].iditem, 0) ) {
+
+            flag = true;
+
+            const rest = this.entrega_foot_item[i].quantify - this.retiro_foot_item[j].quantify;
+
+            if (rest > 0) {
+
+              this.enObra.push(rest);
+
+              const o = {
+                iditem: this.entrega_foot_item[i].iditem,
+                idproject: this.enObra_head_item[i].idproject,
+                name: this.enObra_head_item[i].name,
+                quantify: rest,
+                price: this.entrega_foot_item[i].price,
+                iditemprice: this.entrega_foot_item[i].iditemprice
+              };
+
+              this.enObraObject.push(o);
+
+            }
+
+          }
+
+      }
+
+      if (flag === false) {
+
+        this.enObra.push(this.entrega_foot_item[i].quantify);
+
+        const o = {
+          iditem: this.entrega_foot_item[i].iditem,
+          idproject: this.enObra_head_item[i].idproject,
+          name: this.enObra_head_item[i].name,
+          quantify: this.entrega_foot_item[i].quantify,
+          price: this.entrega_foot_item[i].price,
+          iditemprice: this.entrega_foot_item[i].iditemprice
+        };
+
+        this.enObraObject.push(o);
+
+      }
+
+
     }
+
+
+    console.log(this.enObra);
+    console.log(this.enObraObject);
 
     this.orderProduct(frm);
 
+
+
   }
+
+  // -----------------------------------------------------------------------------------------------------------------
 
   orderProduct(frm: any) {
 
@@ -431,6 +501,7 @@ export class EditliquidationComponent implements OnInit, OnChanges {
       // -------------------------------------------------ENTREGA--------------------------------------------
 
       for (const b of this.entrega) {
+
         for (const c of b.items) {
           if (parseInt(a.iditem, 0) === parseInt(c.iditem, 0)) {
 
@@ -452,6 +523,7 @@ export class EditliquidationComponent implements OnInit, OnChanges {
             o.listguide.push(oo);
           }
         }
+
       }
 
       // -------------------------------------------------RETIRO--------------------------------------------
@@ -476,12 +548,47 @@ export class EditliquidationComponent implements OnInit, OnChanges {
             o.totalquantify += oo.quantify;
             o.totalprice -= ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
             o.listguide.push(oo);
+          } else {
+
+            const iditemSearch = c.iditem;
+            let flag = false;
+
+            for (const aa of this.entrega_head_item) {
+              if (parseInt(aa.iditem, 0) === parseInt(iditemSearch, 0)) {
+                flag = true;
+              }
+            }
+
+            if (flag === false) {
+
+              const dateend: string = frm.dateend;
+              const days: number = this.calculateDay(b.datetimereferral, dateend);
+
+              const oo = {
+                idreferralguide: b.idreferralguide,
+                datetimereferral: b.datetimereferral,
+                dateend: dateend,
+                days: days,
+                price: (parseFloat(c.price) * days).toFixed(3),
+                quantify: -parseInt(c.quantify, 0),
+                total: -( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) ).toFixed(2)
+              };
+
+              o.totalquantify += oo.quantify;
+              o.totalprice -= ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
+              o.listguide.push(oo);
+
+            }
+
           }
         }
       }
 
       this.array_item.push(o);
     }
+
+
+    console.log(this.array_item);
 
     // -------------------------------------------------LOGISTICA--------------------------------------------
 
@@ -499,6 +606,7 @@ export class EditliquidationComponent implements OnInit, OnChanges {
       listguide: this.logistic
     });
 
+
     this.subtotal = 0;
     this.iva = 0;
     for (const x of this.array_item) {
@@ -510,7 +618,11 @@ export class EditliquidationComponent implements OnInit, OnChanges {
     this.totalprecio = ( this.subtotal + this.iva ).toFixed(2);
     this.subtotal = this.subtotal.toFixed(2);
     this.iva = this.iva.toFixed(2);
+
   }
+
+  // ----------------------------------------------------------------------------------------------------------
+
 
   calculateDay(startdate: string, enddate: string): number {
 
@@ -581,6 +693,7 @@ export class EditliquidationComponent implements OnInit, OnChanges {
       dateinit: $('#dateinit').val(),
       dateend: $('#dateend').val(),
       idprojects: data.projects,
+      isNewLiquidacion: false,
       idliquidation: this.tem_edit.idliquidation
     };
 

@@ -56,6 +56,10 @@ class ReferralGuideController extends Controller
                     }
                 }
 
+                if ($filter->isNewLiquidacion == true) {
+                    $where .= " AND biz_referralguide.idreferralguide NOT IN (SELECT biz_referralguide_liquidation.idreferralguide FROM biz_referralguide_liquidation) ";
+                }
+
                 if (isset($filter->idprojects) == true && count($filter->idprojects) > 0) {
                     $where .= ' AND ';
                     for ($i = 0; $i < count($filter->idprojects); $i++) {
@@ -72,6 +76,7 @@ class ReferralGuideController extends Controller
                     ->paginate($filter->num_page);
 
             } else {
+
                 $where = 'biz_referralguide_liquidation.idliquidation = ' . $filter->idliquidation;
 
                 $result = $result->join("biz_referralguide_liquidation", "biz_referralguide_liquidation.idreferralguide", "=", "biz_referralguide.idreferralguide" )
