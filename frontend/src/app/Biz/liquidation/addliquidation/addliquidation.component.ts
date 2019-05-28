@@ -389,19 +389,63 @@ export class AddliquidationComponent implements OnInit {
 
     this.enObra_head_item = this.entrega_head_item;
 
-    for (let i = 0; i < this.enObra_head_item.length; i++) {
-      this.enObra.push(this.entrega_foot_item[i].quantify - this.retiro_foot_item[i].quantify);
+    for (let i = 0; i < this.entrega_foot_item.length; i++) {
 
-      const o = {
-        iditem: this.entrega_foot_item[i].iditem,
-        idproject: this.enObra_head_item[i].idproject,
-        quantify: this.entrega_foot_item[i].quantify - this.retiro_foot_item[i].quantify,
-        price: this.entrega_foot_item[i].price,
-        iditemprice: this.entrega_foot_item[i].iditemprice
-      };
-      this.enObraObject.push(o);
+      let flag = false;
+
+      for (let j = 0; j < this.retiro_foot_item.length; j++) {
+
+          if ( parseInt(this.retiro_foot_item[j].iditem, 0) === parseInt(this.entrega_foot_item[i].iditem, 0) ) {
+
+            flag = true;
+
+            const rest = this.entrega_foot_item[i].quantify - this.retiro_foot_item[j].quantify;
+
+            if (rest > 0) {
+
+              this.enObra.push(rest);
+
+              const o = {
+                iditem: this.entrega_foot_item[i].iditem,
+                idproject: this.enObra_head_item[i].idproject,
+                name: this.enObra_head_item[i].name,
+                quantify: rest,
+                price: this.entrega_foot_item[i].price,
+                iditemprice: this.entrega_foot_item[i].iditemprice
+              };
+
+              this.enObraObject.push(o);
+
+            }
+
+          }
+
+      }
+
+      if (flag === false) {
+
+        this.enObra.push(this.entrega_foot_item[i].quantify);
+
+        const o = {
+          iditem: this.entrega_foot_item[i].iditem,
+          idproject: this.enObra_head_item[i].idproject,
+          name: this.enObra_head_item[i].name,
+          quantify: this.entrega_foot_item[i].quantify,
+          price: this.entrega_foot_item[i].price,
+          iditemprice: this.entrega_foot_item[i].iditemprice
+        };
+
+        this.enObraObject.push(o);
+
+      }
+
 
     }
+
+
+    console.log(this.enObra);
+    console.log(this.enObraObject);
+
     this.orderProduct(frm);
 
 
@@ -427,6 +471,7 @@ export class AddliquidationComponent implements OnInit {
       // -------------------------------------------------ENTREGA--------------------------------------------
 
       for (const b of this.entrega) {
+
         for (const c of b.items) {
           if (parseInt(a.iditem, 0) === parseInt(c.iditem, 0)) {
 
@@ -448,6 +493,7 @@ export class AddliquidationComponent implements OnInit {
             o.listguide.push(oo);
           }
         }
+
       }
 
       // -------------------------------------------------RETIRO--------------------------------------------
@@ -512,7 +558,7 @@ export class AddliquidationComponent implements OnInit {
     }
 
 
-    console.log(this.retiro);
+    console.log(this.array_item);
 
     // -------------------------------------------------LOGISTICA--------------------------------------------
 
