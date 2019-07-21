@@ -433,7 +433,10 @@ export class ReferralguideComponent implements OnInit {
       (response) => {
         console.log(response);
         // this.makeSummary(response);
-        this.makeSummary(response.data1, response.data2);
+        let arrayResult = response.dataA;
+        arrayResult = arrayResult.concat(response.dataB);
+        arrayResult = arrayResult.concat(response.dataC);
+        this.makeSummary(response.data1, arrayResult);
       },
       (error) => {
         console.log(error);

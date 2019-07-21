@@ -249,6 +249,7 @@ class ItemController extends Controller
             $sql .= " AND idunittype =".$filtro->idunittype." ";
         }
 
+
         if ($filtro->state != null) {
             $data = Item::with("nom_category","nom_unit", 'biz_itemprice')
                 ->whereRaw("(itemname  LIKE '%".$filtro->Buscar."%' OR description  LIKE '%".$filtro->Buscar."%') AND state='".$filtro->state."' ".$sql)
