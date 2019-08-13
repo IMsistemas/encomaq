@@ -253,11 +253,11 @@ class LiquidationController extends Controller
             $month = (int)(explode('-', $filtro->dateinit)[1]);
         }
 
-        if ($month == 12) {
+        /*if ($month == 12) {
             $month = 1;
         } else {
             $month = $month - 1;
-        }
+        }*/
 
         return LiquidationItemSurplus::with('biz_item')
             ->join('biz_liquidation', 'biz_liquidation.idliquidation', '=', 'biz_liquidationitemsurplus.idliquidation')
