@@ -637,7 +637,9 @@ export class EditliquidationComponent implements OnInit, OnChanges {
 
       const dateEnd: any = new Date(parseInt(final[0], 0), (parseInt(final[1], 0) - 1), parseInt(final[2], 0));
 
-      return Math.floor( ( ( dateEnd - dateStart ) / 86400 ) / 1000 );
+      // return Math.floor( ( ( dateEnd - dateStart ) / 86400 ) / 1000 );
+
+      return Math.floor( ( dateEnd - dateStart ) / ( 1000 * 60 * 60 * 24 ) ) + 1;
 
     } else {
 

@@ -167,10 +167,11 @@ export class CreatereferralguideComponent implements OnInit {
     this.lis_item.push({ iditem: '', itemname: '--Seleccione--' });
     this.item.get_item().subscribe(
       (response) => {
+        console.log(response);
         for (const cat of response) {
           const o = {
             iditem: cat.iditem,
-            itemname: cat.itemname
+            itemname: cat.itemname + '-' + cat.description
           };
           this.lis_item.push(o);
         }

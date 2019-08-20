@@ -502,8 +502,8 @@ export class ReferralguideComponent implements OnInit {
       iditem: -5,
       itemname: 'MOTIVO'
     };
-    this.headSummaryLiquidation.push(c0); this.headSummaryLiquidation.push(c01);
-    this.headSummaryLiquidation.push(c1); this.headSummaryLiquidation.push(c2); this.headSummaryLiquidation.push(c3);
+    /*this.headSummaryLiquidation.push(c0); this.headSummaryLiquidation.push(c01);
+    this.headSummaryLiquidation.push(c1); this.headSummaryLiquidation.push(c2); this.headSummaryLiquidation.push(c3);*/
     for (const j of temHead) {
       this.headSummaryLiquidation.push(j);
     }
@@ -635,8 +635,8 @@ export class ReferralguideComponent implements OnInit {
       iditem: -5,
       itemname: 'MOTIVO'
     };
-    this.headSummaryLiquidation.push(c0); this.headSummaryLiquidation.push(c01);
-    this.headSummaryLiquidation.push(c1); this.headSummaryLiquidation.push(c2); this.headSummaryLiquidation.push(c3);
+    /*this.headSummaryLiquidation.push(c0); this.headSummaryLiquidation.push(c01);
+    this.headSummaryLiquidation.push(c1); this.headSummaryLiquidation.push(c2); this.headSummaryLiquidation.push(c3);*/
     for (const j of temHead) {
       this.headSummaryLiquidation.push(j);
     }

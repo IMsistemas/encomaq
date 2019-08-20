@@ -522,7 +522,7 @@ class ReferralGuideController extends Controller
         $filtro = json_decode($parameter);
         $auxList1 =  Referralguide::with('biz_project.biz_client', 'biz_Referralguideitem.biz_item','nom_transferreason')
                             ->whereRaw("biz_referralguide.datetimereferral BETWEEN '".$filtro->fechaI."' AND '".$filtro->fechaF."' ")
-                            ->orderBy("biz_referralguide.datetimereferral","DESC")
+                            ->orderBy("biz_referralguide.guidenumber","ASC")
                             ->get();
         // $auxList2 =  Item::orderByRaw('length(itemname), itemname')->get();
         $codeA = Item::whereRaw("itemname LIKE 'A%'")->orderByRaw('length(itemname), itemname asc')->get();

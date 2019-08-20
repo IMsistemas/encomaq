@@ -574,7 +574,7 @@
                                 <td></td>
                                 <td class="text-right"></td>
                                 <td class="text-right">SUBTOTAL</td>
-                                <td class="text-right">{{formatMoney('$', listProduct.totalprice)}}</td>
+                                <td class="text-right">{{ listProduct.totalprice | currency: 'USD' }}</td>
                             </tr>
                           </tfoot>
                         </table>
@@ -608,7 +608,7 @@
                               <td></td>
                               <td></td>
                               <td></td>
-                              <td class="text-right">{{formatMoney('$', listProduct.totalprice)}}</td>
+                              <td class="text-right">{{ listProduct.totalprice | currency: 'USD' }}</td>
                               <td></td>
                           </tr>
                         </tfoot>
@@ -658,7 +658,7 @@
                             <tr *ngFor="let listProduct of array_item let i = index">
                               <td>{{i + 1}}</td>
                               <td>{{listProduct.name}}</td>
-                              <td class="text-right">{{(listProduct.totalprice).toFixed(2)}}</td>
+                              <td class="text-right">{{ listProduct.totalprice | currency: 'USD' }}</td>
                             </tr>
                           </tbody>
                       </table>
@@ -681,19 +681,19 @@
                       <tr>
                         <th style="display: none;"></th>
                         <th> <strong>SUBTOTAL</strong> </th>
-                        <th>{{formatMoney('$', subtotal)}}</th>
+                        <th>{{ subtotal | currency: 'USD' }}</th>
                       </tr>
 
                       <tr>
                         <th style="display: none;"></th>
                         <th> <strong>IVA 12%</strong> </th>
-                        <th>{{formatMoney('$', iva)}}</th>
+                        <th>{{ iva | currency: 'USD' }}</th>
                       </tr>
 
                       <tr>
                         <th style="display: none;"></th>
                         <th> <strong>TOTAL</strong> </th>
-                        <th>{{formatMoney('$', totalprecio)}}</th>
+                        <th>{{ totalprecio | currency: 'USD' }}</th>
                       </tr>
 
                     </tbody>
