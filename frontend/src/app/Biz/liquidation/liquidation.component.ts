@@ -181,8 +181,31 @@ export class LiquidationComponent implements OnInit {
   }
   load(data: any) {
     this.select_data = data;
-    this.getList(data);
+    // this.getList(data);
     // $('#mdlinfo').modal('show');
+    const o = {
+      search: '',
+      state: 1,
+      column: 'idreferralguide',
+      order: 'asc',
+      num_page: 1000,
+      client: data.biz_liquidationproject[0].biz_project.idclient,
+      dateinit: data.dateinit,
+      dateend: data.dateend,
+      idprojects: [data.biz_liquidationproject[0].biz_project.idproject],
+      idliquidation: this.select_data.idliquidation
+    };
+
+    this.referralguide.get(this.page, o).subscribe(
+      (response) => {
+
+        this.orderReferralGuide(response, data);
+        this.list_guias = response;
+        this.listReferralGuide = response;
+      },
+      (error) => {
+        console.log(error);
+    });
   }
   refresfather(data: any) {
     this.get_list_liquidation();
