@@ -50,11 +50,11 @@ class ReferralGuideController extends Controller
                     $where .= " AND  biz_referralguide.idtransferreason=".$filter->idtransferreason." ";
                 }
 
-                if (isset($filter->dateinit) == true && isset($filter->dateend) == true) {
+                /*if (isset($filter->dateinit) == true && isset($filter->dateend) == true) {
                     if ($filter->dateinit != '' && $filter->dateend != '') {
                         $where .= " AND  biz_referralguide.datetimereferral BETWEEN '" . $filter->dateinit . "' AND '" . $filter->dateend . "' ";
                     }
-                }
+                }*/
 
                 if (isset($filter->isNewLiquidacion) == true && $filter->isNewLiquidacion == true) {
                     $where .= " AND biz_referralguide.idreferralguide NOT IN (SELECT biz_referralguide_liquidation.idreferralguide FROM biz_referralguide_liquidation) ";
