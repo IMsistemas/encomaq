@@ -924,22 +924,22 @@ export class EditliquidationComponent implements OnInit, OnChanges {
   }
   pdf() {
     const accion = this.liquidation.liquidationexportarpdf(this.tem_edit.idliquidation);
-    console.log(accion);
+
     $('#printtitle').html('Liquidación');
     $('#print').modal('show');
     $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
   }
   pdfid(id: any) {
-    console.log(id);
+
     const accion = this.referralguide.referraexportarpdf(id.idreferralguide);
-    console.log(accion);
+
     $('#printtitle').html('Guía De Remisión');
     $('#print').modal('show');
     $('#printbody').html("<object width='100%' height='600' data='" + accion + "'></object>");
 
   }
   excelid(id: any) {
-    console.log(id);
+
     this.guiarm = id;
     $('#guiaremisionliquidacion').table2excel({
       exclude: '.noExl',

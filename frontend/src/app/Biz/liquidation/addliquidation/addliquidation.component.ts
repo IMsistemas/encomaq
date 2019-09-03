@@ -443,9 +443,6 @@ export class AddliquidationComponent implements OnInit {
     }
 
 
-    console.log(this.enObra);
-    console.log(this.enObraObject);
-
     this.orderProduct(frm);
 
 
@@ -557,8 +554,6 @@ export class AddliquidationComponent implements OnInit {
       this.array_item.push(o);
     }
 
-
-    console.log(this.array_item);
 
     // -------------------------------------------------LOGISTICA--------------------------------------------
 
@@ -774,8 +769,6 @@ export class AddliquidationComponent implements OnInit {
       Iva: this.iva,
       Total: this.totalprecio
     };
-
-    console.log(o);
 
     this.liquidation.add_liquidation(o).subscribe(
       (response) => {

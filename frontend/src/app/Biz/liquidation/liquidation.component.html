@@ -148,9 +148,9 @@
             <!--{{ident.biz_liquidationproject[0].biz_project.projectname}} -->
           </td>
           <td>{{ident.observation}}</td>
-          <td class="text-right">{{ident.subtotal}}</td>
-          <td class="text-right">{{ident.iva}}</td>
-          <td class="text-right">{{ident.total}}</td>
+          <td class="text-right">{{ident.subtotal | currency: 'USD'}}</td>
+          <td class="text-right">{{ident.iva | currency: 'USD'}}</td>
+          <td class="text-right">{{ident.total | currency: 'USD'}}</td>
           <td>{{ ((ident.state == 1)? 'ACTIVO':'INACTIVO') }}</td>
           <td class="noExl">
             <div class="dropdown">

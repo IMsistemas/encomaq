@@ -136,7 +136,7 @@ export class LiquidationComponent implements OnInit {
         this.from = response.from;
         this.total = response.total;
         this.loading = false;
-        // console.log(this.list_liquidation);
+
       },
       (error) => {
         console.log(error);
@@ -181,7 +181,6 @@ export class LiquidationComponent implements OnInit {
   }
   load(data: any) {
     this.select_data = data;
-    console.log(data);
     this.getList(data);
     // $('#mdlinfo').modal('show');
   }
@@ -658,8 +657,6 @@ orderProduct(frm: any) {
 
 convertDatetoString(date: string): string {
 
-console.log(date);
-
   if (date !== undefined && date !== '' && date !== null) {
     const months = [
       'ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO',
@@ -732,7 +729,6 @@ formatMoney(currency, value, decimals) {
 getLogo() {
   this.liquidation.getLogo().subscribe(
     (response) => {
-        console.log(response);
         this.imageLogo = response;
     },
     (error) => {
@@ -758,8 +754,6 @@ getList(data: any) {
 
   this.liquidation.searchSobrante(o).subscribe(
     (responseSobrante) => {
-
-      // console.log(responseSobrante);
 
       this.sobrante = responseSobrante;
 
@@ -793,14 +787,13 @@ getList(data: any) {
     const antMonth =  (antMoth < 10 ) ? ('0' + antMoth) : antMoth;
 
     const tempDate = f.getFullYear() + '-' + antMonth;
-    console.log(tempDate);
+
 
     const o = {
       Fecha: tempDate,
     };
     this.liquidation.getSummary(o).subscribe(
       (response) => {
-        console.log(response);
         this.makeSummary(response);
       },
       (error) => {
@@ -818,7 +811,7 @@ getList(data: any) {
       if (temHead.length === 0) {
         const o = {
           iditem: i.iditem,
-          itemname: i.biz_item.itemname
+          itemname: i.biz_item.itemname + ' - ' + i.biz_item.description
         };
         temHead.push(o);
       } else {
@@ -826,7 +819,7 @@ getList(data: any) {
         if (pos < 0) {
           const o = {
             iditem: i.iditem,
-            itemname: i.biz_item.itemname
+            itemname: i.biz_item.itemname + ' - ' + i.biz_item.description
           };
           temHead.push(o);
         }
@@ -887,7 +880,7 @@ getList(data: any) {
       const pos2 = tempList1[pos].items.map(function (y) { return parseInt(y.iditem, 0); }).indexOf( parseInt(m.iditem, 0) );
       tempList1[pos].items[pos2].quantity = m.quantify;
     }
-    console.log(tempList1);
+
     this.listSummaryLiquidation = tempList1;
 
     for (const n of temHead) {
