@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Biz;
 
 use App\Models\Biz\LiquidationItemSurplus;
 use App\Models\Biz\Project;
+use App\Models\Biz\Referralguideitem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -264,8 +265,6 @@ class LiquidationController extends Controller
             ->selectRaw('biz_liquidationitemsurplus.*')
             // ->whereRaw('MONTH(biz_liquidation.dateinit) = ' . $month . ' OR MONTH(biz_liquidation.dateinit) = ' . ($month - 1))
             ->get();
-
-
     }
 
     public function liquidationfiltro(Request $request) 
@@ -381,12 +380,26 @@ class LiquidationController extends Controller
     public function getSummary ($parameter) {
         $filtro = json_decode($parameter);
 
-        return LiquidationItemSurplus::with("biz_project.biz_client", "biz_item")
+        /*return LiquidationItemSurplus::with("biz_project.biz_client", "biz_item")
                             //->selectRaw("biz_liquidation.*")
                             ->join("biz_liquidation", "biz_liquidation.idliquidation","=", "biz_liquidationitemsurplus.idliquidation")
                             // ->whereRaw("biz_liquidation.dateend LIKE '%".$filtro->Fecha."%'")
                            //->whereRaw("biz_liquidation.dateend < '2018-10-01'")
                             ->orderBy("biz_liquidation.dateend","DESC")
-                            ->get();
+                            ->get();*/
+
+        $resultSobrante = LiquidationItemSurplus::with('biz_project.biz_client', 'biz_item')
+                                            ->selectRaw('iditem, biz_liquidationitemsurplus.idproject, quantify')
+                                            ->get();
+
+        $resultReferralGuide = Referralguideitem::with('biz_referralguide.biz_project.biz_client', 'biz_item')
+                                ->selectRaw('iditem, idproject, quantify, biz_referralguideitem.idreferralguide')
+                                ->join('biz_referralguide', 'biz_referralguideitem.idreferralguide', '=', 'biz_referralguide.idreferralguide')
+                                ->whereRaw('biz_referralguideitem.idreferralguide NOT IN (SELECT biz_referralguide_liquidation.idreferralguide FROM biz_referralguide_liquidation)')
+                                ->get();
+
+        // dd($resultReferralGuide);
+
+        return $resultSobrante->concat($resultReferralGuide);
     }
 }

@@ -84,6 +84,8 @@ import { CreatePaymentformComponent } from './Biz/paymentform/create-paymentform
 import { EditPaymentformComponent } from './Biz/paymentform/edit-paymentform/edit-paymentform.component';
 import { ItempriceService } from './service/bitemprice/itemprice.service';
 import { CreatereferralguidenullComponent } from './Biz/referralguide/createreferralguidenull/createreferralguidenull.component';
+import { LiquidationNewComponent } from './Biz/liquidation-new/liquidation-new.component';
+import { LiquidationNewService } from './service/bliquidation/liquidation-new.service';
 
 @NgModule({
   declarations: [
@@ -148,6 +150,7 @@ import { CreatereferralguidenullComponent } from './Biz/referralguide/createrefe
     CreatePaymentformComponent,
     EditPaymentformComponent,
     CreatereferralguidenullComponent,
+    LiquidationNewComponent,
   ],
   imports: [
     BrowserModule,
@@ -159,7 +162,8 @@ import { CreatereferralguidenullComponent } from './Biz/referralguide/createrefe
     NomidentifytyService, RoleService, ItemcategoryService, LoginService,
     ReasontransferService, UnittypeService, UserService, WarehouseService,
     BcompanyService, ItemService, ConfigemailService, ClienteService,
-    ProjectService, CarrierService, ContractService, ReferralguideService, LiquidationService, BplaceService, ItempriceService
+    ProjectService, CarrierService, ContractService, ReferralguideService, LiquidationService, BplaceService, ItempriceService,
+    LiquidationNewService
   ],
   bootstrap: [AppComponent]
 })

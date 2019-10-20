@@ -168,3 +168,8 @@ Route::group(['middleware' => 'cors'], function(){
     Route::get('ItemPrice/{id}', 'Biz\ItemPriceController@getItemPriceByID');
     Route::resource('ItemPrice', 'Biz\ItemPriceController');
 });
+
+Route::group(['middleware' => 'cors'], function(){
+    Route::get('liquidation-new/getProjects', 'Biz\LiquidationNewController@getProjects');
+    Route::resource('liquidation-new', 'Biz\LiquidationNewController');
+});

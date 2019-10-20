@@ -19,4 +19,9 @@ class Referralguideitem extends Model
     {
         return $this->belongsTo('App\Models\Biz\ItemPrice','iditemprice');
     }
+
+    public function biz_referralguide()
+    {
+        return $this->belongsTo('App\Models\Biz\Referralguide', 'idreferralguide');
+    }
 }

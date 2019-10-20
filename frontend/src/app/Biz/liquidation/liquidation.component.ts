@@ -871,12 +871,19 @@ getList(data: any) {
         };
         temItem.push(oo);
       }
+      let objProject: any;
+      if (k.biz_project !== undefined) {
+        objProject = k.biz_project;
+      } else {
+        objProject = k.biz_referralguide.biz_project;
+      }
+
       if (tempList1.length === 0) {
         const o = {
           idliquidation: k.idliquidation,
           idproject: k.idproject,
-          businessname: k.biz_project.biz_client.businessname,
-          projectname: k.biz_project.projectname,
+          businessname: objProject.biz_client.businessname,
+          projectname: objProject.projectname,
           items: temItem
         };
         tempList1.push(o);
@@ -887,8 +894,8 @@ getList(data: any) {
           const o = {
             idliquidation: k.idliquidation,
             idproject: k.idproject,
-            businessname: k.biz_project.biz_client.businessname,
-            projectname: k.biz_project.projectname,
+            businessname: objProject.biz_client.businessname,
+            projectname: objProject.projectname,
             items: temItem
           };
           tempList1.push(o);
@@ -917,7 +924,7 @@ getList(data: any) {
 
     for (const p of data) {
       const pos3 = this.footSummaryLiquidation.map(function (z) { return parseInt(z.iditem, 0); }).indexOf( parseInt(p.iditem, 0) );
-      this.footSummaryLiquidation[pos3].quantity = parseInt(this.footSummaryLiquidation[pos3].quantity) + parseInt(p.quantify);
+      this.footSummaryLiquidation[pos3].quantity = parseInt(this.footSummaryLiquidation[pos3].quantity, 0) + parseInt(p.quantify, 0);
     }
 
   }
