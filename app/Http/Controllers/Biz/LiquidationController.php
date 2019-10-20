@@ -262,7 +262,7 @@ class LiquidationController extends Controller
         return LiquidationItemSurplus::with('biz_item')
             ->join('biz_liquidation', 'biz_liquidation.idliquidation', '=', 'biz_liquidationitemsurplus.idliquidation')
             ->selectRaw('biz_liquidationitemsurplus.*')
-            ->whereRaw('MONTH(biz_liquidation.dateinit) = ' . $month . ' OR MONTH(biz_liquidation.dateinit) = ' . ($month - 1))
+            // ->whereRaw('MONTH(biz_liquidation.dateinit) = ' . $month . ' OR MONTH(biz_liquidation.dateinit) = ' . ($month - 1))
             ->get();
 
 
