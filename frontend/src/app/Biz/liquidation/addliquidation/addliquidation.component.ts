@@ -188,7 +188,7 @@ export class AddliquidationComponent implements OnInit {
 
         } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 2) {
 
-          const pos = this.retiro_head_item.map(function(a) {
+          /*const pos = this.retiro_head_item.map(function(a) {
             return parseInt(a.iditem, 0);
           }).indexOf(parseInt(i.iditem, 0));
 
@@ -199,6 +199,19 @@ export class AddliquidationComponent implements OnInit {
               name: i.biz_item.itemname + '. ' + i.biz_item.description
             };
             this.retiro_head_item.push(oo);
+          }*/
+
+          const pos = this.entrega_head_item.map(function(a) {
+            return parseInt(a.iditem, 0);
+          }).indexOf(parseInt(i.iditem, 0));
+
+          if (pos < 0) {
+            const oo = {
+              idproject: e.idproject,
+              iditem: i.iditem,
+              name: i.biz_item.itemname + '. ' + i.biz_item.description
+            };
+            this.entrega_head_item.push(oo);
           }
 
         } else if (parseInt(e.nom_transferreason.idtypetransferreason, 0) === 3) {
@@ -206,6 +219,8 @@ export class AddliquidationComponent implements OnInit {
         }
 
       }
+
+      this.retiro_head_item = this.entrega_head_item;
 
       const objectLogistic = {
         date: e.datetimereferral,
@@ -487,7 +502,11 @@ export class AddliquidationComponent implements OnInit {
 
             o.totalquantify += oo.quantify;
             o.totalprice += ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
-            o.listguide.push(oo);
+            // o.listguide.push(oo);
+            if (oo.quantify !== 0) {
+              o.listguide.push(oo);
+            }
+
           }
         }
 
@@ -514,7 +533,12 @@ export class AddliquidationComponent implements OnInit {
 
             o.totalquantify += oo.quantify;
             o.totalprice -= ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
-            o.listguide.push(oo);
+            // o.listguide.push(oo);
+
+            if (oo.quantify !== 0) {
+              o.listguide.push(oo);
+            }
+
           } else {
 
             const iditemSearch = c.iditem;
@@ -543,7 +567,10 @@ export class AddliquidationComponent implements OnInit {
 
               o.totalquantify += oo.quantify;
               o.totalprice -= ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
-              o.listguide.push(oo);
+              // o.listguide.push(oo);
+              if (oo.quantify !== 0) {
+                o.listguide.push(oo);
+              }
 
             }
 
@@ -671,7 +698,7 @@ export class AddliquidationComponent implements OnInit {
 
           this.referralguide.get(this.page, o).subscribe(
             (response) => {
-
+              console.log(response.data);
               this.orderReferralGuide(response.data, data);
               this.list_guias = response.data;
 
