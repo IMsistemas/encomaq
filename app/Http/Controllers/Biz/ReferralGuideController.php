@@ -58,6 +58,7 @@ class ReferralGuideController extends Controller
 
                 if (isset($filter->isNewLiquidacion) == true && $filter->isNewLiquidacion == true) {
                     $where .= " AND biz_referralguide.idreferralguide NOT IN (SELECT biz_referralguide_liquidation.idreferralguide FROM biz_referralguide_liquidation) ";
+                    $where .= " AND biz_referralguide.datetimereferral <= '" . $filter->dateend . "' ";
                 }
 
                 if (isset($filter->idprojects) == true && count($filter->idprojects) > 0) {
