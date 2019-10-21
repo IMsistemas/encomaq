@@ -495,9 +495,9 @@ export class AddliquidationComponent implements OnInit {
               datetimereferral: b.datetimereferral,
               dateend: dateend,
               days: days,
-              price: (parseFloat(c.price) * days).toFixed(3),
+              price: ((parseFloat(c.price) / 30) * days).toFixed(3),
               quantify: parseInt(c.quantify, 0),
-              total: ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) ).toFixed(2)
+              total: ( ((parseFloat(c.price) / 30) * days) * parseInt(c.quantify, 0) ).toFixed(2)
             };
 
             o.totalquantify += oo.quantify;
@@ -526,9 +526,12 @@ export class AddliquidationComponent implements OnInit {
               datetimereferral: b.datetimereferral,
               dateend: dateend,
               days: days,
-              price: (parseFloat(c.price) * days).toFixed(3),
+              /*price: (parseFloat(c.price) * days).toFixed(3),
               quantify: -parseInt(c.quantify, 0),
-              total: -( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) ).toFixed(2)
+              total: -( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) ).toFixed(2)*/
+              price: ((parseFloat(c.price) / 30) * days).toFixed(3),
+              quantify: -parseInt(c.quantify, 0),
+              total: -( ((parseFloat(c.price) / 30) * days) * parseInt(c.quantify, 0) ).toFixed(2)
             };
 
             o.totalquantify += oo.quantify;
@@ -560,9 +563,12 @@ export class AddliquidationComponent implements OnInit {
                 datetimereferral: b.datetimereferral,
                 dateend: dateend,
                 days: days,
-                price: (parseFloat(c.price) * days).toFixed(3),
+                /*price: (parseFloat(c.price) * days).toFixed(3),
                 quantify: -parseInt(c.quantify, 0),
-                total: -( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) ).toFixed(2)
+                total: -( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) ).toFixed(2)*/
+                price: ((parseFloat(c.price) / 30) * days).toFixed(3),
+                quantify: -parseInt(c.quantify, 0),
+                total: -( ((parseFloat(c.price) / 30) * days) * parseInt(c.quantify, 0) ).toFixed(2)
               };
 
               o.totalquantify += oo.quantify;
