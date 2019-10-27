@@ -416,7 +416,7 @@ export class AddliquidationComponent implements OnInit {
 
             const rest = this.entrega_foot_item[i].quantify - this.retiro_foot_item[j].quantify;
 
-            if (rest > 0) {
+            if (rest >= 0) {
 
               this.enObra.push(rest);
 
@@ -457,6 +457,7 @@ export class AddliquidationComponent implements OnInit {
 
     }
 
+    console.log(this.enObra_head_item);
 
     this.orderProduct(frm);
 

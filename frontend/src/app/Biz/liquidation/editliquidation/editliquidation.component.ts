@@ -237,6 +237,8 @@ export class EditliquidationComponent implements OnInit, OnChanges {
 
       }
 
+      this.retiro_head_item = this.entrega_head_item;
+
       const objectLogistic = {
         date: e.datetimereferral,
         guidenumber: e.guidenumber,
@@ -431,7 +433,7 @@ export class EditliquidationComponent implements OnInit, OnChanges {
 
             const rest = this.entrega_foot_item[i].quantify - this.retiro_foot_item[j].quantify;
 
-            if (rest > 0) {
+            if (rest >= 0) {
 
               this.enObra.push(rest);
 
@@ -513,14 +515,20 @@ export class EditliquidationComponent implements OnInit, OnChanges {
               datetimereferral: b.datetimereferral,
               dateend: dateend,
               days: days,
-              price: (parseFloat(c.price) * days).toFixed(3),
+              // price: (parseFloat(c.price) * days).toFixed(3),
+              price: ((parseFloat(c.price) / 30) * days).toFixed(2),
               quantify: parseInt(c.quantify, 0),
-              total: ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) ).toFixed(2)
+              // total: ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) ).toFixed(2)
+              total: ( ((parseFloat(c.price) / 30) * days) * parseInt(c.quantify, 0) ).toFixed(2)
             };
 
             o.totalquantify += oo.quantify;
-            o.totalprice += ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
-            o.listguide.push(oo);
+            // o.totalprice += ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
+            o.totalprice += ( ((parseFloat(c.price) / 30) * days) * parseInt(c.quantify, 0) );
+            // o.listguide.push(oo);
+            if (oo.quantify !== 0) {
+              o.listguide.push(oo);
+            }
           }
         }
 
@@ -540,14 +548,22 @@ export class EditliquidationComponent implements OnInit, OnChanges {
               datetimereferral: b.datetimereferral,
               dateend: dateend,
               days: days,
-              price: (parseFloat(c.price) * days).toFixed(3),
+              // price: (parseFloat(c.price) * days).toFixed(2),
+              price: ((parseFloat(c.price) / 30) * days).toFixed(2),
               quantify: -parseInt(c.quantify, 0),
-              total: -( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) ).toFixed(2)
+              // total: -( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) ).toFixed(2)
+              total: -( ((parseFloat(c.price) / 30) * days) * parseInt(c.quantify, 0) ).toFixed(2)
             };
 
             o.totalquantify += oo.quantify;
-            o.totalprice -= ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
-            o.listguide.push(oo);
+            // o.totalprice -= ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
+            o.totalprice -= ( ((parseFloat(c.price) / 30) * days) * parseInt(c.quantify, 0) );
+            // o.listguide.push(oo);
+
+            if (oo.quantify !== 0) {
+              o.listguide.push(oo);
+            }
+
           } else {
 
             const iditemSearch = c.iditem;
@@ -569,14 +585,20 @@ export class EditliquidationComponent implements OnInit, OnChanges {
                 datetimereferral: b.datetimereferral,
                 dateend: dateend,
                 days: days,
-                price: (parseFloat(c.price) * days).toFixed(3),
+                // price: (parseFloat(c.price) * days).toFixed(3),
+                price: ((parseFloat(c.price) / 30) * days).toFixed(2),
                 quantify: -parseInt(c.quantify, 0),
-                total: -( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) ).toFixed(2)
+                // total: -( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) ).toFixed(2)
+                total: -( ((parseFloat(c.price) / 30) * days) * parseInt(c.quantify, 0) ).toFixed(2)
               };
 
               o.totalquantify += oo.quantify;
-              o.totalprice -= ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
-              o.listguide.push(oo);
+              // o.totalprice -= ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
+              o.totalprice -= ( ((parseFloat(c.price) / 30) * days) * parseInt(c.quantify, 0) );
+              // o.listguide.push(oo);
+              if (oo.quantify !== 0) {
+                o.listguide.push(oo);
+              }
 
             }
 
