@@ -501,7 +501,8 @@ export class AddliquidationComponent implements OnInit {
             };
 
             o.totalquantify += oo.quantify;
-            o.totalprice += ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
+            // o.totalprice += ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
+            o.totalprice += ( ((parseFloat(c.price) / 30) * days) * parseInt(c.quantify, 0) );
             // o.listguide.push(oo);
             if (oo.quantify !== 0) {
               o.listguide.push(oo);
@@ -535,7 +536,8 @@ export class AddliquidationComponent implements OnInit {
             };
 
             o.totalquantify += oo.quantify;
-            o.totalprice -= ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
+            // o.totalprice -= ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
+            o.totalprice -= ( ((parseFloat(c.price) / 30) * days) * parseInt(c.quantify, 0) );
             // o.listguide.push(oo);
 
             if (oo.quantify !== 0) {
@@ -572,7 +574,8 @@ export class AddliquidationComponent implements OnInit {
               };
 
               o.totalquantify += oo.quantify;
-              o.totalprice -= ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
+              // o.totalprice -= ( (parseFloat(c.price) * days) * parseInt(c.quantify, 0) );
+              o.totalprice -= ( ((parseFloat(c.price) / 30) * days) * parseInt(c.quantify, 0) )
               // o.listguide.push(oo);
               if (oo.quantify !== 0) {
                 o.listguide.push(oo);
