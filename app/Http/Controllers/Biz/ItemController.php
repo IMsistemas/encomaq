@@ -263,12 +263,13 @@ class ItemController extends Controller
     }
     private function existitem($aux, $id)
     {
-        $count = Item::where('itemname', $aux);
+        /*$count = Item::where('itemname', $aux);
         if ($id != null) {
             $count = $count->where('iditem', '!=' , $id);
         }
         $count = $count->count();
-        return ($count == 0) ? false : true;
+        return ($count == 0) ? false : true;*/
+        return false;
     }
         /**
      * Remove the specified resource from storage.
