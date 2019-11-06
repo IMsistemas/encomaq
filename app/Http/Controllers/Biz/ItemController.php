@@ -44,7 +44,7 @@ class ItemController extends Controller
         $data = json_decode($fulldata["Data"]);
         if( isset($data->iditem)) {
             $id = $data->iditem;
-            if ($this->existitem($data->itemname, $id) == false ) {
+            // if ($this->existitem($data->itemname, $id) == false ) {
                 $aux = Item::find($id);
                 $aux->idcategoryitem = $data->idcategoryitem;
                 $aux->idunittype = $data->idunittype;
@@ -93,12 +93,12 @@ class ItemController extends Controller
                 }else{
                     return response()->json(['error' => $aux ]);
                 }
-            } else {
+            /*} else {
                 return response()->json(['error' => 'exist']);
-            }
+            }*/
 
         } else {
-            if ($this->existitem($data->itemname, null) == false ) {
+            // if ($this->existitem($data->itemname, null) == false ) {
                 $aux = new Item();
                 $aux->idcategoryitem = $data->idcategoryitem;
                 $aux->idunittype = $data->idunittype;
@@ -139,9 +139,9 @@ class ItemController extends Controller
                     return response()->json(['success' => $aux ]);
                 }
 
-            } else {
+            /*} else {
                 return response()->json(['error' => 'exist']);
-            }
+            }*/
         }
     }
 
@@ -178,7 +178,7 @@ class ItemController extends Controller
     {
         $fulldata = $request->all();
         $data = json_decode($fulldata["Data"]);
-        if ($this->existitem($data->itemname, $id) == false ) {
+        // if ($this->existitem($data->itemname, $id) == false ) {
             $aux = Item::find($id);
             $aux->idcategoryitem = $data->idcategoryitem;
             $aux->idunittype = $data->idunittype;
@@ -210,9 +210,9 @@ class ItemController extends Controller
             }else{
                 return response()->json(['error' => $aux ]);
             }
-        } else {
+        /*} else {
             return response()->json(['error' => 'exist']);
-        }
+        }*/
     }
 
     /**
